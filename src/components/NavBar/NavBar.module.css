@@ -1,0 +1,69 @@
+.NavBarContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    height: 60px; /* Define una altura consistente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .imageLogo {
+    width: 100px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .logoContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .linksContainer {
+    display: flex;
+    gap: 15px; /* Espaciado entre elementos */
+    margin-right: 30px; /* Espaciado del borde derecho */
+  }
+  
+  .authLink {
+    text-decoration: none; /* Sin subrayado */
+    color: #333; /* Color del texto */
+    font-weight: bold; /* Texto destacado */
+  }
+  
+  .authLink:hover {
+    color: #007bff; /* Cambiar color al pasar el mouse */
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+  }
+  
+  .logoutButton,
+  .menuAppointmentButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logoutButton {
+    background-color: #ff4d4d;
+  }
+  
+  .logoutButton:hover {
+    background-color: #e60000;
+  }
+  
+  .menuAppointmentButton:hover {
+    background-color: #0056b3;
+  }
+  

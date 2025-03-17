@@ -1,0 +1,46 @@
+.cancelAppointment {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .cancelAppointment__input {
+    margin-bottom: 20px;
+  }
+  
+  .cancelAppointment__button,
+  .cancelAppointment__cancelButton {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .cancelAppointment__button:hover,
+  .cancelAppointment__cancelButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .cancelAppointment__error {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .cancelAppointment__success {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .cancelAppointment__details {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  .cancelAppointment__details p {
+    margin: 5px 0;
+  }
+  
