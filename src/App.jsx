@@ -9,6 +9,7 @@ import CreateAppointment from "./views/CreateAppointment/CreateAppointment";
 import MenuAppointment from "./views/MenuAppointment/MenuAppointment";
 import ViewAppointment from "./views/ViewAppointment/ViewAppointment";
 import CancelAppointment from "./views/CancelAppointment/CancelAppointment";
+import ListadoProductos from './views/Productos/ListadoProductos';
 import { useEffect } from "react";
 
 function App() {
@@ -32,8 +33,11 @@ function App() {
           <Route path="/MenuAppointment" element={<MenuAppointment />} />
           <Route path="/ViewAppointment" element={<ViewAppointment />} />
           <Route path="/CancelAppointment" element={<CancelAppointment />} />
+          <Route path="/productos" element={<ListadoProductos />} />
+        
         </Routes>
       </div>
+      <ListadoProductos />
     </>
   );
 }
