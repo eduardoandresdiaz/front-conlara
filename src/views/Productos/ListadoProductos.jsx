@@ -46,7 +46,7 @@ const ListadoProductos = () => {
               <img
                 src={producto.imgUrl}
                 alt={`Imagen de ${producto.name}`}
-                style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'cover' }}
+                style={{ maxWidth: '400px', maxHeight: '400px', objectFit: 'cover' }}
               />
             </div>
           ))

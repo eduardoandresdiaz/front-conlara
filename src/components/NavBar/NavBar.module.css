@@ -43,6 +43,7 @@
     text-decoration: underline; /* Subrayado al pasar el mouse */
   }
   
+  .loginButton,
   .logoutButton,
   .menuAppointmentButton {
     background-color: #007bff;
@@ -57,6 +58,9 @@
   
   .logoutButton {
     background-color: #ff4d4d;
+  }
+  .loginButton {
+    background-color: #038b3c;
   }
   
   .logoutButton:hover {

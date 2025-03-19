@@ -23,15 +23,24 @@ const NavBar = () => {
         <img src={logo} alt="Logo Conlara.com.ar" className={style.imageLogo} />
         
       </Link>
-      <p>Conlara Compra y Venta</p>
+      {/* ///////////////////
+
+
+      /////////////////// */}
       <div className={style.linksContainer}>
         {!user || Object.keys(user).length === 0 ? (
           <>
             <Link to="/login" className={style.authLink}>
+            <button
+            className={style.loginButton}>
               Iniciar Sesión
+            </button >
             </Link>
             <Link to="/register" className={style.authLink}>
+            <button
+            className={style.menuAppointmentButton}>
               Registrarse
+            </button>
             </Link>
           </>
         ) : (

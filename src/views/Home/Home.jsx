@@ -30,7 +30,7 @@ const Home = () => {
       <h1 className={styles.title}>Potal de Compras y Ventas del Valle del Conlara</h1>
       <img 
         src={logoConlara} 
-        alt="Potal de Compras y Venta en el Valle del Conlara" 
+        alt="Portal de Compras y Venta en el Valle del Conlara" 
         className={styles.canchas} 
       />
       <button 
