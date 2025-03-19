@@ -21,30 +21,30 @@ const NavBar = () => {
     <nav className={style.NavBarContainer}>
       <Link to="/" className={style.logoContainer}>
         <img src={logo} alt="Logo Conlara.com.ar" className={style.imageLogo} />
-        <p>HOME</p>
+        
       </Link>
       <p>Conlara Compra y Venta</p>
       <div className={style.linksContainer}>
         {!user || Object.keys(user).length === 0 ? (
           <>
             <Link to="/login" className={style.authLink}>
-              Login
+              Iniciar Sesión
             </Link>
             <Link to="/register" className={style.authLink}>
-              Registro
+              Registrarse
             </Link>
           </>
         ) : (
           <>
             {/* Mostrar solo logueado */}
             <button onClick={handleLogout} className={style.logoutButton}>
-              Logout
+              Cerrar Sesión
             </button>
             <button
               onClick={handleOpenMenuAppointment}
               className={style.menuAppointmentButton}
             >
-              Abrir Menu de Turnos
+            Menu de Publicaciones
             </button>
           </>
         )}

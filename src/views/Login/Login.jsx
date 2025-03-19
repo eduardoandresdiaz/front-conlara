@@ -68,7 +68,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <h1 className="login__title">Login</h1>
+      <h1 className="login__title">Iniciar Sesión</h1> {/* El título ahora está fuera del formulario */}
       <form className="login__form" onSubmit={handleSubmit}>
         <div className="login__field">
           <label className="login__label">Email:</label>
@@ -97,7 +97,7 @@ const Login = () => {
           {errors.password && <span className="login__error">{errors.password}</span>}
         </div>
         <button type="submit" className="login__button" disabled={isSubmitting}>
-          {isSubmitting ? "Cargando..." : "Login"}
+          {isSubmitting ? "Cargando..." : "Iniciar Sesión"}
         </button>
         <br />
         <button

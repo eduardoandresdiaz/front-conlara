@@ -19,7 +19,7 @@ const MenuAppointment = () => {
   return (
     <div className="menu-appointment">
       <div className="menu-appointment__content">
-        <h1 className="menu-appointment__title">Menú de Turnos</h1>
+        <h1 className="menu-appointment__title">Menú Usuario</h1>
         <div className="menu-appointment__buttons">
           <button className="menu-appointment__button" onClick={handleNewAppointment}>
             Publicar Un Producto
