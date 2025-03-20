@@ -10,7 +10,7 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("user"); // Eliminar datos del user
     setUser({}); // Actualizar el estado
-    navigate("/"); // va al login
+    navigate("/"); // Va al login
   };
 
   const handleOpenMenuAppointment = () => {
@@ -35,9 +35,7 @@ const NavBar = () => {
         ) : (
           <>
             {/* Mostrar mensaje de bienvenida y botones solo para usuarios logueados */}
-            <span className={style.welcomeMessage}>
-              {user.email}
-            </span>
+            <span className={style.welcomeMessage}>{user.email}</span>
             <button onClick={handleLogout} className={style.logoutButton}>
               Cerrar Sesión
             </button>
@@ -45,7 +43,7 @@ const NavBar = () => {
               onClick={handleOpenMenuAppointment}
               className={style.menuAppointmentButton}
             >
-              Menu de Publicaciones
+              Menú de Publicaciones
             </button>
           </>
         )}
