@@ -3,10 +3,10 @@
   top: 0;
   left: 0;
   z-index: 1000;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  display: flex; /* Flexbox para alinear en fila */
+  flex-direction: row; /* Garantiza que los elementos estén en fila */
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: space-between; /* Espaciado entre los extremos */
   padding: 10px 20px;
   background-color: #f5f5f5;
   border-bottom: 1px solid #ddd;
@@ -16,26 +16,26 @@
 }
 
 .imageLogo {
-  width: 100px;
-  height: 50px;
-  margin-right: 10px;
+  width: 100px; /* Tamaño estándar del logo */
+  height: 50px; /* Proporción consistente */
+  margin-right: 10px; /* Espaciado del logo */
 }
 
 .logoContainer {
   display: flex;
-  align-items: center;
+  align-items: center; /* Alinear logo verticalmente */
 }
 
 .linksContainer {
-  display: flex;
-  gap: 15px; /* Espaciado entre elementos */
-  margin-right: 30px; /* Espaciado del borde derecho */
+  display: flex; /* Flexbox para alinear en fila */
+  gap: 15px; /* Espaciado entre botones */
+  margin-right: 30px; /* Espaciado a la derecha */
 }
 
 .authLink {
   text-decoration: none; /* Sin subrayado */
   color: #333; /* Color del texto */
-  font-weight: bold; /* Texto destacado */
+  font-weight: bold; /* Destacar texto */
 }
 
 .authLink:hover {
@@ -72,45 +72,44 @@
   background-color: #0056b3;
 }
 
-/* Responsividad: para pantallas menores a 768px */
+/* Responsividad: mantener alineación en fila para pantallas pequeñas */
 @media (max-width: 768px) {
   .NavBarContainer {
-      flex-direction: column; /* Cambiar de fila a columna */
-      height: auto; /* Ajustar altura automáticamente */
-      padding: 10px; /* Reducir padding */
+      flex-direction: row; /* Mantener alineación en fila */
+      flex-wrap: wrap; /* Permitir que los elementos se ajusten si no caben */
   }
 
   .linksContainer {
-      margin-right: 0; /* Eliminar espaciado derecho */
-      flex-direction: column; /* Colocar los enlaces en columna */
-      gap: 10px; /* Reducir espacio entre elementos */
-      width: 100%; /* Ancho completo */
-  }
-
-  .authLink, .loginButton, .logoutButton, .menuAppointmentButton {
-      width: 100%; /* Botones más amplios para pantallas pequeñas */
-      text-align: center; /* Centrar texto */
+      flex-wrap: wrap; /* Botones en varias filas si no caben */
+      justify-content: flex-end; /* Alinear al final */
+      gap: 10px; /* Reducir espaciado entre botones */
   }
 
   .imageLogo {
       width: 80px; /* Reducir tamaño del logo */
       height: 40px;
   }
+
+  .loginButton, .logoutButton, .menuAppointmentButton {
+      font-size: 0.9rem; /* Ajustar tamaño de fuente */
+      padding: 0.4rem 0.8rem; /* Reducir padding */
+  }
 }
 
-/* Responsividad: para pantallas menores a 480px */
 @media (max-width: 480px) {
-  .NavBarContainer {
-      padding: 5px; /* Reducir padding aún más */
+  .linksContainer {
+      flex-wrap: nowrap; /* Forzar una fila en teléfonos */
+      overflow-x: auto; /* Habilitar scroll horizontal si es necesario */
+      gap: 5px; /* Espaciado más reducido */
   }
 
   .imageLogo {
-      width: 60px; /* Tamaño pequeño del logo */
+      width: 60px; /* Tamaño más pequeño del logo */
       height: 30px;
   }
 
-  .authLink, .loginButton, .logoutButton, .menuAppointmentButton {
-      font-size: 0.9rem; /* Ajustar tamaño de fuente */
-      padding: 0.4rem 0.8rem; /* Reducir padding */
+  .loginButton, .logoutButton, .menuAppointmentButton {
+      font-size: 0.8rem; /* Fuente más pequeña en pantallas muy pequeñas */
+      padding: 0.3rem 0.6rem; /* Padding reducido */
   }
 }
