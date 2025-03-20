@@ -28,7 +28,7 @@ const ListadoProductos = () => {
 
   return (
     <div className="listadoProductos">
-      <h1>Listado de Productos</h1>
+      {/* <h1>Listado de Productos</h1> */}
 
       {error && <p className="listadoProductos__error">{error}</p>}
 

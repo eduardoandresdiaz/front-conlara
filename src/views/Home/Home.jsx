@@ -27,7 +27,7 @@ const Home = () => {
 
   return (
     <div className={styles.homeContainer}>
-      <h1 className={styles.title}>Potal de Compras y Ventas del Valle del Conlara</h1>
+      <h1 className={styles.title}></h1>
       <img 
         src={logoConlara} 
         alt="Portal de Compras y Venta en el Valle del Conlara" 
