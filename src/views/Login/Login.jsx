@@ -11,6 +11,7 @@ const Login = () => {
   const [formData, setFormData] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState(""); // Nuevo estado para mensajes de feedback
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,11 +25,12 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setFeedbackMessage(""); // Limpia cualquier mensaje previo
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
         const response = await loginUser(formData);
-        console.log("Response procesado:", response); // Depuración adicional
+        console.log("Response procesado:", response);
         const { token, message } = response;
 
         if (!token) {
@@ -37,25 +39,27 @@ const Login = () => {
 
         localStorage.setItem("token", token); // Guarda el token
         setUser({ email: formData.email }); // Actualiza el usuario en el contexto
-        alert(message); // Mensaje de bienvenida
+        setFeedbackMessage(message); // Mensaje de bienvenida
         navigate('/MenuAppointment'); // Redirige al usuario
       } catch (error) {
         console.error("Error en handleSubmit:", error);
-        alert(typeof error === "string" ? error : "Ocurrió un error inesperado.");
+        setFeedbackMessage(
+          typeof error === "string" ? error : "Ocurrió un error inesperado."
+        );
       } finally {
         setIsSubmitting(false);
       }
     } else {
-      alert("Por favor corrige los errores antes de continuar.");
+      setFeedbackMessage("Por favor corrige los errores antes de continuar.");
     }
   };
 
   const loginUser = async (data) => {
     try {
       const response = await axios.post("https://ecommerce-9558.onrender.com/auth/signin", data);
-      console.log("Respuesta completa de la API:", response); // Depuración adicional
+      console.log("Respuesta completa de la API:", response);
       if (response.status === 200 || response.status === 201) {
-        const { token, message } = response.data; // Ajustado para usar response.data
+        const { token, message } = response.data;
         return { token, message }; // Retorna token y mensaje
       } else {
         throw new Error("La respuesta del servidor no es exitosa.");
@@ -68,8 +72,9 @@ const Login = () => {
 
   return (
     <div className="login">
-      <h1 className="login__title">Iniciar Sesión</h1> {/* El título ahora está fuera del formulario */}
+      <h1 className="login__title">Iniciar Sesión</h1>
       <form className="login__form" onSubmit={handleSubmit}>
+        {feedbackMessage && <div className="login__feedback">{feedbackMessage}</div>} {/* Mensaje dinámico */}
         <div className="login__field">
           <label className="login__label">Email:</label>
           <input
@@ -79,7 +84,7 @@ const Login = () => {
             placeholder="mail@mail.com"
             value={formData.email}
             onChange={handleChange}
-            autoComplete="email" // Mejora en usabilidad y seguridad
+            autoComplete="email"
           />
           {errors.email && <span className="login__error">{errors.email}</span>}
         </div>
@@ -92,7 +97,7 @@ const Login = () => {
             placeholder="********"
             value={formData.password}
             onChange={handleChange}
-            autoComplete="current-password" // Mejora en usabilidad y seguridad
+            autoComplete="current-password"
           />
           {errors.password && <span className="login__error">{errors.password}</span>}
         </div>

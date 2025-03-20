@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import '../ViewAppointment/ViewAppointment.css'; // Puedes mantener los estilos existentes
+import './ListadoProductos.css'; // Cambié la referencia a ListadoProductos.css
 
 const ListadoProductos = () => {
   const [productos, setProductos] = useState([]);
@@ -27,17 +27,17 @@ const ListadoProductos = () => {
   }, []);
 
   return (
-    <div className="viewAppointment">
+    <div className="listadoProductos">
       <h1>Listado de Productos</h1>
 
-      {error && <p className="viewAppointment__error">{error}</p>}
+      {error && <p className="listadoProductos__error">{error}</p>}
 
-      <div className="viewAppointment__list">
+      <div className="listadoProductos__list">
         {productos.length === 0 && !error ? (
           <p>Cargando productos...</p>
         ) : (
           productos.map((producto) => (
-            <div key={producto.id} className="viewAppointment__details">
+            <div key={producto.id} className="listadoProductos__details">
               <h2>{producto.name}</h2>
               <p><strong>Descripción:</strong> {producto.description}</p>
               <p><strong>Precio:</strong> ${producto.price}</p>

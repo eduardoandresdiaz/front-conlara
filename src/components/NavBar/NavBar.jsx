@@ -9,8 +9,8 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user"); // Eliminar datos del user
-    setUser({}); // Actualizar el estado 
-    navigate("/"); // va  al login
+    setUser({}); // Actualizar el estado
+    navigate("/"); // va al login
   };
 
   const handleOpenMenuAppointment = () => {
@@ -21,31 +21,23 @@ const NavBar = () => {
     <nav className={style.NavBarContainer}>
       <Link to="/" className={style.logoContainer}>
         <img src={logo} alt="Logo Conlara.com.ar" className={style.imageLogo} />
-        
       </Link>
-      {/* ///////////////////
-
-
-      /////////////////// */}
       <div className={style.linksContainer}>
         {!user || Object.keys(user).length === 0 ? (
           <>
             <Link to="/login" className={style.authLink}>
-            <button
-            className={style.loginButton}>
-              Iniciar Sesión
-            </button >
+              <button className={style.loginButton}>Iniciar Sesión</button>
             </Link>
             <Link to="/register" className={style.authLink}>
-            <button
-            className={style.menuAppointmentButton}>
-              Registrarse
-            </button>
+              <button className={style.menuAppointmentButton}>Registrarse</button>
             </Link>
           </>
         ) : (
           <>
-            {/* Mostrar solo logueado */}
+            {/* Mostrar mensaje de bienvenida y botones solo para usuarios logueados */}
+            <span className={style.welcomeMessage}>
+              {user.email}
+            </span>
             <button onClick={handleLogout} className={style.logoutButton}>
               Cerrar Sesión
             </button>
@@ -53,7 +45,7 @@ const NavBar = () => {
               onClick={handleOpenMenuAppointment}
               className={style.menuAppointmentButton}
             >
-            Menu de Publicaciones
+              Menu de Publicaciones
             </button>
           </>
         )}
