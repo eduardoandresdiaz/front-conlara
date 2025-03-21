@@ -6,101 +6,47 @@ import { useState } from 'react';
 const CreateAppointment = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
-
-    if (file) {
-      const compressedFile = await compressImage(file, 500); // Reduce a 500 KB
-      setSelectedFile(compressedFile); // Reemplaza el archivo anterior
-    }
-  };
-
-  const compressImage = (file, maxFileSizeKB) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = (event) => {
-        const img = new Image();
-        img.src = event.target.result;
-
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-
-          // Configura el tamaño del canvas
-          canvas.width = img.width;
-          canvas.height = img.height;
-
-          // Dibuja la imagen en el canvas
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-          // Reduce la calidad hasta alcanzar 500 KB
-          let quality = 0.9;
-          let base64Data;
-
-          do {
-            base64Data = canvas.toDataURL('image/jpeg', quality); // Convierte a base64
-            quality -= 0.1; // Reduce la calidad
-          } while (base64Data.length / 1024 > maxFileSizeKB && quality > 0);
-
-          // Convierte base64 a archivo
-          fetch(base64Data)
-            .then((res) => res.blob())
-            .then((blob) => {
-              const compressedFile = new File([blob], file.name, {
-                type: 'image/jpeg',
-                lastModified: Date.now(),
-              });
-              resolve(compressedFile);
-            })
-            .catch(reject);
-        };
-
-        img.onerror = reject;
-      };
-
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
   const posData = async (formData) => {
     try {
-      console.log('Datos enviados:', formData);
-
+      console.log("Datos enviados:", formData);
+      
       // Crear el producto
-      const response = await axios.post('https://ecommerce-9558.onrender.com/products', formData);
-      console.log('Respuesta del backend (producto):', response.data);
-
-      if (response.status === 201 || response.data.startsWith('Producto creado exitosamente')) {
-        const productId = response.data.split(': ')[1]; // Extrae el ID del producto
-        console.log('ID del producto:', productId);
+      const response = await axios.post("https://ecommerce-9558.onrender.com/products", formData);
+      console.log("Respuesta del backend (producto):", response.data);
+      
+      if (response.status === 201 || response.data.startsWith("Producto creado exitosamente")) {
+        const productId = response.data.split(": ")[1]; // Extrae el ID del producto
+        console.log("ID del producto:", productId);
 
         // Subir imagen asociada al producto
         if (selectedFile) {
           const formDataImage = new FormData();
-          formDataImage.append('file', selectedFile);
+          formDataImage.append("file", selectedFile);
 
           const imageResponse = await axios.post(
             `https://ecommerce-9558.onrender.com/file-upload/uploadImage/${productId}`,
             formDataImage,
-            { headers: { 'Content-Type': 'multipart/form-data' } }
+            { headers: { "Content-Type": "multipart/form-data" } }
           );
-
-          console.log('Respuesta del backend (imagen):', imageResponse.data);
-          alert('Producto creado y imagen subida exitosamente');
+          
+          console.log("Respuesta del backend (imagen):", imageResponse.data);
+          alert("Producto creado y imagen subida exitosamente");
           return true; // Indica éxito
         } else {
-          alert('Producto creado exitosamente (sin imagen)');
+          alert("Producto creado exitosamente (sin imagen)");
           return true;
         }
       } else {
-        alert('Error inesperado en el servidor');
+        alert("Error inesperado en el servidor");
         return false;
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert(error.response?.data?.message || 'No se pudo completar la acción');
+      console.error("Error:", error);
+      alert(error.response?.data?.message || "No se pudo completar la acción");
       return false; // Indica error
     }
   };
@@ -219,9 +165,9 @@ const CreateAppointment = () => {
             <button
               type="submit"
               className="create-appointment__button"
-              disabled={isSubmitting || Object.values(errors).some((error) => error)}
+              disabled={isSubmitting || Object.values(errors).some(error => error)}
             >
-              {isSubmitting ? 'Procesando...' : 'Crear Producto'}
+              {isSubmitting ? "Procesando..." : "Crear Producto"}
             </button>
           </Form>
         )}
@@ -231,3 +177,4 @@ const CreateAppointment = () => {
 };
 
 export default CreateAppointment;
+
