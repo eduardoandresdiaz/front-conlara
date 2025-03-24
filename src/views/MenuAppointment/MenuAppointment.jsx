@@ -13,7 +13,7 @@ const MenuAppointment = () => {
 
   // Función para redirigir a la página de "Mis Turnos"
   const handleMyAppointments = () => {
-    navigate('/appointments'); // Redirige a la página de mis turnos
+    navigate('/misproductos'); // Redirige a la página de mis turnos
   };
 
   return (

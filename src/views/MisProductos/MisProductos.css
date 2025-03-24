@@ -1,23 +1,58 @@
+/* Contenedor principal */
 .listadoProductos {
   padding: 20px;
   font-family: Arial, sans-serif;
+  max-width: 1200px; /* Limitar el ancho máximo del contenedor */
+  margin: 0 auto; /* Centrar el contenedor horizontalmente */
 }
 
+/* Título centrado superior */
+.tituloSuperior {
+  text-align: center;
+  font-size: 2rem; /* Tamaño del título */
+  margin-bottom: 20px; /* Espacio inferior */
+  color: #333; /* Color oscuro para el texto */
+  font-weight: bold; /* Negrita */
+}
+
+/* Mensaje de error */
 .listadoProductos__error {
   color: red;
   font-weight: bold;
+  text-align: center; /* Centrar el texto */
 }
 
+/* Estilo para la lista de productos */
 .listadoProductos__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: flex; /* Flexbox para organizar las tarjetas */
+  flex-wrap: wrap; /* Permitir que las tarjetas se ajusten en varias filas */
+  gap: 20px; /* Espaciado entre las tarjetas */
+  justify-content: center; /* Centrar las tarjetas horizontalmente */
 }
 
+/* Estilo de cada tarjeta de producto */
 .listadoProductos__details {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;
-  max-width: 400px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc; /* Borde gris claro */
+  border-radius: 8px; /* Esquinas redondeadas */
+  padding: 15px; /* Espaciado interno */
+  max-width: 400px; /* Ancho máximo de la tarjeta */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  background-color: #f9f9f9; /* Fondo claro */
+  text-align: center; /* Centrar el contenido dentro de la tarjeta */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Efecto dinámico */
+}
+
+.listadoProductos__details:hover {
+  transform: translateY(-5px); /* Elevar al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Intensificar la sombra */
+}
+
+/* Estilo para las imágenes dentro de las tarjetas */
+.listadoProductos__details img {
+  width: 100%; /* La imagen ocupará el ancho disponible */
+  max-width: 300px; /* Limitar el ancho máximo */
+  max-height: 300px; /* Limitar la altura máxima */
+  object-fit: cover; /* Ajustar la imagen sin distorsionarse */
+  border-radius: 5px; /* Esquinas redondeadas */
+  margin: 10px 0; /* Espaciado superior e inferior */
 }
