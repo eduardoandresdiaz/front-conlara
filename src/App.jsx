@@ -1,7 +1,7 @@
 import "./App.css";
 import Home from './views/Home/Home';
 import Login from "./views/Login/Login";
-import MyAppointments from './views/MyAppointments/MyAppointments';
+import MisProductos from './views/MisProductos/MisProductos';
 import Register from "./views/Register/Register";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
@@ -28,7 +28,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/appointments" element={<MyAppointments />} />
+          <Route path="/MisProductos" element={<MisProductos />} />
           <Route path="/createAppointments" element={<CreateAppointment />} />
           <Route path="/MenuAppointment" element={<MenuAppointment />} />
           <Route path="/ViewAppointment" element={<ViewAppointment />} />
