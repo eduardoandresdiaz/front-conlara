@@ -56,3 +56,20 @@
   border-radius: 5px; /* Esquinas redondeadas */
   margin: 10px 0; /* Espaciado superior e inferior */
 }
+
+/* Estilo para el botón de eliminar publicación */
+.eliminarBoton {
+  background-color: red; /* Fondo rojo */
+  color: black; /* Texto negro */
+  border: none; /* Sin bordes */
+  border-radius: 8px; /* Esquinas redondeadas */
+  padding: 10px 20px; /* Espaciado interno */
+  cursor: pointer; /* Cambiar el puntero al pasar el mouse */
+  font-weight: bold; /* Texto en negrita */
+  font-size: 1rem; /* Tamaño del texto */
+  transition: background-color 0.3s ease; /* Efecto dinámico al pasar el mouse */
+}
+
+.eliminarBoton:hover {
+  background-color: darkred; /* Fondo rojo oscuro al pasar el mouse */
+}
