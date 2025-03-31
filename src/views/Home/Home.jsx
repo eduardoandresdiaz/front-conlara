@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'; //import React, { useState, useEffe
 import { useNavigate } from 'react-router-dom'; // Para la redirección
 import logoConlara from "../../assets/media/images/imagen2.jpg"; // Importar la imagen de las canchas
 import styles from './Home.module.css';
+import ListadoProductos from '../Productos/ListadoProductos';
 
 const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,7 +40,9 @@ const Home = () => {
       >
         {isLoggedIn ? 'Logout' : 'Publicar un Producto'}
       </button>
+      <ListadoProductos />
     </div>
+    
   );
 };
 

@@ -57,6 +57,29 @@
   margin: 10px 0; /* Espaciado superior e inferior */
 }
 
+/* Estilo para el botón de modificar publicación */
+.modificarBoton {
+  background-color: yellow; /* Fondo amarillo */
+  color: black; /* Texto negro */
+  border: none; /* Sin bordes */
+  border-radius: 8px; /* Esquinas redondeadas */
+  padding: 10px 20px; /* Espaciado interno */
+  cursor: pointer; /* Cambiar el puntero al pasar el mouse */
+  font-weight: bold; /* Texto en negrita */
+  font-size: 1rem; /* Tamaño del texto */
+  transition: background-color 0.3s ease; /* Efecto dinámico al pasar el mouse */
+}
+
+.modificarBoton:hover {
+  background-color: gold; /* Fondo amarillo más intenso al pasar el mouse */
+}
+
+.modificarBoton:disabled {
+  background-color: #ccc; /* Fondo gris cuando está deshabilitado */
+  color: #999; /* Texto gris desactivado */
+  cursor: not-allowed; /* Cambiar puntero a "no permitido" */
+}
+
 /* Estilo para el botón de eliminar publicación */
 .eliminarBoton {
   background-color: red; /* Fondo rojo */

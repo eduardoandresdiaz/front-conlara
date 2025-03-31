@@ -1,24 +1,64 @@
 .listadoProductos {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .listadoProductos__error {
-    color: red;
-    font-weight: bold;
-  }
-  
-  .listadoProductos__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .listadoProductos__details {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    max-width: 400px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.listadoProductos__error {
+  color: red;
+  font-weight: bold;
+}
+
+.listadoProductos__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Centrar las tarjetas */
+}
+
+.listadoProductos__details {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  max-width: 400px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9; /* Fondo claro */
+  text-align: center; /* Centrar el contenido dentro de la tarjeta */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave */
+}
+
+.listadoProductos__details:hover {
+  transform: translateY(-5px); /* Elevar ligeramente al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Intensificar la sombra */
+}
+
+.listadoProductos__details img {
+  width: 100%; /* Imagen ocupa el ancho disponible */
+  max-width: 300px; /* Limitar el ancho máximo */
+  max-height: 300px; /* Limitar la altura máxima */
+  object-fit: cover; /* Ajustar la imagen */
+  border-radius: 5px; /* Esquinas redondeadas */
+  margin: 10px 0; /* Espaciado vertical */
+}
+
+/* Estilo del botón "Me Interesa" */
+.meInteresaBoton {
+  background-color: #007BFF; /* Fondo azul */
+  color: white; /* Texto blanco */
+  border: none; /* Sin bordes */
+  border-radius: 8px; /* Esquinas redondeadas */
+  padding: 10px 20px; /* Espaciado interno */
+  cursor: pointer; /* Cambiar el puntero al pasar el mouse */
+  font-weight: bold; /* Texto en negrita */
+  font-size: 1rem; /* Tamaño del texto */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.meInteresaBoton:hover {
+  background-color: #0056b3; /* Fondo más oscuro al pasar el mouse */
+}
+
+.meInteresaBoton:disabled {
+  background-color: #ccc; /* Fondo gris al estar deshabilitado */
+  color: #999; /* Texto gris */
+  cursor: not-allowed; /* Cursor no permitido */
+}
