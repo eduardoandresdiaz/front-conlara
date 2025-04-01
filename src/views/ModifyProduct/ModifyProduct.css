@@ -1,12 +1,12 @@
-/* BEM Naming Conventions */
 .modify-product {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Asegura que todo el contenido esté centrado */
     background-color: #f4f4f4;
     font-family: 'Arial', sans-serif;
+    padding: 20px; /* Añadimos padding para evitar que el contenido quede pegado al borde */
 }
 
 .modify-product__title {
@@ -21,12 +21,18 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    width: 450px; /* Aumenta el ancho para acomodar imagen y campos */
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Espaciado entre elementos */
 }
 
 .modify-product__field {
+    width: 100%; /* Los campos ocupan todo el ancho disponible */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 15px;
 }
 
@@ -59,18 +65,19 @@
 .modify-product__button {
     padding: 10px;
     font-size: 1rem;
-    color: #333; /* Cambiamos el texto a un color más oscuro para contraste */
+    color: #333; /* Texto oscuro para contraste */
     background-color: yellow; /* Fondo amarillo */
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-weight: bold;
+    width: 100%; /* Botón ocupa todo el ancho */
 }
 
 .modify-product__button:hover {
-    background-color: #ffd700; /* Fondo amarillo más intenso */
-    color: #000; /* Texto más oscuro en hover */
+    background-color: #ffd700; /* Amarillo más intenso */
+    color: #000;
 }
 
 .modify-product__button:disabled {
@@ -79,8 +86,22 @@
     cursor: not-allowed;
 }
 
+/* Imagen del producto */
+.modify-product__image {
+    width: 100%; /* Imagen ocupa el ancho del contenedor */
+    max-width: 400px; /* Tamaño máximo para mantener proporción */
+    border-radius: 8px;
+    object-fit: cover; /* Ajusta la imagen al contenedor sin distorsión */
+    margin-bottom: 20px; /* Espacio entre imagen y formulario */
+}
+
 @media (max-width: 600px) {
     .modify-product__form {
-        width: 90%;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .modify-product__image {
+        max-width: 100%; /* Imagen ajusta al ancho de la pantalla */
     }
 }

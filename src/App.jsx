@@ -12,6 +12,7 @@ import CancelAppointment from "./views/CancelAppointment/CancelAppointment";
 import ListadoProductos from './views/Productos/ListadoProductos';
 import ModifyProduct from './views/ModifyProduct/ModifyProduct';
 import DetallesProducto from "./views/Detalles/Detalles"; // Importando el componente de detalles
+import Perfil from './views/Perfil/Perfil'; // Importa el nuevo componente
 import { useEffect } from "react";
 
 function App() {
@@ -37,6 +38,8 @@ function App() {
           <Route path="/productos" element={<ListadoProductos />} />
           <Route path="/ModifyProduct/:id" element={<ModifyProduct />} />
           <Route path="/productos/:id" element={<DetallesProducto />} /> {/* Detalles producto */}
+          <Route path="/perfil" element={<Perfil />} /> {/* Nueva ruta */}
+          
         </Routes>
       </div>
       
