@@ -3,17 +3,20 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserProvider } from './context/UserContext.jsx';
-import DetallesProducto from './views/Detalles/Detalles.jsx'; // Ajuste de la ruta correcta
+import DetallesProducto from './views/Detalles/Detalles.jsx'; // Ruta correcta al componente
 import App from './App.jsx'; // Componente principal
+import { HelmetProvider } from 'react-helmet-async';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <Routes>
-          <Route path="*" element={<App />} /> {/* Ajustado para incluir el comodín '*' */}
-          <Route path="/productos/:id" element={<DetallesProducto />} />
-        </Routes>
+        <HelmetProvider>
+          <Routes>
+            <Route path="*" element={<App />} />
+            <Route path="/productos/:id" element={<DetallesProducto />} />
+          </Routes>
+        </HelmetProvider>
       </UserProvider>
     </BrowserRouter>
   </StrictMode>
