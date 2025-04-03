@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <UserProvider>
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route path="*" element={<App />} /> {/* Ajustado para incluir el comodín '*' */}
           <Route path="/productos/:id" element={<DetallesProducto />} />
         </Routes>
       </UserProvider>
