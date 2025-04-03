@@ -7,7 +7,7 @@
     padding: 20px;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    min-height: 100vh; /* Asegura que ocupe toda la altura de la pantalla */
+    min-height: 100vh;
 }
 
 /* Título del producto */
@@ -24,144 +24,76 @@
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    max-width: 800px; /* Ancho máximo para mantener la legibilidad */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
     width: 100%;
-    text-align: center; /* Centrar contenido */
-}
-
-/* Información del producto */
-.detallesProducto__informacion {
-    margin-bottom: 20px; /* Separar las secciones */
-}
-
-.detallesProducto__etiqueta {
-    font-weight: bold;
-    color: #555;
-}
-
-.detallesProducto__valor {
-    color: #333;
+    text-align: center;
 }
 
 /* Imagen del producto */
 .detallesProducto__imagen {
     width: 100%;
-    max-width: 400px; /* Limitar el tamaño máximo */
+    max-width: 400px;
     max-height: 400px;
-    object-fit: cover; /* Ajustar la imagen sin distorsión */
-    border-radius: 8px; /* Esquinas redondeadas */
-    margin: 20px auto; /* Centrar la imagen */
-}
-
-/* Mensajes de error o carga */
-.detallesProducto__mensaje {
-    font-size: 1.2rem;
-    color: #999;
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* Contenedor para los botones */
-.detallesProducto__botones {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px; /* Separar los botones del contenido */
-}
-
-/* Botón para acciones */
-.detallesProducto__boton {
-    background-color: #007BFF;
-    color: white;
-    border: none;
+    object-fit: cover;
     border-radius: 8px;
-    padding: 10px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
+    margin: 20px auto;
 }
 
-.detallesProducto__boton:hover {
-    background-color: #0056b3;
-}
-
-.detallesProducto__boton:disabled {
-    background-color: #ccc;
-    color: #999;
-    cursor: not-allowed;
-}
-
-/* Información de contacto del vendedor */
-.detallesProducto__contacto {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #f9f9f9; /* Fondo claro para diferenciar */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    text-align: center; /* Centrar el texto */
-}
-
-/* ===== Botones de compartir ===== */
+/* Botones de compartir */
 .detallesProducto__compartir {
-    margin-top: 30px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .detallesProducto__compartir h3 {
-    font-size: 1.3rem;
-    color: #444;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #555;
+    text-align: center;
 }
 
-.detallesProducto__boton.compartir {
-    display: inline-flex;
+/* Botones de compartir */
+.detallesProducto__boton {
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin: 5px;
-    padding: 10px 15px;
-    border-radius: 8px;
     text-decoration: none;
-    color: white;
-    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
     font-size: 1rem;
-    transition: transform 0.2s ease-in-out;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 250px;
+    margin: auto;
 }
 
-.detallesProducto__boton.compartir:hover {
-    transform: scale(1.05);
+/* Colores específicos por red social */
+.compartir.facebook {
+    background-color: #1877f2;
 }
 
-/* Facebook */
-.detallesProducto__boton.compartir.facebook {
-    background-color: #1877F2;
+.compartir.whatsapp {
+    background-color: #25d366;
 }
 
-.detallesProducto__boton.compartir.facebook:hover {
-    background-color: #1258b1;
+.compartir.instagram {
+    background-color: #e4405f;
 }
 
-/* WhatsApp */
-.detallesProducto__boton.compartir.whatsapp {
-    background-color: #25D366;
+/* Efecto hover */
+.compartir.facebook:hover {
+    background-color: #155ab6;
 }
 
-.detallesProducto__boton.compartir.whatsapp:hover {
+.compartir.whatsapp:hover {
     background-color: #1da851;
 }
 
-/* Instagram */
-.detallesProducto__boton.compartir.instagram {
-    background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
-}
-
-.detallesProducto__boton.compartir.instagram:hover {
-    opacity: 0.8;
-}
-
-/* Iconos de los botones */
-.detallesProducto__boton.compartir i {
-    font-size: 1.2rem;
+.compartir.instagram:hover {
+    background-color: #bc2a8d;
 }
