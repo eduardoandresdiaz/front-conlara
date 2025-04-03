@@ -35,6 +35,11 @@ const DetallesProducto = () => {
     setMostrarContacto(true);
   };
 
+  const productUrl = `https://conlara.com.ar/productos/${id}`;
+  const productImage = producto.imgUrl || 'https://conlara.com.ar/default-product.jpg';
+  const productTitle = encodeURIComponent(producto.name || 'Producto en Conlara Tienda');
+  const productDescription = encodeURIComponent(producto.description || 'Detalles del producto disponible en Conlara Tienda');
+
   return (
     <div className="detallesProducto">
       <Helmet>
@@ -42,8 +47,8 @@ const DetallesProducto = () => {
         <meta property="og:type" content="product" />
         <meta property="og:title" content={producto.name ? `${producto.name} - Conlara Tienda` : 'Producto en Conlara Tienda'} />
         <meta property="og:description" content={producto.description || 'Detalles del producto disponible en Conlara Tienda'} />
-        <meta property="og:image" content={producto.imgUrl || 'https://conlara.com.ar/default-product.jpg'} />
-        <meta property="og:url" content={`https://conlara.com.ar/productos/${id}`} />
+        <meta property="og:image" content={productImage} />
+        <meta property="og:url" content={productUrl} />
         <meta property="og:site_name" content="Conlara Tienda" />
       </Helmet>
 
@@ -69,7 +74,7 @@ const DetallesProducto = () => {
           </p>
           <img
             className="detallesProducto__imagen"
-            src={producto.imgUrl || 'https://conlara.com.ar/default-product.jpg'}
+            src={productImage}
             alt={`Imagen de ${producto.name || 'producto'}`}
           />
           <div className="detallesProducto__botones">
@@ -86,6 +91,35 @@ const DetallesProducto = () => {
               <p><strong>Teléfono del vendedor:</strong> {producto.telefono || 'No disponible'}</p>
             </div>
           )}
+
+          {/* Botones de compartir */}
+          <div className="detallesProducto__compartir">
+            <h3>Compartir en redes:</h3>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${productUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="detallesProducto__boton compartir facebook"
+            >
+              Compartir en Facebook
+            </a>
+            <a
+              href={`https://api.whatsapp.com/send?text=${productTitle}%20${productUrl}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="detallesProducto__boton compartir whatsapp"
+            >
+              Compartir en WhatsApp
+            </a>
+            <a
+              href={`https://www.instagram.com/`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="detallesProducto__boton compartir instagram"
+            >
+              Compartir en Instagram
+            </a>
+          </div>
         </div>
       ) : (
         <p className="detallesProducto__mensaje">Cargando detalles del producto...</p>
