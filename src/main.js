@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client'; // Importar createRoot
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './style.css';
-import DetallesProducto from './DetallesProducto';
+import DetallesProducto from './views/Detalles/Detalles.jsx'; // Ruta ajustada si el archivo está en esta ubicación
 
 // Componente original con los logotipos y contador
 const Home = () => {
@@ -43,8 +43,8 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/productos/:id" element={<DetallesProducto />} />
+        <Route path="/" element={<Home />} /> {/* Componente principal */}
+        <Route path="/productos/:id" element={<DetallesProducto />} /> {/* Manejo de rutas dinámicas */}
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
