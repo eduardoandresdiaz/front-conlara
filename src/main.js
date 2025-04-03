@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client'; // Importar createRoot
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './style.css';
 import DetallesProducto from './DetallesProducto';
@@ -37,8 +37,9 @@ const setupCounter = (element) => {
   });
 };
 
-// Renderización principal
-ReactDOM.render(
+// Crear raíz para React 18+
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
@@ -46,32 +47,5 @@ ReactDOM.render(
         <Route path="/productos/:id" element={<DetallesProducto />} />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('app')
+  </React.StrictMode>
 );
-
-
-// import './style.css'
-// import javascriptLogo from './javascript.svg'
-// import viteLogo from '/vite.svg'
-// import { setupCounter } from './counter.js'
-
-// document.querySelector('#app').innerHTML = `
-//   <div>
-//     <a href="https://vite.dev" target="_blank">
-//       <img src="${viteLogo}" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-//       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-//     </a>
-//     <h1>Hello Vite!</h1>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite logo to learn more
-//     </p>
-//   </div>
-// `
-
-// setupCounter(document.querySelector('#counter'))
