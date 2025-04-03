@@ -29,6 +29,7 @@ const MisProductos = () => {
       setError(error.message);
       setProductos([]);
     }
+    ///prueba
   };
 
   // Función para eliminar un producto y su imagen
