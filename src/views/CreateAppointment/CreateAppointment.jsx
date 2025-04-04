@@ -12,12 +12,29 @@ const CreateAppointment = () => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const posData = async (formData) => {
+  const fetchUserData = async (email) => {
+    try {
+      // Hacer la petición para obtener los datos del usuario
+      const response = await axios.get(`https://ecommerce-9558.onrender.com/users/email/${email}`);
+      console.log("Datos del usuario obtenidos:", response.data);
+      return response.data; // Retorna los datos del usuario
+    } catch (error) {
+      console.error("Error obteniendo datos del usuario:", error);
+      alert("No se pudo obtener la información del usuario.");
+      return null;
+    }
+  };
+
+  const posData = async (formData, userData) => {
     try {
       console.log("Datos enviados:", formData);
 
       // Crear el producto
-      const response = await axios.post("https://ecommerce-9558.onrender.com/products", formData);
+      const response = await axios.post("https://ecommerce-9558.onrender.com/products", {
+        ...formData,
+        creatorEmail: userData.email, // Agregar el correo desde los datos del usuario
+        telefono: userData.phone || "Teléfono no disponible", // Añadir el teléfono si existe
+      });
       console.log("Respuesta del backend (producto):", response.data);
 
       if (response.status === 201 || response.data.startsWith("Producto creado exitosamente")) {
@@ -88,14 +105,22 @@ const CreateAppointment = () => {
           return errors;
         }}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
-          // Agregar correo electrónico automáticamente
+          // Obtener los datos del usuario desde la API
+          const userData = await fetchUserData(user.email);
+          if (!userData) {
+            setSubmitting(false);
+            return;
+          }
+
+          // Ajustar datos del producto con la información del usuario
           const formData = {
             ...values,
-            creatorEmail: user.email, // Correo electrónico del contexto
+            creatorEmail: userData.email, // Correo obtenido del usuario
+            telefono: userData.phone || "Teléfono no disponible", // Teléfono
             category: { name: values.category }, // Ajustar el formato de la categoría
           };
 
-          const success = await posData(formData);
+          const success = await posData(formData, userData);
           if (success) {
             resetForm(); // Limpia el formulario si se crea exitosamente
             setSelectedFile(null); // Limpia la selección de archivo
@@ -105,6 +130,8 @@ const CreateAppointment = () => {
       >
         {({ isSubmitting, errors }) => (
           <Form className="create-appointment__form">
+            {/* Campos del formulario */}
+            {/* El mismo código que ya tenías para los campos */}
             <div className="create-appointment__field">
               <label htmlFor="name" className="create-appointment__label">Nombre del producto</label>
               <Field
@@ -186,5 +213,3 @@ const CreateAppointment = () => {
 };
 
 export default CreateAppointment;
-
-
