@@ -1,99 +1,172 @@
-/* Contenedor principal */
-.detallesProducto {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+/* Estilos generales */
+body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    min-height: 100vh;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
 }
 
-/* Título del producto */
-.detallesProducto__titulo {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Contenedor de detalles */
-.detallesProducto__contenedor {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.detallesProducto {
     max-width: 800px;
-    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.detallesProducto__contenedor {
     text-align: center;
 }
 
-/* Imagen del producto */
+.detallesProducto__titulo {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.detallesProducto__informacion {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 10px 0;
+}
+
+.detallesProducto__etiqueta {
+    font-weight: bold;
+    color: #222;
+}
+
 .detallesProducto__imagen {
     width: 100%;
     max-width: 400px;
-    max-height: 400px;
-    object-fit: cover;
+    height: auto;
+    margin-top: 10px;
     border-radius: 8px;
-    margin: 20px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón de Comprar */
+.detallesProducto__comprar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.detallesProducto__boton.comprar {
+    background-color: #ff6600;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.detallesProducto__boton.comprar:hover {
+    background-color: #cc5500;
 }
 
 /* Botones de compartir */
 .detallesProducto__compartir {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
     margin-top: 20px;
-}
-
-.detallesProducto__compartir h3 {
-    font-size: 1.2rem;
-    color: #555;
     text-align: center;
 }
 
-/* Botones de compartir */
-.detallesProducto__boton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 8px;
+.detallesProducto__compartir h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.detallesProducto__boton.compartir {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 15px;
     font-size: 1rem;
-    font-weight: bold;
     color: white;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    max-width: 250px;
-    margin: auto;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
 }
 
-/* Colores específicos por red social */
-.compartir.facebook {
-    background-color: #1877f2;
+.detallesProducto__boton.compartir.facebook {
+    background: #1877f2;
 }
 
-.compartir.whatsapp {
-    background-color: #25d366;
+.detallesProducto__boton.compartir.facebook:hover {
+    background: #1258b4;
 }
 
-.compartir.instagram {
-    background-color: #e4405f;
+.detallesProducto__boton.compartir.whatsapp {
+    background: #25d366;
 }
 
-/* Efecto hover */
-.compartir.facebook:hover {
-    background-color: #155ab6;
+.detallesProducto__boton.compartir.whatsapp:hover {
+    background: #1c9e50;
 }
 
-.compartir.whatsapp:hover {
-    background-color: #1da851;
+.detallesProducto__boton.compartir.instagram {
+    background: #e4405f;
 }
 
-.compartir.instagram:hover {
-    background-color: #bc2a8d;
+.detallesProducto__boton.compartir.instagram:hover {
+    background: #c32aa3;
+}
+
+/* Botón de regresar */
+.detallesProducto__botones {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.detallesProducto__boton {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border: none;
+}
+
+.detallesProducto__boton:hover {
+    background-color: #555;
+}
+
+/* Mensajes de error y carga */
+.detallesProducto__mensaje {
+    text-align: center;
+    font-size: 1.2rem;
+    color: red;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    .detallesProducto {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .detallesProducto__titulo {
+        font-size: 1.8rem;
+    }
+
+    .detallesProducto__informacion {
+        font-size: 1rem;
+    }
+
+    .detallesProducto__imagen {
+        max-width: 100%;
+    }
+
+    .detallesProducto__boton {
+        width: 100%;
+        text-align: center;
+    }
 }
