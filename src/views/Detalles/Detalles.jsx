@@ -10,6 +10,7 @@ const DetallesProducto = () => {
   const [error, setError] = useState("");
   const [mostrarContacto, setMostrarContacto] = useState(false);
 
+  // Detectar si el usuario está en un dispositivo móvil
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   useEffect(() => {
@@ -32,10 +33,30 @@ const DetallesProducto = () => {
 
   const handleRegresar = () => navigate("/");
 
-  const handleComprar = () => setMostrarContacto(true);
+  const handleComprar = () => {
+    setMostrarContacto(true);
+
+    // Mostrar el número en un alert solo si es móvil
+    if (isMobile) {
+      if (producto.telefono) {
+        alert(`Número de teléfono del vendedor: ${producto.telefono}`);
+      } else {
+        alert("Teléfono no disponible");
+      }
+    }
+  };
+
+  const handleWhatsAppClick = () => {
+    if (producto.telefono) {
+      // Mostrar el número en un alert al presionar WhatsApp
+      alert(`Número enviado a WhatsApp: ${formatTelefonoWhatsApp(producto.telefono)}`);
+    } else {
+      alert("Teléfono no disponible");
+    }
+  };
 
   const formatTelefonoWhatsApp = (telefono) => {
-    // Agrega siempre un `9` después de `+54` para WhatsApp
+    // Agregar siempre un `9` después de `+54` para WhatsApp
     if (telefono.startsWith("+54")) {
       return `+549${telefono.slice(3)}`;
     }
@@ -108,6 +129,7 @@ const DetallesProducto = () => {
                     className="detallesProducto__boton"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={handleWhatsAppClick}
                   >
                     WhatsApp
                   </a>
@@ -151,6 +173,7 @@ const DetallesProducto = () => {
 };
 
 export default DetallesProducto;
+
 
 // import { useEffect, useState } from "react";
 // import { useParams, useNavigate } from "react-router-dom";
