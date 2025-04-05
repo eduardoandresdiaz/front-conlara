@@ -63,18 +63,24 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Efecto 3D */
 }
 
 .detallesProducto__boton.comprar:hover {
     background-color: #cc5500;
+    transform: translateY(-3px); /* Hace que el botón parezca levantarse */
 }
 
 /* Botones de compartir */
 .detallesProducto__compartir {
     margin-top: 20px;
     text-align: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .detallesProducto__compartir h3 {
@@ -82,15 +88,22 @@ body {
     margin-bottom: 10px;
 }
 
+.botonesCompartir {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 .detallesProducto__boton.compartir {
     display: inline-block;
-    margin: 10px 5px;
     padding: 10px 15px;
     font-size: 1rem;
     color: white;
     border-radius: 5px;
     text-decoration: none;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Efecto 3D */
 }
 
 .detallesProducto__boton.compartir.facebook {
@@ -99,6 +112,7 @@ body {
 
 .detallesProducto__boton.compartir.facebook:hover {
     background: #1258b4;
+    transform: translateY(-3px);
 }
 
 .detallesProducto__boton.compartir.whatsapp {
@@ -107,17 +121,16 @@ body {
 
 .detallesProducto__boton.compartir.whatsapp:hover {
     background: #1c9e50;
+    transform: translateY(-3px);
 }
 
-.detallesProducto__boton.compartir.instagram {
-    background: #e4405f;
+.enlaceCompartir {
+    margin-top: 15px;
+    word-wrap: break-word;
+    text-align: center;
 }
 
-.detallesProducto__boton.compartir.instagram:hover {
-    background: #c32aa3;
-}
-
-/* Botón de regresar */
+/* Botones de regresar */
 .detallesProducto__botones {
     display: flex;
     justify-content: center;
@@ -125,18 +138,20 @@ body {
 }
 
 .detallesProducto__boton {
-    background-color: #333;
+    background-color: #007bff; /* Azul moderno */
     color: white;
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Efecto 3D */
 }
 
 .detallesProducto__boton:hover {
-    background-color: #555;
+    background-color: #0056b3; /* Azul más oscuro para hover */
+    transform: translateY(-3px); /* Hace que el botón parezca levantarse */
 }
 
 /* Mensajes de error y carga */
@@ -163,6 +178,10 @@ body {
 
     .detallesProducto__imagen {
         max-width: 100%;
+    }
+
+    .detallesProducto__compartir {
+        padding: 5px;
     }
 
     .detallesProducto__boton {
