@@ -14,14 +14,29 @@ const CreateAppointment = () => {
 
   const fetchUserData = async (email) => {
     try {
-      // Hacer la petición para obtener los datos del usuario
-      const response = await axios.get(`https://ecommerce-9558.onrender.com/users/email/${email}`);
+      // Obtener el token almacenado (ajusta la lógica según tu aplicación)
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        throw new Error('Token no disponible. Por favor, inicia sesión nuevamente.');
+      }
+
+      // Hacer la petición para obtener los datos del usuario, incluyendo el token en el encabezado
+      const response = await axios.get(
+        `https://ecommerce-9558.onrender.com/users/email/${email}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Añade el token al encabezado
+          },
+        }
+      );
+
       console.log("Datos del usuario obtenidos:", response.data);
       return response.data; // Retorna los datos del usuario
     } catch (error) {
-      console.error("Error obteniendo datos del usuario:", error);
-      alert("No se pudo obtener la información del usuario.");
-      return null;
+      console.error("Error obteniendo datos del usuario:", error.response?.data || error.message);
+      alert("No se pudo obtener la información del usuario. Por favor, verifica tus credenciales.");
+      return null; // Retorna null en caso de error
     }
   };
 
@@ -131,7 +146,6 @@ const CreateAppointment = () => {
         {({ isSubmitting, errors }) => (
           <Form className="create-appointment__form">
             {/* Campos del formulario */}
-            {/* El mismo código que ya tenías para los campos */}
             <div className="create-appointment__field">
               <label htmlFor="name" className="create-appointment__label">Nombre del producto</label>
               <Field

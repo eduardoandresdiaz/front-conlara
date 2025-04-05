@@ -3,8 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import "./Detalles.css"; // Asegúrate de tener el archivo CSS correspondiente
 
-
-
 const DetallesProducto = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -36,15 +34,24 @@ const DetallesProducto = () => {
 
   const handleComprar = () => setMostrarContacto(true);
 
+  const quitarPrefijoTelefono = (telefono) => {
+    return telefono.startsWith("+54") ? telefono.slice(3) : telefono;
+  };
+
   const productUrl = `https://conlara.com.ar/productos/${id}`;
   const mensajeWhatsApp = `Mirá este producto: ${producto.name} - ${productUrl}`;
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`;
   const whatsappUrl = isMobile
     ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
     : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
-  const instagramUrl = isMobile
-    ? "instagram://user?username=conlara.tienda"
-    : "https://www.instagram.com/conlara.tienda/";
+
+  const handleCopyToClipboard = () => {
+    navigator.clipboard.writeText(productUrl).then(() => {
+      alert("Enlace copiado al portapapeles");
+    }).catch(() => {
+      alert("Hubo un error al copiar el enlace");
+    });
+  };
 
   return (
     <div className="detallesProducto">
@@ -80,10 +87,28 @@ const DetallesProducto = () => {
             <button className="detallesProducto__boton" onClick={handleComprar}>Comprar</button>
           </div>
 
-          {mostrarContacto && (
+          {mostrarContacto && producto.telefono && (
             <div className="detallesProducto__contacto">
               <p><strong>Correo del vendedor:</strong> {producto.creatorEmail}</p>
-              <p><strong>Teléfono del vendedor:</strong> {producto.telefono || "No disponible"}</p>
+              <p><strong>Teléfono del vendedor:</strong> {quitarPrefijoTelefono(producto.telefono)}</p>
+              {isMobile ? (
+                <div className="detallesProducto__accionesMovil">
+                  <a
+                    href={`tel:${quitarPrefijoTelefono(producto.telefono)}`}
+                    className="detallesProducto__boton"
+                  >
+                    Llamar
+                  </a>
+                  <a
+                    href={`https://wa.me/${quitarPrefijoTelefono(producto.telefono)}`}
+                    className="detallesProducto__boton"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    WhatsApp
+                  </a>
+                </div>
+              ) : null}
             </div>
           )}
 
@@ -103,12 +128,15 @@ const DetallesProducto = () => {
             >
               <i className="fa-brands fa-whatsapp"></i> Compartir en WhatsApp
             </a>
-            <a
-              href={instagramUrl}
-              className="detallesProducto__boton compartir instagram"
-            >
-              <i className="fa-brands fa-instagram"></i> Ver en Instagram
-            </a>
+            <div className="detallesProducto__copiar">
+              <span>Enlace:</span> {productUrl}
+              <button
+                className="detallesProducto__boton"
+                onClick={handleCopyToClipboard}
+              >
+                Copiar
+              </button>
+            </div>
           </div>
         </div>
       ) : (
