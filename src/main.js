@@ -1,51 +1,49 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client'; // Importar createRoot
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './style.css';
-import DetallesProducto from './views/Detalles/Detalles.jsx'; // Ruta ajustada si el archivo está en esta ubicación
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/media/images/logo.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conlara Compra y Venta</title>
 
-// Componente original con los logotipos y contador
-const Home = () => {
-  return (
-    <div>
-      <a href="https://vite.dev" target="_blank">
-        <img src="/vite.svg" className="logo" alt="Vite logo" />
-      </a>
-      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-        <img src="/javascript.svg" className="logo vanilla" alt="JavaScript logo" />
-      </a>
-      <h1>Hello Vite!</h1>
-      <div className="card">
-        <button id="counter" type="button" onClick={() => setupCounter(document.querySelector('#counter'))}>
-          Contador
-        </button>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite logo to learn more
-      </p>
-    </div>
-  );
-};
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Conlara Compra y Venta" />
+    <meta
+      property="og:description"
+      content="Compra y vende productos fácilmente en nuestra plataforma."
+    />
+    <meta
+      property="og:image"
+      content="https://conlara.com.ar/assets/media/images/logo.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://conlara.com.ar/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Conlara Compra y Venta" />
 
-// Función para configurar el contador (mantenida desde tu código original)
-const setupCounter = (element) => {
-  let count = 0;
-  element.textContent = `Count: ${count}`;
-  element.addEventListener('click', () => {
-    count++;
-    element.textContent = `Count: ${count}`;
-  });
-};
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Conlara Compra y Venta" />
+    <meta
+      name="twitter:description"
+      content="Compra y vende productos fácilmente en nuestra plataforma."
+    />
+    <meta
+      name="twitter:image"
+      content="https://conlara.com.ar/assets/media/images/logo.jpg"
+    />
 
-// Crear raíz para React 18+
-const root = ReactDOM.createRoot(document.getElementById('app'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} /> {/* Componente principal */}
-        <Route path="/productos/:id" element={<DetallesProducto />} /> {/* Manejo de rutas dinámicas */}
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
-);
+    <!-- Font Awesome (para íconos de redes sociales) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
