@@ -14,7 +14,7 @@
     />
     <meta
       property="og:image"
-      content="https://conlara.com.ar/assets/logo-BWybetGO.jpg"
+      content="https://conlara.com.ar/assets/imagen2-Ch2Bn8__.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -31,7 +31,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://conlara.com.ar/assets/logo-BWybetGO.jpg"
+      content="https://conlara.com.ar/assets/imagen2-Ch2Bn8__.jpg"
     />
 
     <!-- Font Awesome (para íconos de redes sociales) -->
