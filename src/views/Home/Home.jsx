@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react'; //import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Para la redirección
-import logoConlara from "../../assets/media/images/imagen2.jpg"; // Importar la imagen de las canchas
+import logoConlara from "../../assets/media/images/imagen2.png"; // Importar la imagen de las canchas
 import styles from './Home.module.css';
 import ListadoProductos from '../Productos/ListadoProductos';
 

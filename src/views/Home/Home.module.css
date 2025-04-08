@@ -36,6 +36,14 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+body {
+  background-color: #ffae3b;
+  color: #000;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
 
 
 .homeContainer {
@@ -44,7 +52,7 @@ table {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 20px;
+    padding: 0px;
   }
   
   .title {
@@ -54,7 +62,7 @@ table {
   }
   
   .canchas {
-    max-width: 100%;
+    max-width: 15%;
     height: auto;
     border-radius: 10px; /* Agregar bordes redondeados a la imagen */
   }

@@ -150,7 +150,7 @@ const Register = () => {
             </div>
 
             <button type="submit" className="register__button" disabled={isSubmitting}>
-              {isSubmitting ? "Registrando..." : "Registrar"}
+              {isSubmitting ? "Registrando..." : "Registrarse"}
             </button>
           </Form>
         )}

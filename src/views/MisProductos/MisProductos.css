@@ -37,7 +37,7 @@
   padding: 15px; /* Espaciado interno */
   max-width: 400px; /* Ancho máximo de la tarjeta */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  background-color: #f9f9f9; /* Fondo claro */
+  background-color: #fff84f; /* Fondo claro */
   text-align: center; /* Centrar el contenido dentro de la tarjeta */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Efecto dinámico */
 }

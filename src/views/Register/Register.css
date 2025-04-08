@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
+
   font-family: 'Arial', sans-serif;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .register__form {
-  background-color: #fff;
+  background-color: #fff84f;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -43,11 +43,13 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  background-color: #e4e3e3;
 }
 
 .register__input:focus {
   outline: none;
   border-color: #007BFF;
+  background-color: rgb(202, 202, 202);
 }
 
 .register__error {
@@ -58,17 +60,19 @@
 
 .register__button {
   padding: 10px;
-  font-size: 1rem;
+  font-size: 2rem;
   color: #fff;
-  background-color: #007BFF;
+  background-color: #007BFF; /* Azul brillante */
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Efecto 3D */
 }
 
 .register__button:hover:not(:disabled) {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Azul más oscuro para hover */
+  transform: translateY(-3px); /* Simula levantamiento del botón */
 }
 
 @media (max-width: 600px) {
