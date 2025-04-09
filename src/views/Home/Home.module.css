@@ -62,7 +62,7 @@ body {
   }
   
   .canchas {
-    max-width: 15%;
+    max-width: 24em;
     height: auto;
     border-radius: 10px; /* Agregar bordes redondeados a la imagen */
   }
