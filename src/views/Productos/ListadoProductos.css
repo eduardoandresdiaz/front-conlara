@@ -62,3 +62,34 @@
   color: #999; /* Texto gris */
   cursor: not-allowed; /* Cursor no permitido */
 }
+.listadoProductos__buscador {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.listadoProductos__buscador input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px 0 0 8px;
+  width: 60%;
+  max-width: 400px;
+  outline: none;
+}
+
+.listadoProductos__buscador button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.listadoProductos__buscador button:hover {
+  background-color: #0056b3;
+}
+
