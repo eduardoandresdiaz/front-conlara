@@ -38,6 +38,8 @@ function App() {
           <Route path="/productos" element={<ListadoProductos />} />
           <Route path="/ModifyProduct/:id" element={<ModifyProduct />} />
           <Route path="/productos/:id" element={<DetallesProducto />} /> {/* Detalles producto */}
+          <Route path="/productos/share/:id" element={<DetallesProducto />} /> {/* Ruta para productos compartidos */}
+
           <Route path="/perfil" element={<Perfil />} /> {/* Nueva ruta */}
         </Routes>
       </div>
