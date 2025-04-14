@@ -43,18 +43,16 @@ const DetallesProducto = () => {
   const handleRegresar = () => navigate("/");
   const handleComprar = () => setMostrarContacto(true);
 
-  const productUrl = `https://conlara.com.ar/products/share/${id}`;
-  const mensajeWhatsApp = `Mirá este producto: ${producto.name} - ${productUrl}`;
-  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-    productUrl
-  )}`;
+  const shareUrl = `https://conlara.com.ar/productos/share/${id}`;
+  const mensajeWhatsApp = `Mirá este producto: ${producto.name} - ${shareUrl}`;
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
   const whatsappUrl = isMobile
     ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
     : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
 
   const handleCopyToClipboard = () => {
     navigator.clipboard
-      .writeText(productUrl)
+      .writeText(shareUrl)
       .then(() => {
         alert("Enlace copiado al portapapeles");
       })
@@ -92,7 +90,7 @@ const DetallesProducto = () => {
           property="og:image"
           content={producto.imgUrl || "https://via.placeholder.com/400"}
         />
-        <meta property="og:url" content={productUrl} />
+        <meta property="og:url" content={shareUrl} />
         <meta property="og:site_name" content="Conlara Tienda" />
       </Helmet>
 
@@ -202,6 +200,7 @@ const DetallesProducto = () => {
 };
 
 export default DetallesProducto;
+
 
 // import { useEffect, useState } from "react";
 // import { useParams, useNavigate } from "react-router-dom";
