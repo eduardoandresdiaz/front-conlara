@@ -88,7 +88,7 @@ const DetallesProducto = () => {
           content={producto.imgUrl || "https://via.placeholder.com/400"}
         />
         <meta property="og:url" content={productUrl} />
-        <meta property="og:site_name" content="Conlara Tienda" />
+        <meta property="og:site_name" content="Conlara.com.ar" />
       </Helmet>
 
       {error ? (
