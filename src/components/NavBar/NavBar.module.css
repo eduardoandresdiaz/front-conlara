@@ -24,7 +24,7 @@
 
 /* Estilos del título */
 .title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #222;
   text-transform: uppercase;
@@ -121,5 +121,24 @@
 
   .linksContainer.open {
     display: flex !important;
+  }
+}
+
+/* Botón de menú hamburguesa */
+.menuButton {
+  display: none; /* Oculto en pantallas grandes */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .menuButton {
+    display: block; /* Se muestra en móviles */
+    font-size: 3rem; /* Aumenta el tamaño del ícono */
+    width: 85px; /* Área de clic más grande */
+    height: 85px;
+    padding: 15px;
+    cursor: pointer;
+    background: none;
+    border: none;
   }
 }
