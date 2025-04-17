@@ -47,8 +47,11 @@ const DetallesProducto = () => {
   const handleRegresar = () => navigate("/");
   const handleComprar = () => setMostrarContacto(true);
 
-  const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
-  const mensajeWhatsApp = `🛍️ Mirá este producto en Conlara Tienda:\n\n${producto.name}\n\n🔗 ${productUrl}`;
+  // const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
+  const productUrl = `https://ecommerce-9558.onrender.com/productos/share/${id}`;
+  
+  // const mensajeWhatsApp = `🛍️ Mirá este producto en Conlara Tienda:\n\n${producto.name}\n\n🔗 ${productUrl}`;
+  const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar\nPublica \n${producto.name}\n\n🔗 ${productUrl}`;
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`;
   const whatsappUrl = isMobile
     ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
@@ -66,14 +69,14 @@ const DetallesProducto = () => {
       <Helmet>
         <title>
           {producto.name
-            ? `${producto.name} - Conlara Tienda`
+            ? `${producto.name} - Conlara.com.ar`
             : "Cargando producto..."}
         </title>
         <meta
           name="description"
           content={
             producto.description ||
-            "Compra los mejores productos en Conlara Tienda"
+            "Compra los mejores productos en Conlara.com.ar"
           }
         />
         <meta name="keywords" content="tienda, compra, venta, productos, Conlara" />
@@ -88,7 +91,7 @@ const DetallesProducto = () => {
           content={producto.imgUrl || "https://via.placeholder.com/400"}
         />
         <meta property="og:url" content={productUrl} />
-        <meta property="og:site_name" content="Conlara Tienda" />
+        <meta property="og:site_name" content="Conlara.com.ar" />
       </Helmet>
 
       {error ? (
