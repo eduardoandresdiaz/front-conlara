@@ -49,7 +49,13 @@ const DetallesProducto = () => {
 
   const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
   const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar\n Compra y Vende en el Valle del Conlara\n${producto.name}\n\n🔗 ${productUrl}`;
-  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`;
+  
+  // Texto personalizado para compartir en Facebook
+  const textoPersonalizado = "¡Echa un vistazo a este producto en Conlara! Compra y vende en el Valle del Conlara.";
+
+  // URL para compartir en Facebook con el texto personalizado
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}&quote=${encodeURIComponent(textoPersonalizado)}`;
+
   const whatsappUrl = isMobile
     ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
     : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
@@ -62,129 +68,141 @@ const DetallesProducto = () => {
   };
 
   return (
-    <div className="detallesProducto">
-      <Helmet>
-        <title>
-          {producto.name
-            ? `${producto.name} - Conlara.com.ar`
-            : "Cargando producto..."}
-        </title>
-        <meta
-          name="description"
-          content={
-            producto.description ||
-            "Compra los mejores productos en Conlara.com.ar"
-          }
-        />
-        <meta name="keywords" content="tienda, compra, venta, productos, Conlara" />
-        <meta property="og:type" content="product" />
-        <meta property="og:title" content={producto.name || "Producto"} />
-        <meta
-          property="og:description"
-          content={producto.description || "Detalles del producto"}
-        />
-        <meta
-          property="og:image"
-          content={producto.imgUrl || "https://via.placeholder.com/400"}
-        />
-        <meta property="og:url" content={productUrl} />
-        <meta property="og:site_name" content="Conlara.com.ar" />
-      </Helmet>
+    <>
+      {/* Encabezado fuera del contenedor amarillo */}
+      <div className="encabezadoConlara">
+        <h1 className="detallesProducto__tituloPrincipal">CONLARA.COM.AR</h1>
+        <h2 className="detallesProducto__subtitulo">Compra y Vende en El Valle Del Conlara</h2>
+      </div>
 
-      {error ? (
-        <div className="error-container">
-          <p className="error-message">
-            Hubo un problema al cargar los detalles: {error}
-          </p>
-        </div>
-      ) : null}
-
-      {producto.name ? (
-        <div className="detallesProducto__contenedor">
-          <h1 className="detallesProducto__titulo">{producto.name}</h1>
-          <p className="detallesProducto__informacion">
-            <span className="detallesProducto__etiqueta">Descripción: </span>
-            {producto.description}
-          </p>
-          <p className="detallesProducto__informacion">
-            <span className="detallesProducto__etiqueta">Precio: </span>${producto.price}
-          </p>
-          <img
-            className="detallesProducto__imagen"
-            src={producto.imgUrl || "https://via.placeholder.com/400"}
-            alt={`Imagen de ${producto.name}`}
-            onError={(e) => (e.target.src = "https://via.placeholder.com/400")}
-            role="img"
-            aria-label={`Imagen ilustrativa de ${producto.name}`}
+      <div className="detallesProducto">
+        <Helmet>
+          <title>
+            {producto.name
+              ? `${producto.name} - Conlara.com.ar`
+              : "Cargando producto..."}
+          </title>
+          <meta
+            name="description"
+            content={
+              producto.description ||
+              "Compra los mejores productos en Conlara.com.ar"
+            }
           />
+          <meta name="keywords" content="tienda, compra, venta, productos, Conlara" />
+          <meta property="og:type" content="product" />
+          <meta property="og:title" content={producto.name || "Producto"} />
+          <meta
+            property="og:description"
+            content={producto.description || "Detalles del producto"}
+          />
+          <meta
+            property="og:image"
+            content={producto.imgUrl || "https://via.placeholder.com/400"}
+          />
+          <meta property="og:url" content={productUrl} />
+          <meta property="og:site_name" content="Conlara.com.ar" />
+        </Helmet>
 
-          <div className="detallesProducto__botones">
-            <button className="detallesProducto__boton" onClick={handleRegresar}>
-              Lista De Productos
-            </button>
-            <button className="detallesProducto__boton" onClick={handleComprar}>
-              Comprar
-            </button>
+        {error ? (
+          <div className="error-container">
+            <p className="error-message">
+              Hubo un problema al cargar los detalles: {error}
+            </p>
           </div>
+        ) : null}
 
-          {mostrarContacto && producto.telefono && (
-            <div className="detallesProducto__contacto">
-              <p>
-                <strong>Correo del vendedor:</strong> {producto.creatorEmail}
-              </p>
-              <p>
-                <strong>Teléfono del vendedor:</strong> {producto.telefono}
-              </p>
-              {isMobile && (
-                <div className="detallesProducto__accionesMovil">
-                  <a
-                    href={`tel:${producto.telefono}`}
-                    className="detallesProducto__boton"
-                  >
-                    Llamar
-                  </a>
-                  <a
-                    href={`https://wa.me/${producto.telefono}`}
-                    className="detallesProducto__boton"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    WhatsApp
-                  </a>
-                </div>
-              )}
-            </div>
-          )}
+        {producto.name ? (
+          <div className="detallesProducto__contenedor">
+            <h1 className="detallesProducto__titulo">{producto.name}</h1>
+            <p className="detallesProducto__informacion">
+              <span className="detallesProducto__etiqueta">Descripción: </span>
+              {producto.description}
+            </p>
+            <p className="detallesProducto__informacion">
+              <span className="detallesProducto__etiqueta">Precio: </span>${producto.price}
+            </p>
+            <img
+              className="detallesProducto__imagen"
+              src={producto.imgUrl || "https://via.placeholder.com/400"}
+              alt={`Imagen de ${producto.name}`}
+              onError={(e) => (e.target.src = "https://via.placeholder.com/400")}
+              role="img"
+              aria-label={`Imagen ilustrativa de ${producto.name}`}
+            />
 
-          <div className="detallesProducto__compartir">
-            <h3>Compartir</h3>
-            <a
-              href={facebookShareUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="detallesProducto__boton compartir facebook"
-            >
-              <i className="fa-brands fa-facebook-f"></i> Compartir en Facebook
-            </a>
-            <a
-              href={whatsappUrl}
-              className="detallesProducto__boton compartir whatsapp"
-            >
-              <i className="fa-brands fa-whatsapp"></i> Compartir en WhatsApp
-            </a>
-            <div className="detallesProducto__copiar">
-              <button className="detallesProducto__boton" onClick={handleCopyToClipboard}>
-                Copiar Enlace
+            <div className="detallesProducto__botones">
+              <button className="detallesProducto__boton" onClick={handleComprar}>
+                Comprar
               </button>
             </div>
+
+            {mostrarContacto && producto.telefono && (
+              <div className="detallesProducto__contacto">
+                <p>
+                  <strong>Correo del vendedor:</strong> {producto.creatorEmail}
+                </p>
+                <p>
+                  <strong>Teléfono del vendedor:</strong> {producto.telefono}
+                </p>
+                {isMobile && (
+                  <div className="detallesProducto__accionesMovil">
+                    <a
+                      href={`tel:${producto.telefono}`}
+                      className="detallesProducto__boton"
+                    >
+                      Llamar
+                    </a>
+                    <a
+                      href={`https://wa.me/${producto.telefono}`}
+                      className="detallesProducto__boton"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      WhatsApp
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="detallesProducto__compartir">
+              <h3>Compartir</h3>
+              <a
+                href={facebookShareUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="detallesProducto__boton compartir facebook"
+              >
+                <i className="fa-brands fa-facebook-f"></i> Compartir en Facebook
+              </a>
+              <a
+                href={whatsappUrl}
+                className="detallesProducto__boton compartir whatsapp"
+              >
+                <i className="fa-brands fa-whatsapp"></i> Compartir en WhatsApp
+              </a>
+              <div className="detallesProducto__copiar">
+                <button className="detallesProducto__boton" onClick={handleCopyToClipboard}>
+                  Copiar Enlace
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="loading-spinner">
-          <p>Cargando detalles del producto...</p>
-        </div>
-      )}
-    </div>
+        ) : (
+          <div className="loading-spinner">
+            <p>Cargando detalles del producto...</p>
+          </div>
+        )}
+      </div>
+
+      {/* Botón fuera del contenedor */}
+      <div className="boton-regresar-contenedor">
+        <button className="detallesProducto__boton" onClick={handleRegresar}>
+          Mirá más productos de conlara.com.ar
+        </button>
+      </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #fff9c4; /* amarillo claro */
     margin: 0;
     padding: 0;
 }
@@ -10,9 +10,22 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background: #fff84f;
+    background: #fce40c; /* fondo blanco */
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.detallesProducto__tituloPrincipal {
+    font-size: 5rem;
+    margin-bottom: 0.5rem;
+    color: #222;
+}
+
+.detallesProducto__subtitulo {
+    font-size: 1.2rem;
+    color: #444;
+    margin-bottom: 20px;
 }
 
 .detallesProducto__contenedor {
@@ -20,7 +33,7 @@ body {
 }
 
 .detallesProducto__titulo {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #333;
     margin-bottom: 10px;
 }
@@ -37,8 +50,8 @@ body {
 }
 
 .detallesProducto__imagen {
-    display: block; /* Asegura que sea un elemento de bloque */
-    margin: 0 auto; /* Centra horizontalmente */
+    display: block;
+    margin: 0 auto;
     width: 100%;
     max-width: 400px;
     height: auto;
@@ -48,12 +61,6 @@ body {
 }
 
 /* Botón de Comprar */
-.detallesProducto__comprar {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
 .detallesProducto__boton.comprar {
     background-color: #ff6600;
     color: white;
@@ -63,32 +70,31 @@ body {
     border-radius: 8px;
     cursor: pointer;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
     transition: background-color 0.3s ease, transform 0.2s ease;
     border: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Efecto 3D */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .detallesProducto__boton.comprar:hover {
     background-color: #cc5500;
-    transform: translateY(-3px); /* Hace que el botón parezca levantarse */
+    transform: translateY(-3px);
 }
 
 /* Botones de compartir */
 .detallesProducto__compartir {
     margin-top: 20px;
     text-align: center;
-    padding: 10px;
-    background-color: #ffae3f;
-    border-color: #222;
+    padding: 15px;
+    background-color: #f5f5f5;
     border-radius: 10px;
-    overflow: hidden;
 }
 
 .detallesProducto__compartir h3 {
     font-size: 1.5rem;
     margin-bottom: 10px;
+    color: #333;
 }
 
 .botonesCompartir {
@@ -106,7 +112,7 @@ body {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Efecto 3D */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .detallesProducto__boton.compartir.facebook {
@@ -127,41 +133,46 @@ body {
     transform: translateY(-3px);
 }
 
-.enlaceCompartir {
-    margin-top: 15px;
-    word-wrap: break-word;
-    text-align: center;
-}
-
-/* Botones de regresar */
-.detallesProducto__botones {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.detallesProducto__boton {
-    background-color: #007bff; /* Azul moderno */
+/* Botón copiar */
+.detallesProducto__copiar button {
+    margin-top: 10px;
+    background-color: #007bff;
     color: white;
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
     border: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Efecto 3D */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.detallesProducto__boton:hover {
-    background-color: #0056b3; /* Azul más oscuro para hover */
-    transform: translateY(-3px); /* Hace que el botón parezca levantarse */
+.detallesProducto__copiar button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
 }
 
-/* Mensajes de error y carga */
-.detallesProducto__mensaje {
+/* Botón "mirá más productos" */
+.detallesProducto__boton.volverInicio {
+    background-color: #007bff;
+    color: white;
+    display: block;
+    width: fit-content;
+    margin: 30px auto 0;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
     text-align: center;
-    font-size: 1.2rem;
-    color: red;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.detallesProducto__boton.volverInicio:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
 }
 
 /* Responsividad */
@@ -172,23 +183,50 @@ body {
     }
 
     .detallesProducto__titulo {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
 
     .detallesProducto__informacion {
         font-size: 1rem;
     }
 
-    .detallesProducto__imagen {
-        max-width: 100%;
-    }
-
-    .detallesProducto__compartir {
-        padding: 5px;
-    }
-
     .detallesProducto__boton {
         width: 100%;
         text-align: center;
     }
+
+    .detallesProducto__imagen {
+        max-width: 100%;
+    }
 }
+.detallesProducto__tituloPrincipal {
+    font-size: 2.5rem; /* más grande */
+    font-weight: bold; /* en negrita */
+    margin-bottom: 0.5rem;
+    color: #222;
+}
+.detallesProducto__subtitulo {
+    font-size: 1,2%; /* Tamaño más grande */
+    font-weight: bold; /* En negrita */
+    color: #444;
+    margin-bottom: 20px;
+}
+.detallesProducto__boton {
+    background-color: #9dff00; /* color de fondo */
+    color: rgb(24, 22, 22); /* color del texto */
+    padding: 12px 20px; /* espaciado */
+    font-size: 1.2rem; /* tamaño de fuente */
+    font-weight: bold; /* negrita */
+    border-radius: 8px; /* bordes redondeados */
+    cursor: pointer; /* cursor en forma de mano */
+    display: inline-block; /* asegura que el botón sea visible */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none; /* sin borde */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* sombra */
+}
+
+.detallesProducto__boton:hover {
+    background-color: #96cc00; /* color de fondo al pasar el mouse */
+    transform: translateY(-3px); /* pequeño efecto al pasar el mouse */
+}
+
