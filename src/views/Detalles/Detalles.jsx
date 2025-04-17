@@ -47,11 +47,8 @@ const DetallesProducto = () => {
   const handleRegresar = () => navigate("/");
   const handleComprar = () => setMostrarContacto(true);
 
-  // const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
-  const productUrl = `https://ecommerce-9558.onrender.com/productos/share/${id}`;
-  
-  // const mensajeWhatsApp = `🛍️ Mirá este producto en Conlara Tienda:\n\n${producto.name}\n\n🔗 ${productUrl}`;
-  const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar\nPublica \n${producto.name}\n\n🔗 ${productUrl}`;
+  const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
+  const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar\n Compra y Vende en el Valle del Conlara\n${producto.name}\n\n🔗 ${productUrl}`;
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`;
   const whatsappUrl = isMobile
     ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
@@ -91,7 +88,7 @@ const DetallesProducto = () => {
           content={producto.imgUrl || "https://via.placeholder.com/400"}
         />
         <meta property="og:url" content={productUrl} />
-        <meta property="og:site_name" content="Conlara.com.ar" />
+        <meta property="og:site_name" content="Conlara Tienda" />
       </Helmet>
 
       {error ? (
