@@ -1,50 +1,68 @@
+/* Estilos del contenedor principal del navbar */
 .NavBarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background-color: #ffae3b;
+  border-bottom: 2px solid #ddd;
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  display: flex; /* Flexbox para alinear en fila */
-  flex-direction: row; /* Garantiza que los elementos estén en fila */
-  align-items: center; /* Centra verticalmente los elementos */
-  justify-content: space-between; /* Espaciado entre los extremos */
-  padding: 0em 0em;
-  background-color: #ffae3b;
-  border-bottom: 1px solid #ddd;
-  width: 100%;
-  height: 3em; /* Define una altura consistente */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 60px;
 }
 
-.imageLogo {
-  width: 50px; /* Tamaño estándar del logo */
-  height: 50px; /* Proporción consistente */
-  margin-right: 10px; /* Espaciado del logo */
-}
-
-.logoContainer {
+/* Contenedor del título (centrado) */
+.titleContainer {
+  flex-grow: 1;
   display: flex;
-  align-items: center; /* Alinear logo verticalmente */
+  justify-content: center; /* Centra el título */
+  align-items: center;
 }
 
+/* Estilos del título */
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #222;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Estilos para el logo (izquierda) */
+.imageLogo {
+  width: 60px;
+  height: 60px;
+}
+
+/* Contenedor de los botones (derecha) */
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Botón de menú hamburguesa */
+.menuButton {
+  display: none; /* Oculta el botón en pantallas grandes */
+}
+
+/* Contenedor de enlaces */
 .linksContainer {
-  display: flex; /* Flexbox para alinear en fila */
-  gap: 15px; /* Espaciado entre botones */
-  margin-right: 30px; /* Espaciado a la derecha */
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
+/* Estilos para los botones */
 .authLink {
-  text-decoration: none; /* Sin subrayado */
-  color: #333; /* Color del texto */
-  font-weight: bold; /* Destacar texto */
+  text-decoration: none;
 }
 
-.authLink:hover {
-  color: #007bff; /* Cambiar color al pasar el mouse */
-  text-decoration: underline; /* Subrayado al pasar el mouse */
-}
-
-.loginButton,
-.logoutButton,
+.loginButton, 
+.logoutButton, 
 .menuAppointmentButton {
   background-color: #007bff;
   color: white;
@@ -53,7 +71,7 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .logoutButton {
@@ -66,50 +84,42 @@
 
 .logoutButton:hover {
   background-color: #e60000;
+  transform: scale(1.05);
 }
 
 .menuAppointmentButton:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
 }
 
-/* Responsividad: mantener alineación en fila para pantallas pequeñas */
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
-  .NavBarContainer {
-      flex-direction: row; /* Mantener alineación en fila */
-      flex-wrap: wrap; /* Permitir que los elementos se ajusten si no caben */
+  .buttonsContainer {
+    position: absolute;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+  }
+
+  .menuButton {
+    display: block; /* Se muestra en móviles */
   }
 
   .linksContainer {
-      flex-wrap: wrap; /* Botones en varias filas si no caben */
-      justify-content: flex-end; /* Alinear al final */
-      gap: 10px; /* Reducir espaciado entre botones */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 4rem;
+    right: 10px;
+    background: #fff;
+    width: 220px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
   }
 
-  .imageLogo {
-      width: 80px; /* Reducir tamaño del logo */
-      height: 40px;
-  }
-
-  .loginButton, .logoutButton, .menuAppointmentButton {
-      font-size: 0.9rem; /* Ajustar tamaño de fuente */
-      padding: 0.4rem 0.8rem; /* Reducir padding */
-  }
-}
-
-@media (max-width: 480px) {
-  .linksContainer {
-      flex-wrap: nowrap; /* Forzar una fila en teléfonos */
-      overflow-x: auto; /* Habilitar scroll horizontal si es necesario */
-      gap: 5px; /* Espaciado más reducido */
-  }
-
-  .imageLogo {
-      width: 60px; /* Tamaño más pequeño del logo */
-      height: 30px;
-  }
-
-  .loginButton, .logoutButton, .menuAppointmentButton {
-      font-size: 0.8rem; /* Fuente más pequeña en pantallas muy pequeñas */
-      padding: 0.3rem 0.6rem; /* Padding reducido */
+  .linksContainer.open {
+    display: flex !important;
   }
 }

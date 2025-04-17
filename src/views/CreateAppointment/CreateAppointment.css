@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f4f4f4;
+  background-color: #fff84d;
   font-family: 'Arial', sans-serif;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .create-appointment__form {
-  background-color: #fff;
+  background-color: #ffae3b;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -43,6 +43,7 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  background-color: rgb(243, 243, 243);
 }
 
 .create-appointment__input:focus {
