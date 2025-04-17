@@ -200,13 +200,13 @@ body {
     }
 }
 .detallesProducto__tituloPrincipal {
-    font-size: 2.5rem; /* más grande */
+    font-size: 2rem; /* más grande */
     font-weight: bold; /* en negrita */
     margin-bottom: 0.5rem;
     color: #222;
 }
 .detallesProducto__subtitulo {
-    font-size: 1.2%; /* Tamaño más grande */
+    font-size: 1.5rem; /* Tamaño más grande */
     font-weight: bold; /* En negrita */
     color: #444;
     margin-bottom: 20px;
