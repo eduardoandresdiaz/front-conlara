@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
+//import { useState } from 'react';
 import './Register.css';
 
 const Register = () => {
@@ -25,7 +26,6 @@ const Register = () => {
       console.error("Error durante la solicitud:", error);
     
       if (error.response) {
-        // Capturamos el mensaje exacto del backend
         const serverMessage = error.response.data.message || "Error inesperado en el servidor.";
         alert(`Problema detectado: ${serverMessage}`);
       } else if (error.request) {
@@ -52,6 +52,7 @@ const Register = () => {
           country: '',
           address: '',
           city: '',
+          acceptTerms: false
         }}
         validate={(values) => {
           const errors = {};
@@ -84,11 +85,14 @@ const Register = () => {
             errors.phone = 'El teléfono es obligatorio.';
           }
 
+          if (!values.acceptTerms) {
+            errors.acceptTerms = 'Debes aceptar los Términos y Condiciones.';
+          }
+
           return errors;
         }}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           try {
-            // Agregar prefijo +54 al teléfono si no lo tiene
             const processedValues = {
               ...values,
               phone: values.phone.startsWith('+54') ? values.phone : `+54${values.phone}`,
@@ -106,7 +110,7 @@ const Register = () => {
           }
         }}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, values, setFieldValue }) => (
           <Form className="register__form">
             <div className="register__field">
               <label htmlFor="name" className="register__label">Nombre y Apellido</label>
@@ -139,14 +143,13 @@ const Register = () => {
             </div>
 
             <div className="register__field">
-  <label htmlFor="phone" className="register__label">Teléfono</label>
-  <div style={{ display: "flex", alignItems: "center" }}>
-    <span style={{ marginRight: "8px" }}>+54</span>
-    <Field type="text" name="phone" id="phone" className="register__input" />
-  </div>
-  <ErrorMessage name="phone" component="div" className="register__error" />
-</div>
-
+              <label htmlFor="phone" className="register__label">Teléfono</label>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <span style={{ marginRight: "8px" }}>+54</span>
+                <Field type="text" name="phone" id="phone" className="register__input" />
+              </div>
+              <ErrorMessage name="phone" component="div" className="register__error" />
+            </div>
 
             <div className="register__field">
               <label htmlFor="country" className="register__label">Provincia</label>
@@ -166,7 +169,72 @@ const Register = () => {
               <ErrorMessage name="city" component="div" className="register__error" />
             </div>
 
-            <button type="submit" className="register__button" disabled={isSubmitting}>
+            {/* Términos y Condiciones */}
+            <div className="register__field">
+  <label className="register__label">Términos y Condiciones</label>
+  <div
+    style={{
+      maxHeight: '150px',
+      overflowY: 'scroll',
+      padding: '10px',
+      border: '1px solid #ccc',
+      marginBottom: '10px',
+      backgroundColor: '#f9f9f9',
+      fontSize: '0.9rem'
+    }}
+  >
+   <div className="register__terms-box">
+  <strong>Términos y Condiciones:</strong>
+  <p>Al registrarte aceptás nuestros Términos y Condiciones de uso. Conlara actúa como intermediario en las transacciones, no se responsabiliza por publicaciones ni cumplimiento de acuerdos entre usuarios. Todo contenido en el sitio es propiedad intelectual de sus autores. Nos reservamos el derecho de suspender cuentas por uso indebido. Para más información consultá nuestra política completa disponible en el sitio.</p>
+  
+  <p>El uso del sitio implica aceptar las condiciones descritas. El usuario será responsable de la información proporcionada y de su conducta en la plataforma. Conlara se reserva el derecho de modificar estos términos cuando lo considere necesario.</p>
+  
+  <strong>Términos y Condiciones de Uso de Conlara</strong>
+  <p><em>Última actualización: Abril 2025</em></p>
+
+  <p>Bienvenido a Conlara. Al registrarte y utilizar nuestros servicios aceptás los siguientes Términos y Condiciones. Te recomendamos leerlos atentamente.</p>
+
+  <p><strong>1. Aceptación de los Términos:</strong> El acceso y uso de la plataforma conlara.com.ar implica la aceptación plena de estos términos. Si no estás de acuerdo con alguno de ellos, por favor no continúes con el uso de la plataforma.</p>
+
+  <p><strong>2. Registro de Usuarios:</strong> Para operar dentro del sitio, es obligatorio completar el formulario de registro con datos válidos. El usuario declara y garantiza que la información brindada es veraz, actual y completa.</p>
+
+  <p><strong>3. Confidencialidad de la Cuenta:</strong> El usuario es responsable de la confidencialidad de su cuenta y contraseña. Conlara no se responsabiliza por el uso indebido de credenciales por terceros.</p>
+
+  <p><strong>4. Publicaciones:</strong> Los productos publicados deben cumplir con la legislación vigente y las políticas del sitio. Conlara se reserva el derecho de eliminar publicaciones sin previo aviso si considera que infringen estas normas.</p>
+
+  <p><strong>5. Responsabilidad sobre las Transacciones:</strong> Conlara actúa como intermediario entre vendedores y compradores, pero no participa directamente en las transacciones. No garantiza la veracidad de las publicaciones, ni se responsabiliza por el cumplimiento de las obligaciones asumidas por los usuarios.</p>
+
+  <p><strong>6. Prohibiciones:</strong> Está prohibido:</p>
+  <ul>
+    <li>Utilizar el sitio para fines ilegales o fraudulentos.</li>
+    <li>Publicar contenido ofensivo, discriminatorio o falso.</li>
+    <li>Manipular precios o interferir en las publicaciones de otros usuarios.</li>
+  </ul>
+
+  <p><strong>7. Propiedad Intelectual:</strong> Todo el contenido del sitio (textos, imágenes, logos, etc.) es propiedad de Conlara o de sus respectivos titulares. Su uso no autorizado está prohibido.</p>
+
+  <p><strong>8. Protección de Datos:</strong> Los datos personales serán tratados conforme a nuestra Política de Privacidad. Al registrarte, aceptás que Conlara procese tus datos para brindarte los servicios.</p>
+
+  <p><strong>9. Modificaciones de los Términos:</strong> Conlara podrá modificar los Términos y Condiciones en cualquier momento. Los cambios serán informados por los canales habituales y entrarán en vigencia 10 días después de su publicación.</p>
+
+  <p><strong>10. Jurisdicción:</strong> Este acuerdo se rige por las leyes de la República Argentina. Cualquier controversia será resuelta por el <strong>Juzgado de Concarán, San Luis, Argentina</strong>.</p>
+</div>
+
+  </div>
+  <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+    <Field
+      type="checkbox"
+      name="acceptTerms"
+      checked={values.acceptTerms}
+      onChange={() => setFieldValue('acceptTerms', !values.acceptTerms)}
+    />
+    Acepto los Términos y Condiciones
+  </label>
+  <ErrorMessage name="acceptTerms" component="div" className="register__error" />
+</div>
+
+
+            <button type="submit" className="register__button" disabled={isSubmitting || !values.acceptTerms}>
               {isSubmitting ? "Registrando..." : "Registrarse"}
             </button>
           </Form>

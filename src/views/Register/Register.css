@@ -80,3 +80,9 @@
       width: 90%;
   }
 }
+.register {
+  margin-top: 70px; /* Ajusta según la altura del navbar */
+}
+body {
+  padding-top: 160px; /* Igual a la altura del navbar */
+}
