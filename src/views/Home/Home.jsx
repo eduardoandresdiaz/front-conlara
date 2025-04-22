@@ -29,11 +29,11 @@ const Home = () => {
   return (
     <div className={styles.homeContainer}>
       <h1 className={styles.title}>Compra y Venta</h1>
-      <img 
+      {/* <img 
         src={logoConlara} 
         alt="Portal de Compras y Venta en el Valle del Conlara" 
         className={styles.canchas} 
-      />
+      /> */}
       <button 
         onClick={handleAuthButtonClick} 
         className={styles.authButton}

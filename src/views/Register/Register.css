@@ -24,6 +24,7 @@
   width: 350px;
   display: flex;
   flex-direction: column;
+  margin-top: 200px;
 }
 
 .register__field {
@@ -83,6 +84,4 @@
 .register {
   margin-top: 70px; /* Ajusta según la altura del navbar */
 }
-body {
-  padding-top: 160px; /* Igual a la altura del navbar */
-}
+
