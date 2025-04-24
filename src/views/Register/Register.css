@@ -1,19 +1,19 @@
 /* BEM Naming Conventions */
 .register {
   display: flex;
-  flex-direction: column; /* Coloca el título encima del formulario */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-
   font-family: 'Arial', sans-serif;
+  margin-top: 70px; /* Ajusta según la altura del navbar */
 }
 
 .register__title {
   font-size: 2rem;
   color: #333;
-  margin-bottom: 20px; /* Espacio entre el título y el formulario */
-  text-align: center; /* Centra el texto */
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .register__form {
@@ -63,25 +63,49 @@
   padding: 10px;
   font-size: 2rem;
   color: #fff;
-  background-color: #007BFF; /* Azul brillante */
+  background-color: #007BFF;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Efecto 3D */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .register__button:hover:not(:disabled) {
-  background-color: #0056b3; /* Azul más oscuro para hover */
-  transform: translateY(-3px); /* Simula levantamiento del botón */
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.register__image-preview {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.register__image {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+/* Si querés la imagen redonda tipo avatar, cambiá border-radius a 50% arriba */
+.register__terms-box {
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  font-size: 0.9rem;
+  max-height: 150px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+  border-radius: 4px;
 }
 
 @media (max-width: 600px) {
   .register__form {
-      width: 90%;
+    width: 90%;
   }
 }
 .register {
-  margin-top: 70px; /* Ajusta según la altura del navbar */
+  margin-top: 170px; /* Ajusta según la altura del navbar */
 }
-
