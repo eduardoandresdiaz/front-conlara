@@ -19,7 +19,7 @@ const DetallesProducto = () => {
     const fetchProducto = async () => {
       try {
         const response = await fetch(
-          `https://og.conlara.com.ar/productos/${id}`,
+          `https://ecommerce-9558.onrender.com/products/${id}`,
           { signal: controller.signal }
         );
         clearTimeout(timeoutId);
