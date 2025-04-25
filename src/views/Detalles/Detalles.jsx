@@ -120,8 +120,10 @@ const DetallesProducto = () => {
               {producto.description}
             </p>
             <p className="detallesProducto__informacion">
-              <span className="detallesProducto__etiqueta">Precio: </span>${producto.price}
-            </p>
+  <span className="detallesProducto__etiqueta">Precio: </span>
+  {producto.price === 1 ? "Consultar precio" : `$${producto.price}`}
+</p>
+
             <img
               className="detallesProducto__imagen"
               src={producto.imgUrl || "https://via.placeholder.com/400"}
