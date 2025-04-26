@@ -48,6 +48,13 @@ const ListadoProductos = () => {
     fetchBusqueda();
   };
 
+  const formatPrice = (price) => {
+    // Asegurarse de que el precio sea un número válido
+    const validPrice = isNaN(price) ? 0 : parseFloat(price);
+    // Mostrar "Consultar" si el precio es 1.00
+    return validPrice === 1 ? "Consultar" : `$${validPrice.toFixed(2)}`;
+  };
+
   return (
     <div className="listadoProductos">
       {/* Buscador */}
@@ -67,23 +74,28 @@ const ListadoProductos = () => {
         {productos.length === 0 && !error ? (
           <p>Cargando productos...</p>
         ) : (
-          productos.map((producto) => (
-            <div key={producto.id} className="listadoProductos__details">
-              <h2>{producto.name}</h2>
-              <p><strong>Precio:</strong> ${producto.price}</p>
-              <img
-                src={producto.imgUrl}
-                alt={`Imagen de ${producto.name}`}
-                style={{ maxWidth: '400px', maxHeight: '400px', objectFit: 'cover' }}
-              />
-              <button
-                className="meInteresaBoton"
-                onClick={() => handleClick(producto.id)}
-              >
-                Me Interesa
-              </button>
-            </div>
-          ))
+          productos.map((producto) => {
+            return (
+              <div key={producto.id} className="listadoProductos__details">
+                <img
+                  src={producto.imgUrl}
+                  alt={`Imagen de ${producto.name}`}
+                  style={{ maxWidth: '400px', maxHeight: '400px', objectFit: 'cover' }}
+                />
+                <h2>{producto.name}</h2>
+                <p>{producto.description}</p>
+                <div className="price">
+                  <span>Precio: {formatPrice(producto.price)}</span>
+                </div>
+                <button
+                  className="meInteresaBoton"
+                  onClick={() => handleClick(producto.id)}
+                >
+                  Me Interesa
+                </button>
+              </div>
+            );
+          })
         )}
       </div>
     </div>

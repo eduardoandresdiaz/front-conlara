@@ -24,6 +24,8 @@
   background-color: #fff84f; /* Fondo claro */
   text-align: center; /* Centrar el contenido dentro de la tarjeta */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave */
+  width: 100%; /* Aseguramos que ocupe el 100% del contenedor */
+  max-width: 300px; /* Limitar a un ancho máximo en pantallas pequeñas */
 }
 
 .listadoProductos__details:hover {
@@ -62,6 +64,7 @@
   color: #999; /* Texto gris */
   cursor: not-allowed; /* Cursor no permitido */
 }
+
 .listadoProductos__buscador {
   display: flex;
   justify-content: center;
@@ -94,3 +97,32 @@
   background-color: #0056b3;
 }
 
+/* Media Queries para Pantallas Pequeñas */
+@media (max-width: 768px) {
+  .listadoProductos__details {
+    max-width: 100%; /* Las tarjetas ocuparán el 100% del ancho en pantallas pequeñas */
+    margin-bottom: 20px; /* Añadir espacio entre las tarjetas */
+  }
+
+  .listadoProductos__buscador input {
+    width: 80%; /* Aumentamos el ancho del input en pantallas pequeñas */
+  }
+
+  .listadoProductos__buscador button {
+    width: 20%; /* El botón ocupa el 20% del ancho */
+  }
+}
+
+@media (max-width: 480px) {
+  .listadoProductos__buscador input {
+    width: 70%; /* Ajustamos el input para que ocupe más espacio */
+  }
+
+  .listadoProductos__buscador button {
+    width: 30%; /* El botón se adapta al 30% */
+  }
+
+  .listadoProductos__details {
+    max-width: 100%; /* Las tarjetas ocupan todo el ancho disponible */
+  }
+}

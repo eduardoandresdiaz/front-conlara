@@ -6,28 +6,38 @@ body {
     padding: 0;
 }
 
+/* Contenedor principal */
 .detallesProducto {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background: #fce40c; /* fondo blanco */
+    background: #fce40c;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
+/* Encabezado principal */
+.encabezadoConlara {
+    text-align: center;
+    padding: 20px 0;
+}
+
 .detallesProducto__tituloPrincipal {
-    font-size: 5rem;
-    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    font-weight: bold;
     color: #222;
+    margin-bottom: 0.5rem;
 }
 
 .detallesProducto__subtitulo {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
     color: #444;
     margin-bottom: 20px;
 }
 
+/* Contenido del producto */
 .detallesProducto__contenedor {
     text-align: center;
 }
@@ -60,31 +70,35 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Botón de Comprar */
-.detallesProducto__boton.comprar {
-    background-color: #ff6600;
-    color: white;
+/* Botones generales */
+.detallesProducto__boton {
+    background-color: #9dff00;
+    color: rgb(24, 22, 22);
     padding: 12px 20px;
     font-size: 1.2rem;
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    margin: 20px auto;
+    display: inline-block;
     transition: background-color 0.3s ease, transform 0.2s ease;
     border: none;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    margin: 10px;
 }
 
-.detallesProducto__boton.comprar:hover {
-    background-color: #cc5500;
+.detallesProducto__boton:hover {
+    background-color: #96cc00;
     transform: translateY(-3px);
 }
 
-/* Botones de compartir */
+/* Botón específico de comprar */
+.detallesProducto__botones {
+    margin: 20px 0;
+}
+
+/* Compartir sección */
 .detallesProducto__compartir {
-    margin-top: 20px;
+    margin-top: 30px;
     text-align: center;
     padding: 15px;
     background-color: #f5f5f5;
@@ -104,8 +118,8 @@ body {
     gap: 10px;
 }
 
+/* Botones compartir específicos */
 .detallesProducto__boton.compartir {
-    display: inline-block;
     padding: 10px 15px;
     font-size: 1rem;
     color: white;
@@ -133,9 +147,8 @@ body {
     transform: translateY(-3px);
 }
 
-/* Botón copiar */
+/* Botón copiar enlace */
 .detallesProducto__copiar button {
-    margin-top: 10px;
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
@@ -143,6 +156,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     border: none;
+    margin-top: 10px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -153,26 +167,34 @@ body {
 }
 
 /* Botón "mirá más productos" */
-.detallesProducto__boton.volverInicio {
-    background-color: #007bff;
-    color: white;
-    display: block;
-    width: fit-content;
-    margin: 30px auto 0;
-    padding: 12px 20px;
-    font-size: 1rem;
-    border-radius: 8px;
+.boton-regresar-contenedor {
     text-align: center;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 30px 0;
 }
 
-.detallesProducto__boton.volverInicio:hover {
-    background-color: #0056b3;
-    transform: translateY(-3px);
+/* Contacto móvil */
+.detallesProducto__accionesMovil {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Mensaje de error */
+.error-container {
+    background-color: #ffe0e0;
+    padding: 20px;
+    border-radius: 8px;
+    color: #c00;
+    margin: 20px;
+}
+
+/* Spinner de carga */
+.loading-spinner {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2rem;
+    color: #555;
 }
 
 /* Responsividad */
@@ -199,34 +221,3 @@ body {
         max-width: 100%;
     }
 }
-.detallesProducto__tituloPrincipal {
-    font-size: 2rem; /* más grande */
-    font-weight: bold; /* en negrita */
-    margin-bottom: 0.5rem;
-    color: #222;
-}
-.detallesProducto__subtitulo {
-    font-size: 1.5rem; /* Tamaño más grande */
-    font-weight: bold; /* En negrita */
-    color: #444;
-    margin-bottom: 20px;
-}
-.detallesProducto__boton {
-    background-color: #9dff00; /* color de fondo */
-    color: rgb(24, 22, 22); /* color del texto */
-    padding: 12px 20px; /* espaciado */
-    font-size: 1.2rem; /* tamaño de fuente */
-    font-weight: bold; /* negrita */
-    border-radius: 8px; /* bordes redondeados */
-    cursor: pointer; /* cursor en forma de mano */
-    display: inline-block; /* asegura que el botón sea visible */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none; /* sin borde */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* sombra */
-}
-
-.detallesProducto__boton:hover {
-    background-color: #96cc00; /* color de fondo al pasar el mouse */
-    transform: translateY(-3px); /* pequeño efecto al pasar el mouse */
-}
-

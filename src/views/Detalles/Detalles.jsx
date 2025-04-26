@@ -49,13 +49,8 @@ const DetallesProducto = () => {
 
   const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
   const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar\n Compra y Vende en el Valle del Conlara\n${producto.name}\n\n🔗 ${productUrl}`;
-  
-  // Texto personalizado para compartir en Facebook
   const textoPersonalizado = "¡Echa un vistazo a este producto en Conlara! Compra y vende en el Valle del Conlara.";
-
-  // URL para compartir en Facebook con el texto personalizado
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}&quote=${encodeURIComponent(textoPersonalizado)}`;
-
   const whatsappUrl = isMobile
     ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
     : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
@@ -69,7 +64,6 @@ const DetallesProducto = () => {
 
   return (
     <>
-      {/* Encabezado fuera del contenedor amarillo */}
       <div className="encabezadoConlara">
         <h1 className="detallesProducto__tituloPrincipal">CONLARA.COM.AR</h1>
         <h2 className="detallesProducto__subtitulo">Compra y Vende en El Valle Del Conlara</h2>
@@ -120,9 +114,14 @@ const DetallesProducto = () => {
               {producto.description}
             </p>
             <p className="detallesProducto__informacion">
-  <span className="detallesProducto__etiqueta">Precio: </span>
-  {producto.price === 1 ? "Consultar precio" : `$${producto.price}`}
-</p>
+              <span className="detallesProducto__etiqueta">Precio: </span>
+              {Number(producto.price) === 1 || !producto.price
+                ? "Consultar precio"
+                : `$${Number(producto.price).toLocaleString("es-AR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}`}
+            </p>
 
             <img
               className="detallesProducto__imagen"
@@ -198,7 +197,6 @@ const DetallesProducto = () => {
         )}
       </div>
 
-      {/* Botón fuera del contenedor */}
       <div className="boton-regresar-contenedor">
         <button className="detallesProducto__boton" onClick={handleRegresar}>
           Mirá más productos de conlara.com.ar
