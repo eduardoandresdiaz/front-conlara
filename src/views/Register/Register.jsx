@@ -86,7 +86,13 @@ const Register = () => {
           else if (values.password.length < 6) errors.password = 'Debe tener al menos 6 caracteres.';
           if (values.password !== values.confirmPassword) errors.confirmPassword = 'Las contraseñas no coinciden.';
           if (!values.phone) errors.phone = 'El teléfono es obligatorio.';
-          if (!values.nickname) errors.nickname = 'El nickname es obligatorio.';
+          if (!values.nickname) {
+            errors.nickname = 'El nickname es obligatorio.';
+          } else if (/\s/.test(values.nickname)) {
+            errors.nickname = 'El nickname no debe contener espacios.';
+          }
+          
+          // if (!values.nickname) errors.nickname = 'El nickname es obligatorio.';
           if (!values.acceptTerms) errors.acceptTerms = 'Debes aceptar los Términos y Condiciones.';
           return errors;
         }}
@@ -215,12 +221,45 @@ const Register = () => {
               <ErrorMessage name="city" component="div" className="register__error" />
             </div>
 
-            {/* Nickname */}
+{/* Nickname */}
+<div className="register__field">
+  <label htmlFor="nickname" className="register__label">Empresa, Apodo o Nickname</label>
+  <input
+    type="text"
+    name="nickname"
+    id="nickname"
+    value={values.nickname}
+    onChange={(e) => {
+      let inputValue = e.target.value;
+      inputValue = inputValue.replace(/\s/g, ''); // Elimina espacios
+      if (inputValue.length > 20) inputValue = inputValue.slice(0, 20); // Limitar a 20 caracteres
+      setFieldValue('nickname', inputValue);
+    }}
+    className="register__input"
+  />
+  
+  {/* Contador y reglas */}
+  <div style={{ fontSize: '12px', marginTop: '4px' }}>
+    <span style={{ color: values.nickname.length >= 20 ? 'red' : '#666' }}>
+      {values.nickname.length}/20
+    </span>
+    <div style={{ color: '#666', marginTop: '2px' }}>
+      No puede contener espacios. Permitidos: "-" y "_".
+    </div>
+  </div>
+
+  <ErrorMessage name="nickname" component="div" className="register__error" />
+</div>
+
+
+
+
+            {/* Nickname
             <div className="register__field">
-              <label htmlFor="nickname" className="register__label">Nickname</label>
+              <label htmlFor="nickname" className="register__label">Empresa, Apodo o Nickname</label>
               <Field type="text" name="nickname" id="nickname" className="register__input" />
               <ErrorMessage name="nickname" component="div" className="register__error" />
-            </div>
+            </div> */}
 
             {/* Imagen de perfil */}
             <div className="register__field">

@@ -83,7 +83,7 @@ const ListadoProductos = () => {
                   style={{ maxWidth: '400px', maxHeight: '400px', objectFit: 'cover' }}
                 />
                 <h2>{producto.name}</h2>
-                <p>{producto.description}</p>
+                {/* <p>{producto.description}</p> */}
                 <div className="price">
                   <span>Precio: {formatPrice(producto.price)}</span>
                 </div>

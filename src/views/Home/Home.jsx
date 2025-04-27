@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react'; //import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Para la redirección
-import logoConlara from "../../assets/media/images/imagen2.jpg"; // Importar la imagen de las canchas
+//import logoConlara from "../../assets/media/images/imagen2.jpg"; // Importar la imagen de las canchas
 import styles from './Home.module.css';
 import ListadoProductos from '../Productos/ListadoProductos';
 
@@ -28,7 +28,7 @@ const Home = () => {
 
   return (
     <div className={styles.homeContainer}>
-      <h1 className={styles.title}>Compra y Venta</h1>
+      <h1 className={styles.title}>Comprá y Venta</h1>
       {/* <img 
         src={logoConlara} 
         alt="Portal de Compras y Venta en el Valle del Conlara" 
