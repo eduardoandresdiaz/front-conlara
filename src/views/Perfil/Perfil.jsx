@@ -12,8 +12,8 @@ const Perfil = () => {
     telefono: '',
     ciudad: '',
     provincia: '',
-    nickname: '', 
-    imgUrlUser: user.imgUrlUser || '', // Asignamos la imagen actual si ya está disponible
+    nickname: '',
+    imgUrlUser: '',
   });
   const [message, setMessage] = useState('');
   const [dataFetched, setDataFetched] = useState(false);
@@ -28,28 +28,28 @@ const Perfil = () => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        if (!token) throw new Error('No se encontró un token de autenticación.');
+        if (!token) throw new Error('No se encontró un token.');
 
         const response = await axios.get(`https://ecommerce-9558.onrender.com/users/email/${user.email}`, {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
         });
 
+        const userData = response.data;
         setFormData({
-          id: response.data.id,
-          direccion: response.data.address || '',
-          telefono: response.data.phone || '',
-          ciudad: response.data.city || '',
-          provincia: response.data.country || '',
-          nickname: response.data.nickname || '',
-          imgUrlUser: response.data.imgUrlUser || '', // Aseguramos que se actualice la URL de la imagen
+          id: userData.id,
+          direccion: userData.address || '',
+          telefono: userData.phone || '',
+          ciudad: userData.city || '',
+          provincia: userData.country || '',
+          nickname: userData.nickname || '',
+          imgUrlUser: userData.imgUrlUser || '',
         });
-        setUser(response.data);
+        setUser(userData); // Actualiza el contexto
         setDataFetched(true);
       } catch (error) {
-        setMessage('Error al obtener los datos del usuario: ' + error.message);
+        setMessage('Error al cargar los datos: ' + (error.response?.data?.message || error.message));
       }
     };
 
@@ -65,43 +65,42 @@ const Perfil = () => {
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      // Validación de tipo y tamaño de la imagen
-      const validTypes = ['image/jpeg', 'image/png'];
-      if (!validTypes.includes(file.type)) {
-        setMessage('Solo se permiten imágenes en formato JPEG o PNG.');
-        return;
-      }
-      if (file.size > 2 * 1024 * 1024) { // Limitar a 2 MB
-        setMessage('El tamaño de la imagen no puede superar los 2 MB.');
-        return;
-      }
+    if (!file) return;
 
-      const formDataImage = new FormData();
-      formDataImage.append('image', file);
+    const validTypes = ['image/jpeg', 'image/png'];
+    if (!validTypes.includes(file.type)) {
+      setMessage('Solo se permiten imágenes JPEG o PNG.');
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      setMessage('La imagen no puede superar 2MB.');
+      return;
+    }
 
-      try {
-        const token = localStorage.getItem('token');
-        if (!token) throw new Error('No se encontró un token de autenticación.');
+    const formDataImage = new FormData();
+    formDataImage.append('file', file);
 
-        const userId = formData.id; // ID del usuario
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('No se encontró un token.');
 
-        const response = await axios.post(
-          `http://ecommerce-9558.onrender.com/file-upload/uploadProfileImage/${userId}`,
-          formDataImage,
-          {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-          }
-        );
+      const response = await axios.post(
+        `https://ecommerce-9558.onrender.com/file-upload/uploadProfileImage/${formData.id}`,
+        formDataImage,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
 
-        const newImgUrl = response.data.imgUrlUser; // URL de la nueva imagen
-        setFormData(prev => ({ ...prev, imgUrlUser: newImgUrl })); // Actualizamos el estado con la nueva URL de la imagen
-        setMessage('Imagen actualizada exitosamente');
-      } catch (error) {
-        setMessage('Error al subir la imagen: ' + error.message);
-      }
+      const newImgUrl = response.data.imgUrlUser;
+      setFormData(prev => ({ ...prev, imgUrlUser: newImgUrl }));
+      setUser(prev => ({ ...prev, imgUrlUser: newImgUrl })); // Actualiza contexto
+      setMessage('Imagen actualizada exitosamente.');
+    } catch (error) {
+      setMessage('Error al subir imagen: ' + (error.response?.data?.message || error.message));
     }
   };
 
@@ -109,7 +108,7 @@ const Perfil = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      if (!token) throw new Error('No se encontró un token de autenticación.');
+      if (!token) throw new Error('No se encontró un token.');
 
       const response = await axios.put(
         `https://ecommerce-9558.onrender.com/users/${formData.id}`,
@@ -119,19 +118,19 @@ const Perfil = () => {
           city: formData.ciudad,
           country: formData.provincia,
           nickname: formData.nickname,
-          imgUrlUser: formData.imgUrlUser, // Incluimos la nueva URL de la imagen
+          imgUrlUser: formData.imgUrlUser,
         },
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      setMessage('Perfil actualizado exitosamente');
+      setUser(response.data); // Actualiza el contexto con los datos nuevos
+      setMessage('Perfil actualizado exitosamente.');
     } catch (error) {
-      setMessage('Error al actualizar el perfil: ' + error.message);
+      setMessage('Error al actualizar perfil: ' + (error.response?.data?.message || error.message));
     }
   };
 
@@ -143,14 +142,15 @@ const Perfil = () => {
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     if (passwords.nueva !== passwords.confirmar) {
-      return setMessage('La nueva contraseña no coincide con la confirmación.');
+      setMessage('La nueva contraseña no coincide con la confirmación.');
+      return;
     }
 
     try {
       const token = localStorage.getItem('token');
-      if (!token) throw new Error('No se encontró un token de autenticación.');
+      if (!token) throw new Error('No se encontró un token.');
 
-      const response = await axios.post(
+      await axios.post(
         `https://ecommerce-9558.onrender.com/users/change-password`,
         {
           currentPassword: passwords.actual,
@@ -158,114 +158,109 @@ const Perfil = () => {
         },
         {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      setMessage('Contraseña actualizada exitosamente');
+      setMessage('Contraseña actualizada exitosamente.');
       setPasswords({ actual: '', nueva: '', confirmar: '' });
       setMostrarCambioContrasena(false);
     } catch (error) {
-      setMessage('Error al cambiar la contraseña: ' + error.message);
+      setMessage('Error al cambiar la contraseña: ' + (error.response?.data?.message || error.message));
     }
   };
 
   return (
     <div className="perfil">
       <h1 className="perfil__title">Modificar Perfil</h1>
-      {message && <p className={`perfil__message ${message.includes('error') ? 'error' : 'success'}`}>{message}</p>}
+
+      {message && (
+        <p className={`perfil__message ${message.toLowerCase().includes('error') ? 'error' : 'success'}`}>
+          {message}
+        </p>
+      )}
 
       {!mostrarCambioContrasena ? (
-        <>
-          <form className="perfil__form" onSubmit={handleSubmit}>
-            <div className="perfil__field">
-              <label htmlFor="direccion">Dirección</label>
-              <input type="text" id="direccion" name="direccion" value={formData.direccion} onChange={handleChange} />
-            </div>
-            <div className="perfil__field">
-              <label htmlFor="telefono">Teléfono</label>
-              <input type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} />
-            </div>
-            <div className="perfil__field">
-              <label htmlFor="ciudad">Ciudad</label>
-              <input type="text" id="ciudad" name="ciudad" value={formData.ciudad} onChange={handleChange} />
-            </div>
-            <div className="perfil__field">
-              <label htmlFor="provincia">Provincia</label>
-              <input type="text" id="provincia" name="provincia" value={formData.provincia} onChange={handleChange} />
-            </div>
+        <form className="perfil__form" onSubmit={handleSubmit}>
+          <div className="perfil__field">
+            <label htmlFor="direccion">Dirección</label>
+            <input type="text" id="direccion" name="direccion" value={formData.direccion} onChange={handleChange} />
+          </div>
 
-            {/* Nickname */}
-            <div className="perfil__field">
-              <label htmlFor="nickname">Empresa, Apodo o Nickname</label>
-              <input
-                type="text"
-                id="nickname"
-                name="nickname"
-                value={formData.nickname}
-                onChange={(e) => {
-                  let inputValue = e.target.value;
-                  inputValue = inputValue.replace(/\s/g, ''); // Elimina espacios
-                  inputValue = inputValue.replace(/[^a-zA-Z0-9-_]/g, ''); // Solo permite letras, números, - y _
-                  if (inputValue.length > 20) inputValue = inputValue.slice(0, 20); // Limita a 20 caracteres
-                  setFormData(prev => ({ ...prev, nickname: inputValue }));
-                }}
-                className="perfil__input"
-              />
+          <div className="perfil__field">
+            <label htmlFor="telefono">Teléfono</label>
+            <input type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} />
+          </div>
 
-              {/* Contador y reglas */}
-              <div style={{ fontSize: '12px', marginTop: '4px' }}>
-                <span style={{ color: formData.nickname.length >= 20 ? 'red' : '#666' }}>
-                  {formData.nickname.length}/20
-                </span>
-                <div style={{ color: '#666', marginTop: '2px' }} >
-                  No puede contener espacios. Permitidos: "-" y "_".
-                </div>
-              </div>
-            </div>
+          <div className="perfil__field">
+            <label htmlFor="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" value={formData.ciudad} onChange={handleChange} />
+          </div>
 
-            {/* Campo para la imagen */}
-            <div className="perfil__field">
-              <label htmlFor="imgUrlUser">Imagen de perfil</label>
-              <input
-                type="file"
-                id="imgUrlUser"
-                name="imgUrlUser"
-                onChange={handleImageChange}
-              />
-              {formData.imgUrlUser && (
-                <div>
-                  <img src={formData.imgUrlUser} alt="Imagen de perfil" className="perfil__image-preview" />
-                </div>
-              )}
-            </div>
+          <div className="perfil__field">
+            <label htmlFor="provincia">Provincia</label>
+            <input type="text" id="provincia" name="provincia" value={formData.provincia} onChange={handleChange} />
+          </div>
 
-            <button type="submit" className="perfil__button">Actualizar Perfil</button>
-          </form>
-          <button className="perfil__button" onClick={() => setMostrarCambioContrasena(true)}>
-            Cambiar Contraseña
-          </button>
-        </>
+          <div className="perfil__field">
+            <label htmlFor="nickname">Empresa, Apodo o Nickname</label>
+            <input
+              type="text"
+              id="nickname"
+              name="nickname"
+              value={formData.nickname}
+              onChange={(e) => {
+                let value = e.target.value.replace(/\s/g, '').replace(/[^a-zA-Z0-9-_]/g, '');
+                if (value.length > 20) value = value.slice(0, 20);
+                setFormData(prev => ({ ...prev, nickname: value }));
+              }}
+            />
+            <small>{formData.nickname.length}/20 - Sin espacios, permite "-" y "_".</small>
+          </div>
+
+          <div className="perfil__field">
+            <label>Imagen Actual</label>
+            {formData.imgUrlUser && (
+              <img src={formData.imgUrlUser} alt="Imagen de perfil" className="perfil__image" />
+            )}
+          </div>
+
+          <div className="perfil__field">
+            <label htmlFor="image">Subir Nueva Imagen</label>
+            <input type="file" id="image" accept="image/jpeg, image/png" onChange={handleImageChange} />
+          </div>
+
+          <div className="perfil__buttons">
+            <button type="submit" className="perfil__button">Guardar cambios</button>
+            <button type="button" className="perfil__button" onClick={() => setMostrarCambioContrasena(true)}>
+              Cambiar contraseña
+            </button>
+          </div>
+        </form>
       ) : (
         <form className="perfil__form" onSubmit={handlePasswordSubmit}>
           <div className="perfil__field">
-            <label htmlFor="actual">Contraseña actual</label>
-            <input type="password" id="actual" name="actual" value={passwords.actual} onChange={handlePasswordChange} required />
+            <label htmlFor="actual">Contraseña Actual</label>
+            <input type="password" id="actual" name="actual" value={passwords.actual} onChange={handlePasswordChange} />
           </div>
+
           <div className="perfil__field">
-            <label htmlFor="nueva">Nueva contraseña</label>
-            <input type="password" id="nueva" name="nueva" value={passwords.nueva} onChange={handlePasswordChange} required />
+            <label htmlFor="nueva">Nueva Contraseña</label>
+            <input type="password" id="nueva" name="nueva" value={passwords.nueva} onChange={handlePasswordChange} />
           </div>
+
           <div className="perfil__field">
-            <label htmlFor="confirmar">Confirmar nueva contraseña</label>
-            <input type="password" id="confirmar" name="confirmar" value={passwords.confirmar} onChange={handlePasswordChange} required />
+            <label htmlFor="confirmar">Confirmar Nueva Contraseña</label>
+            <input type="password" id="confirmar" name="confirmar" value={passwords.confirmar} onChange={handlePasswordChange} />
           </div>
-          <button type="submit" className="perfil__button">Cambiar Contraseña</button>
-          <button type="button" className="perfil__button" onClick={() => setMostrarCambioContrasena(false)}>
-            Volver
-          </button>
+
+          <div className="perfil__buttons">
+            <button type="submit" className="perfil__button">Actualizar contraseña</button>
+            <button type="button" className="perfil__button" onClick={() => setMostrarCambioContrasena(false)}>
+              Volver
+            </button>
+          </div>
         </form>
       )}
     </div>
@@ -273,6 +268,7 @@ const Perfil = () => {
 };
 
 export default Perfil;
+
 
 
 // /* eslint-disable react/no-unescaped-entities */
