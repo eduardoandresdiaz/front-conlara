@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './ListadoProductos.css';
+
+import './PerfilPublico.css';
+
 
 const PerfilPublico = () => {
   const { nickname } = useParams();
