@@ -3,7 +3,7 @@ import Home from "./views/Home/Home";
 import Login from "./views/Login/Login";
 import MisProductos from "./views/MisProductos/MisProductos";
 import Register from "./views/Register/Register";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom"; // ⬅️ importá useLocation
 import NavBar from "./components/NavBar/NavBar";
 import CreateAppointment from "./views/CreateAppointment/CreateAppointment";
 import MenuAppointment from "./views/MenuAppointment/MenuAppointment";
@@ -15,12 +15,18 @@ import DetallesProducto from "./views/Detalles/Detalles";
 import Perfil from "./views/Perfil/Perfil";
 import { HelmetProvider } from "react-helmet-async";
 import { useEffect } from "react";
-import PerfilPublico from "./views/PerfilPublico/PerfilPublico"; // ✅ Importación nueva
+import PerfilPublico from "./views/PerfilPublico/PerfilPublico";
 
 function App() {
+  const location = useLocation();
+
   useEffect(() => {
     localStorage.removeItem("user");
   }, []);
+
+  useEffect(() => {
+    console.log("Ruta actual:", location.pathname); // ⬅️ Log de ruta
+  }, [location]);
 
   return (
     <HelmetProvider>
@@ -40,8 +46,6 @@ function App() {
           <Route path="/productos/:id" element={<DetallesProducto />} />
           <Route path="/productos/share/:id" element={<DetallesProducto />} />
           <Route path="/perfil" element={<Perfil />} />
-
-          {/* ✅ Ruta pública por nickname al final */}
           <Route path="/:nickname" element={<PerfilPublico />} />
         </Routes>
       </div>
@@ -50,6 +54,7 @@ function App() {
 }
 
 export default App;
+
 
 // import "./App.css";
 // import Home from "./views/Home/Home";
