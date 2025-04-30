@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import './PerfilPublico.css';
-
 
 const PerfilPublico = () => {
   const { nickname } = useParams();
@@ -12,14 +12,17 @@ const PerfilPublico = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!nickname) return;
+    console.log("Intentando buscar usuario con nickname:", nickname);
+
     const fetchUsuario = async () => {
       try {
-        const res = await fetch(`https://ecommerce-9558.onrender.com/users/nickname/${nickname}`);
-        if (!res.ok) throw new Error('Usuario no encontrado');
-        const data = await res.json();
-        setUsuario(data);
+        const res = await axios.get(`https://ecommerce-9558.onrender.com/users/nickname/${nickname}`);
+        setUsuario(res.data);
+        console.log("Usuario cargado:", res.data);
       } catch (err) {
-        setError(err.message);
+        console.error("Error al obtener usuario:", err);
+        setError('Usuario no encontrado');
       }
     };
 
@@ -27,16 +30,16 @@ const PerfilPublico = () => {
   }, [nickname]);
 
   useEffect(() => {
+    if (!usuario) return;
+
     const fetchProductos = async () => {
-      if (!usuario) return;
       try {
-        const res = await fetch('https://ecommerce-9558.onrender.com/products?page=1&limit=1000');
-        if (!res.ok) throw new Error('Error al obtener productos');
-        const data = await res.json();
-        const productosUsuario = data.filter(prod => prod.email === usuario.email);
+        const res = await axios.get('https://ecommerce-9558.onrender.com/products?page=1&limit=1000');
+        const productosUsuario = res.data.filter(prod => prod.email === usuario.email);
         setProductos(productosUsuario);
       } catch (err) {
-        setError(err.message);
+        console.error("Error al obtener productos:", err);
+        setError('Error al obtener productos');
       }
     };
 
