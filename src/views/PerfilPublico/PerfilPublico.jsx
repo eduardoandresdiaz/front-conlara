@@ -60,6 +60,7 @@ const PerfilPublico = () => {
     <>
       <Helmet>
         <title>Perfil de {usuario?.nickname}</title>
+        <meta property="fb:app_id" content="1010635721174127" />
         <meta name="description" content={`Mira los productos publicados por ${usuario?.nickname}`} />
         <meta property="og:title" content={`Perfil de usuario: ${usuario?.nickname}`} />
         <meta property="og:description" content={`Mira los productos publicados por ${usuario?.nickname}`} />
