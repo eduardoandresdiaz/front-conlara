@@ -35,7 +35,8 @@ const PerfilPublico = () => {
     const fetchProductos = async () => {
       try {
         const res = await axios.get('https://ecommerce-9558.onrender.com/products?page=1&limit=1000');
-        const productosUsuario = res.data.filter(prod => prod.email === usuario.email);
+        const productosUsuario = res.data.filter(prod => prod.creatorEmail === usuario.email);
+
         setProductos(productosUsuario);
       } catch (err) {
         console.error("Error al obtener productos:", err);
