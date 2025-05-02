@@ -68,6 +68,7 @@ const PerfilPublico = () => {
         <meta property="og:url" content={window.location.href} />
         <meta property="og:type" content="website" />
       </Helmet>
+      <meta property="fb:app_id" content="1010635721174127" />
 
       <div className="listadoProductos">
         <h1 style={{ textAlign: 'center' }}>{usuario.nickname}</h1>
