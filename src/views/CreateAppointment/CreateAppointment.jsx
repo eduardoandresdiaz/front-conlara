@@ -100,6 +100,8 @@ const CreateAppointment = () => {
           const errors = {};
           if (!values.name) {
             errors.name = 'El nombre del producto es obligatorio.';
+          } else if (values.name.length > 50) { // Ajusta el número según el límite del backend
+            errors.name = 'El nombre no puede superar los 50 caracteres.';
           }
           if (!values.description) {
             errors.description = 'La descripción es obligatoria.';

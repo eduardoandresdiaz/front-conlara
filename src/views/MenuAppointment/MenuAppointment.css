@@ -9,6 +9,7 @@
 
 .menu-appointment__content {
   text-align: center;
+  padding-top: 163px;
 }
 
 .menu-appointment__title {
@@ -48,5 +49,123 @@
 @media (max-width: 600px) {
   .menu-appointment__buttons {
     width: 90%;
+  }
+}
+.qr-container {
+  display: flex; /* 🟢 Usa flexbox */
+  flex-direction: column;
+  align-items: center; /* 🟢 Centra horizontalmente */
+  justify-content: center; /* 🟢 Centra verticalmente */
+  position: relative;
+}
+
+.qr-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  width: 80%;
+}
+
+.print-button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.print-button:hover {
+  background-color: #0056b3;
+}
+.menu-appointment__qr {
+  display: flex; /* 🟢 Usa flexbox para centrar */
+  flex-direction: column; /* 🟢 Acomoda el QR y el link en columna */
+  align-items: center; /* 🟢 Centra horizontalmente */
+  justify-content: center; /* 🟢 Centra verticalmente */
+  margin-top: 15px;
+  text-align: center;
+  width: 100%;
+}
+
+.qr-link {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.qr-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.qr-link a:hover {
+  text-decoration: underline;
+}
+
+.print-button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.print-button:hover {
+  background-color: #0056b3;
+}
+@media print {
+  body * {
+    visibility: hidden; /* 🔹 Oculta todo excepto el QR y el link */
+  }
+
+  .menu-appointment__qr, 
+  .menu-appointment__qr * {
+    visibility: visible;
+    text-align: center;
+  }
+
+  .qr-link {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .qr-link a {
+    color: black; /* Mejor contraste en impresión */
+    text-decoration: none;
+  }
+
+  .print-button {
+    display: none; /* 🔹 Oculta el botón en impresión */
+  }
+}
+@media print {
+  .menu-appointment__qr canvas {
+    width: 600px !important; /* 🔹 Aumenta el tamaño del QR */
+    height: 600px !important;
+  }
+
+  .qr-link {
+    font-size: 18px; /* 🔹 Texto más grande para impresión */
+    text-align: center;
+  }
+  .menu-appointment__qr::before {
+    content: "Escanea el QR para ver nuestros productos"; /* ✅ Texto agregado */
+    display: block;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
   }
 }
