@@ -46,14 +46,25 @@ const DetallesProducto = () => {
 
   const handleRegresar = () => navigate("/");
   const handleComprar = () => setMostrarContacto(true);
-
   const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
-  const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar\n Compra y Vende en el Valle del Conlara\n${producto.name}\n\n🔗 ${productUrl}`;
-  const textoPersonalizado = "¡Echa un vistazo a este producto en Conlara! Compra y vende en el Valle del Conlara.";
-  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}&quote=${encodeURIComponent(textoPersonalizado)}`;
-  const whatsappUrl = isMobile
-    ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
-    : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
+const facebookProductUrl = `https://ecommerce-9558.onrender.com/products/share-facebook/${id}`;
+
+const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar\n Compra y Vende en el Valle del Conlara\n${producto.name}\n\n🔗 ${productUrl}`;
+const textoPersonalizado = "¡Echa un vistazo a este producto en Conlara! Compra y vende en el Valle del Conlara.";
+
+const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(facebookProductUrl)}&quote=${encodeURIComponent(textoPersonalizado)}`;
+const whatsappUrl = isMobile
+  ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
+  : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
+
+
+  // const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
+  // const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar\n Compra y Vende en el Valle del Conlara\n${producto.name}\n\n🔗 ${productUrl}`;
+  // const textoPersonalizado = "¡Echa un vistazo a este producto en Conlara! Compra y vende en el Valle del Conlara.";
+  // const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}&quote=${encodeURIComponent(textoPersonalizado)}`;
+  // const whatsappUrl = isMobile
+  //   ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
+  //   : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
 
   const handleCopyToClipboard = () => {
     navigator.clipboard

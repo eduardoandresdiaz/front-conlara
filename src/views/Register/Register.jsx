@@ -81,7 +81,13 @@ const Register = () => {
           if (!values.name) errors.name = 'El nombre es obligatorio.';
           if (!values.dni) errors.dni = 'El DNI es obligatorio.';
           else if (!/^\d{7,8}$/.test(values.dni)) errors.dni = 'DNI inválido.';
-          if (!values.email) errors.email = 'El email es obligatorio.';
+          if (!values.email) {
+            errors.email = "El email es obligatorio.";
+          } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(values.email)) {
+            errors.email = "Formato de email inválido.";
+          }
+          
+          
           if (!values.password) errors.password = 'La contraseña es obligatoria.';
           else if (values.password.length < 6) errors.password = 'Debe tener al menos 6 caracteres.';
           if (values.password !== values.confirmPassword) errors.confirmPassword = 'Las contraseñas no coinciden.';
@@ -147,11 +153,23 @@ const Register = () => {
             resetForm();
             setPreviewImage(null);
             navigate("/login");
-          } catch (error) {
-            console.error("❌ Error en el registro:", error.response?.data || error.message);
-            alert("Hubo un problema al registrar el usuario.");
+          } 
+          ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+          catch (error) {
+            const errorMessage = error.response?.data?.message || error.message;
+          
+            console.error("❌ Error en el registro:", errorMessage);
+          
+            if (errorMessage === "el usuario ya registrado") {
+              alert("Este correo ya está registrado. Por favor, usá otro.");
+            } else if (errorMessage === "el nickname ya está en uso") {
+              alert("El nickname ya está en uso. Por favor, elegí otro.");
+            } else {
+              alert("Hubo un problema al registrar el usuario.");
+            }
           }
-        
+          
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
           setSubmitting(false);
         }}
         
