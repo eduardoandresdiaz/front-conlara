@@ -1,128 +1,144 @@
+/* 1️⃣ ESTILOS COMUNES (para todos los tamaños) */
+
 .listadoProductos {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.listadoProductos__error {
-  color: red;
-  font-weight: bold;
-}
-
-.listadoProductos__list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center; /* Centrar las tarjetas */
-}
-
-.listadoProductos__details {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 15px;
-  max-width: 400px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #fff84f; /* Fondo claro */
-  text-align: center; /* Centrar el contenido dentro de la tarjeta */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación suave */
-  width: 100%; /* Aseguramos que ocupe el 100% del contenedor */
-  max-width: 300px; /* Limitar a un ancho máximo en pantallas pequeñas */
-}
-
-.listadoProductos__details:hover {
-  transform: translateY(-5px); /* Elevar ligeramente al pasar el mouse */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Intensificar la sombra */
-}
-
-.listadoProductos__details img {
-  width: 100%; /* Imagen ocupa el ancho disponible */
-  max-width: 300px; /* Limitar el ancho máximo */
-  max-height: 300px; /* Limitar la altura máxima */
-  object-fit: cover; /* Ajustar la imagen */
-  border-radius: 5px; /* Esquinas redondeadas */
-  margin: 10px 0; /* Espaciado vertical */
-}
-
-/* Estilo del botón "Me Interesa" */
-.meInteresaBoton {
-  background-color: #007BFF; /* Fondo azul */
-  color: white; /* Texto blanco */
-  border: none; /* Sin bordes */
-  border-radius: 8px; /* Esquinas redondeadas */
-  padding: 10px 20px; /* Espaciado interno */
-  cursor: pointer; /* Cambiar el puntero al pasar el mouse */
-  font-weight: bold; /* Texto en negrita */
-  font-size: 1rem; /* Tamaño del texto */
-  transition: background-color 0.3s ease; /* Transición suave */
-}
-
-.meInteresaBoton:hover {
-  background-color: #0056b3; /* Fondo más oscuro al pasar el mouse */
-}
-
-.meInteresaBoton:disabled {
-  background-color: #ccc; /* Fondo gris al estar deshabilitado */
-  color: #999; /* Texto gris */
-  cursor: not-allowed; /* Cursor no permitido */
+  flex-direction: column;
+  align-items: center;
+  padding: 1px;
 }
 
 .listadoProductos__buscador {
   display: flex;
   justify-content: center;
+  gap: 0px;
   margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
 }
 
-.listadoProductos__buscador input {
-  padding: 10px;
-  font-size: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 8px 0 0 8px;
-  width: 60%;
-  max-width: 400px;
-  outline: none;
-  background-color: aliceblue;
+.listadoProductos__buscador input,
+.listadoProductos__buscador button {
+  padding: 1px;
+  font-size: 16px;
 }
 
 .listadoProductos__buscador button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
-  border-radius: 0 8px 8px 0;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 5px;
 }
 
 .listadoProductos__buscador button:hover {
   background-color: #0056b3;
 }
 
-/* Media Queries para Pantallas Pequeñas */
-@media (max-width: 768px) {
+.listadoProductos__error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.listadoProductos__list {
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px; /* un poco más grande para PC */
+  box-sizing: border-box;
+}
+
+.listadoProductos__details {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: center;
+  background-color: #ffff99;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.listadoProductos__details img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid black;
+}
+
+.listadoProductos__details h2 {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.price {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.meInteresaBoton {
+  padding: 8px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.meInteresaBoton:hover {
+  background-color: #0056b3;
+}
+
+/* 2️⃣ ESTILOS PARA PANTALLAS PEQUEÑAS (MÓVILES) */
+@media (max-width: 767px) {
   .listadoProductos__details {
-    max-width: 100%; /* Las tarjetas ocuparán el 100% del ancho en pantallas pequeñas */
-    margin-bottom: 20px; /* Añadir espacio entre las tarjetas */
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+    min-height: 300px;
+    font-size: 14px;
+    
   }
 
-  .listadoProductos__buscador input {
-    width: 80%; /* Aumentamos el ancho del input en pantallas pequeñas */
+  .price {
+    font-size: 16px;
   }
 
+  .listadoProductos__buscador input,
   .listadoProductos__buscador button {
-    width: 20%; /* El botón ocupa el 20% del ancho */
+    font-size: 14px;
+    padding: 6px;
+  }
+  .listadoProductos__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    justify-content: center;
+    width: 110%;
+    max-width: 1200px; /* un poco más grande para PC */
+    box-sizing: border-box;
   }
 }
 
-@media (max-width: 480px) {
-  .listadoProductos__buscador input {
-    width: 70%; /* Ajustamos el input para que ocupe más espacio */
-  }
-
-  .listadoProductos__buscador button {
-    width: 30%; /* El botón se adapta al 30% */
-  }
-
+/* 3️⃣ ESTILOS PARA PANTALLAS DE ESCRITORIO (PC) */
+@media (min-width: 768px) {
   .listadoProductos__details {
-    max-width: 100%; /* Las tarjetas ocupan todo el ancho disponible */
+    flex: 1 1 30%;
+    max-width: 30%;
+    min-height: 320px;
+    font-size: 16px;
+    margin-bottom: -16px;
+  }
+
+  .price {
+    font-size: 18px;
+  }
+
+  .listadoProductos__buscador input,
+  .listadoProductos__buscador button {
+    font-size: 16px;
+    padding: 8px;
   }
 }
