@@ -30,8 +30,7 @@ function App() {
 
   return (
     <HelmetProvider>
-      <NavBar />
-      <div style={{ marginTop: "60px" }}>
+      <div style={{ marginTop: "115px" }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -48,6 +47,7 @@ function App() {
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/:nickname" element={<PerfilPublico />} />
         </Routes>
+      <NavBar />
       </div>
     </HelmetProvider>
   );

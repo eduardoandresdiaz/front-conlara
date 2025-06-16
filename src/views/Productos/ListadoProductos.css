@@ -1,24 +1,30 @@
-/* 1️⃣ ESTILOS COMUNES (para todos los tamaños) */
+/* 1️⃣ ESTILOS COMUNES */
 
 .listadoProductos {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1px;
+  
 }
 
 .listadoProductos__buscador {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
   justify-content: center;
-  gap: 0px;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 400px;
+  gap: 0;
+  padding: 8px 12px;
+  background-color: transparent;
+  border: none;
 }
 
 .listadoProductos__buscador input,
 .listadoProductos__buscador button {
-  padding: 1px;
+  padding: 8px;
   font-size: 16px;
 }
 
@@ -42,16 +48,18 @@
 .listadoProductos__list {
   display: flex;
   flex-wrap: wrap;
-
+  row-gap: 1px;
+  column-gap: 1px;
+  gap: 1px;
   justify-content: center;
   width: 100%;
-  max-width: 1200px; /* un poco más grande para PC */
   box-sizing: border-box;
+  margin-top: 0;
 }
 
 .listadoProductos__details {
   border: 1px solid #000;
-  padding: 8px;
+  padding: 0;
   text-align: center;
   background-color: #ffff99;
   border-radius: 8px;
@@ -59,6 +67,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+;
 }
 
 .listadoProductos__details img {
@@ -66,40 +75,47 @@
   height: auto;
   object-fit: cover;
   border: 1px solid black;
+  margin: 0px;
+  padding: 0px;
+  margin-top: 0%;
 }
 
 .listadoProductos__details h2 {
   font-size: 14px;
-  margin: 8px 0;
+  margin: 0px 0;
+  padding: 0;
 }
 
 .price {
   font-weight: bold;
   margin-top: 10px;
+  font-size: 18px; /* tamaño por defecto para desktop, override en móviles abajo */
 }
 
 .meInteresaBoton {
   padding: 8px;
-  margin-top: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   background-color: #007bff;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+
 }
 
 .meInteresaBoton:hover {
   background-color: #0056b3;
 }
 
-/* 2️⃣ ESTILOS PARA PANTALLAS PEQUEÑAS (MÓVILES) */
+/* 2️⃣ PANTALLAS PEQUEÑAS (MÓVILES) */
 @media (max-width: 767px) {
   .listadoProductos__details {
     flex: 1 1 calc(50% - 10px);
     max-width: calc(50% - 10px);
     min-height: 300px;
     font-size: 14px;
-    
+    margin-bottom: -16px;
   }
 
   .price {
@@ -111,18 +127,14 @@
     font-size: 14px;
     padding: 6px;
   }
+
   .listadoProductos__list {
-    display: flex;
-    flex-wrap: wrap;
     gap: 1px;
-    justify-content: center;
     width: 110%;
-    max-width: 1200px; /* un poco más grande para PC */
-    box-sizing: border-box;
   }
 }
 
-/* 3️⃣ ESTILOS PARA PANTALLAS DE ESCRITORIO (PC) */
+/* 3️⃣ PANTALLAS GRANDES (DESKTOP) */
 @media (min-width: 768px) {
   .listadoProductos__details {
     flex: 1 1 30%;
@@ -131,14 +143,18 @@
     font-size: 16px;
     margin-bottom: -16px;
   }
+}
 
-  .price {
-    font-size: 18px;
-  }
-
-  .listadoProductos__buscador input,
-  .listadoProductos__buscador button {
+/* 3️⃣ PANTALLAS GRANDES (DESKTOP) */
+@media (min-width: 480px) {
+  .listadoProductos__details {
+    flex: 1 1 30%;
+    max-width: 30%;
+    min-height: 320px;
     font-size: 16px;
-    padding: 8px;
+    margin-bottom: -16px;
   }
 }
+
+
+
