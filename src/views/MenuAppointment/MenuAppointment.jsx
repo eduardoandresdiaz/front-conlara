@@ -53,7 +53,7 @@ const MenuAppointment = () => {
             Publicar tu Producto
           </button>
           <button className="menu-appointment__button" onClick={() => navigate("/misproductos")}>
-            Mis Productos Publicados
+          Modificar o Eliminar Productos Publicados
           </button>
 
           {nickname && (
@@ -67,7 +67,7 @@ const MenuAppointment = () => {
                   )
                 }
               >
-                Compartir en WhatsApp
+                Comparte Tu Tienda en WhatsApp
               </button>
 
               <button
@@ -79,12 +79,12 @@ const MenuAppointment = () => {
                   )
                 }
               >
-                Compartir en Facebook
+                Comparte Tu Tienda en Facebook
               </button>
 
               {/* 🔹 Botón para mostrar QR */}
               <button className="menu-appointment__button" onClick={() => setShowQR(!showQR)}>
-                {showQR ? "Ocultar QR" : "Generar QR"}
+                {showQR ? "Ocultar QR" : "Generar QR para tu Tienda"}
               </button>
 
               {/* 🔹 Mostrar QR y opción de imprimir */}
@@ -162,7 +162,7 @@ export default MenuAppointment;
 //             Publicar tu Producto
 //           </button>
 //           <button className="menu-appointment__button" onClick={() => navigate("/misproductos")}>
-//             Mis Productos Publicados
+//             Modificar o Eliminar Productos Publicados
 //           </button>
 
 //           {/* Mostrar botones de compartir solo si hay un `nickname` */}
