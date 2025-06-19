@@ -46,6 +46,9 @@ const DetallesProducto = () => {
 
   const handleRegresar = () => navigate("/");
   const handleComprar = () => setMostrarContacto(true);
+  const handleVolverAtras = () => {
+  navigate(-1); // vuelve a la página anterior
+};
   const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
 const facebookProductUrl = `https://ecommerce-9558.onrender.com/products/share-facebook/${id}`;
 
@@ -119,6 +122,10 @@ const whatsappUrl = isMobile
 
         {producto.name ? (
           <div className="detallesProducto__contenedor">
+            <button className="detallesProducto__boton volver-atras" onClick={handleVolverAtras}>
+                 ⬅ Volver
+            </button>
+
             <h1 className="detallesProducto__titulo">{producto.name}</h1>
             <p className="detallesProducto__informacion">
               <span className="detallesProducto__etiqueta">Descripción: </span>

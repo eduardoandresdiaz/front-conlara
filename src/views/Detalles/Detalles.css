@@ -221,3 +221,15 @@ body {
         max-width: 100%;
     }
 }
+.volver-atras {
+    background-color: #ccc;
+    color: #222;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+  }
+  
+  .volver-atras:hover {
+    background-color: #aaa;
+    transform: translateY(-2px);
+  }
+  
