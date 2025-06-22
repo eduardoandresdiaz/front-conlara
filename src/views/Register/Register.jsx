@@ -283,23 +283,59 @@ const Register = () => {
             <div className="register__field">
               <label htmlFor="profileImage" className="register__label">Imagen de Perfil</label>
               <input
-                id="profileImage"
-                name="profileImage"
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  setFieldValue('profileImage', file);
-                  if (file) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => setPreviewImage(reader.result);
-                    reader.readAsDataURL(file);
-                  } else {
-                    setPreviewImage(null);
-                  }
-                }}
-                className="register__input"
-              />
+  id="profileImage"
+  name="profileImage"
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const maxSizeKB = 50; // límite de tamaño en kilobytes
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 300; // ancho máximo (puede ajustarse)
+        const scaleSize = MAX_WIDTH / img.width;
+        canvas.width = MAX_WIDTH;
+        canvas.height = img.height * scaleSize;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        let quality = 0.7;
+        let base64 = canvas.toDataURL("image/jpeg", quality);
+
+        while (base64.length > maxSizeKB * 1024 && quality > 0.1) {
+          quality -= 0.05;
+          base64 = canvas.toDataURL("image/jpeg", quality);
+        }
+
+        const byteString = atob(base64.split(',')[1]);
+        const mimeString = base64.split(',')[0].split(':')[1].split(';')[0];
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+
+        const blob = new Blob([ab], { type: mimeString });
+        const compressedFile = new File([blob], file.name, { type: mimeString });
+
+        // ✅ Seteamos el archivo comprimido para enviar
+        setFieldValue("profileImage", compressedFile);
+        setPreviewImage(base64); // Mostrar vista previa
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  }}
+  className="register__input"
+/>
+
               {previewImage && (
                 <div className="register__image-preview">
                   <img src={previewImage} alt="Vista previa" className="register__image" />

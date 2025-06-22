@@ -109,3 +109,9 @@
 .register {
   margin-top: 170px; /* Ajusta según la altura del navbar */
 }
+.register__image {
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
