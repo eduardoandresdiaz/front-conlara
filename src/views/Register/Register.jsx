@@ -88,8 +88,21 @@ const Register = () => {
           }
           
           
-          if (!values.password) errors.password = 'La contraseña es obligatoria.';
-          else if (values.password.length < 6) errors.password = 'Debe tener al menos 6 caracteres.';
+          if (!values.password) {
+            errors.password = 'La contraseña es obligatoria.';
+          } else {
+            if (values.password.length < 6) {
+              errors.password = 'Debe tener al menos 6 caracteres.';
+            } else if (!/[A-Z]/.test(values.password)) {
+              errors.password = 'Debe contener al menos una mayúscula.';
+            } else if (!/[0-9]/.test(values.password)) {
+              errors.password = 'Debe contener al menos un número.';
+            } else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(values.password)) {
+              errors.password = 'Debe contener al menos un símbolo.';
+            }
+          }
+          
+          
           if (values.password !== values.confirmPassword) errors.confirmPassword = 'Las contraseñas no coinciden.';
           if (!values.phone) errors.phone = 'El teléfono es obligatorio.';
           if (!values.nickname) {
@@ -201,10 +214,27 @@ const Register = () => {
             </div>
 
             <div className="register__field">
-              <label htmlFor="password" className="register__label">Clave</label>
-              <Field type="password" name="password" id="password" className="register__input" />
-              <ErrorMessage name="password" component="div" className="register__error" />
-            </div>
+  <label htmlFor="password" className="register__label">Clave</label>
+  <Field type="password" name="password" id="password" className="register__input" />
+  <ErrorMessage name="password" component="div" className="register__error" />
+
+  {/* Requisitos de contraseña */}
+  <ul className="password__requirements">
+  <li style={{ color: values.password.length >= 6 ? "green" : "#666" }}>
+    • Mínimo 6 caracteres
+  </li>
+  <li style={{ color: /[A-Z]/.test(values.password) ? "green" : "#666" }}>
+    • Al menos una mayúscula
+  </li>
+  <li style={{ color: /[0-9]/.test(values.password) ? "green" : "#666" }}>
+    • Al menos un número
+  </li>
+  <li style={{ color: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(values.password) ? "green" : "#666" }}>
+    • Al menos un símbolo (ej: @ / # $)
+  </li>
+</ul>
+</div>
+
 
             <div className="register__field">
               <label htmlFor="confirmPassword" className="register__label">Confirmar Clave</label>

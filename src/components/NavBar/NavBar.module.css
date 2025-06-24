@@ -142,3 +142,17 @@
     border: none;
   }
 }
+.profileButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 12px;
+  margin: 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profileButton:hover {
+  background-color: #45a049;
+}

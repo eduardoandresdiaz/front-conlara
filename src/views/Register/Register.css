@@ -115,3 +115,15 @@
   object-fit: cover;
   border-radius: 10px;
 }
+.password__requirements {
+  list-style: none;
+  padding-left: 0;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.password__requirements li {
+  margin-bottom: 3px;
+  transition: color 0.2s ease;
+}
+

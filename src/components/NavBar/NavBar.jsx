@@ -50,7 +50,20 @@ const NavBar = () => {
         ) : (
           <>
             <button onClick={() => { navigate("/perfil"); closeMenu(); }} className={style.emailButton}>
-              {user.email}
+            <>
+  <button
+    onClick={() => { navigate("/perfil"); closeMenu(); }}
+    className={style.emailButton}
+  >
+    {user.email}
+  </button>
+  <button
+    onClick={() => { navigate("/perfil"); closeMenu(); }}
+    className={style.profileButton}
+  >
+    Tu Perfil
+  </button>
+</>
             </button>
             <button onClick={handleLogout} className={style.logoutButton}>
               Cerrar Sesión
