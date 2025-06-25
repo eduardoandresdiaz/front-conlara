@@ -24,7 +24,7 @@
   width: 350px;
   display: flex;
   flex-direction: column;
-  margin-top: 200px;
+  margin-top: 458px;
 }
 
 .register__field {
@@ -116,14 +116,17 @@
   border-radius: 10px;
 }
 .password__requirements {
+  font-weight: bold;
   list-style: none;
   padding-left: 0;
-  font-size: 13px;
+  font-size: 20px;
   margin-top: 5px;
+  
 }
 
 .password__requirements li {
   margin-bottom: 3px;
   transition: color 0.2s ease;
+  
 }
 

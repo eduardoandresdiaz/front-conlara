@@ -214,25 +214,26 @@ const Register = () => {
             </div>
 
             <div className="register__field">
+  {/* Requisitos de contraseña */}
+    <h1 className="register__title">Requisitos de la Clave</h1>
+  <ul className="password__requirements">
+  <li style={{ color: values.password.length >= 6 ? "green" : "red" }}>
+    • Mínimo 6 caracteres
+  </li>
+  <li style={{ color: /[A-Z]/.test(values.password) ? "green" : "red" }}>
+    • Al menos una mayúscula
+  </li>
+  <li style={{ color: /[0-9]/.test(values.password) ? "green" : "red" }}>
+    • Al menos un número
+  </li>
+  <li style={{ color: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(values.password) ? "green" : "red" }}>
+    • Al menos un símbolo (ej: @ / # $)
+  </li>
+</ul>
   <label htmlFor="password" className="register__label">Clave</label>
   <Field type="password" name="password" id="password" className="register__input" />
   <ErrorMessage name="password" component="div" className="register__error" />
 
-  {/* Requisitos de contraseña */}
-  <ul className="password__requirements">
-  <li style={{ color: values.password.length >= 6 ? "green" : "#666" }}>
-    • Mínimo 6 caracteres
-  </li>
-  <li style={{ color: /[A-Z]/.test(values.password) ? "green" : "#666" }}>
-    • Al menos una mayúscula
-  </li>
-  <li style={{ color: /[0-9]/.test(values.password) ? "green" : "#666" }}>
-    • Al menos un número
-  </li>
-  <li style={{ color: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(values.password) ? "green" : "#666" }}>
-    • Al menos un símbolo (ej: @ / # $)
-  </li>
-</ul>
 </div>
 
 
