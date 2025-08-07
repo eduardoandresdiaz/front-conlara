@@ -7,6 +7,7 @@ import './Register.css';
 const Register = () => {
   const navigate = useNavigate();
   const [previewImage, setPreviewImage] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const uploadProfileImage = async (userId, file) => {
     try {
       const formData = new FormData();

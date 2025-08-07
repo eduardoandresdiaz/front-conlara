@@ -45,8 +45,8 @@ function App() {
           <Route path="/productos/:id" element={<DetallesProducto />} />
           <Route path="/productos/share/:id" element={<DetallesProducto />} />
           <Route path="/perfil" element={<Perfil />} />
-          {/* <Route path="/:nickname" element={<PerfilPublico />} /> */}
-          <Route path="/perfil/:nickname" element={<PerfilPublico />} />
+          <Route path="/:nickname" element={<PerfilPublico />} />
+          {/* <Route path="/perfil/:nickname" element={<PerfilPublico />} /> */}
 
         </Routes>
       <NavBar />
