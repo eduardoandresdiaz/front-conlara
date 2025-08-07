@@ -97,8 +97,18 @@ const ModifyProduct = () => {
           }
         );
         alert('Producto modificado y nueva imagen subida exitosamente.');
+        
+                setTimeout(() => {
+                navigate('/mis-productos');
+                }, 1000); // Espera 1 segundo antes de redirigir
+
       } else {
         alert('Producto modificado exitosamente (sin cambiar imagen).');
+        
+                setTimeout(() => {
+                navigate('/mis-productos');
+                }, 1000); // Espera 1 segundo antes de redirigir
+
       }
 
       navigate('/mis-productos');
