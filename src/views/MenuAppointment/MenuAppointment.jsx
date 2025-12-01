@@ -99,8 +99,14 @@ const MenuAppointment = () => {
                   <button className="print-button" onClick={handlePrint}>
                     Imprimir QR
                   </button>
+
                 </div>
               )}
+                  <button 
+                     className="menu-appointment__button" 
+                     onClick={() => navigate("/carrusel")}>
+                     Mostrar Productos
+                  </button>
             </>
           )}
         </div>

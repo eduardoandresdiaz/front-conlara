@@ -1,0 +1,75 @@
+.carrusell {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffae3b, #ffae3b);
+    text-align: center;
+    overflow: hidden;
+  }
+  
+  /* Nickname como título */
+  .carrusell__nickname {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  
+  /* Mensaje de error */
+  .carrusell__error {
+    color: #b00020;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Detalles del producto */
+  .carrusell__details {
+    background: #ffae3b;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    animation: fadeSlide 0.8s ease-in-out;
+  }
+  
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .carrusell__name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .carrusell__precio {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #444;
+  }
+  
+  .carrusell__imagen {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .carrusell__imagen:hover {
+    transform: scale(1.05);
+  }
+  body.carrusell-page .navbar {
+    display: none;
+  }
+  

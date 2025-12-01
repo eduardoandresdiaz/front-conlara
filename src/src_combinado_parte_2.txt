@@ -1,0 +1,296 @@
+tes>
+//       </div>
+//       <ListadoProductos />
+//     </>
+//   );
+// }
+
+// export default App;
+
+--- Fin de la parte 1 del archivo "App.jsx". No hay más partes. ---
+const fs = require('fs');
+const path = require('path');
+
+// Configurar el límite de caracteres
+const limiteCaracteres = 10000; // Límite ajustado a tu necesidad
+
+// Función para dividir texto en partes con marcas de identificación
+function dividirTextoEnPartes(texto, limite, archivo) {
+    const partes = [];
+    const totalPartes = Math.ceil(texto.length / limite);
+    let contador = 1;
+
+    while (texto.length > 0) {
+        const parte = texto.slice(0, limite);
+        texto = texto.slice(limite);
+
+        // Agregar marcas al final de cada parte
+        let marca = '';
+        if (contador < totalPartes) {
+            marca = `\n--- Fin de la parte ${contador} del archivo "${archivo}". Parte siguiente: ${contador + 1}/${totalPartes} ---\n`;
+        } else {
+            marca = `\n--- Fin de la parte ${contador} del archivo "${archivo}". No hay más partes. ---\n`;
+        }
+        partes.push(parte + marca);
+        contador++;
+    }
+    return partes;
+}
+
+// Función para procesar un directorio y sus subcarpetas
+function procesarDirectorio(directorio) {
+    const entradas = fs.readdirSync(directorio, { withFileTypes: true });
+    let contenidoCompleto = '';
+
+    entradas.forEach(entrada => {
+        const rutaCompleta = path.join(directorio, entrada.name);
+
+        if (entrada.isDirectory()) {
+            // Procesar subcarpetas recursivamente
+            procesarDirectorio(rutaCompleta);
+        } else if (entrada.isFile() && entrada.name !== 'code_export.js') {
+            // Leer el contenido del archivo
+            try {
+                const contenidoArchivo = fs.readFileSync(rutaCompleta, 'utf-8');
+                const partes = dividirTextoEnPartes(contenidoArchivo, limiteCaracteres, entrada.name);
+
+                // Combinar contenido de todos los archivos
+                contenidoCompleto += partes.join('');
+                console.log(`Archivo "${entrada.name}" procesado.`);
+            } catch (error) {
+                console.error(`Error al procesar el archivo ${rutaCompleta}: ${error.message}`);
+            }
+        }
+    });
+
+    return contenidoCompleto;
+}
+
+// Guardar el contenido combinado, asegurando el límite de caracteres
+function guardarContenidoEnPartes(contenido, archivoSalida, limite) {
+    const partes = dividirTextoEnPartes(contenido, limite, path.basename(archivoSalida));
+
+    partes.forEach((parte, indice) => {
+        const archivoParte = archivoSalida.replace('.txt', `_parte_${indice + 1}.txt`);
+        fs.writeFileSync(archivoParte, parte);
+        console.log(`Parte ${indice + 1} guardada en "${archivoParte}".`);
+    });
+}
+
+// Obtener el nombre de la carpeta raíz
+const directorioInicial = path.join(__dirname, '.'); // Directorio principal
+const nombreCarpetaRaiz = path.basename(path.resolve(directorioInicial));
+const archivoSalida = path.join(__dirname, `${nombreCarpetaRaiz}_combinado.txt`); // Nombre basado en la carpeta raíz
+
+// Procesar el directorio y guardar el contenido combinado
+const contenidoFinal = procesarDirectorio(directorioInicial);
+if (contenidoFinal) {
+    guardarContenidoEnPartes(contenidoFinal, archivoSalida, limiteCaracteres);
+} else {
+    console.log('No se encontró contenido para procesar.');
+}
+
+--- Fin de la parte 1 del archivo "code_export.cjs". No hay más partes. ---
+export function setupCounter(element) {
+  let counter = 0
+  const setCounter = (count) => {
+    counter = count
+    element.innerHTML = `count is ${counter}`
+  }
+  element.addEventListener('click', () => setCounter(counter + 1))
+  setCounter(0)
+}
+
+--- Fin de la parte 1 del archivo "counter.js". No hay más partes. ---
+/* === RESET CSS Moderno === */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  line-height: 1.5;
+  background-color: #ffae3b;
+  color: #000;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body{
+  width: 100%;
+  height: 100%;
+  margin: 0%;
+  padding: 0%;
+  background-color: #ffae3b;
+  
+
+}
+--- Fin de la parte 1 del archivo "index.css". No hay más partes. ---
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 256"><path fill="#F7DF1E" d="M0 0h256v256H0V0Z"></path><path d="m67.312 213.932l19.59-11.856c3.78 6.701 7.218 12.371 15.465 12.371c7.905 0 12.89-3.092 12.89-15.12v-81.798h24.057v82.138c0 24.917-14.606 36.259-35.916 36.259c-19.245 0-30.416-9.967-36.087-21.996m85.07-2.576l19.588-11.341c5.157 8.421 11.859 14.607 23.715 14.607c9.969 0 16.325-4.984 16.325-11.858c0-8.248-6.53-11.17-17.528-15.98l-6.013-2.58c-17.357-7.387-28.87-16.667-28.87-36.257c0-18.044 13.747-31.792 35.228-31.792c15.294 0 26.292 5.328 34.196 19.247l-18.732 12.03c-4.125-7.389-8.591-10.31-15.465-10.31c-7.046 0-11.514 4.468-11.514 10.31c0 7.217 4.468 10.14 14.778 14.608l6.014 2.577c20.45 8.765 31.963 17.7 31.963 37.804c0 21.654-17.012 33.51-39.867 33.51c-22.339 0-36.774-10.654-43.819-24.574"></path></svg>
+--- Fin de la parte 1 del archivo "javascript.svg". No hay más partes. ---
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/media/images/logo.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conlara Compra y Venta</title>
+
+    <!-- Open Graph meta tags -->
+    <meta property="og:title" content="Conlara Compra y Venta" />
+    <meta
+      property="og:description"
+      content="Compra y vende productos fácilmente en nuestra plataforma."
+    />
+    <meta
+      property="og:image"
+      content="https://conlara.com.ar/assets/imagen2-Ch2Bn8__.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://conlara.com.ar/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Conlara Compra y Venta" />
+
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Conlara Compra y Venta" />
+    <meta
+      name="twitter:description"
+      content="Compra y vende productos fácilmente en nuestra plataforma."
+    />
+    <meta
+      name="twitter:image"
+      content="https://conlara.com.ar/assets/imagen2-Ch2Bn8__.jpg"
+    />
+
+    <!-- Font Awesome (para íconos de redes sociales) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+--- Fin de la parte 1 del archivo "main.js". No hay más partes. ---
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { UserProvider } from './context/UserContext.jsx';
+import DetallesProducto from './views/Detalles/Detalles.jsx'; // Componente de detalles
+import App from './App.jsx'; // Componente principal
+import { HelmetProvider } from 'react-helmet-async';
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <BrowserRouter>
+      <UserProvider>
+        <HelmetProvider>
+          <Routes>
+            <Route path="*" element={<App />} />
+            <Route path="/productos/:id" element={<DetallesProducto />} />
+            <Route path="/productos/share/:id" element={<DetallesProducto />} />
+          </Routes>
+        </HelmetProvider>
+      </UserProvider>
+    </BrowserRouter>
+  </StrictMode>
+);
+
+// import { StrictMode } from 'react';
+// import { createRoot } from 'react-dom/client';
+// import './index.css';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import { UserProvider } from './context/UserContext.jsx';
+// import DetallesProducto from './views/Detalles/Detalles.jsx'; // Ruta correcta al componente
+// import App from './App.jsx'; // Componente principal
+// import { HelmetProvider } from 'react-helmet-async';
+
+// createRoot(document.getElementById('root')).render(
+//   <StrictMode>
+//     <BrowserRouter>
+//       <UserProvider>
+//         <HelmetProvider>
+//           <Routes>
+//             <Route path="*" element={<App />} />
+//             <Route path="/productos/:id" element={<DetallesProducto />} />
+//           </Routes>
+//         </HelmetProvider>
+//       </UserProvider>
+//     </BrowserRouter>
+//   </StrictMode>
+// );
+
+--- Fin de la parte 1 del archivo "main.jsx". No hay más partes. ---
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535
+--- Fin de la parte 2 del archivo "src_combinado.txt". Parte siguiente: 3/3 ---

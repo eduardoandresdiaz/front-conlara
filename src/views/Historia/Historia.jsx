@@ -1,0 +1,21 @@
+import React from "react";
+import "./Historia.css"; // Importa el CSS
+
+function Historia() {
+  return (
+    <div className="historia-container">
+      <h1>Historia de La Toma</h1>
+      <p>Conocé el legado de nuestro pueblo a través de este video.</p>
+      <a
+        href="https://www.facebook.com/emilcen.urbani/videos/1038706328162863"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="historia-button"
+      >
+        Ver video en Facebook
+      </a>
+    </div>
+  );
+}
+
+export default Historia;

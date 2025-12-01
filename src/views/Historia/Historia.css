@@ -1,0 +1,59 @@
+/* === Contenedor principal === */
+.historia-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    background-color: #ffae3b; /* Color de fondo característico */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* === Títulos y texto === */
+  .historia-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+  }
+  
+  .historia-container p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #000;
+  }
+  
+  /* === Botón === */
+  .historia-button {
+    display: inline-block;
+    background-color: #4267B2;
+    color: white;
+    padding: 0.8rem 1.6rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .historia-button:hover {
+    background-color: #365899;
+  }
+  
+  /* === Responsive === */
+  @media (max-width: 600px) {
+    .historia-container h1 {
+      font-size: 2rem;
+    }
+  
+    .historia-container p {
+      font-size: 1rem;
+    }
+  
+    .historia-button {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+    }
+  }
+  
