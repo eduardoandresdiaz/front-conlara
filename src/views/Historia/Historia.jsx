@@ -7,13 +7,14 @@ function Historia() {
       <h1>Historia de La Toma</h1>
       <p>Conocé el legado de nuestro pueblo a través de este video.</p>
       <a
-        href="https://www.facebook.com/emilcen.urbani/videos/1038706328162863"
+        href="https://www.facebook.com/share/v/1BmXWzaZ6T/"
         target="_blank"
         rel="noopener noreferrer"
         className="historia-button"
       >
-        Ver video en Facebook
+        Ver video
       </a>
+      
     </div>
   );
 }

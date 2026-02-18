@@ -379,11 +379,64 @@ const Register = () => {
             <div className="register__field">
               <label className="register__label">Términos y Condiciones</label>
               <div className="register__terms-box">
-                <strong>Términos y Condiciones:</strong>
-                <p>Al registrarte aceptás nuestros Términos y Condiciones de uso. Conlara actúa como intermediario en las transacciones...</p>
-                <p><strong>1. Aceptación de los Términos:</strong> El acceso y uso de la plataforma conlara.com.ar implica la aceptación...</p>
-                <p><strong>10. Jurisdicción:</strong> Este acuerdo se rige por las leyes de la República Argentina...</p>
-              </div>
+  <h2 className="text-xl font-bold mb-4">Términos y Condiciones</h2>
+  <p>
+    Al registrarte aceptás nuestros Términos y Condiciones de uso. Conlara actúa como
+    intermediario en las transacciones entre comercios, artesanos y usuarios.
+  </p>
+  <ol className="list-decimal list-inside space-y-2 mt-4">
+    <li>
+      <strong>Aceptación de los Términos:</strong> El acceso y uso de la plataforma
+      conlara.com.ar implica la aceptación plena de estos Términos y Condiciones.
+    </li>
+    <li>
+      <strong>Objeto de la Plataforma:</strong> Conlara facilita la publicación, promoción y
+      transacciones de productos y servicios locales.
+    </li>
+    <li>
+      <strong>Registro de Usuario:</strong> El registro requiere datos verídicos y actualizados.
+      El usuario es responsable de mantener la confidencialidad de sus credenciales.
+    </li>
+    <li>
+      <strong>Responsabilidades del Usuario:</strong> Usar la plataforma conforme a la ley y la
+      buena fe, no publicar contenido ofensivo o ilegal, y asumir responsabilidad por las
+      transacciones realizadas.
+    </li>
+    <li>
+      <strong>Responsabilidades de Conlara:</strong> Proveer un entorno seguro y accesible, sin
+      garantizar la calidad o cumplimiento de los productos/servicios ofrecidos por terceros.
+    </li>
+    <li>
+      <strong>Publicación de Contenido:</strong> Los comercios y artesanos son responsables de la
+      veracidad de la información publicada. Conlara puede eliminar publicaciones que incumplan
+      normas.
+    </li>
+    <li>
+      <strong>Protección de Datos Personales:</strong> Los datos se tratan conforme a la Ley de
+      Protección de Datos Personales de la República Argentina. El usuario puede ejercer derechos
+      de acceso, rectificación y supresión.
+    </li>
+    <li>
+      <strong>Pagos y Transacciones:</strong> Las condiciones de pago se establecen entre comprador
+      y vendedor. Conlara no se responsabiliza por incumplimientos, aunque puede mediar en
+      disputas.
+    </li>
+    <li>
+      <strong>Limitación de Responsabilidad:</strong> Conlara no será responsable por daños
+      derivados del uso de la plataforma, salvo aquellos que la ley disponga expresamente.
+    </li>
+    <li>
+      <strong>Jurisdicción:</strong> Este acuerdo se rige por las leyes de la República Argentina.
+      Cualquier conflicto será sometido a los tribunales ordinarios de la Provincia de San Luis.
+    </li>
+    <li>
+      <strong>Modificaciones:</strong> Conlara podrá modificar estos Términos y Condiciones en
+      cualquier momento. Las modificaciones entrarán en vigor desde su publicación en la
+      plataforma.
+    </li>
+  </ol>
+</div>
+
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Field
                   type="checkbox"
