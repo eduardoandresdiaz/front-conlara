@@ -10,12 +10,26 @@ const CreateAppointment = () => {
 
   // ✅ Categorías fijas en el frontend
   const categories = [
-    { id: 1, name: "Electrónica" },
-    { id: 2, name: "Ropa" },
-    { id: 3, name: "Alimentos" },
-    { id: 4, name: "Hogar" },
-    { id: 5, name: "Juguetes" },
+    { id: 1, name: "Alimentos" },
+    { id: 2, name: "Juguetes" },
+    { id: 3, name: "Inmuebles" },
+    { id: 4, name: "Celulares y Accesorios" },
+    { id: 5, name: "Audio y Video" },
+    { id: 6, name: "Vehículos" },
+    { id: 7, name: "Indumentaria" },
+    { id: 8, name: "Servicios" },
+    { id: 9, name: "Tecnología" },
+    { id: 10, name: "Hogar y Muebles" },
+    { id: 11, name: "Belleza y Cuidado Personal" },
+    { id: 12, name: "Deportes y Fitness" },
+    { id: 13, name: "Libros, Música y Películas" },
+    { id: 14, name: "Mascotas" },
+    { id: 15, name: "Herramientas y Construcción" },
+    { id: 16, name: "Jardín y Exteriores" },
+    { id: 17, name: "Ferretería" },
+    { id: 18, name: "Repuestos Automotor" },
   ];
+  
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
