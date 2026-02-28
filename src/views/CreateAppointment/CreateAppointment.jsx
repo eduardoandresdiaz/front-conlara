@@ -8,6 +8,15 @@ const CreateAppointment = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const { user } = useUser(); // Obtener el usuario desde el contexto
 
+  // ✅ Categorías fijas en el frontend
+  const categories = [
+    { id: 1, name: "Electrónica" },
+    { id: 2, name: "Ropa" },
+    { id: 3, name: "Alimentos" },
+    { id: 4, name: "Hogar" },
+    { id: 5, name: "Juguetes" },
+  ];
+
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -174,9 +183,15 @@ const CreateAppointment = () => {
               <ErrorMessage name="stock" component="div" className="create-appointment__error" />
             </div>
 
+            {/* ✅ Menú desplegable con categorías fijas */}
             <div className="create-appointment__field">
               <label htmlFor="category" className="create-appointment__label">Categoría</label>
-              <Field type="text" name="category" id="category" className="create-appointment__input" />
+              <Field as="select" name="category" id="category" className="create-appointment__input">
+                <option value="">Selecciona una categoría</option>
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.name}>{cat.name}</option>
+                ))}
+              </Field>
               <ErrorMessage name="category" component="div" className="create-appointment__error" />
             </div>
 
@@ -207,6 +222,217 @@ const CreateAppointment = () => {
 };
 
 export default CreateAppointment;
+
+
+// import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import axios from 'axios';
+// import './CreateAppointment.css'; // Mantiene el CSS existente
+// import { useState } from 'react';
+// import { useUser } from '../../context/UserContext'; // Importar el contexto del usuario
+
+// const CreateAppointment = () => {
+//   const [selectedFile, setSelectedFile] = useState(null);
+//   const { user } = useUser(); // Obtener el usuario desde el contexto
+
+//   const handleFileChange = (event) => {
+//     setSelectedFile(event.target.files[0]);
+//   };
+
+//   const fetchUserData = async (email) => {
+//     try {
+//       const token = localStorage.getItem('token');
+//       if (!token) {
+//         throw new Error('Token no disponible. Por favor, inicia sesión nuevamente.');
+//       }
+
+//       const response = await axios.get(
+//         `https://ecommerce-9558.onrender.com/users/email/${email}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         }
+//       );
+
+//       console.log("Datos del usuario obtenidos:", response.data);
+//       return response.data;
+//     } catch (error) {
+//       console.error("Error obteniendo datos del usuario:", error.response?.data || error.message);
+//       alert("No se pudo obtener la información del usuario. Por favor, verifica tus credenciales.");
+//       return null;
+//     }
+//   };
+
+//   const posData = async (formData, userData) => {
+//     try {
+//       console.log("Datos enviados:", formData);
+
+//       const response = await axios.post("https://ecommerce-9558.onrender.com/products", {
+//         ...formData,
+//         creatorEmail: userData.email,
+//         telefono: userData.phone || "Teléfono no disponible",
+//       });
+//       console.log("Respuesta del backend (producto):", response.data);
+
+//       if (response.status === 201 || response.data.startsWith("Producto creado exitosamente")) {
+//         const productId = response.data.split(": ")[1];
+//         console.log("ID del producto:", productId);
+
+//         if (selectedFile) {
+//           const formDataImage = new FormData();
+//           formDataImage.append("file", selectedFile);
+
+//           const imageResponse = await axios.post(
+//             `https://ecommerce-9558.onrender.com/file-upload/uploadImage/${productId}`,
+//             formDataImage,
+//             { headers: { "Content-Type": "multipart/form-data" } }
+//           );
+
+//           console.log("Respuesta del backend (imagen):", imageResponse.data);
+//           alert("Producto creado y imagen subida exitosamente");
+//           return true;
+//         } else {
+//           alert("Producto creado exitosamente (sin imagen)");
+//           return true;
+//         }
+//       } else {
+//         alert("Error inesperado en el servidor");
+//         return false;
+//       }
+//     } catch (error) {
+//       console.error("Error:", error);
+//       alert(error.response?.data?.message || "No se pudo completar la acción");
+//       return false;
+//     }
+//   };
+
+//   return (
+//     <div className="create-appointment">
+//       <h1 className="create-appointment__title">Crear Producto</h1>
+//       <Formik
+//         initialValues={{
+//           name: '',
+//           description: '',
+//           price: '',
+//           stock: '',
+//           category: '',
+//           expiresAt: '', // ✅ nuevo campo
+//         }}
+//         validate={(values) => {
+//           const errors = {};
+//           if (!values.name) {
+//             errors.name = 'El nombre del producto es obligatorio.';
+//           } else if (values.name.length > 50) {
+//             errors.name = 'El nombre no puede superar los 50 caracteres.';
+//           }
+//           if (!values.description) {
+//             errors.description = 'La descripción es obligatoria.';
+//           }
+//           if (!values.price) {
+//             errors.price = 'El precio es obligatorio.';
+//           } else if (isNaN(values.price) || values.price <= 0) {
+//             errors.price = 'El precio debe ser un número positivo.';
+//           }
+//           if (!values.stock) {
+//             errors.stock = 'La cantidad es obligatoria.';
+//           } else if (!Number.isInteger(Number(values.stock)) || values.stock < 0) {
+//             errors.stock = 'La cantidad debe ser un número entero positivo.';
+//           }
+//           if (!values.category) {
+//             errors.category = 'La categoría es obligatoria.';
+//           }
+//           if (values.expiresAt) {
+//             const today = new Date();
+//             const selectedDate = new Date(values.expiresAt);
+//             if (selectedDate < today) {
+//               errors.expiresAt = 'La fecha de expiración no puede ser anterior a hoy.';
+//             }
+//           }
+//           return errors;
+//         }}
+//         onSubmit={async (values, { setSubmitting, resetForm }) => {
+//           const userData = await fetchUserData(user.email);
+//           if (!userData) {
+//             setSubmitting(false);
+//             return;
+//           }
+
+//           const formData = {
+//             ...values,
+//             expiresAt: values.expiresAt ? new Date(values.expiresAt) : undefined, // ✅ enviar fecha
+//             creatorEmail: userData.email,
+//             telefono: userData.phone || "Teléfono no disponible",
+//             category: { name: values.category },
+//           };
+
+//           const success = await posData(formData, userData);
+//           if (success) {
+//             resetForm();
+//             setSelectedFile(null);
+//           }
+//           setSubmitting(false);
+//         }}
+//       >
+//         {({ isSubmitting, errors }) => (
+//           <Form className="create-appointment__form">
+//             {/* Campos del formulario */}
+//             <div className="create-appointment__field">
+//               <label htmlFor="name" className="create-appointment__label">Nombre del producto</label>
+//               <Field type="text" name="name" id="name" className="create-appointment__input" />
+//               <ErrorMessage name="name" component="div" className="create-appointment__error" />
+//             </div>
+
+//             <div className="create-appointment__field">
+//               <label htmlFor="description" className="create-appointment__label">Descripción</label>
+//               <Field as="textarea" name="description" id="description" className="create-appointment__input" />
+//               <ErrorMessage name="description" component="div" className="create-appointment__error" />
+//             </div>
+
+//             <div className="create-appointment__field">
+//               <label htmlFor="price" className="create-appointment__label">Precio</label>
+//               <Field type="number" name="price" id="price" className="create-appointment__input" step="0.01" />
+//               <ErrorMessage name="price" component="div" className="create-appointment__error" />
+//             </div>
+
+//             <div className="create-appointment__field">
+//               <label htmlFor="stock" className="create-appointment__label">Cantidad</label>
+//               <Field type="number" name="stock" id="stock" className="create-appointment__input" />
+//               <ErrorMessage name="stock" component="div" className="create-appointment__error" />
+//             </div>
+
+//             <div className="create-appointment__field">
+//               <label htmlFor="category" className="create-appointment__label">Categoría</label>
+//               <Field type="text" name="category" id="category" className="create-appointment__input" />
+//               <ErrorMessage name="category" component="div" className="create-appointment__error" />
+//             </div>
+
+//             {/* ✅ Nuevo campo para fecha de expiración */}
+//             <div className="create-appointment__field">
+//               <label htmlFor="expiresAt" className="create-appointment__label">Fecha de expiración</label>
+//               <Field type="date" name="expiresAt" id="expiresAt" className="create-appointment__input" />
+//               <ErrorMessage name="expiresAt" component="div" className="create-appointment__error" />
+//             </div>
+
+//             <div className="create-appointment__field">
+//               <label htmlFor="file" className="create-appointment__label">Subir Imagen</label>
+//               <input type="file" id="file" className="create-appointment__input" onChange={handleFileChange} />
+//             </div>
+
+//             <button
+//               type="submit"
+//               className="create-appointment__button"
+//               disabled={isSubmitting || Object.values(errors).some(error => error)}
+//             >
+//               {isSubmitting ? "Procesando..." : "Crear Producto"}
+//             </button>
+//           </Form>
+//         )}
+//       </Formik>
+//     </div>
+//   );
+// };
+
+// export default CreateAppointment;
 
 // import { Formik, Form, Field, ErrorMessage } from 'formik';
 // import axios from 'axios';
