@@ -109,8 +109,11 @@ const ListadoProductos = () => {
 
       <div className="listadoProductos__list">
         {productos.length === 0 && !error ? (
-          <p>Cargando productos...</p>
-        ) : (
+                  loading ? (
+            <p>Cargando productos...</p>
+          ) : productos.length === 0 && !error ? (
+            <p>No se encontraron productos para tu búsqueda.</p>
+        ) : productos.length === 0 && !error ? (
           productos.map((producto) => (
             <div key={producto.id} className="listadoProductos__details">
               <img
