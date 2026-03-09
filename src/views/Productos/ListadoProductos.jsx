@@ -108,33 +108,33 @@ const ListadoProductos = () => {
       {error && <p className="listadoProductos__error">{error}</p>}
 
       <div className="listadoProductos__list">
-        {productos.length === 0 && !error ? (
-                  loading ? (
-            <p>Cargando productos...</p>
-          ) : productos.length === 0 && !error ? (
-            <p>No se encontraron productos para tu búsqueda.</p>
-        ) : productos.length === 0 && !error ? (
-          productos.map((producto) => (
-            <div key={producto.id} className="listadoProductos__details">
-              <img
-                src={producto.imgUrl}
-                alt={`Imagen de ${producto.name}`}
-                className="listadoProductos__img"
-              />
-              <h2>{producto.name}</h2>
-              <div className="price">
-                <span>Precio: {formatPrice(producto.price)}</span>
-              </div>
-              <button
-                className="meInteresaBoton"
-                onClick={() => handleClick(producto.id)}
-              >
-                Me Interesa
-              </button>
-            </div>
-          ))
-        )}
+  {loading ? ( //iiiiiiii
+    <p>Cargando productos...</p> //iiiiiiii
+  ) : productos.length === 0 && !error ? ( //iiiiiiii
+    <p>No se encontraron productos para tu búsqueda.</p> //iiiiiiii
+  ) : (
+    productos.map((producto) => (
+      <div key={producto.id} className="listadoProductos__details">
+        <img
+          src={producto.imgUrl}
+          alt={`Imagen de ${producto.name}`}
+          className="listadoProductos__img"
+        />
+        <h2>{producto.name}</h2>
+        <div className="price">
+          <span>Precio: {formatPrice(producto.price)}</span>
+        </div>
+        <button
+          className="meInteresaBoton"
+          onClick={() => handleClick(producto.id)}
+        >
+          Me Interesa
+        </button>
       </div>
+    ))
+  )}
+</div>
+
 
       {loading && <p>Cargando más productos...</p>}
     </div>
