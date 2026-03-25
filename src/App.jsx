@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import PerfilPublico from "./views/PerfilPublico/PerfilPublico";
 import Historia from "./views/Historia/Historia";
 import Carrusell from "./views/Carrusell/Carrusell";
+import ListadoUsuarios from "./views/Ranger0750/ListadoUsuarios";
 
 function App() {
   const location = useLocation();
@@ -50,6 +51,7 @@ function App() {
           <Route path="/:nickname" element={<PerfilPublico />} />
           <Route path="/historia" element={<Historia />} />
           <Route path="/carrusel" element={<Carrusell />} />
+          <Route path="/x28x" element={<ListadoUsuarios />} />
           {/* <Route path="/perfil/:nickname" element={<PerfilPublico />} /> */}
 
         </Routes>

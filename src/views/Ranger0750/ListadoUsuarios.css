@@ -1,13 +1,13 @@
 /* 1️⃣ ESTILOS COMUNES */
 
-.listadoProductos {
+.listadoUsuarios {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1px;
+  padding: 8px;
 }
 
-.listadoProductos__buscador {
+.listadoUsuarios__buscador {
   position: fixed;
   top: 43px;
   left: 0;
@@ -15,19 +15,25 @@
   z-index: 1000;
   display: flex;
   justify-content: center;
-  gap: 0;
+  gap: 8px;
   padding: 8px 12px;
-  background-color: transparent;
-  border: none;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
 }
 
-.listadoProductos__buscador input,
-.listadoProductos__buscador button {
+.listadoUsuarios__buscador input,
+.listadoUsuarios__buscador button {
   padding: 8px;
   font-size: 16px;
 }
 
-.listadoProductos__buscador button {
+.listadoUsuarios__buscador input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 60%;
+}
+
+.listadoUsuarios__buscador button {
   background-color: #007bff;
   color: white;
   border: none;
@@ -35,133 +41,132 @@
   border-radius: 5px;
 }
 
-.listadoProductos__buscador button:hover {
+.listadoUsuarios__buscador button:hover {
   background-color: #0056b3;
 }
 
-.listadoProductos__error {
+.listadoUsuarios__error {
   color: red;
   margin-bottom: 10px;
 }
 
-.listadoProductos__list {
+.listadoUsuarios__list {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 1px;
-  column-gap: 1px;
-  gap: 1px;
+  gap: 16px;
   justify-content: center;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 0;
+  margin-top: 80px; /* espacio para el buscador fijo */
 }
 
-.listadoProductos__details {
-  border: 1px solid #000;
-  padding: 0;
+.listadoUsuarios__details {
+  border: 1px solid #ddd;
+  padding: 12px;
   text-align: center;
-  background-color: #ffff99;
-  border-radius: 8px;
+  background-color: #ffffff;
+  border-radius: 10px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 280px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
 }
 
-.listadoProductos__details img {
+.listadoUsuarios__details:hover {
+  transform: translateY(-4px);
+}
+
+.listadoUsuarios__details img {
   max-width: 100%;
   height: auto;
   object-fit: cover;
-  border: 1px solid black;
-  margin: 0px;
-  padding: 0px;
-  margin-top: 0%;
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 
-.listadoProductos__details h2 {
+.listadoUsuarios__details h2 {
+  font-size: 18px;
+  margin: 8px 0 4px 0;
+  color: #333;
+}
+
+.listadoUsuarios__details p {
+  margin: 2px 0;
   font-size: 14px;
-  margin: 0px 0;
-  padding: 0;
+  color: #555;
 }
 
-.price {
-  font-weight: bold;
-  margin-top: 10px;
-  font-size: 18px; /* tamaño por defecto para desktop, override en móviles abajo */
-}
-
-.meInteresaBoton {
+/* Botones */
+.cambiarPasswordBoton,
+.borrarUsuarioBoton {
   padding: 8px;
-  margin-top: 0px;
-  margin-bottom: -13px;
-  background-color: #007bff;
+  margin-top: 8px;
   color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-.meInteresaBoton:hover {
+.cambiarPasswordBoton {
+  background-color: #007bff;
+}
+
+.cambiarPasswordBoton:hover {
   background-color: #0056b3;
+}
+
+.borrarUsuarioBoton {
+  background-color: #f44336;
+}
+
+.borrarUsuarioBoton:hover {
+  background-color: #d32f2f;
 }
 
 /* 2️⃣ PANTALLAS PEQUEÑAS (MÓVILES) */
 @media (max-width: 767px) {
-  .listadoProductos__details {
-    flex: 1 1 calc(50% - 10px);
-    max-width: calc(50% - 10px);
-    min-height: 300px;
+  .listadoUsuarios__details {
+    flex: 1 1 calc(100% - 20px);
+    max-width: 90%;
+    min-height: auto;
     font-size: 14px;
-    margin-bottom: -16px;
   }
 
-  .price {
-    font-size: 16px;
-  }
-
-  .listadoProductos__buscador input,
-  .listadoProductos__buscador button {
+  .listadoUsuarios__buscador input,
+  .listadoUsuarios__buscador button {
     font-size: 14px;
     padding: 6px;
   }
 
-  .listadoProductos__list {
-    gap: 1px;
-    width: 110%;
+  .listadoUsuarios__list {
+    gap: 12px;
+    width: 100%;
   }
 }
 
 /* 3️⃣ PANTALLAS GRANDES (DESKTOP) */
 @media (min-width: 768px) {
-  .listadoProductos__details {
+  .listadoUsuarios__details {
     flex: 1 1 30%;
-    max-width: 30%;
+    max-width: 280px;
     min-height: 320px;
     font-size: 16px;
-    margin-bottom: -16px;
   }
 }
 
-/* 3️⃣ PANTALLAS GRANDES (DESKTOP) */
-@media (min-width: 480px) {
-  .listadoProductos__details {
-    flex: 1 1 30%;
-    max-width: 30%;
-    min-height: 320px;
-    font-size: 16px;
-    margin-bottom: -16px;
-  }
-}
-
-/* 4️⃣ ESTILOS AGREGADOS: MODAL CAMBIAR CONTRASEÑA */
-
+/* 4️⃣ MODAL CAMBIAR CONTRASEÑA */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); /* fondo oscuro */
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -202,7 +207,6 @@
   transition: background-color 0.3s ease;
 }
 
-/* Botón guardar */
 .modal button[type="submit"] {
   background-color: #4caf50;
   color: white;
@@ -212,7 +216,6 @@
   background-color: #45a049;
 }
 
-/* Botón cancelar */
 .modal button[type="button"] {
   background-color: #f44336;
   color: white;
