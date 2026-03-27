@@ -1,75 +1,125 @@
 .carrusell {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffae3b, #ffae3b);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Nickname como título */
+.carrusell__nickname {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* Mensaje de error */
+.carrusell__error {
+  color: #b00020;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Detalles del producto */
+.carrusell__details {
+  background: #ffae3b;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  animation: fadeSlide 0.8s ease-in-out;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.carrusell__name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.carrusell__precio {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.carrusell__imagen {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.carrusell__imagen:hover {
+  transform: scale(1.05);
+}
+
+/* Ocultar navbar si estás en la página del carrusel */
+body.carrusell-page .navbar {
+  display: none;
+}
+
+/* 🔧 Ajustes para pantallas grandes (Smart TV, >1200px) */
+@media (min-width: 1200px) {
+  .carrusell {
     width: 100vw;
     height: 100vh;
-    margin: 0;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #ffae3b, #ffae3b);
-    text-align: center;
-    overflow: hidden;
+    padding: 4rem;
   }
-  
-  /* Nickname como título */
+
   .carrusell__nickname {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
+    font-size: 3rem;
+    margin-bottom: 2rem;
   }
-  
-  /* Mensaje de error */
-  .carrusell__error {
-    color: #b00020;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-  
-  /* Detalles del producto */
+
   .carrusell__details {
-    background: #ffae3b;
-    border-radius: 12px;
-    padding: 2rem;
-    max-width: 600px;
-    width: 90%;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    animation: fadeSlide 0.8s ease-in-out;
+    max-width: 1000px;   /* más ancho en TV */
+    padding: 3rem;
+    font-size: 1.5rem;
   }
-  
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
+
   .carrusell__name {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: #333;
+    font-size: 2.5rem;
   }
-  
+
   .carrusell__precio {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: #444;
+    font-size: 1.8rem;
   }
-  
+
   .carrusell__imagen {
-    width: 100%;
-    max-height: 300px;
-    object-fit: contain;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
+    max-height: 600px;   /* imágenes más grandes */
+    object-fit: cover;   /* que ocupen todo el espacio */
   }
-  
-  .carrusell__imagen:hover {
-    transform: scale(1.05);
+}
+
+/* 🔧 Ajustes para pantallas muy pequeñas (<400px) */
+@media (max-width: 400px) {
+  .carrusell__nickname {
+    font-size: 1.5rem;
   }
-  body.carrusell-page .navbar {
-    display: none;
+
+  .carrusell__details {
+    padding: 1rem;
+    font-size: 1rem;
   }
-  
+
+  .carrusell__imagen {
+    max-height: 200px;
+  }
+}
