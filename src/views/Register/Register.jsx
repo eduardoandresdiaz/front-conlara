@@ -76,7 +76,7 @@ const Register = () => {
           nickname: '',
           profileImage: null,
           acceptTerms: false,
-          sharedCount: 1
+          sharedCount: '1'
         }}
         validate={(values) => {
           const errors = {};
