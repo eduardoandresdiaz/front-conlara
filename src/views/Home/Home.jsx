@@ -38,7 +38,7 @@ const Home = () => {
         onClick={handleAuthButtonClick} 
         className={styles.authButton}
       >
-        {isLoggedIn ? 'Logout' : 'Publica Gratis tu Producto'}
+        {isLoggedIn ? 'Logout' : 'Publica tu Producto'}
       </button>
       <ListadoProductos />
     </div>
