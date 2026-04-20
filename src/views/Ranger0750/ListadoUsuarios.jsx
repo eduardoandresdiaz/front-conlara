@@ -167,6 +167,7 @@ const ListadoUsuarios = () => {
               <p>Teléfono: {usuario.phone}</p>
               <p>Ciudad: {usuario.city}, {usuario.country}</p>
               <p>Sharedcount: {usuario.sharedcount}</p>
+              <p>x28x</p>
               <button
                 className="cambiarPasswordBoton"
                 onClick={() => handleChangePassword(usuario.id)}
