@@ -224,3 +224,101 @@
 .modal button[type="button"]:hover {
   background-color: #d32f2f;
 }
+/* Estilo para input de sharedcount */
+.sharedcountInput {
+  width: 80px;
+  padding: 6px;
+  margin: 6px auto;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sharedcountInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+  outline: none;
+}
+
+/* Estilo para botón de guardar sharedcount */
+.sharedcountButton {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sharedcountButton:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+/* Contenedor de cada usuario */
+.listadoUsuarios__details {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Input para editar el límite */
+.listadoUsuarios__details input[type="number"] {
+  width: 120px;
+  padding: 6px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Botón para guardar el límite */
+.listadoUsuarios__details button {
+  padding: 8px 12px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+/* Botón específico de guardar límite */
+.listadoUsuarios__details button:nth-of-type(1) {
+  background-color: #4caf50;
+  color: white;
+}
+
+.listadoUsuarios__details button:nth-of-type(1):hover {
+  background-color: #45a049;
+}
+
+/* Botones de acciones (cambiar contraseña, borrar usuario) */
+.cambiarPasswordBoton {
+  background-color: #2196f3;
+  color: white;
+}
+
+.cambiarPasswordBoton:hover {
+  background-color: #1976d2;
+}
+
+.borrarUsuarioBoton {
+  background-color: #f44336;
+  color: white;
+}
+
+.borrarUsuarioBoton:hover {
+  background-color: #d32f2f;
+}
+

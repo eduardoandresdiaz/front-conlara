@@ -169,3 +169,9 @@
     margin-bottom: 15px;
   }
 }
+.menu-appointment__button.disabled {
+  background-color: #ccc;   /* gris */
+  color: #666;              /* texto apagado */
+  cursor: not-allowed;      /* cursor bloqueado */
+  border: 1px solid #aaa;
+}
