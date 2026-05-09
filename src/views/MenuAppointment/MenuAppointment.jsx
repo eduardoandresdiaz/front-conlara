@@ -85,7 +85,7 @@ const MenuAppointment = () => {
           </button>
 
           <button className="menu-appointment__button" onClick={() => navigate("/misproductos")}>
-            Modificar o Eliminar Productos Publicados
+            Mi Negocio
           </button>
 
           {nickname && (

@@ -96,3 +96,66 @@
 .eliminarBoton:hover {
   background-color: darkred; /* Fondo rojo oscuro al pasar el mouse */
 }
+/* Botón Vendido */
+.vendidoBoton {
+  background-color: #4caf50; /* Verde */
+  color: white; /* Texto blanco */
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin: 10px 0; /* Espaciado superior e inferior */
+}
+
+.vendidoBoton:hover {
+  background-color: #45a049; /* Verde más oscuro al pasar el mouse */
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Contenido del Modal */
+.modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.modalContent p {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.modalContent button {
+  background-color: #4caf50; /* Verde */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.modalContent button:hover {
+  background-color: #45a049;
+}
