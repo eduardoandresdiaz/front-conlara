@@ -138,11 +138,21 @@ const MisProductos = () => {
                 Vendido
               </button>
 
-              <img
+              {/* <img
                 src={producto.imgUrl}
                 alt={`Imagen de ${producto.name}`}
                 style={{ maxWidth: '400px', maxHeight: '400px', objectFit: 'cover' }}
-              />
+              /> */}
+<div className="imagenContainer">
+  <img
+    src={producto.imgUrl}
+    alt={`Imagen de ${producto.name}`}
+    className="productoImagen"
+  />
+  {producto.stock === 0 && (
+    <div className="agotadoOverlay">AGOTADO</div>
+  )}
+</div>
 
               <button
                 className="eliminarBoton"
