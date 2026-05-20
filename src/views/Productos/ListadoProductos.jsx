@@ -114,23 +114,30 @@ const ListadoProductos = () => {
     <p>No se encontraron productos para tu búsqueda.</p> //iiiiiiii
   ) : (
     productos.map((producto) => (
-      <div key={producto.id} className="listadoProductos__details">
-        <img
-          src={producto.imgUrl}
-          alt={`Imagen de ${producto.name}`}
-          className="listadoProductos__img"
-        />
-        <h2>{producto.name}</h2>
-        <div className="price">
-          <span>Precio: {formatPrice(producto.price)}</span>
-        </div>
-        <button
-          className="meInteresaBoton"
-          onClick={() => handleClick(producto.id)}
-        >
-          Me Interesa
-        </button>
-      </div>
+<div key={producto.id} className="listadoProductos__details">
+  <div className="imagenContainer">
+    <img
+      src={producto.imgUrl}
+      alt={`Imagen de ${producto.name}`}
+      className="listadoProductos__img"
+    />
+    {producto.stock === 0 && (
+      <div className="agotadoOverlay">AGOTADO</div>
+    )}
+  </div>
+
+  <h2>{producto.name}</h2>
+  <div className="price">
+    <span>Precio: {formatPrice(producto.price)}</span>
+  </div>
+  <button
+    className="meInteresaBoton"
+    onClick={() => handleClick(producto.id)}
+  >
+    Me Interesa
+  </button>
+</div>
+
     ))
   )}
 </div>
