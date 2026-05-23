@@ -136,8 +136,7 @@ const ListadoProductos = () => {
 
   <h2>{producto.name}</h2>
   <div className="price">
-    <span>Precio: {formatPrice(producto.price)}</span>
-    <span>Precio: {formatPrice(producto.price, producto.expiresAt)}</span>
+  <span>Precio: {formatPrice(producto.price, producto.expiresAt)}</span>
   </div>
   <button
     className="meInteresaBoton"
