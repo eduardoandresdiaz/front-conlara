@@ -8,6 +8,8 @@ const MisProductos = () => {
   const [error, setError] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const [mensajeStock, setMensajeStock] = useState('');
+  const [filtroAgotados, setFiltroAgotados] = useState(false);
+  const [filtroVencidos, setFiltroVencidos] = useState(false);
   const { user } = useUser();
   const navigate = useNavigate();
 
@@ -64,7 +66,7 @@ const MisProductos = () => {
         throw new Error('Error al eliminar el producto');
       }
 
-      const deletedProduct = await responseProduct.json();
+      await responseProduct.json();
       setProductos((prevProductos) => prevProductos.filter((p) => p.id !== producto.id));
     } catch (error) {
       console.error('Error al intentar eliminar el producto y la imagen:', error.message);
@@ -75,6 +77,12 @@ const MisProductos = () => {
     try {
       if (producto.stock <= 0) {
         setMensajeStock("No quedan productos en stock");
+        setModalOpen(true);
+        return;
+      }
+
+      if (new Date(producto.expiresAt) < new Date()) {
+        setMensajeStock("La oferta ya venció");
         setModalOpen(true);
         return;
       }
@@ -112,16 +120,40 @@ const MisProductos = () => {
     fetchProductos();
   }, []);
 
+  // Filtrado dinámico
+  const productosFiltrados = productos.filter((p) => {
+    if (filtroAgotados) return p.stock === 0;
+    if (filtroVencidos) return new Date(p.expiresAt) < new Date();
+    return true;
+  });
+
   return (
     <div className="listadoProductos">
-      <h1 className="tituloSuperior">Mis Publicaciones</h1>
+     <h1 className="tituloSuperior">Mis Publicaciones</h1>
+
+<div className="filtrosContainer">
+  <button
+    className="filtroBoton"
+    onClick={() => setFiltroAgotados(!filtroAgotados)}
+  >
+    {filtroAgotados ? "Mostrar Todo" : "Productos Agotados"}
+  </button>
+  <button
+    className="filtroBoton"
+    onClick={() => setFiltroVencidos(!filtroVencidos)}
+  >
+    {filtroVencidos ? "Mostrar Todo" : "Ofertas Vencidas"}
+  </button>
+</div>
+
+
       {error && <p className="listadoProductos__error">{error}</p>}
 
       <div className="listadoProductos__list">
-        {productos.length === 0 && !error ? (
-          <p>Cargando productos...</p>
+        {productosFiltrados.length === 0 && !error ? (
+          <p>No hay productos para mostrar.</p>
         ) : (
-          productos.map((producto) => (
+          productosFiltrados.map((producto) => (
             <div key={producto.id} className="listadoProductos__details">
               <h2>{producto.name}</h2>
               <p><strong>Precio:</strong> ${producto.price}</p>
@@ -130,29 +162,27 @@ const MisProductos = () => {
               <p><strong>Fecha de Creación:</strong> {new Date(producto.createdAt).toLocaleString()}</p>
               <p><strong>Fecha de Expiración:</strong> {new Date(producto.expiresAt).toLocaleDateString()}</p>
 
-              {/* Botón Vendido entre fecha de expiración e imagen */}
               <button
                 className="vendidoBoton"
                 onClick={() => marcarVendido(producto)}
+                disabled={producto.stock === 0 || new Date(producto.expiresAt) < new Date()}
               >
                 Vendido
               </button>
 
-              {/* <img
-                src={producto.imgUrl}
-                alt={`Imagen de ${producto.name}`}
-                style={{ maxWidth: '400px', maxHeight: '400px', objectFit: 'cover' }}
-              /> */}
-<div className="imagenContainer">
-  <img
-    src={producto.imgUrl}
-    alt={`Imagen de ${producto.name}`}
-    className="productoImagen"
-  />
-  {producto.stock === 0 && (
-    <div className="agotadoOverlay">AGOTADO</div>
-  )}
-</div>
+              <div className="imagenContainer">
+                <img
+                  src={producto.imgUrl}
+                  alt={`Imagen de ${producto.name}`}
+                  className="productoImagen"
+                />
+                {producto.stock === 0 && (
+                  <div className="agotadoOverlay">AGOTADO</div>
+                )}
+                {new Date(producto.expiresAt) < new Date() && producto.stock > 0 && (
+                  <div className="ofertaVencidaOverlay">OFERTA VENCIDA</div>
+                )}
+              </div>
 
               <button
                 className="eliminarBoton"
@@ -185,6 +215,199 @@ const MisProductos = () => {
 };
 
 export default MisProductos;
+
+
+// import { useEffect, useState } from 'react';
+// import { useUser } from "../../context/UserContext";
+// import { useNavigate } from 'react-router-dom';
+// import './MisProductos.css';
+
+// const MisProductos = () => {
+//   const [productos, setProductos] = useState([]);
+//   const [error, setError] = useState('');
+//   const [modalOpen, setModalOpen] = useState(false);
+//   const [mensajeStock, setMensajeStock] = useState('');
+//   const { user } = useUser();
+//   const navigate = useNavigate();
+
+//   const fetchProductos = async () => {
+//     try {
+//       if (!user || !user.email) {
+//         throw new Error("No se encontró el email del usuario.");
+//       }
+
+//       const response = await fetch(`https://ecommerce-9558.onrender.com/products/by-creator?creatorEmail=${user.email}`);
+//       if (!response.ok) {
+//         throw new Error('Error al obtener los productos del usuario');
+//       }
+//       const data = await response.json();
+//       setProductos(data);
+//       setError('');
+//     } catch (error) {
+//       setError(error.message);
+//       setProductos([]);
+//     }
+//   };
+
+//   const eliminarProducto = async (producto) => {
+//     try {
+//       const token = localStorage.getItem('token');
+//       if (!token) {
+//         throw new Error("No se encontró un token de autenticación.");
+//       }
+
+//       const imgUrl = producto.imgUrl;
+//       const publicId = imgUrl.split('/').pop().split('.')[0];
+
+//       const responseImg = await fetch(`https://ecommerce-9558.onrender.com/file-upload/deleteImage/${publicId}`, {
+//         method: 'DELETE',
+//         headers: {
+//           'Authorization': `Bearer ${token}`,
+//           'Content-Type': 'application/json',
+//         },
+//       });
+
+//       if (!responseImg.ok) {
+//         throw new Error('Error al eliminar la imagen asociada al producto');
+//       }
+
+//       const responseProduct = await fetch(`https://ecommerce-9558.onrender.com/products/${producto.id}`, {
+//         method: 'DELETE',
+//         headers: {
+//           'Authorization': `Bearer ${token}`,
+//           'Content-Type': 'application/json',
+//         },
+//       });
+
+//       if (!responseProduct.ok) {
+//         throw new Error('Error al eliminar el producto');
+//       }
+
+//       const deletedProduct = await responseProduct.json();
+//       setProductos((prevProductos) => prevProductos.filter((p) => p.id !== producto.id));
+//     } catch (error) {
+//       console.error('Error al intentar eliminar el producto y la imagen:', error.message);
+//     }
+//   };
+
+//   const marcarVendido = async (producto) => {
+//     try {
+//       if (producto.stock <= 0) {
+//         setMensajeStock("No quedan productos en stock");
+//         setModalOpen(true);
+//         return;
+//       }
+
+//       const nuevoStock = producto.stock - 1;
+
+//       const token = localStorage.getItem('token');
+//       const response = await fetch(`https://ecommerce-9558.onrender.com/products/${producto.id}`, {
+//         method: 'PATCH',
+//         headers: {
+//           'Authorization': `Bearer ${token}`,
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ stock: nuevoStock }),
+//       });
+
+//       if (!response.ok) {
+//         throw new Error('Error al actualizar el stock');
+//       }
+
+//       setProductos((prevProductos) =>
+//         prevProductos.map((p) =>
+//           p.id === producto.id ? { ...p, stock: nuevoStock } : p
+//         )
+//       );
+
+//       setMensajeStock(`Te quedan ${nuevoStock} productos en stock`);
+//       setModalOpen(true);
+//     } catch (error) {
+//       console.error('Error al marcar como vendido:', error.message);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchProductos();
+//   }, []);
+
+//   return (
+//     <div className="listadoProductos">
+//       <h1 className="tituloSuperior">Mis Publicaciones</h1>
+//       {error && <p className="listadoProductos__error">{error}</p>}
+
+//       <div className="listadoProductos__list">
+//         {productos.length === 0 && !error ? (
+//           <p>Cargando productos...</p>
+//         ) : (
+//           productos.map((producto) => (
+//             <div key={producto.id} className="listadoProductos__details">
+//               <h2>{producto.name}</h2>
+//               <p><strong>Precio:</strong> ${producto.price}</p>
+//               <p><strong>Stock:</strong> {producto.stock}</p>
+//               <p><strong>Categoría:</strong> {producto.category.name}</p>
+//               <p><strong>Fecha de Creación:</strong> {new Date(producto.createdAt).toLocaleString()}</p>
+//               <p><strong>Fecha de Expiración:</strong> {new Date(producto.expiresAt).toLocaleDateString()}</p>
+
+//               {/* Botón Vendido entre fecha de expiración e imagen */}
+//               <button
+//                 className="vendidoBoton"
+//                 onClick={() => marcarVendido(producto)}
+//               >
+//                 Vendido
+//               </button>
+
+//               {/* <img
+//                 src={producto.imgUrl}
+//                 alt={`Imagen de ${producto.name}`}
+//                 style={{ maxWidth: '400px', maxHeight: '400px', objectFit: 'cover' }}
+//               /> */}
+// <div className="imagenContainer">
+//   <img
+//     src={producto.imgUrl}
+//     alt={`Imagen de ${producto.name}`}
+//     className="productoImagen"
+//   />
+//   {producto.stock === 0 && (
+//     <div className="agotadoOverlay">AGOTADO</div>
+//   )}
+//   {new Date(producto.expiresAt) < new Date() && producto.stock > 0 && (
+//     <div className="ofertaVencidaOverlay">OFERTA VENCIDA</div>
+//   )}
+// </div>
+
+
+//               <button
+//                 className="eliminarBoton"
+//                 onClick={() => eliminarProducto(producto)}
+//               >
+//                 Eliminar Publicación
+//               </button>
+
+//               <button
+//                 className="modificarBoton"
+//                 onClick={() => navigate(`/ModifyProduct/${producto.id}`)}
+//               >
+//                 Modificar Publicacion
+//               </button>
+//             </div>
+//           ))
+//         )}
+//       </div>
+
+//       {modalOpen && (
+//         <div className="modalOverlay">
+//           <div className="modalContent">
+//             <p>{mensajeStock}</p>
+//             <button onClick={() => setModalOpen(false)}>Entendido</button>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default MisProductos;
 
 // import { useEffect, useState } from 'react';
 // import { useUser } from "../../context/UserContext"; // Importar el contexto para obtener el email del usuario

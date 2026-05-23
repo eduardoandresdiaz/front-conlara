@@ -87,10 +87,18 @@ const ListadoProductos = () => {
     fetchBusqueda(1, false);
   };
 
-  const formatPrice = (price) => {
+  const formatPrice = (price, expiresAt) => {
     const validPrice = isNaN(price) ? 0 : parseFloat(price);
+  
+    // Si la oferta ya venció → mostrar "Consultar"
+    if (new Date(expiresAt) < new Date()) {
+      return 'Consultar';
+    }
+  
+    // Si el precio es 1 → mostrar "Consultar"
     return validPrice === 1 ? 'Consultar' : `$${validPrice.toFixed(2)}`;
   };
+  
 
   return (
     <div className="listadoProductos">
@@ -129,6 +137,7 @@ const ListadoProductos = () => {
   <h2>{producto.name}</h2>
   <div className="price">
     <span>Precio: {formatPrice(producto.price)}</span>
+    <span>Precio: {formatPrice(producto.price, producto.expiresAt)}</span>
   </div>
   <button
     className="meInteresaBoton"
