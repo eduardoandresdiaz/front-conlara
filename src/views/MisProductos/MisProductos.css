@@ -224,3 +224,9 @@
   align-items: center;
   gap: 10px; /* espacio entre título y botones */
 }
+.detallesCompactos {
+  text-align: left;      /* alinea a la izquierda */
+  font-size: 70%;        /* reduce tamaño de letra un 30% */
+  line-height: 0.75;     /* reduce interlineado un 50% */
+  margin: 5px 0;         /* opcional: espacio reducido */
+}

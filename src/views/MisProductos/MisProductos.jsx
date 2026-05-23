@@ -122,29 +122,45 @@ const MisProductos = () => {
 
   // Filtrado dinámico
   const productosFiltrados = productos.filter((p) => {
-    if (filtroAgotados) return p.stock === 0;
-    if (filtroVencidos) return new Date(p.expiresAt) < new Date();
+    const esAgotado = p.stock === 0;
+    const esVencido = new Date(p.expiresAt) < new Date();
+  
+    // Si ambos filtros están activos → mostrar productos que cumplan al menos uno
+    if (filtroAgotados && filtroVencidos) {
+      return esAgotado || esVencido;
+    }
+  
+    if (filtroAgotados) return esAgotado;
+    if (filtroVencidos) return esVencido;
+  
     return true;
   });
+  const cantidadAgotados = productos.filter((p) => p.stock === 0).length;
+  const cantidadVencidos = productos.filter((p) => new Date(p.expiresAt) < new Date()).length;
+    
+  
+  
+  
 
   return (
     <div className="listadoProductos">
      <h1 className="tituloSuperior">Mis Publicaciones</h1>
 
-<div className="filtrosContainer">
+     <div className="filtrosContainer">
   <button
     className="filtroBoton"
     onClick={() => setFiltroAgotados(!filtroAgotados)}
   >
-    {filtroAgotados ? "Mostrar Todo" : "Productos Agotados"}
+    {filtroAgotados ? "Mostrar Todo" : `Productos Agotados (${cantidadAgotados})`}
   </button>
   <button
     className="filtroBoton"
     onClick={() => setFiltroVencidos(!filtroVencidos)}
   >
-    {filtroVencidos ? "Mostrar Todo" : "Ofertas Vencidas"}
+    {filtroVencidos ? "Mostrar Todo" : `Ofertas Vencidas (${cantidadVencidos})`}
   </button>
 </div>
+
 
 
       {error && <p className="listadoProductos__error">{error}</p>}
@@ -158,9 +174,12 @@ const MisProductos = () => {
               <h2>{producto.name}</h2>
               <p><strong>Precio:</strong> ${producto.price}</p>
               <p><strong>Stock:</strong> {producto.stock}</p>
+              <div className="detallesCompactos">
               <p><strong>Categoría:</strong> {producto.category.name}</p>
               <p><strong>Fecha de Creación:</strong> {new Date(producto.createdAt).toLocaleString()}</p>
               <p><strong>Fecha de Expiración:</strong> {new Date(producto.expiresAt).toLocaleDateString()}</p>
+</div>
+
 
               <button
                 className="vendidoBoton"
