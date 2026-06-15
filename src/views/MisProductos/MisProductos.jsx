@@ -138,10 +138,13 @@ const MisProductos = () => {
   const productosFiltrados = productos.filter((p) => {
     const esAgotado = p.stock === 0;
     const esVencido = new Date(p.expiresAt) < new Date();
+    // const coincideBusqueda =
+    //   p.name.toLowerCase().includes(busqueda.toLowerCase()) ||
+    //   p.category.name.toLowerCase().includes(busqueda.toLowerCase());
     const coincideBusqueda =
-      p.name.toLowerCase().includes(busqueda.toLowerCase()) ||
-      p.category.name.toLowerCase().includes(busqueda.toLowerCase());
-
+    (p.name?.toLowerCase().includes(busqueda.toLowerCase())) ||
+    (p.category?.name?.toLowerCase().includes(busqueda.toLowerCase()));
+  
     if (filtroAgotados && filtroVencidos) return (esAgotado || esVencido) && coincideBusqueda;
     if (filtroAgotados) return esAgotado && coincideBusqueda;
     if (filtroVencidos) return esVencido && coincideBusqueda;
@@ -193,7 +196,8 @@ const MisProductos = () => {
               <p><strong>Precio:</strong> ${producto.price}</p>
               <p><strong>Stock:</strong> {producto.stock}</p>
               <div className="detallesCompactos">
-                <p><strong>Categoría:</strong> {producto.category.name}</p>
+              <p><strong>Categoría:</strong> {producto.category?.name ?? 'Sin categoría'}</p>
+
                 <p><strong>Fecha de Creación:</strong> {new Date(producto.createdAt).toLocaleString()}</p>
                 <p><strong>Fecha de Expiración:</strong> {new Date(producto.expiresAt).toLocaleDateString()}</p>
               </div>
