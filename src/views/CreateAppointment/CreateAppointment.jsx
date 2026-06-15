@@ -114,6 +114,10 @@ const CreateAppointment = () => {
           stock: '',
           category: '',
           expiresAt: '', // ✅ nuevo campo
+          mostrarPrecio: true,       // ✅ nuevo campo
+          resaltarOferta: false,     // ✅ nuevo campo
+          noPublicable: false,       // ✅ nuevo campo
+          proveedor: '',
         }}
         validate={(values) => {
           const errors = {};
@@ -154,13 +158,25 @@ const CreateAppointment = () => {
             return;
           }
 
+          // const formData = {
+          //   ...values,
+          //   expiresAt: values.expiresAt ? new Date(values.expiresAt) : undefined, // ✅ enviar fecha
+          //   creatorEmail: userData.email,
+          //   telefono: userData.phone || "Teléfono no disponible",
+          //   category: { name: values.category },
+          // };
           const formData = {
             ...values,
-            expiresAt: values.expiresAt ? new Date(values.expiresAt) : undefined, // ✅ enviar fecha
+            expiresAt: values.expiresAt ? new Date(values.expiresAt) : undefined,
             creatorEmail: userData.email,
             telefono: userData.phone || "Teléfono no disponible",
             category: { name: values.category },
+            mostrarPrecio: values.mostrarPrecio,
+            resaltarOferta: values.resaltarOferta,
+            noPublicable: values.noPublicable,
+            proveedor: values.proveedor,
           };
+          
 
           const success = await posData(formData, userData);
           if (success) {
@@ -208,6 +224,38 @@ const CreateAppointment = () => {
               </Field>
               <ErrorMessage name="category" component="div" className="create-appointment__error" />
             </div>
+
+            {/* ✅ Checkbox mostrarPrecio */}
+<div className="create-appointment__field">
+  <label>
+    <Field type="checkbox" name="mostrarPrecio" />
+    Mostrar precio
+  </label>
+</div>
+
+{/* ✅ Checkbox resaltarOferta */}
+<div className="create-appointment__field">
+  <label>
+    <Field type="checkbox" name="resaltarOferta" />
+    Resaltar como oferta
+  </label>
+</div>
+
+{/* ✅ Checkbox noPublicable */}
+<div className="create-appointment__field">
+  <label>
+    <Field type="checkbox" name="noPublicable" disabled />
+    Producto no publicable
+  </label>
+</div>
+
+{/* ✅ Input proveedor */}
+<div className="create-appointment__field">
+  <label htmlFor="proveedor" className="create-appointment__label">Proveedor</label>
+  <Field type="text" name="proveedor" id="proveedor" className="create-appointment__input" />
+  <ErrorMessage name="proveedor" component="div" className="create-appointment__error" />
+</div>
+
 
             {/* ✅ Nuevo campo para fecha de expiración */}
             <div className="create-appointment__field">
