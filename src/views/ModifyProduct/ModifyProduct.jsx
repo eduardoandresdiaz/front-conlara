@@ -27,8 +27,13 @@ const ModifyProduct = () => {
           price: response.data.price,
           stock: response.data.stock,
           category: response.data.category ? response.data.category.id : '',
-          expiresAt: response.data.expiresAt ? response.data.expiresAt.split('T')[0] : ''
+          expiresAt: response.data.expiresAt ? response.data.expiresAt.split('T')[0] : '',
+          proveedor: response.data.proveedor || '',
+          mostrarprecio: response.data.mostrarprecio,   // cuidado: backend lo devuelve en minúsculas
+          resaltaroferta: response.data.resaltaroferta,
+          nopublicable: response.data.nopublicable
         });
+        
 
         setImageUrl(response.data.imgUrl);
       } catch (error) {
@@ -122,8 +127,13 @@ const ModifyProduct = () => {
               price: parseFloat(values.price),
               stock: parseInt(values.stock, 10),
               category: { id: values.category },
-              expiresAt: values.expiresAt ? new Date(values.expiresAt).toISOString() : null
+              expiresAt: values.expiresAt ? new Date(values.expiresAt).toISOString() : null,
+              proveedor: values.proveedor,
+              mostrarprecio: values.mostrarprecio,
+              resaltaroferta: values.resaltaroferta,
+              nopublicable: values.nopublicable
             };
+            
             await updateProduct(formData);
             setSubmitting(false);
           }}
@@ -164,6 +174,33 @@ const ModifyProduct = () => {
                 </Field>
                 <ErrorMessage name="category" component="div" className="modify-product__error" />
               </div>
+              <div className="modify-product__field">
+  <label htmlFor="proveedor" className="modify-product__label">Proveedor</label>
+  <Field type="text" name="proveedor" id="proveedor" className="modify-product__input" />
+  <ErrorMessage name="proveedor" component="div" className="modify-product__error" />
+</div>
+
+<div className="modify-product__field">
+  <label>
+    <Field type="checkbox" name="mostrarprecio" />
+    Mostrar Precio
+  </label>
+</div>
+
+<div className="modify-product__field">
+  <label>
+    <Field type="checkbox" name="resaltaroferta" />
+    Resaltar Oferta
+  </label>
+</div>
+
+<div className="modify-product__field">
+  <label>
+    <Field type="checkbox" name="nopublicable" />
+    No Publicable
+  </label>
+</div>
+
 
               <div className="modify-product__field">
                 <label htmlFor="expiresAt" className="modify-product__label">Fecha de Expiración</label>
