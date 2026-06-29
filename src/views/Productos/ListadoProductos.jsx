@@ -87,8 +87,13 @@ const ListadoProductos = () => {
     fetchBusqueda(1, false);
   };
 
-  const formatPrice = (price, expiresAt) => {
+  const formatPrice = (price, expiresAt, mostrarprecio) => {
     const validPrice = isNaN(price) ? 0 : parseFloat(price);
+  
+    // Si mostrarprecio es false → mostrar "Consultar"
+    if (!mostrarprecio) {
+      return 'Consultar';
+    }
   
     // Si la oferta ya venció → mostrar "Consultar"
     if (new Date(expiresAt) < new Date()) {
@@ -132,11 +137,18 @@ const ListadoProductos = () => {
     {producto.stock === 0 && (
       <div className="agotadoOverlay">AGOTADO</div>
     )}
+     {/* Overlay de OFERTA */}
+     {producto.resaltaroferta && (
+      <div className="ofertaOverlay">OFERTA</div>
+    )}
+
   </div>
 
   <h2>{producto.name}</h2>
   <div className="price">
-  <span>Precio: {formatPrice(producto.price, producto.expiresAt)}</span>
+  <span>
+    Precio: {formatPrice(producto.price, producto.expiresAt, producto.mostrarprecio)}
+  </span>
   </div>
   <button
     className="meInteresaBoton"

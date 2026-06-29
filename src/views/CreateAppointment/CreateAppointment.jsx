@@ -171,9 +171,9 @@ const CreateAppointment = () => {
             creatorEmail: userData.email,
             telefono: userData.phone || "Teléfono no disponible",
             category: { name: values.category },
-            mostrarPrecio: values.mostrarPrecio,
-            resaltarOferta: values.resaltarOferta,
-            noPublicable: values.noPublicable,
+            mostrarprecio: values.mostrarprecio,
+            resaltaroferta: values.resaltaroferta,
+            nopublicable: values.nopublicable,
             proveedor: values.proveedor,
           };
           
@@ -225,26 +225,26 @@ const CreateAppointment = () => {
               <ErrorMessage name="category" component="div" className="create-appointment__error" />
             </div>
 
-            {/* ✅ Checkbox mostrarPrecio */}
+            {/* ✅ Checkbox mostrarprecio */}
 <div className="create-appointment__field">
   <label>
-    <Field type="checkbox" name="mostrarPrecio" />
+    <Field type="checkbox" name="mostrarprecio" />
     Mostrar precio
   </label>
 </div>
 
-{/* ✅ Checkbox resaltarOferta */}
+{/* ✅ Checkbox resaltaroferta */}
 <div className="create-appointment__field">
   <label>
-    <Field type="checkbox" name="resaltarOferta" />
+    <Field type="checkbox" name="resaltaroferta" />
     Resaltar como oferta
   </label>
 </div>
 
-{/* ✅ Checkbox noPublicable */}
+{/* ✅ Checkbox nopublicable */}
 <div className="create-appointment__field">
   <label>
-    <Field type="checkbox" name="noPublicable" disabled />
+    <Field type="checkbox" name="nopublicable" disabled />
     Producto no publicable
   </label>
 </div>
