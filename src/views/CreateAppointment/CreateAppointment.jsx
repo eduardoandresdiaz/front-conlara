@@ -112,6 +112,8 @@ const CreateAppointment = () => {
           description: '',
           price: '',
           stock: '',
+          stockminimo: 0,
+          ubicacion: '',
           category: '',
           expiresAt: '', // ✅ nuevo campo
           mostrarprecio: true,       // ✅ nuevo campo
@@ -175,6 +177,8 @@ const CreateAppointment = () => {
             resaltaroferta: values.resaltaroferta,
             nopublicable: values.nopublicable,
             proveedor: values.proveedor,
+            stockminimo: values.stockminimo,
+            ubicacion: values.ubicacion,
           };
           
 
@@ -211,6 +215,20 @@ const CreateAppointment = () => {
               <label htmlFor="stock" className="create-appointment__label">Cantidad</label>
               <Field type="number" name="stock" id="stock" className="create-appointment__input" />
               <ErrorMessage name="stock" component="div" className="create-appointment__error" />
+            </div>
+
+             {/* 🔹 Nuevo campo Stock mínimo */}
+            <div className="create-appointment__field">
+              <label htmlFor="stockminimo" className="create-appointment__label">Stock mínimo</label>
+              <Field type="number" name="stockminimo" id="stockminimo" className="create-appointment__input" />
+              <ErrorMessage name="stockminimo" component="div" className="create-appointment__error" />
+          </div>
+
+            {/* 🔹 Nuevo campo Ubicación */}
+            <div className="create-appointment__field">
+              <label htmlFor="ubicacion" className="create-appointment__label">Ubicación</label>
+              <Field type="text" name="ubicacion" id="ubicacion" className="create-appointment__input" />
+              <ErrorMessage name="ubicacion" component="div" className="create-appointment__error" />
             </div>
 
             {/* ✅ Menú desplegable con categorías fijas */}

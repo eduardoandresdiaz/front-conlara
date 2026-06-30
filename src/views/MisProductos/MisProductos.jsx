@@ -195,9 +195,13 @@ const MisProductos = () => {
               <h2>{producto.name}</h2>
               <p><strong>Precio:</strong> ${producto.price}</p>
               <p><strong>Stock:</strong> {producto.stock}</p>
-              <div className="detallesCompactos">
-              <p><strong>Categoría:</strong> {producto.category?.name ?? 'Sin categoría'}</p>
 
+              {/* 🔹 Nuevos campos */}
+              <p><strong>Stock mínimo:</strong> {producto.stockminimo}</p>
+              <p><strong>Ubicación:</strong> {producto.ubicacion ?? 'No especificada'}</p>
+
+              <div className="detallesCompactos">
+                <p><strong>Categoría:</strong> {producto.category?.name ?? 'Sin categoría'}</p>
                 <p><strong>Fecha de Creación:</strong> {new Date(producto.createdAt).toLocaleString()}</p>
                 <p><strong>Fecha de Expiración:</strong> {new Date(producto.expiresAt).toLocaleDateString()}</p>
               </div>

@@ -26,6 +26,8 @@ const ModifyProduct = () => {
           description: response.data.description,
           price: response.data.price,
           stock: response.data.stock,
+          stockminimo: response.data.stockminimo || 0,
+          ubicacion: response.data.ubicacion || '',
           category: response.data.category ? response.data.category.id : '',
           expiresAt: response.data.expiresAt ? response.data.expiresAt.split('T')[0] : '',
           proveedor: response.data.proveedor || '',
@@ -126,6 +128,8 @@ const ModifyProduct = () => {
               description: values.description,
               price: parseFloat(values.price),
               stock: parseInt(values.stock, 10),
+              stockminimo: parseInt(values.stockminimo, 10),
+              ubicacion: values.ubicacion,
               category: { id: values.category },
               expiresAt: values.expiresAt ? new Date(values.expiresAt).toISOString() : null,
               proveedor: values.proveedor,
@@ -163,6 +167,18 @@ const ModifyProduct = () => {
                 <Field type="number" name="stock" id="stock" className="modify-product__input" />
                 <ErrorMessage name="stock" component="div" className="modify-product__error" />
               </div>
+              <div className="modify-product__field">
+  <label htmlFor="stockminimo" className="modify-product__label">Stock mínimo</label>
+  <Field type="number" name="stockminimo" id="stockminimo" className="modify-product__input" />
+  <ErrorMessage name="stockminimo" component="div" className="modify-product__error" />
+</div>
+
+<div className="modify-product__field">
+  <label htmlFor="ubicacion" className="modify-product__label">Ubicación</label>
+  <Field type="text" name="ubicacion" id="ubicacion" className="modify-product__input" />
+  <ErrorMessage name="ubicacion" component="div" className="modify-product__error" />
+</div>
+
 
               <div className="modify-product__field">
                 <label htmlFor="category" className="modify-product__label">Categoría</label>
