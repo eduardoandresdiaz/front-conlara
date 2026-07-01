@@ -1,5 +1,6 @@
 /* BEM Naming Conventions */
 .create-appointment {
+  margin-top: 250px;
   display: flex;
   flex-direction: column; /* Organiza en columna */
   justify-content: center;
