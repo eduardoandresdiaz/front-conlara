@@ -154,7 +154,7 @@ const ListadoProductos = () => {
     className="meInteresaBoton"
     onClick={() => handleClick(producto.id)}
   >
-    Me Interesa
+    Ver Detalles
   </button>
 </div>
 
