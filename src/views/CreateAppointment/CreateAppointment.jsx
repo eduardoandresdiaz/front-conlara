@@ -151,6 +151,10 @@ const CreateAppointment = () => {
               errors.expiresAt = 'La fecha de expiración no puede ser anterior a hoy.';
             }
           }
+          if (!values.ubicacion) {
+            errors.ubicacion = 'La ubicación es obligatoria.';
+          }
+          
           return errors;
         }}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
@@ -190,8 +194,8 @@ const CreateAppointment = () => {
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, errors }) => (
-          <Form className="create-appointment__form">
+        {({ isSubmitting, errors, validateForm, handleSubmit }) => (
+           <Form className="create-appointment__form">
             {/* Campos del formulario */}
             <div className="create-appointment__field">
               <label htmlFor="name" className="create-appointment__label">Nombre del producto</label>
@@ -288,12 +292,20 @@ const CreateAppointment = () => {
             </div>
 
             <button
-              type="submit"
-              className="create-appointment__button"
-              disabled={isSubmitting || Object.values(errors).some(error => error)}
-            >
-              {isSubmitting ? "Procesando..." : "Crear Producto"}
-            </button>
+      type="button"
+      className="create-appointment__button"
+      onClick={async () => {
+        const formErrors = await validateForm();
+        if (Object.keys(formErrors).length > 0) {
+          alert("⚠️ Hay campos obligatorios sin completar o con errores.");
+        } else {
+          handleSubmit();
+        }
+      }}
+      disabled={isSubmitting}
+    >
+      {isSubmitting ? "Procesando..." : "Crear Producto"}
+    </button>
           </Form>
         )}
       </Formik>
