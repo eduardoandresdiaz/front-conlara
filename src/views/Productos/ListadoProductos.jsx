@@ -124,7 +124,7 @@ const ListadoProductos = () => {
   {loading ? ( //iiiiiiii
     <p>Cargando productos...</p> //iiiiiiii
   ) : productos.length === 0 && !error ? ( //iiiiiiii
-    <p>No se encontraron productos para tu búsqueda.</p> //iiiiiiii
+    <p>🤖</p> //iiiiiiii
   ) : (
     productos.map((producto) => (
 <div key={producto.id} className="listadoProductos__details">
@@ -163,7 +163,7 @@ const ListadoProductos = () => {
 </div>
 
 
-      {loading && <p>Cargando más productos...</p>}
+      {loading && <p>😉</p>}
     </div>
   );
 };

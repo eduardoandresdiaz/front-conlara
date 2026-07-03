@@ -86,7 +86,7 @@ const CreateAppointment = () => {
           );
 
           console.log("Respuesta del backend (imagen):", imageResponse.data);
-          alert("Producto creado y imagen subida exitosamente");
+          alert("Producto creado e imagen subida exitosamente");
           return true;
         } else {
           alert("Producto creado exitosamente (sin imagen)");
@@ -292,20 +292,21 @@ const CreateAppointment = () => {
             </div>
 
             <button
-      type="button"
-      className="create-appointment__button"
-      onClick={async () => {
-        const formErrors = await validateForm();
-        if (Object.keys(formErrors).length > 0) {
-          alert("⚠️ Hay campos obligatorios sin completar o con errores.");
-        } else {
-          handleSubmit();
-        }
-      }}
-      disabled={isSubmitting}
-    >
-      {isSubmitting ? "Procesando..." : "Crear Producto"}
-    </button>
+  type="button"
+  className="create-appointment__button"
+  onClick={async () => {
+    const formErrors = await validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      const camposFaltantes = Object.keys(formErrors).join(", ");
+      alert(`⚠️ Faltan completar los siguientes campos: ${camposFaltantes}`);
+    } else {
+      handleSubmit();
+    }
+  }}
+  disabled={isSubmitting}
+>
+  {isSubmitting ? "Procesando..." : "Crear Producto"}
+</button>
           </Form>
         )}
       </Formik>
