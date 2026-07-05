@@ -125,8 +125,8 @@ const CreateAppointment = () => {
           const errors = {};
           if (!values.name) {
             errors.name = 'El nombre del producto es obligatorio.';
-          } else if (values.name.length > 50) {
-            errors.name = 'El nombre no puede superar los 50 caracteres.';
+          } else if (values.name.length > 100) {
+            errors.name = 'El nombre no puede superar los 100 caracteres.';
           }
           if (!values.description) {
             errors.description = 'La descripción es obligatoria.';
@@ -198,7 +198,7 @@ const CreateAppointment = () => {
            <Form className="create-appointment__form">
             {/* Campos del formulario */}
             <div className="create-appointment__field">
-              <label htmlFor="name" className="create-appointment__label">Nombre del producto</label>
+              <label htmlFor="name" className="create-appointment__label" maxLength={100} >Nombre del producto</label>
               <Field type="text" name="name" id="name" className="create-appointment__input" />
               <ErrorMessage name="name" component="div" className="create-appointment__error" />
             </div>
