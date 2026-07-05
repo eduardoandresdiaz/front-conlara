@@ -146,9 +146,10 @@ const ListadoProductos = () => {
 
   <h2>{producto.name}</h2>
   <div className="price">
-  <span>
-    Precio: {formatPrice(producto.price, producto.expiresAt, producto.mostrarprecio)}
-  </span>
+  <span className="precioTexto">
+  Precio: {formatPrice(producto.price, producto.expiresAt, producto.mostrarprecio)}
+ </span>
+
   </div>
   <button
     className="meInteresaBoton"
