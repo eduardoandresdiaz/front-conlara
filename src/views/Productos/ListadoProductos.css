@@ -69,6 +69,7 @@
   border: 1px solid #000;
   margin: 0px 0px 0px 0px;;
   gap: 0;
+  margin-top: auto;
 }
 
 /* 🔑 Nombre justificado y máximo 35 caracteres */
@@ -87,11 +88,12 @@
   margin: 0px 0px 0px 0px;
 }
 
-.price { font-weight: bold; margin-top: 10px; font-size: 18px; }
+.price {
+   font-weight: bold;
+   font-size: 18px;
+    margin-top: auto; }
 
 .meInteresaBoton {
-  padding: 8px;
-  margin-top: 0;
   background: #007bff;
   color: #fff;
   border: none;
@@ -110,7 +112,7 @@
 
 .listadoProductos__details h2 {
   font-size: 13px;
-    margin: 0 0 10px;
+    
     max-width: 35ch;
   }
   
@@ -186,19 +188,19 @@
 
 
 
-.precioTexto {
-  margin: 0;                 /* todos los márgenes en 0 */
+.precioTexto {                /* todos los márgenes en 0 */
   font-family: Arial, sans-serif; /* tipografía (podés cambiarla) */
   font-size: 16px;           /* tamaño de letra */
   font-weight: bold;         /* opcional: negrita */
   color: #333;               /* color del texto */
+  
 }
 @media (max-width: 480px) {
   .listadoProductos__details {
     background-color: #007bff;
     width: 100%;
     max-width: 46%;
-    margin: 0;
+    margin-bottom: auto;
     padding: 0;
   }
 }
@@ -210,7 +212,7 @@
       gap: 4px !important; /* fuerza la separación */
       width: 100%;
       padding: 0;
-      margin: 0;
+      margin-bottom: auto;
     }
   }
   
@@ -218,7 +220,7 @@
   /* 3️⃣ DESKTOP → TRES COLUMNAS */
   @media (min-width: 768px) {
     .listadoProductos__list {
-      width: 40%;
+      width: 100%;
       display: flex;
       flex-wrap: wrap;
       gap: 0px;
