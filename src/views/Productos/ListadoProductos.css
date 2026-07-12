@@ -100,7 +100,7 @@
   cursor: pointer;
   border-radius: 5px;
   padding: 0;
-  margin-top: auto;
+  margin-top: 0;
 }
 .meInteresaBoton:hover { background: #0056b3; }
 

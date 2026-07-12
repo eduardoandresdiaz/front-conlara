@@ -219,8 +219,8 @@ const Register = () => {
   {/* Requisitos de contraseña */}
     <h1 className="register__title">Requisitos de la Clave</h1>
   <ul className="password__requirements">
-  <li style={{ color: values.password.length >= 6 ? "green" : "red" }}>
-    • Mínimo 6 caracteres
+  <li style={{ color: values.password.length >= 8 ? "green" : "red" }}>
+    • Mínimo 8 caracteres
   </li>
   <li style={{ color: /[A-Z]/.test(values.password) ? "green" : "red" }}>
     • Al menos una mayúscula
@@ -461,6 +461,7 @@ const Register = () => {
 };
 
 export default Register;
+
 
 
 
