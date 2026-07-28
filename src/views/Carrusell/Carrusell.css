@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ffae3b, #ffae3b);
+  background: linear-gradient(135deg, #e3f2df, #e3f2df);
   text-align: center;
   overflow: hidden;
 }
@@ -31,7 +31,7 @@
 
 /* Detalles del producto */
 .carrusell__details {
-  background: #ffae3b;
+  background: #e3f2df;
   border-radius: 12px;
   padding: 2rem;
   max-width: 600px;

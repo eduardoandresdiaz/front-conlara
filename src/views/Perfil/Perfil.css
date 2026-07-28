@@ -5,7 +5,7 @@
     align-items: center;
     min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-color: #ffae3b;
+    background-color: #e3f2df;
   }
   
   .perfil__title {
@@ -15,7 +15,7 @@
   }
   
   .perfil__form {
-    background-color: #fff84f;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

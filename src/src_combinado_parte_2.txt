@@ -122,7 +122,7 @@ html, body {
 
 body {
   line-height: 1.5;
-  background-color: #ffae3b;
+  background-color: #e3f2df;
   color: #000;
 }
 
@@ -163,7 +163,7 @@ body{
   height: 100%;
   margin: 0%;
   padding: 0%;
-  background-color: #ffae3b;
+  background-color: #e3f2df;
   
 
 }
