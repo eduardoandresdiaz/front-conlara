@@ -25,7 +25,7 @@
   padding: 15px;
   max-width: 400px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  background-color: #eceff3;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
@@ -93,7 +93,7 @@
 .listadoProductos__buscador input {
   padding: 10px;
   font-size: 1rem;
-  border: 2px solid #ccc;
+  border: 2px solid #4960e7;
   border-radius: 8px 0 0 8px;
   width: 60%;
   max-width: 400px;

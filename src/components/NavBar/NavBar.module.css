@@ -1,4 +1,5 @@
 /* Estilos del contenedor principal del navbar */
+
 .NavBarContainer {
   display: flex;
   align-items: center;
@@ -66,7 +67,7 @@
 .logoutButton, 
 .menuAppointmentButton {
   background-color: #007bff;
-  color: white;
+  color: rgb(255, 255, 255);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -133,6 +134,7 @@
 /* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
   .menuButton {
+    color: black;
     display: block; /* Se muestra en móviles */
     font-size: 2.5rem; /* Aumenta el tamaño del ícono */
     width: 57px; /* Área de clic más grande */
