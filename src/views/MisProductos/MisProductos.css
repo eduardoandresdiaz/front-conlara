@@ -32,7 +32,7 @@
 
 /* Estilo de cada tarjeta de producto */
 .listadoProductos__details {
-  border: 1px solid #ccc; /* Borde gris claro */
+  border: 2px solid #322ff8; /* Borde gris claro */
   border-radius: 8px; /* Esquinas redondeadas */
   padding: 15px; /* Espaciado interno */
   max-width: 400px; /* Ancho máximo de la tarjeta */
