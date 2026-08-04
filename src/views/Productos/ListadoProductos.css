@@ -242,6 +242,7 @@
     cursor: pointer;
     font-weight: 600;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: -36px
   }
   
   .telefonos_utiles:hover {
