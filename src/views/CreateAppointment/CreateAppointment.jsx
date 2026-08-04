@@ -27,7 +27,8 @@ const CreateAppointment = () => {
     { id: 15, name: "Herramientas y Construcción" },
     { id: 16, name: "Jardín y Exteriores" },
     { id: 17, name: "Ferretería" },
-    { id: 18, name: "Repuestos Automotor" },
+    { id: 18, name: "Repuestos y accesorios para el Automotor" },
+    { id: 19, name: "Repuestos y accesorios para Motos" },
   ];
   
 

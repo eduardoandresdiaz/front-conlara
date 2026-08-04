@@ -4,6 +4,7 @@
   font-family: Arial, sans-serif;
   max-width: 1200px; /* Limitar el ancho máximo del contenedor */
   margin: 0 auto; /* Centrar el contenedor horizontalmente */
+  margin-top: 27px;
 }
 
 /* Título centrado superior */

@@ -85,7 +85,7 @@
 }
 
 .listadoProductos__buscador {
-  display: flex;
+  display: block;
   justify-content: center;
   margin-bottom: 20px;
 }
@@ -99,6 +99,7 @@
   max-width: 400px;
   outline: none;
   background-color: aliceblue;
+  margin-top: 51px;
 }
 
 .listadoProductos__buscador button {

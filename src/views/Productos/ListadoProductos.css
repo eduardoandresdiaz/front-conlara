@@ -227,3 +227,86 @@
       justify-content: center;
     }
   }
+  .botones_superiores {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+  }
+  
+  .telefonos_utiles {
+    background-color: #007bff; /* Azul primario */
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .telefonos_utiles:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+    transform: scale(1.05);
+  }
+  
+  .telefonos_utiles:active {
+    background-color: #004080;
+    transform: scale(0.95);
+  }
+  /* Contenedor principal del carrusel */
+.swiper {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px 0;
+}
+
+/* Cada slide */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.swiper-slide:hover {
+  transform: scale(1.05);
+}
+
+/* Imágenes dentro del slide */
+.swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Botones de navegación */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #333;
+  background: rgba(255,255,255,0.8);
+  padding: 12px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(255,255,255,1);
+}
+
+/* Paginación (los puntitos) */
+.swiper-pagination-bullet {
+  background: rgba(0,0,0,0.3);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #333;
+}

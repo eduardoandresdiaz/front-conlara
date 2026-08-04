@@ -167,8 +167,8 @@ const ModifyProduct = () => {
                 <Field type="number" name="stock" id="stock" className="modify-product__input" />
                 <ErrorMessage name="stock" component="div" className="modify-product__error" />
               </div>
-              <div className="modify-product__field">
-  <label htmlFor="stockminimo" className="modify-product__label">Stock mínimo</label>
+                <div className="modify-product__field">
+               <label htmlFor="stockminimo" className="modify-product__label">Stock mínimo</label>
   <Field type="number" name="stockminimo" id="stockminimo" className="modify-product__input" />
   <ErrorMessage name="stockminimo" component="div" className="modify-product__error" />
 </div>

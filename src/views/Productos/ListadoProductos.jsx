@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import './ListadoProductos.css';
 import { useNavigate } from 'react-router-dom';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules"; // 👈 agregar Autoplay
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const ListadoProductos = () => {
   const [productos, setProductos] = useState([]);
@@ -105,10 +112,46 @@ const ListadoProductos = () => {
   };
   
 
+      
   return (
+    
     <div className="listadoProductos">
+      <div className='botones_superiores'>
+        <button className='telefonos_utiles'>Telefonos Utiles</button>
+        <button className='telefonos_utiles'>Guia de Servicios</button>
+      </div>
       {/* Buscador */}
       <form className="listadoProductos__buscador" onSubmit={handleSubmit}>
+         {/* Carrusel de imágenes */}
+<Swiper
+  spaceBetween={10}
+  slidesPerView={3}
+  navigation
+  pagination={{ clickable: true }}
+  autoplay={{
+    delay: 2000, // ⏱ tiempo en ms entre cada slide
+    disableOnInteraction: false, // sigue moviéndose aunque el usuario interactúe
+    pauseOnMouseEnter: true, // 👈 se detiene si pasás el mouse encima
+  }}
+  breakpoints={{
+    320: { slidesPerView: 1 },
+    640: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 }
+  }}
+  modules={[Navigation, Pagination, Autoplay]} // 👈 incluir Autoplay
+>
+  <SwiperSlide>
+    <img src="src/assets/media/publicidad/img1.png" alt="Producto 1" />
+  </SwiperSlide>
+  <SwiperSlide>
+    <img src="src/assets/media/publicidad/img3.png" alt="Producto 2" />
+  </SwiperSlide>
+  <SwiperSlide>
+    <img src="src/assets/media/publicidad/img3.png" alt="Producto 3" />
+  </SwiperSlide>
+</Swiper>
+
+        
         <input
           type="text"
           placeholder="Buscar productos..."
