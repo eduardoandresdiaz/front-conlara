@@ -235,6 +235,7 @@
   
   .telefonos_utiles {
     background-color: #007bff; /* Azul primario */
+    background: linear-gradient(0deg, black, #007bff);
     color: #fff;
     border: none;
     padding: 10px 18px;

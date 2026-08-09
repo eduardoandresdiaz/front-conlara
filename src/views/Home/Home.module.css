@@ -68,17 +68,46 @@ body {
   }
   
   .authButton {
-    margin-top: 111px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    margin-top: 150px;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  border-radius: 5px;
+  background: #007bff;
+  color: #fff;
+  z-index: 0;
+  width: 177px;
+  height: 46px;
+}
+
+.authButton::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(
+    #00f700,
+    #7c3aed,
+    #ec4899,
+    #00f700
+  );
+  animation: girar 2s linear infinite;
+  z-index: -2;
+}
+
+.authButton::after {
+  content: "";
+  position: absolute;
+  inset: 3px; /* grosor del borde */
+  background: linear-gradient(0deg, black, #007bff);
+  border-radius: 3px;
+  z-index: -1;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
   }
-  
-  .authButton:hover {
-    background-color: #0056b3;
+  to {
+    transform: rotate(360deg);
   }
-  
+}
