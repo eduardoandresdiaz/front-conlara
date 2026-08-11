@@ -94,7 +94,7 @@
   padding: 10px;
   font-size: 1rem;
   border: 2px solid #4960e7;
-  border-radius: 8px 0 0 8px;
+  border-radius: 65px;
   width: 60%;
   max-width: 400px;
   outline: none;
@@ -106,15 +106,17 @@
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
-  background-color: #007BFF;
+  background-color: transparent;
   color: white;
-  border-radius: 0 8px 8px 0;
+  border-radius: 65px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 12px;
+  margin-left: -75px;
 }
 
 .listadoProductos__buscador button:hover {
-  background-color: #0056b3;
+  background-color: transparent;
 }
 
 /* Título del perfil */
