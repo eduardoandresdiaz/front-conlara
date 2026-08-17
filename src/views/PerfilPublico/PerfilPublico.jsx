@@ -178,7 +178,7 @@ const formatPhone = (phone = '') => {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>Perfil de {usuario?.nickname}</title>
         <meta name="description" content={`Mira los productos publicados por ${usuario?.nickname}`} />
         <meta property="og:title" content={`Perfil de usuario: ${usuario?.nickname}`} />
@@ -186,7 +186,29 @@ const formatPhone = (phone = '') => {
         <meta property="og:image" content={usuario?.imgUrlUser || FALLBACK_USER_IMG} />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="website" />
-      </Helmet>
+      </Helmet> */}
+      <Helmet>
+  <title>Perfil de {formatNickname(usuario?.nickname)}</title>
+  <meta name="description" content={`Mira los productos publicados por ${formatNickname(usuario?.nickname)}`} />
+
+  {/* Open Graph */}
+  <meta property="og:title" content={`Perfil de usuario: ${formatNickname(usuario?.nickname)}`} />
+  <meta property="og:description" content={`Mira los productos publicados por ${formatNickname(usuario?.nickname)}`} />
+  <meta property="og:image" content={usuario?.imgUrlUser || FALLBACK_USER_IMG} />
+  <meta property="og:image:secure_url" content={usuario?.imgUrlUser || FALLBACK_USER_IMG} />
+  <meta property="og:url" content={currentUrl} />
+  <meta property="og:type" content="website" />
+
+  {/* Twitter card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={`Perfil de ${formatNickname(usuario?.nickname)}`} />
+  <meta name="twitter:description" content={`Mira los productos publicados por ${formatNickname(usuario?.nickname)}`} />
+  <meta name="twitter:image" content={usuario?.imgUrlUser || FALLBACK_USER_IMG} />
+
+  {/* Opcional: app id si tenés una app de Facebook */}
+  {/* <meta property="fb:app_id" content="TU_FB_APP_ID" /> */}
+</Helmet>
+
 
       <div className="listadoProductos">
         <h1 style={{ textAlign: 'center' }}>{formatNickname(usuario?.nickname)}</h1>
