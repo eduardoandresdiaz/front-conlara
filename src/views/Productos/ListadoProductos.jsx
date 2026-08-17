@@ -117,9 +117,16 @@ const ListadoProductos = () => {
     
     <div className="listadoProductos">
       <div className='botones_superiores'>
-        <button className='telefonos_utiles'>Telefonos Utiles</button>
-        <button className='telefonos_utiles'>Guia de Servicios</button>
-      </div>
+  <a 
+    href="https://conlara.com.ar/InfoLaToma" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className='telefonos_utiles'
+  >
+    Informacion Util
+  </a>
+  <button className='telefonos_utiles'>Guia de Servicios</button>
+</div>
       {/* Buscador */}
       <form className="listadoProductos__buscador" onSubmit={handleSubmit}>
          {/* Carrusel de imágenes */}

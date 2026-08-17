@@ -17,6 +17,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { useEffect } from "react";
 import PerfilPublico from "./views/PerfilPublico/PerfilPublico";
 import Historia from "./views/Historia/Historia";
+import InfoLaToma from "./views/InfoLaToma/InfoLaToma";
 import Carrusell from "./views/Carrusell/Carrusell";
 import ListadoUsuarios from "./views/Ranger0750/ListadoUsuarios";
 
@@ -50,6 +51,7 @@ function App() {
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/:nickname" element={<PerfilPublico />} />
           <Route path="/historia" element={<Historia />} />
+          <Route path="/infoLaToma" element={<InfoLaToma />} />
           <Route path="/carrusel" element={<Carrusell />} />
           <Route path="/x28x" element={<ListadoUsuarios />} />
           {/* <Route path="/perfil/:nickname" element={<PerfilPublico />} /> */}

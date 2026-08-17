@@ -1,0 +1,47 @@
+.infoUtil {
+    max-width: 600px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .infoUtil h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .infoUtil ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .infoUtil li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+  
+  .infoUtil a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .infoUtil a:hover {
+    text-decoration: underline;
+  }
+  
+  .btnHistoria {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .btnHistoria:hover {
+    background: #0056b3;
+  }
+  
