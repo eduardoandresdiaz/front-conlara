@@ -177,3 +177,18 @@
   background-color: #0f5dcf;
 }
 
+.perfilPublico__contacto {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.perfilPublico__contacto a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.perfilPublico__contacto a:hover {
+  text-decoration: underline;
+}
