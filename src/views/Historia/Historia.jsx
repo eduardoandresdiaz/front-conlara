@@ -12,8 +12,17 @@ function Historia() {
         rel="noopener noreferrer"
         className="historia-button"
       >
-        Ver video
+        Ver video Capitulo 1 "Los Cesares" La llegada de los Españoles
       </a>
+      <a
+        href="https://www.facebook.com/share/v/19LXhJBsJ3/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="historia-button"
+      >
+        El Origen del Marmol Onix
+      </a>
+      
       
     </div>
   );
