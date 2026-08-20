@@ -1,235 +1,238 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #fff9c4; /* amarillo claro */
-    margin: 0;
-    padding: 0;
-}
-
-/* Contenedor principal */
-.detallesProducto {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fce40c;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* Encabezado principal */
+/* Detalles.css - estilo inspirado en listadoProductos */
 .encabezadoConlara {
     text-align: center;
-    padding: 20px 0;
-}
-
-.detallesProducto__tituloPrincipal {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #222;
-    margin-bottom: 0.5rem;
-}
-
-.detallesProducto__subtitulo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #444;
-    margin-bottom: 20px;
-}
-
-/* Contenido del producto */
-.detallesProducto__contenedor {
-    text-align: center;
-}
-
-.detallesProducto__titulo {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.detallesProducto__informacion {
-    font-size: 1.2rem;
-    color: #555;
-    margin: 10px 0;
-}
-
-.detallesProducto__etiqueta {
-    font-weight: bold;
-    color: #222;
-}
-
-.detallesProducto__imagen {
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    margin-top: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Botones generales */
-.detallesProducto__boton {
-    background-color: #9dff00;
-    color: rgb(24, 22, 22);
-    padding: 12px 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    display: inline-block;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    margin: 10px;
-}
-
-.detallesProducto__boton:hover {
-    background-color: #96cc00;
-    transform: translateY(-3px);
-}
-
-/* Botón específico de comprar */
-.detallesProducto__botones {
-    margin: 20px 0;
-}
-
-/* Compartir sección */
-.detallesProducto__compartir {
-    margin-top: 30px;
-    text-align: center;
-    padding: 15px;
-    background-color: #f5f5f5;
-    border-radius: 10px;
-}
-
-.detallesProducto__compartir h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.botonesCompartir {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-/* Botones compartir específicos */
-.detallesProducto__boton.compartir {
-    padding: 10px 15px;
-    font-size: 1rem;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.detallesProducto__boton.compartir.facebook {
-    background: #1877f2;
-}
-
-.detallesProducto__boton.compartir.facebook:hover {
-    background: #1258b4;
-    transform: translateY(-3px);
-}
-
-.detallesProducto__boton.compartir.whatsapp {
-    background: #25d366;
-}
-
-.detallesProducto__boton.compartir.whatsapp:hover {
-    background: #1c9e50;
-    transform: translateY(-3px);
-}
-
-/* Botón copiar enlace */
-.detallesProducto__copiar button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    margin-top: 10px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.detallesProducto__copiar button:hover {
-    background-color: #0056b3;
-    transform: translateY(-3px);
-}
-
-/* Botón "mirá más productos" */
-.boton-regresar-contenedor {
-    text-align: center;
-    margin: 30px 0;
-}
-
-/* Contacto móvil */
-.detallesProducto__accionesMovil {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-/* Mensaje de error */
-.error-container {
-    background-color: #ffe0e0;
-    padding: 20px;
-    border-radius: 8px;
-    color: #c00;
-    margin: 20px;
-}
-
-/* Spinner de carga */
-.loading-spinner {
-    text-align: center;
-    padding: 50px;
-    font-size: 1.2rem;
-    color: #555;
-}
-
-/* Responsividad */
-@media (max-width: 600px) {
-    .detallesProducto {
-        width: 90%;
-        padding: 15px;
-    }
-
-    .detallesProducto__titulo {
-        font-size: 1.6rem;
-    }
-
-    .detallesProducto__informacion {
-        font-size: 1rem;
-    }
-
-    .detallesProducto__boton {
-        width: 100%;
-        text-align: center;
-    }
-
-    .detallesProducto__imagen {
-        max-width: 100%;
-    }
-}
-.volver-atras {
-    background-color: #ccc;
-    color: #222;
-    margin-bottom: 20px;
-    padding: 10px 20px;
+    padding: 18px 10px;
+    background: linear-gradient(90deg, #3f42e6 0%, #4960e7 100%);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   }
   
-  .volver-atras:hover {
-    background-color: #aaa;
+  .detallesProducto {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #222;
+    max-width: 1100px;
+    margin: 20px auto;
+  }
+  
+  .detallesProducto__tituloPrincipal {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+  }
+  
+  .detallesProducto__subtitulo {
+    margin: 6px 0 0;
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+  
+  /* Contenedor principal */
+  .detallesProducto__contenedor {
+    border: 2px solid #3f42e6;
+    border-radius: 10px;
+    padding: 18px;
+    background-color: #eceff3;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  }
+  
+  /* Volver atras */
+  .detallesProducto__boton.volver-atras {
+    background: transparent;
+    border: 2px solid #3f42e6;
+    color: #3f42e6;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  
+  /* Título y descripción */
+  .detallesProducto__titulo {
+    font-size: 1.6rem;
+    margin: 6px 0 12px;
+    font-weight: 800;
+    color: #0f1a3a;
+  }
+  
+  .detallesProducto__informacion {
+    font-size: 1.05rem;
+    margin: 8px 0;
+    line-height: 1.4;
+  }
+  
+  .detallesProducto__etiqueta {
+    font-weight: 800;
+    color: #3f42e6;
+    margin-right: 6px;
+  }
+  
+  /* Precio */
+  .detallesProducto__informacion .precio {
+    font-weight: 800;
+    color: #0b3a66;
+  }
+  
+  /* Imagen */
+  .detallesProducto__imagen {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin: 14px auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  
+  /* Botones principales */
+  .detallesProducto__botones {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .detallesProducto__boton {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.2s ease, transform 0.12s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .detallesProducto__boton:hover {
+    background-color: #0056b3;
     transform: translateY(-2px);
+  }
+  
+  /* Contacto */
+  .detallesProducto__contacto {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(63,66,230,0.06);
+    text-align: center;
+    font-size: 1rem;
+  }
+  
+  .detallesProducto__contacto p {
+    margin: 6px 0;
+  }
+  
+  /* Acciones móvil (llamar / whatsapp) */
+  .detallesProducto__accionesMovil {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .detallesProducto__accionesMovil .detallesProducto__boton {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+  
+  /* Compartir */
+  .detallesProducto__compartir {
+    margin-top: 18px;
+    text-align: center;
+  }
+  
+  .detallesProducto__compartir h3 {
+    margin-bottom: 8px;
+    color: #3f42e6;
+  }
+  
+  .detallesProducto__boton.compartir.facebook {
+    background-color: #1877f2;
+  }
+  
+  .detallesProducto__boton.compartir.whatsapp {
+    background-color: #25D366;
+    color: #fff;
+  }
+  
+  /* Copiar enlace */
+  .detallesProducto__copiar {
+    margin-top: 10px;
+  }
+  
+  /* Error y loading */
+  .error-container {
+    text-align: center;
+    margin: 18px 0;
+  }
+  
+  .error-message {
+    color: #c0392b;
+    font-weight: 800;
+  }
+  
+  .loading-spinner {
+    text-align: center;
+    padding: 30px 0;
+    color: #555;
+  }
+  
+  /* Botón regresar al listado */
+  .boton-regresar-contenedor {
+    display: flex;
+    justify-content: center;
+    margin: 22px 0 40px;
+  }
+  
+  /* Responsive */
+  @media (min-width: 900px) {
+    .detallesProducto__contenedor {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 20px;
+      align-items: start;
+    }
+  
+    .detallesProducto__imagen {
+      margin: 0;
+    }
+  
+    .detallesProducto__botones {
+      justify-content: flex-start;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .detallesProducto {
+      padding: 14px;
+    }
+  
+    .detallesProducto__titulo {
+      font-size: 1.4rem;
+    }
+  
+    .detallesProducto__imagen {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .detallesProducto__boton {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .detallesProducto__contenedor {
+      grid-template-columns: 1fr;
+    }
   }
   

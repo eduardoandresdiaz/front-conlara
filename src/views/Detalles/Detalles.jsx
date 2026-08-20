@@ -66,11 +66,19 @@ const DetallesProducto = () => {
       .catch(() => alert("Hubo un error al copiar el enlace"));
   };
 
+  // Función de precio integrada en el mismo archivo
+  const formatPrice = (price, expiresAt, mostrarprecio = true) => {
+    if (mostrarprecio === false) return "Consultar";
+    if (expiresAt && new Date(expiresAt) < new Date()) return "Consultar";
+    const validPrice = isNaN(price) ? 0 : parseFloat(price);
+    return validPrice === 1 ? "Consultar" : `$${validPrice.toFixed(2)}`;
+  };
+
   return (
     <>
       <div className="encabezadoConlara">
         <h1 className="detallesProducto__tituloPrincipal">CONLARA.COM.AR</h1>
-        <h2 className="detallesProducto__subtitulo">Compra y Vende en El Valle Del Conlara</h2>
+        <h2 className="detallesProducto__subtitulo"></h2>
       </div>
 
       <div className="detallesProducto">
@@ -125,12 +133,7 @@ const DetallesProducto = () => {
             </p>
             <p className="detallesProducto__informacion">
               <span className="detallesProducto__etiqueta">Precio: </span>
-              {Number(producto.price) === 1 || !producto.price
-                ? "Consultar precio"
-                : `$${Number(producto.price).toLocaleString("es-AR", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}`}
+              {formatPrice(producto.price, producto.expiresAt, producto.mostrarprecio)}
             </p>
 
             <img
@@ -217,6 +220,7 @@ const DetallesProducto = () => {
 };
 
 export default DetallesProducto;
+
 
 // import { useEffect, useState } from "react";
 // import { useParams, useNavigate } from "react-router-dom";
