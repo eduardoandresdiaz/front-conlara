@@ -53,6 +53,7 @@ body {
     justify-content: center;
     text-align: center;
     padding: 0px;
+    margin-top: 151px;
   }
   
   .title {
@@ -110,4 +111,7 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+.styles.homeContainer {
+  margin-top: 0px;
 }

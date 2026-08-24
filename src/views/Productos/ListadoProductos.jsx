@@ -125,7 +125,7 @@ const ListadoProductos = () => {
   >
     Informacion Util
   </a>
-  <button className='telefonos_utiles'>Guia de Servicios</button>
+  <button className='telefonos_utiles' onClick={() => navigate('/servicios')}>Guia de Servicios</button>
 </div>
       {/* Buscador */}
       <form className="listadoProductos__buscador" onSubmit={handleSubmit}>
@@ -220,3 +220,4 @@ const ListadoProductos = () => {
 };
 
 export default ListadoProductos;
+// onClick={() => navigate('/servicios')}

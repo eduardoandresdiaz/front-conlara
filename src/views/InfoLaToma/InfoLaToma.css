@@ -1,3 +1,4 @@
+/* Base existente (tu CSS) */
 .infoUtil {
   max-width: 600px;
   margin: auto;
@@ -20,6 +21,7 @@
   padding: 10px;
   border-radius: 8px;
   background: #f9f9f9;
+  margin-bottom: 12px;
 }
 
 .infoUtil a {
@@ -44,4 +46,115 @@
 
 .btnHistoria:hover {
   background: #0056b3;
+}
+
+/* Nuevos estilos para la sección Farmacia de turno */
+.farmaciaTurno {
+  border: 2px solid #e0e7ff;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.farmaciaTurno h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.15rem;
+  color: #0b5ed7;
+}
+
+.farmaciaTurno p {
+  margin: 6px 0;
+  line-height: 1.35;
+}
+
+/* Bloque con dirección, teléfono y mapa */
+.farmaciaInfo {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #eef2ff;
+}
+
+.farmaciaInfo p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.telefonoLink {
+  color: #0b5ed7;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.telefonoLink:hover {
+  text-decoration: underline;
+}
+
+/* Nota especial cuando una farmacia cubre por cierre */
+.notaTurno {
+  margin-top: 8px;
+  padding: 8px;
+  background: #fff8e6;
+  border: 1px solid #ffe8a8;
+  border-radius: 6px;
+  color: #7a4b00;
+  font-size: 0.95rem;
+}
+
+/* Fecha del turno */
+.fechaTurno {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Centrado del botón de historia */
+.centerLink {
+  text-align: center;
+  margin: 14px 0;
+}
+
+/* Ajustes para la lista de lugares (mantener consistencia) */
+.lugaresList .lugarItem {
+  display: block;
+}
+
+.lugarNombre {
+  margin: 0 0 6px 0;
+  font-size: 1rem;
+  color: #222;
+}
+
+/* Bloque de teléfonos dentro de cada lugar */
+.telefonoBlock {
+  margin: 6px 0;
+}
+
+.telefonoColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.telefonoFila {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+/* Responsive pequeño */
+@media (max-width: 420px) {
+  .infoUtil {
+    padding: 12px;
+  }
+  .farmaciaTurno h2 {
+    font-size: 1rem;
+  }
+  .farmaciaInfo p, .telefonoFila {
+    font-size: 0.9rem;
+  }
 }

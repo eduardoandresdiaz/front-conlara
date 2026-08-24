@@ -1,0 +1,26 @@
+body {
+    color: brown;
+    margin-bottom: 100px;
+}
+
+.listadoProductosServicios {
+    color: #000;
+    padding-top: 100px;
+}
+
+.listadoProductos__buscador {
+    display: block;
+    justify-content: center;
+    
+}
+.listadoProductos__list2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding-top: 28px;
+
+}
+.listadoProductos__servicios{
+    margin-top: 10000px;
+}

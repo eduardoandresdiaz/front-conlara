@@ -20,6 +20,7 @@ import Historia from "./views/Historia/Historia";
 import InfoLaToma from "./views/InfoLaToma/InfoLaToma";
 import Carrusell from "./views/Carrusell/Carrusell";
 import ListadoUsuarios from "./views/Ranger0750/ListadoUsuarios";
+import Servicios from "./views/Servicios/Servicios";
 
 function App() {
   const location = useLocation();
@@ -45,6 +46,7 @@ function App() {
           <Route path="/ViewAppointment" element={<ViewAppointment />} />
           <Route path="/CancelAppointment" element={<CancelAppointment />} />
           <Route path="/productos" element={<ListadoProductos />} />
+          <Route path="/servicios" element={<Servicios />} />
           <Route path="/ModifyProduct/:id" element={<ModifyProduct />} />
           <Route path="/productos/:id" element={<DetallesProducto />} />
           <Route path="/productos/share/:id" element={<DetallesProducto />} />
