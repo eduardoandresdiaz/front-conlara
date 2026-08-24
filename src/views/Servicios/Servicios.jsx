@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './servicios.css';
+import './Servicios.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from "swiper/react";
