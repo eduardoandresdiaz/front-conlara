@@ -9,13 +9,19 @@
   font-family: 'Arial', sans-serif;
 }
 
+
 .login__title {
   font-size: 2rem;
   color: #333;
-  margin-bottom: 20px; /* Espacio entre el título y el formulario */
+  margin-top: -300px; /* Espacio entre el título y el formulario */
   text-align: center; /* Centra horizontalmente el título */
 }
 
+@media (max-width: 600px) {
+  .login__title {
+    margin-top: -654px;
+  }
+}
 .login__form {
   background-color: #ffffff;
   padding: 20px;
@@ -24,6 +30,11 @@
   width: 300px;
   display: flex;
   flex-direction: column;
+}
+@media (max-width: 600px) {
+  .login__form {
+      width: 90%;
+  }
 }
 
 .login__field {
@@ -71,8 +82,3 @@
   background-color: #0056b3;
 }
 
-@media (max-width: 600px) {
-  .login__form {
-      width: 90%;
-  }
-}

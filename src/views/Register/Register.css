@@ -24,7 +24,7 @@
   width: 350px;
   display: flex;
   flex-direction: column;
-  margin-top: 458px;
+  margin-top: 540px;
 }
 
 .register__field {
@@ -104,6 +104,7 @@
 @media (max-width: 600px) {
   .register__form {
     width: 90%;
+    margin-top: 269px;
   }
 }
 .register {

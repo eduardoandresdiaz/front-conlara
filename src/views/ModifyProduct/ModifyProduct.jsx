@@ -111,9 +111,17 @@ const ModifyProduct = () => {
             if (!values.price || isNaN(values.price) || values.price <= 0) {
               errors.price = 'El precio debe ser un número positivo.';
             }
-            if (!values.stock || !Number.isInteger(Number(values.stock)) || values.stock < 0) {
-              errors.stock = 'La cantidad debe ser un número entero positivo.';
-            }
+            const stockNum = Number(values.stock);
+
+if (
+  values.stock === '' ||
+  values.stock == null ||
+  !Number.isInteger(stockNum) ||
+  stockNum < 0
+) {
+  errors.stock = 'La cantidad debe ser un número entero no negativo.';
+}
+
             if (!values.category || !/^[0-9a-fA-F-]{36}$/.test(values.category)) {
               errors.category = 'La categoría es obligatoria y debe ser un UUID válido.';
             }

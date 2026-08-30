@@ -11,9 +11,11 @@
 .tituloSuperior {
   text-align: center;
   font-size: 2rem; /* Tamaño del título */
-  margin-bottom: 20px; /* Espacio inferior */
+  margin-bottom: 0px; /* Espacio inferior */
   color: #333; /* Color oscuro para el texto */
   font-weight: bold; /* Negrita */
+  margin-bottom: 0%;
+  margin-top: -79px;
 }
 
 /* Mensaje de error */
@@ -202,6 +204,7 @@
 }
 .filtroBoton {
   margin-left: 10px;
+  margin-bottom: 3px;
   padding: 8px 14px;
   background-color: #007bff; /* azul */
   color: white;
@@ -231,3 +234,23 @@
   line-height: 0.75;     /* reduce interlineado un 50% */
   margin: 5px 0;         /* opcional: espacio reducido */
 }
+.buscadorContainer {
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #4960e7;
+  border-radius: 65px;
+  width: 60%;
+  max-width: 400px;
+  max-height: 40px;
+  min-height: 40px;
+  outline: none;
+  background-color: aliceblue;
+  margin-top: 10px;
+  margin-bottom: 3px;
+}
+.Lupa{
+  margin-bottom: 10px;
+  margin-top: -18px;
+  margin-left: 191px;
+}
+
