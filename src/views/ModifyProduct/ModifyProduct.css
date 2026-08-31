@@ -1,90 +1,142 @@
-/* BEM Naming Conventions */
+/* ModifyProduct.css - listo para copiar y pegar */
+
+/* Box sizing global */
+:root {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Contenedor principal: permitir scroll hasta el final */
 .modify-product {
-    margin-top: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #fff84d; /* Fondo amarillo */
-    font-family: 'Arial', sans-serif;
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* no centrar verticalmente para permitir scroll */
+  align-items: stretch;
+  min-height: 100vh;
+  background-color: #fff84d; /* Fondo amarillo */
+  font-family: 'Arial', sans-serif;
+  padding: 20px 16px 80px; /* padding-bottom extra para que el botón quede accesible */
+  box-sizing: border-box;
+}
+
+/* Título */
+.modify-product__title {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Formulario: ancho máximo, centrado horizontal, permite crecer verticalmente */
+.modify-product__form {
+  background-color: #fff2cc; /* fondo claro */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 24px; /* espacio inferior para scroll */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* Campo (label + input) */
+.modify-product__field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label */
+.modify-product__label {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* Inputs y select */
+.modify-product__input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f3f3f3;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.modify-product__input:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.08);
+}
+
+/* Error */
+.modify-product__error {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-top: 6px;
+}
+
+/* Botón */
+.modify-product__button {
+  padding: 10px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.08s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modify-product__button:hover {
+  background-color: #0056b3;
+}
+
+.modify-product__button:active {
+  transform: translateY(1px);
+}
+
+/* Imagen actual */
+.modify-product__image {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  object-fit: cover;
+}
+
+/* File input estilo */
+.modify-product__field input[type="file"] {
+  padding: 6px 8px;
+  background-color: transparent;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .modify-product {
+    margin-top: 80px;
+    padding: 16px 12px 120px; /* más padding-bottom en móvil para asegurar visibilidad del botón */
   }
-  
-  .modify-product__title {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
+
   .modify-product__form {
-    background-color: #e3f2df; /* Fondo naranja */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .modify-product__field {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .modify-product__label {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 5px;
-  }
-  
-  .modify-product__input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: rgb(243, 243, 243);
-  }
-  
-  .modify-product__input:focus {
-    outline: none;
-    border-color: #007BFF;
-  }
-  
-  .modify-product__error {
-    color: red;
-    font-size: 0.875rem;
-    margin-top: 5px;
-  }
-  
-  .modify-product__button {
-    padding: 10px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #007BFF; /* Azul principal */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .modify-product__button:hover {
-    background-color: #0056b3; /* Azul más oscuro */
-  }
-  
-  .modify-product__image {
     max-width: 100%;
-    border-radius: 6px;
-    margin-top: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding: 16px;
   }
-  
-  @media (max-width: 600px) {
-    .modify-product__form {
-      width: 90%;
-    }
+
+  .modify-product__title {
+    font-size: 1.5rem;
   }
-  
+}

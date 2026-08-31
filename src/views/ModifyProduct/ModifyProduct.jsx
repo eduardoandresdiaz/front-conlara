@@ -74,29 +74,29 @@ const ModifyProduct = () => {
         formData,
         { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
       );
-
+  
       if (selectedFile) {
         const formDataImage = new FormData();
         formDataImage.append('file', selectedFile);
-
+  
         await axios.post(
           `https://ecommerce-9558.onrender.com/file-upload/uploadImage/${id}`,
           formDataImage,
           { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } }
         );
         alert('Producto modificado y nueva imagen subida exitosamente.');
-        setTimeout(() => navigate('/'), 1000);
       } else {
         alert('Producto modificado exitosamente (sin cambiar imagen).');
-        setTimeout(() => navigate('/'), 1000);
       }
-
-      navigate('/mis-productos');
+  
+      // Volver a la página anterior en el historial
+      navigate(-1);
     } catch (error) {
       console.error('Error al modificar el producto:', error);
       alert(error.response?.data?.message || 'Ocurrió un error inesperado.');
     }
   };
+  
 
   return (
     <div className="modify-product">
