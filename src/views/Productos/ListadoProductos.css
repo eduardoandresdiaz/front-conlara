@@ -1,4 +1,4 @@
-/* 1️⃣ ESTILOS COMUNES */
+/* 📦 Contenedor principal */
 .listadoProductos {
   display: flex;
   flex-direction: column;
@@ -6,6 +6,7 @@
   padding: 1px;
 }
 
+/* 🔍 Buscador */
 .listadoProductos__buscador {
   position: fixed;
   top: 43px;
@@ -18,36 +19,57 @@
   background: transparent;
   border: none;
 }
-
 .listadoProductos__buscador input,
 .listadoProductos__buscador button {
-  padding: 8px;
-  font-size: 16px;
+  padding: 6px;
+  font-size: 14px;
 }
-
 .listadoProductos__buscador button {
   background: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  transition: background 0.3s ease;
 }
 .listadoProductos__buscador button:hover { background: #0056b3; }
 
-.listadoProductos__error { color: red; margin-bottom: 10px; }
+/* ⚠️ Error */
+.listadoProductos__error {
+  color: red;
+  margin-bottom: 10px;
+}
 
+/* 📋 Lista de productos */
 .listadoProductos__list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0px;
   justify-content: center;
+  gap: 0;
   width: 100%;
   box-sizing: border-box;
-  margin: 0%;
   padding: 0;
 }
+@media (max-width: 767px) {
+  .listadoProductos__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px !important;
+  }
+}
+@media (min-width: 768px) {
+  .listadoProductos__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
 
+/* 🟨 Detalles de producto */
 .listadoProductos__details {
+  flex: 1 1 30%;
+  max-width: 30%;
+  min-height: 320px;
   border: 5px solid #0e75e3;
   background: #ffff99;
   border-radius: 8px;
@@ -56,43 +78,77 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  font-size: 16px;
   margin: 0;
   padding: 0;
   gap: 0;
-  width: 100%;
+}
+@media (max-width: 768px) {
+  .listadoProductos__details {
+    max-width: 46%;
+    background-color: #007bff;
+    margin-bottom: -5px;
+  }
+  @media (max-width: 480px) {
+    .listadoProductos__details {
+        max-width: 100%;
+        margin-top: -23px;
+        margin-left: -9px;
+        padding: 0px;
+    }
+}
 }
 
+/* 🖼️ Imagen dentro de detalles */
 .listadoProductos__details img {
   width: 100%;
   height: auto;
   object-fit: cover;
   border: 1px solid #000;
-  margin: 0px 0px 0px 0px;;
-  gap: 0;
-  margin-top: 200px;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .listadoProductos__details img {
+    width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid #000;
+  margin-top: 0px;
+  margin-left: 0px;
+  }
+  @media (max-width: 480px) {
+    .listadoProductos__details {
+        max-width: 100%;
+        height: auto;
+  object-fit: cover;
+  border: 1px solid #000;
+  margin-top: 0px;
+  margin-left: 0px;
+    }
+}
 }
 
-/* 🔑 Nombre justificado y máximo 35 caracteres */
+/* 📝 Título del producto */
 .listadoProductos__details h2 {
-  gap: 0;
-  font-size: 14px;
-  margin: 0 0 12px;
-  padding: 0 6px;
+  font-size: 13px;
   line-height: 1.4;
   text-align: justify;
   text-justify: inter-word;
-  white-space: normal;
+  max-width: 35ch;
+  margin: 0 0 12px;
+  padding: 0 6px;
   overflow-wrap: break-word;
   word-break: break-word;
-  max-width: 35ch;
-  margin: 0px 0px 0px 0px;
 }
 
+/* 💲 Precio */
 .price {
-   font-weight: bold;
-   font-size: 18px;
-    margin-top: auto; }
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: auto;
+}
 
+/* 🔘 Botón "Me interesa" */
 .meInteresaBoton {
   background: #007bff;
   color: #fff;
@@ -101,41 +157,11 @@
   border-radius: 5px;
   padding: 0;
   margin-top: 0;
+  transition: background 0.3s ease;
 }
 .meInteresaBoton:hover { background: #0056b3; }
 
-
-
-
-
-.listadoProductos__details { min-height: 300px; font-size: 14px; }
-
-.listadoProductos__details h2 {
-  font-size: 13px;
-    
-    max-width: 35ch;
-  }
-  
-  .price { font-size: 16px; }
-  
-  .listadoProductos__buscador input,
-  .listadoProductos__buscador button {
-    font-size: 14px;
-    padding: 6px;
-  }
-
-
-
-.listadoProductos__details {
-  flex: 1 1 30%;
-  max-width: 30%;
-  min-height: 320px;
-  font-size: 16px;
-  gap: 0;
-}
-
-
-/* 4️⃣ MODAL */
+/* 🪟 Modal */
 .modal {
   position: fixed;
   top: 0; left: 0;
@@ -144,7 +170,6 @@
   display: flex; justify-content: center; align-items: center;
   z-index: 2000;
 }
-
 .modal form {
   background: #fff;
   padding: 20px 30px;
@@ -153,14 +178,11 @@
   width: 300px;
   text-align: center;
 }
-
 .modal h3 { margin-bottom: 15px; font-size: 1.2rem; color: #333; }
-
 .modal input[type="password"] {
   width: 100%; padding: 10px; margin-bottom: 15px;
   border: 1px solid #ccc; border-radius: 6px; font-size: 1rem;
 }
-
 .modal button {
   padding: 10px 15px; margin: 5px;
   border: none; border-radius: 6px; cursor: pointer;
@@ -171,7 +193,7 @@
 .modal button[type="button"] { background: #f44336; color: #fff; }
 .modal button[type="button"]:hover { background: #d32f2f; }
 
-/* Overlay OFERTA */
+/* 🏷️ Overlay oferta */
 .ofertaOverlay {
   position: absolute; top: 10px; left: 10px;
   background: #ffcc00; color: #000; font-weight: bold;
@@ -179,92 +201,42 @@
   border: 2px solid #000; z-index: 2;
   animation: pulse 1.5s infinite;
 }
-
 @keyframes pulse {
   0% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.1); opacity: 0.8; }
   100% { transform: scale(1); opacity: 1; }
 }
 
-
-
-.precioTexto {                /* todos los márgenes en 0 */
-  font-family: Arial, sans-serif; /* tipografía (podés cambiarla) */
-  font-size: 16px;           /* tamaño de letra */
-  font-weight: bold;         /* opcional: negrita */
-  color: #333;               /* color del texto */
-  
+/* 🔝 Botones superiores */
+.botones_superiores {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
 }
-@media (max-width: 480px) {
-  .listadoProductos__details {
-    background-color: #007bff;
-    width: 100%;
-    max-width: 46%;
-    margin-bottom: auto;
-    padding: 0;
-  }
-}
-  /* 2️⃣ MÓVIL → DOS COLUMNAS */
-  @media (max-width: 767px) {
-    .listadoProductos__list {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 4px !important; /* fuerza la separación */
-      width: 100%;
-      padding: 0;
-      margin-bottom: auto;
-    }
-  }
-  
 
-  /* 3️⃣ DESKTOP → TRES COLUMNAS */
-  @media (min-width: 768px) {
-    .listadoProductos__list {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0px;
-      justify-content: center;
-    }
-  }
-  .botones_superiores {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 1rem;
-  }
-  
-  .telefonos_utiles {
-    background-color: #007bff; /* Azul primario */
-    background: linear-gradient(0deg, black, #007bff);
-    color: #fff;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: -36px;
-    margin-right: 10px;
-  }
-  
-  .telefonos_utiles:hover {
-    background-color: #0056b3; /* Azul más oscuro */
-    transform: scale(1.05);
-  }
-  
-  .telefonos_utiles:active {
-    background-color: #004080;
-    transform: scale(0.95);
-  }
-  /* Contenedor principal del carrusel */
+/* 📞 Botón teléfonos útiles */
+.telefonos_utiles {
+  background: linear-gradient(0deg, black, #007bff);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: -36px;
+  margin-right: 10px;
+}
+.telefonos_utiles:hover { background-color: #0056b3; transform: scale(1.05); }
+.telefonos_utiles:active { background-color: #004080; transform: scale(0.95); }
+
+/* 🎠 Carrusel Swiper */
 .swiper {
   width: 100%;
   max-width: 900px;
   margin: auto;
   padding: 20px 0;
 }
-
-/* Cada slide */
 .swiper-slide {
   display: flex;
   justify-content: center;
@@ -275,20 +247,13 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   transition: transform 0.3s ease;
 }
-
-.swiper-slide:hover {
-  transform: scale(1.05);
-}
-
-/* Imágenes dentro del slide */
+.swiper-slide:hover { transform: scale(1.05); }
 .swiper-slide img {
   width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 10px;
 }
-
-/* Botones de navegación */
 .swiper-button-next,
 .swiper-button-prev {
   color: #333;
@@ -298,18 +263,10 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   transition: background 0.3s;
 }
-
 .swiper-button-next:hover,
-.swiper-button-prev:hover {
-  background: rgba(255,255,255,1);
-}
-
-/* Paginación (los puntitos) */
+.swiper-button-prev:hover { background: rgba(255,255,255,1); }
 .swiper-pagination-bullet {
   background: rgba(0,0,0,0.3);
   opacity: 1;
 }
-
-.swiper-pagination-bullet-active {
-  background: #333;
-}
+.swiper-pagination-bullet-active { background: #333; }

@@ -4,7 +4,7 @@
   flex-direction: column; /* Coloca el título sobre el formulario */
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 43vh;
   
   font-family: 'Arial', sans-serif;
 }
@@ -21,6 +21,13 @@
   .login__title {
     margin-top: -654px;
   }
+  
+}
+@media (max-width: 390px) {
+  .login__title {
+  
+    margin-top: 0px; ;
+  }
 }
 .login__form {
   background-color: #ffffff;
@@ -36,6 +43,13 @@
       width: 90%;
   }
 }
+@media (max-width: 390px) {
+  .login__form {
+    width: 90%;
+    margin-top: 10px ;
+  }
+}
+
 
 .login__field {
   margin-bottom: 15px;
