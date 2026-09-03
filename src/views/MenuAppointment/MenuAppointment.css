@@ -2,9 +2,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 213vh;
+  height: 10em;
   background-color: #e3f2df;
   font-family: 'Arial', sans-serif;
+}
+@media (max-width: 390px) {
+  .menu-appointment {
+    height: 11em;;
+  }
 }
 
 .menu-appointment__content {

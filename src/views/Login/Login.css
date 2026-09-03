@@ -4,9 +4,14 @@
   flex-direction: column; /* Coloca el título sobre el formulario */
   justify-content: center;
   align-items: center;
-  height: 43vh;
+  height: 100vh;
   
   font-family: 'Arial', sans-serif;
+}
+@media (max-width: 390px) {
+  .login {
+    height: 43vh;
+  }
 }
 
 
