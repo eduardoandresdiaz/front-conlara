@@ -1,146 +1,234 @@
-/* BEM Naming Conventions */
-.register {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: 'Arial', sans-serif;
-  margin-top: 70px; /* Ajusta según la altura del navbar */
-}
-
-.register__title {
-  font-size: 2rem;
+/* ===========================
+   VARIABLES (ajusta aquí si querés)
+   =========================== */
+   :root {
+    /* Colores principales */
+    --primary: #007BFF;
+    --primary-dark: #0056b3;
+    --input-bg: #e4e3e3;
+    --input-bg-focus: rgb(202, 202, 202);
+    --muted: #555;
+    --error: #e53935;
+    --card-bg: #ffffff;
+    --terms-bg: #f9f9f9;
+  }
+  
+  /* ===========================
+     REGISTER Contenedor principal
+     =========================== */
+  /* Contenedor principal centrado verticalmente */
+  .register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* ocupa toda la altura de la ventana */
+    font-family: 'Arial', sans-serif;
+    margin-top: 470px; /* Ajusta según la altura del navbar */
+  }
+  
+  /* Título del formulario */
+  .register__title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 100px;
+  }
+  .register__titulo {
+    font-size: 2rem;
   color: #333;
   margin-bottom: 20px;
   text-align: center;
-}
-
-.register__form {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 540px;
-}
-
-.register__field {
-  margin-bottom: 15px;
-}
-
-.register__label {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-.register__input {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  background-color: #e4e3e3;
-}
-
-.register__input:focus {
-  outline: none;
-  border-color: #007BFF;
-  background-color: rgb(202, 202, 202);
-}
-
-.register__error {
-  color: red;
-  font-size: 0.875rem;
-  margin-top: 5px;
-}
-
-.register__button {
-  padding: 10px;
-  font-size: 2rem;
-  color: #fff;
-  background-color: #007BFF;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.register__button:hover:not(:disabled) {
-  background-color: #0056b3;
-  transform: translateY(-3px);
-}
-
-.register__image-preview {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.register__image {
-  max-width: 150px;
-  max-height: 150px;
-  border-radius: 8px;
-  object-fit: cover;
-  border: 1px solid #ccc;
-}
-
-/* Si querés la imagen redonda tipo avatar, cambiá border-radius a 50% arriba */
-.register__terms-box {
-  padding: 10px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  font-size: 0.9rem;
-  max-height: 150px;
-  overflow-y: scroll;
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-
-@media (max-width: 600px) {
-  .register__form {
-    width: 90%;
-    margin-top: 269px;
+  margin-top: 130px;
   }
-}
-.register {
-  margin-top: 170px; /* Ajusta según la altura del navbar */
-}
-.register__image {
-  max-width: 150px;
-  max-height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-.password__requirements {
-  font-weight: bold;
-  list-style: none;
-  padding-left: 0;
-  font-size: 20px;
-  margin-top: 5px;
+  @media screen and (max-width: 600px) {
+    .register__titulo {
+      font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 680px;
+    }
+    
+  }
   
-}
-
-.password__requirements li {
-  margin-bottom: 3px;
-  transition: color 0.2s ease;
+  /* ===========================
+     FORMULARIO
+     =========================== */
+  /* Caja del formulario: fondo, sombra y padding */
+  .register__form {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px; /* separación respecto al título */
+  }
   
-}
-
-/* Barra de seguridad */
-.password-strength-bar {
-  height: 8px;
-  border-radius: 4px;
-  margin-top: 6px;
-  background-color: #ddd;
-  overflow: hidden;
-}
-
-.password-strength-fill {
-  height: 100%;
-  transition: width 0.3s ease, background-color 0.3s ease;
-}
+  /* Campo (wrapper) de cada input */
+  .register__field {
+    margin-bottom: 15px;
+  }
+  
+  /* Label de cada campo */
+  .register__label {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  
+  /* Input base */
+  .register__input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+  }
+  
+  /* Estado focus del input */
+  .register__input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: var(--input-bg-focus);
+  }
+  
+  /* Mensaje de error */
+  .register__error {
+    color: var(--error);
+    font-size: 0.875rem;
+    margin-top: 5px;
+  }
+  
+  /* Botón principal */
+  .register__button {
+    padding: 10px;
+    font-size: 1.25rem; /* reducido para mejor proporción visual */
+    color: #fff;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Hover del botón (si no está deshabilitado) */
+  .register__button:hover:not(:disabled) {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+  }
+  
+  /* ===========================
+     IMAGEN AVATAR / PREVIEW
+     =========================== */
+  /* Contenedor de la previsualización */
+  .register__image-preview {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Imagen: tamaño máximo y recorte */
+  .register__image {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 10px; /* cambiar a 50% para avatar circular */
+    border: 1px solid #ccc;
+  }
+  
+  /* ===========================
+     TÉRMINOS Y CAJA DE TEXTO
+     =========================== */
+  .register__terms-box {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: var(--terms-bg);
+    font-size: 0.9rem;
+    max-height: 150px;
+    overflow-y: auto; /* scroll si excede */
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  
+  /* ===========================
+     REQUISITOS DE CONTRASEÑA
+     =========================== */
+  /* Lista de requisitos (sin bullets por defecto) */
+  .password__requirements {
+    font-weight: bold;
+    list-style: none;
+    padding-left: 0;
+    font-size: 1rem; /* 20px era grande; 1rem es más consistente */
+    margin-top: 5px;
+  }
+  
+  /* Item de requisito (se puede cambiar color dinámicamente con JS) */
+  .password__requirements li {
+    margin-bottom: 3px;
+    transition: color 0.2s ease;
+  }
+  
+  /* ===========================
+     BARRA DE SEGURIDAD DE CONTRASEÑA
+     =========================== */
+  /* Contenedor de la barra (fondo gris) */
+  .password-strength-bar {
+    height: 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+    background-color: #ddd;
+    overflow: hidden;
+  }
+  
+  /* Relleno dinámico (ancho y color controlados por clases) */
+  .password-strength-fill {
+    height: 100%;
+    width: 0%; /* por defecto 0, JS ajusta la clase/width */
+    transition: width 0.3s ease, background-color 0.3s ease;
+  }
+  
+  /* Ejemplo de clases para distintos niveles (aplicar desde JS) */
+  .password-strength-fill.malo {
+    width: 25%;
+    background-color: #e53935; /* rojo */
+  }
+  
+  .password-strength-fill.regular {
+    width: 50%;
+    background-color: #ff9800; /* naranja */
+  }
+  
+  .password-strength-fill.bueno {
+    width: 75%;
+    background-color: #2196f3; /* azul */
+  }
+  
+  .password-strength-fill.excelente {
+    width: 100%;
+    background-color: #4caf50; /* verde */
+  }
+  
+  /* ===========================
+     RESPONSIVE
+     =========================== */
+  @media (max-width: 600px) {
+    .register__form {
+      width: 90%;
+      margin-top: 0px; /* menos separación en móvil */
+    }
+  
+    .register {
+      margin-top: 120px; /* ajustar si el navbar ocupa más espacio en móvil */
+    }
+  
+    .register__button {
+      font-size: 1rem;
+    }
+  }
+  

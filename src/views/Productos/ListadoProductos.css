@@ -1,4 +1,7 @@
-/* 📦 Contenedor principal */
+/* =========================================================
+   📦 CONTENEDOR PRINCIPAL
+========================================================= */
+
 .listadoProductos {
   display: flex;
   flex-direction: column;
@@ -6,7 +9,11 @@
   padding: 1px;
 }
 
-/* 🔍 Buscador */
+
+/* =========================================================
+   🔍 BUSCADOR
+========================================================= */
+
 .listadoProductos__buscador {
   position: fixed;
   top: 43px;
@@ -19,11 +26,13 @@
   background: transparent;
   border: none;
 }
+
 .listadoProductos__buscador input,
 .listadoProductos__buscador button {
   padding: 6px;
   font-size: 14px;
 }
+
 .listadoProductos__buscador button {
   background: #007bff;
   color: #fff;
@@ -32,15 +41,26 @@
   border-radius: 5px;
   transition: background 0.3s ease;
 }
-.listadoProductos__buscador button:hover { background: #0056b3; }
 
-/* ⚠️ Error */
+.listadoProductos__buscador button:hover {
+  background: #0056b3;
+}
+
+
+/* =========================================================
+   ⚠️ ERROR
+========================================================= */
+
 .listadoProductos__error {
   color: red;
   margin-bottom: 10px;
 }
 
-/* 📋 Lista de productos */
+
+/* =========================================================
+   📋 CONTENEDOR DE LA LISTA DE PRODUCTOS
+========================================================= */
+
 .listadoProductos__list {
   display: flex;
   flex-wrap: wrap;
@@ -50,6 +70,7 @@
   box-sizing: border-box;
   padding: 0;
 }
+
 @media (max-width: 767px) {
   .listadoProductos__list {
     display: grid;
@@ -58,14 +79,18 @@
   }
 }
 
-/* 🟨 Detalles de producto */
+
+/* =========================================================
+   🟨 CONFIGURACIÓN DE LAS CARDS
+========================================================= */
+
 .listadoProductos__details {
   flex: 1 1 30%;
   max-width: 30%;
   min-height: 320px;
-  border: 5px solid #0e75e3;
-  background: #ffff99;
-  border-radius: 8px;
+  border: none;
+  border-color: transparent;
+  border-radius: 0px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -73,26 +98,39 @@
   text-align: center;
   font-size: 16px;
   margin-top: -10px;
-  margin-left: -10px;
+  margin-left: 0px;
   margin-right: -10px;
   margin-bottom: -5px;
-  padding: 0;
+  padding: 2px;
 }
+
+
+/* =========================================================
+   📱 CARDS EN TABLET Y MÓVIL
+========================================================= */
+
 @media (max-width: 768px) {
   .listadoProductos__details {
     max-width: 46%;
-    background-color: #007bff;
+    border:none;
+    
   }
 }
+
 @media (max-width: 480px) {
   .listadoProductos__details {
     max-width: 100%;
     margin: 0;
     padding: 0;
+    border: none;
   }
 }
 
-/* 🖼️ Imagen dentro de detalles */
+
+/* =========================================================
+   🖼️ IMAGEN DENTRO DE LA CARD
+========================================================= */
+
 .listadoProductos__details img {
   width: 100%;
   height: auto;
@@ -101,7 +139,11 @@
   margin: 0;
 }
 
-/* 📝 Título del producto */
+
+/* =========================================================
+   📝 TÍTULO DEL PRODUCTO
+========================================================= */
+
 .listadoProductos__details h2 {
   font-size: 13px;
   line-height: 1.4;
@@ -114,14 +156,22 @@
   word-break: break-word;
 }
 
-/* 💲 Precio */
+
+/* =========================================================
+   💲 PRECIO
+========================================================= */
+
 .price {
   font-weight: bold;
   font-size: 16px;
   margin-top: auto;
 }
 
-/* 🔘 Botón "Me interesa" */
+
+/* =========================================================
+   🔘 BOTÓN "ME INTERESA"
+========================================================= */
+
 .meInteresaBoton {
   background: #007bff;
   color: #fff;
@@ -132,62 +182,133 @@
   margin-top: 0;
   transition: background 0.3s ease;
 }
-.meInteresaBoton:hover { background: #0056b3; }
 
-/* 🪟 Modal */
+.meInteresaBoton:hover {
+  background: #0056b3;
+}
+
+
+/* =========================================================
+   🪟 MODAL
+========================================================= */
+
 .modal {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: flex; justify-content: center; align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 2000;
 }
+
 .modal form {
   background: #fff;
   padding: 20px 30px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   width: 300px;
   text-align: center;
 }
-.modal h3 { margin-bottom: 15px; font-size: 1.2rem; color: #333; }
-.modal input[type="password"] {
-  width: 100%; padding: 10px; margin-bottom: 15px;
-  border: 1px solid #ccc; border-radius: 6px; font-size: 1rem;
-}
-.modal button {
-  padding: 10px 15px; margin: 5px;
-  border: none; border-radius: 6px; cursor: pointer;
-  font-size: 0.95rem; transition: background 0.3s ease;
-}
-.modal button[type="submit"] { background: #4caf50; color: #fff; }
-.modal button[type="submit"]:hover { background: #45a049; }
-.modal button[type="button"] { background: #f44336; color: #fff; }
-.modal button[type="button"]:hover { background: #d32f2f; }
 
-/* 🏷️ Overlay oferta */
+.modal h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.modal input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.modal button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.3s ease;
+}
+
+.modal button[type="submit"] {
+  background: #4caf50;
+  color: #fff;
+}
+
+.modal button[type="submit"]:hover {
+  background: #45a049;
+}
+
+.modal button[type="button"] {
+  background: #f44336;
+  color: #fff;
+}
+
+.modal button[type="button"]:hover {
+  background: #d32f2f;
+}
+
+
+/* =========================================================
+   🏷️ OVERLAY DE OFERTA
+========================================================= */
+
 .ofertaOverlay {
-  position: absolute; top: 10px; left: 10px;
-  background: #ffcc00; color: #000; font-weight: bold;
-  padding: 5px 10px; border-radius: 4px;
-  border: 2px solid #000; z-index: 2;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: 2px solid #000;
+  z-index: 2;
   animation: pulse 1.5s infinite;
 }
+
 @keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-/* 🔝 Botones superiores */
+
+/* =========================================================
+   🔝 BOTONES SUPERIORES
+========================================================= */
+
 .botones_superiores {
   display: flex;
   justify-content: flex-start;
   margin-bottom: 1rem;
 }
 
-/* 📞 Botón teléfonos útiles */
+
+/* =========================================================
+   📞 BOTÓN TELÉFONOS ÚTILES
+========================================================= */
+
 .telefonos_utiles {
   background: linear-gradient(0deg, black, #007bff);
   color: #fff;
@@ -196,20 +317,35 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
   margin-top: -36px;
   margin-right: 10px;
 }
-.telefonos_utiles:hover { background-color: #0056b3; transform: scale(1.05); }
-.telefonos_utiles:active { background-color: #004080; transform: scale(0.95); }
 
-/* 🎠 Carrusel Swiper */
+.telefonos_utiles:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.telefonos_utiles:active {
+  background-color: #004080;
+  transform: scale(0.95);
+}
+
+
+/* =========================================================
+   🎠 CARRUSEL SWIPER
+========================================================= */
+
 .swiper {
   width: 100%;
   max-width: 900px;
   margin: auto;
   padding: 20px 0;
 }
+
 .swiper-slide {
   display: flex;
   justify-content: center;
@@ -217,29 +353,41 @@
   background: #f5f5f5;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
 }
-.swiper-slide:hover { transform: scale(1.05); }
+
+.swiper-slide:hover {
+  transform: scale(1.05);
+}
+
 .swiper-slide img {
   width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 10px;
 }
+
 .swiper-button-next,
 .swiper-button-prev {
   color: #333;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.8);
   padding: 12px;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   transition: background 0.3s;
 }
+
 .swiper-button-next:hover,
-.swiper-button-prev:hover { background: rgba(255,255,255,1); }
+.swiper-button-prev:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
 .swiper-pagination-bullet {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   opacity: 1;
 }
-.swiper-pagination-bullet-active { background: #333; }
+
+.swiper-pagination-bullet-active {
+  background: #333;
+}

@@ -35,12 +35,16 @@
 
 /* Estilo de cada tarjeta de producto */
 .listadoProductos__details {
-  border: 2px solid #322ff8; /* Borde gris claro */
-  border-radius: 8px; /* Esquinas redondeadas */
+  border: none; /* Borde gris claro */
+  border-radius: 0px; /* Esquinas redondeadas */
   padding: 15px; /* Espaciado interno */
   max-width: 400px; /* Ancho máximo de la tarjeta */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  background-color: #eceff3; /* Fondo claro */
+  background: linear-gradient(
+  to top,
+  #007bff 0%,
+  #e6f1f5 100%
+);
   text-align: center; /* Centrar el contenido dentro de la tarjeta */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Efecto dinámico */
 }

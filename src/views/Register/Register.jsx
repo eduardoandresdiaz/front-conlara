@@ -61,7 +61,7 @@ const Register = () => {
 
   return (
     <div className="register">
-      <h1 className="register__title">Registro</h1>
+      <h1 className="register__titulo">Registro</h1>
       <Formik
         initialValues={{
           name: '',
