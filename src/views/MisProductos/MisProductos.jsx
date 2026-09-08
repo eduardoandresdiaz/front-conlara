@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useUser } from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
 import './MisProductos.css';
+import axios from "axios";
 
 const MisProductos = () => {
   const [productos, setProductos] = useState([]);
@@ -173,37 +174,59 @@ const MisProductos = () => {
   const cantidadStockMinimo = productos.filter((p) => (p.stock > 0) && (p.stock <= (p.stockminimo ?? 0))).length;
   
   const fetchUserDataByEmail = async (email) => {
-    const token = localStorage.getItem('token');
-    if (!token) throw new Error('No se encontró un token.');
+    const token = localStorage.getItem("token");
+  
+    if (!token) {
+      throw new Error("No se encontró un token.");
+    }
+  
+    console.log("Email:", email);
+    console.log("Token:", token);
   
     const response = await axios.get(
       `https://ecommerce-9558.onrender.com/users/email/${email}`,
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
   
-    // ✅ Aquí capturas todos los datos que devuelve la API
+    console.log("Respuesta:", response.data);
+  
     const userData = response.data;
   
-    return userData; // <-- retorna toda la info en una variable
-  };
-
-
-  const compartirWhatsApp = (producto) => {
-    const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
+    console.log("Datos completos del usuario:", userData);
   
-    const mensaje = `🛍️ ${producto.name}
-    
-    
+    return userData;
+  };
+  
+  
+  const compartirWhatsApp = async (producto) => {
+    try {
+      // Buscar los datos del vendedor usando el creatorEmail del producto
+      const userData = await fetchUserDataByEmail(producto.creatorEmail);
+  
+      const nickname = userData.nickname || "";
+  
+      const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
+      
+  
+      const mensaje = `🛍️ ${producto.name}
+  👤 ${nickname}
   
   Compra y vende en el Valle del Conlara.
   
-  🔗 ${productUrl}`;
+   🔗 ${productUrl}`;
   
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
+      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
   
-    window.open(whatsappUrl, "_blank");
+      window.open(whatsappUrl, "_blank");
+  
+    } 
+    catch (error) {
+      console.error("Error al obtener los datos del usuario:", error);
+    }
   };
   return (
     <div className="listadoProductos">
