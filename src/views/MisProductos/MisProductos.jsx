@@ -201,31 +201,44 @@ const MisProductos = () => {
     return userData;
   };
   
+
 const compartirWhatsApp = async (producto) => {
   try {
-    // Buscar los datos del vendedor usando el creatorEmail del producto
+    // Detectar si está usando un dispositivo móvil
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    // Buscar los datos del vendedor
     const userData = await fetchUserDataByEmail(producto.creatorEmail);
 
     const nickname = userData.nickname || "";
 
+    // URL pública para compartir
     const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
 
-    const mensaje = `🛍️ ${producto.name}
+    // Mensaje de WhatsApp
+    const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar
 👤 ${nickname}
+Compra y Vende en el Valle del Conlara
 
-Compra y vende en el Valle del Conlara.
+${producto.name}
 
 🔗 ${productUrl}`;
 
-    // Abrir la aplicación de WhatsApp
-    const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(mensaje)}`;
+    // Móvil → aplicación WhatsApp
+    // PC → WhatsApp Web
+    const whatsappUrl = isMobile
+      ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
+      : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
 
+    // Abrir WhatsApp
     window.location.href = whatsappUrl;
 
   } catch (error) {
     console.error("Error al obtener los datos del usuario:", error);
   }
 };
+
+
 
   return (
     <div className="listadoProductos">
