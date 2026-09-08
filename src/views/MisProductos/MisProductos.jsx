@@ -171,7 +171,40 @@ const MisProductos = () => {
   const cantidadAgotados = productos.filter((p) => p.stock === 0).length;
   const cantidadVencidos = productos.filter((p) => new Date(p.expiresAt) < new Date()).length;
   const cantidadStockMinimo = productos.filter((p) => (p.stock > 0) && (p.stock <= (p.stockminimo ?? 0))).length;
+  
+  const fetchUserDataByEmail = async (email) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('No se encontró un token.');
+  
+    const response = await axios.get(
+      `https://ecommerce-9558.onrender.com/users/email/${email}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+  
+    // ✅ Aquí capturas todos los datos que devuelve la API
+    const userData = response.data;
+  
+    return userData; // <-- retorna toda la info en una variable
+  };
 
+
+  const compartirWhatsApp = (producto) => {
+    const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
+  
+    const mensaje = `🛍️ ${producto.name}
+    
+    
+  
+  Compra y vende en el Valle del Conlara.
+  
+  🔗 ${productUrl}`;
+  
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
+  
+    window.open(whatsappUrl, "_blank");
+  };
   return (
     <div className="listadoProductos">
       <h1 className="tituloSuperior">Mis Publicaciones</h1>
@@ -287,6 +320,11 @@ const MisProductos = () => {
               >
                 Modificar Publicacion
               </button>
+              <button
+                     className="compartirWhatsAppBoton"
+                      onClick={() => compartirWhatsApp(producto)}>
+                                <i className="fa-brands fa-whatsapp"></i>
+                                      Compartir en WhatsApp</button>
             </div>
           ))
         )}

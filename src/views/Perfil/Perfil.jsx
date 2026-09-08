@@ -133,6 +133,22 @@ const Perfil = () => {
       setMessage('Error al actualizar perfil: ' + (error.response?.data?.message || error.message));
     }
   };
+  const fetchUserDataByEmail = async (email) => {
+    const token = localStorage.getItem('token');
+    if (!token) throw new Error('No se encontró un token.');
+  
+    const response = await axios.get(
+      `https://ecommerce-9558.onrender.com/users/email/${email}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+  
+    // ✅ Aquí capturas todos los datos que devuelve la API
+    const userData = response.data;
+  
+    return userData; // <-- retorna toda la info en una variable
+  };
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;

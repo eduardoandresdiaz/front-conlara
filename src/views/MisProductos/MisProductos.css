@@ -45,6 +45,7 @@
   #007bff 0%,
   #e6f1f5 100%
 );
+margin-top: 10px; /* Espaciado superior */
   text-align: center; /* Centrar el contenido dentro de la tarjeta */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* Efecto dinámico */
 }
@@ -258,3 +259,22 @@
   margin-left: 191px;
 }
 
+.compartirWhatsAppBoton {
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.compartirWhatsAppBoton:hover {
+  background: #1ebe5d;
+}
+
+.compartirWhatsAppBoton i {
+  margin-right: 8px;
+}
