@@ -201,33 +201,32 @@ const MisProductos = () => {
     return userData;
   };
   
-  
-  const compartirWhatsApp = async (producto) => {
-    try {
-      // Buscar los datos del vendedor usando el creatorEmail del producto
-      const userData = await fetchUserDataByEmail(producto.creatorEmail);
-  
-      const nickname = userData.nickname || "";
-  
-      const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
-      
-  
-      const mensaje = `🛍️ ${producto.name}
-  👤 ${nickname}
-  
-  Compra y vende en el Valle del Conlara.
-  
-   🔗 ${productUrl}`;
-  
-      const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensaje)}`;
-  
-      window.open(whatsappUrl, "_blank");
-  
-    } 
-    catch (error) {
-      console.error("Error al obtener los datos del usuario:", error);
-    }
-  };
+const compartirWhatsApp = async (producto) => {
+  try {
+    // Buscar los datos del vendedor usando el creatorEmail del producto
+    const userData = await fetchUserDataByEmail(producto.creatorEmail);
+
+    const nickname = userData.nickname || "";
+
+    const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
+
+    const mensaje = `🛍️ ${producto.name}
+👤 ${nickname}
+
+Compra y vende en el Valle del Conlara.
+
+🔗 ${productUrl}`;
+
+    // Abrir la aplicación de WhatsApp
+    const whatsappUrl = `whatsapp://send?text=${encodeURIComponent(mensaje)}`;
+
+    window.location.href = whatsappUrl;
+
+  } catch (error) {
+    console.error("Error al obtener los datos del usuario:", error);
+  }
+};
+
   return (
     <div className="listadoProductos">
       <h1 className="tituloSuperior">Mis Publicaciones</h1>
