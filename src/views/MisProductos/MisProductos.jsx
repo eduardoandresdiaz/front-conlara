@@ -202,45 +202,49 @@ const MisProductos = () => {
   };
   
 
-const compartirWhatsApp = async (producto) => {
-  try {
-    // Detectar si está usando un dispositivo móvil
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    // Buscar los datos del vendedor
-    const userData = await fetchUserDataByEmail(producto.creatorEmail);
-
-    const nickname = userData.nickname || "";
-    const telefono = userData.phone || "";
-
-    // URL pública para compartir
-    const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
-
-    // Mensaje de WhatsApp
-    const mensajeWhatsApp = `
-${nickname}
-${producto.name}
-${userData.phone ? `📞 ${telefono}` : ""}
-
-
-
-🔗 ${productUrl}`;
-
-    // Móvil → aplicación WhatsApp
-    // PC → WhatsApp Web
-    const whatsappUrl = isMobile
-      ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
-      : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
-
-    // Abrir WhatsApp
-    window.location.href = whatsappUrl;
-
-  } catch (error) {
-    console.error("Error al obtener los datos del usuario:", error);
-  }
-};
-
-
+  const compartirWhatsApp = async (producto) => {
+    try {
+      // Detectar si está usando un dispositivo móvil
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
+      // Buscar los datos del vendedor
+      const userData = await fetchUserDataByEmail(producto.creatorEmail);
+  
+      // Reemplazar "_" y "-" por espacios
+      const nickname = (userData.nickname || "")
+        .replace(/[_-]+/g, " ")
+        .trim();
+  
+      // Quitar +54 del teléfono
+      const telefono = (userData.phone || "")
+        .replace(/^\+54\s?/, "")
+        .trim();
+  
+      // URL pública para compartir
+      const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
+  
+      // Mensaje de WhatsApp
+      const mensajeWhatsApp = `${nickname}
+  
+  ${producto.name}
+  ${telefono ? `📞 ${telefono}` : ""}
+  
+  ${productUrl}`;
+  
+      // Móvil → aplicación WhatsApp
+      // PC → WhatsApp Web
+      const whatsappUrl = isMobile
+        ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
+        : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
+  
+      // Abrir WhatsApp
+      window.open(whatsappUrl, "_blank");
+  
+    } catch (error) {
+      console.error("Error al obtener los datos del usuario:", error);
+    }
+  };
+//////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="listadoProductos">
