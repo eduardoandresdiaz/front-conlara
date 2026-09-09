@@ -211,16 +211,18 @@ const compartirWhatsApp = async (producto) => {
     const userData = await fetchUserDataByEmail(producto.creatorEmail);
 
     const nickname = userData.nickname || "";
+    const telefono = userData.phone || "";
 
     // URL pública para compartir
     const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
 
     // Mensaje de WhatsApp
-    const mensajeWhatsApp = `🛍️ Miralo en Conlara.com.ar
-👤 ${nickname}
-Compra y Vende en el Valle del Conlara
-
+    const mensajeWhatsApp = `
+${nickname}
 ${producto.name}
+${userData.phone ? `📞 ${telefono}` : ""}
+
+
 
 🔗 ${productUrl}`;
 
