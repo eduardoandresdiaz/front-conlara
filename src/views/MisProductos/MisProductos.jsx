@@ -201,7 +201,7 @@ const MisProductos = () => {
     return userData;
   };
   
-
+//////////////////////////////////////////////////////////////////////////////
   const compartirWhatsApp = async (producto) => {
     try {
       // Detectar si está usando un dispositivo móvil
@@ -222,14 +222,13 @@ const MisProductos = () => {
   
       // URL pública para compartir
       const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
-  
+      const productUrl2 = `https://ecommerce-9558.onrender.com/productos/share/${producto.id}`;
       // Mensaje de WhatsApp
-      const mensajeWhatsApp = `${nickname}
-  
-  ${producto.name}
-  ${telefono ? `📞 ${telefono}` : ""}
-  
-  ${productUrl}`;
+      const mensajeWhatsApp =
+     `${productUrl}
+      ${nickname}
+      ${producto.name}
+      ${telefono ? `📞 ${telefono}` : ""}`;
   
       // Móvil → aplicación WhatsApp
       // PC → WhatsApp Web
