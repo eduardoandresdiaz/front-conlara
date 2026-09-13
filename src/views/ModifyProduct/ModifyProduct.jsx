@@ -69,6 +69,12 @@ const ModifyProduct = () => {
   const updateProduct = async (formData) => {
     try {
       const token = localStorage.getItem('token');
+      console.log("ID:", id);
+      console.log("VALUES:", values);
+      console.log(
+  "JSON:",
+  JSON.stringify(values, null, 2)
+);
       await axios.put(
         `https://ecommerce-9558.onrender.com/products/${id}`,
         formData,
@@ -92,8 +98,10 @@ const ModifyProduct = () => {
       // Volver a la página anterior en el historial
       navigate(-1);
     } catch (error) {
-      console.error('Error al modificar el producto:', error);
-      alert(error.response?.data?.message || 'Ocurrió un error inesperado.');
+      console.error("Error completo:", error);
+      console.error("Response:", error.response);
+      console.error("Data:", error.response?.data);
+      console.error("Payload enviado:", values);
     }
   };
   

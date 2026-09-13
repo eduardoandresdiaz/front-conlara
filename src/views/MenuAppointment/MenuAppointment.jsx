@@ -84,9 +84,11 @@ const MenuAppointment = () => {
             Publicar tu Producto
           </button>
 
-          <button className="menu-appointment__button" onClick={() => navigate("/misproductos")}>
-            Mi Negocio
-          </button>
+          <button
+                  className="menu-appointment__button"
+                  onClick={() => navigate("/misproductos")}>
+                          {nickname.replace(/[_-]/g, " ")}
+                             </button>
 
           {nickname && (
             <>
