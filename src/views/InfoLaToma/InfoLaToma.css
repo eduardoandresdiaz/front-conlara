@@ -158,3 +158,36 @@
     font-size: 0.9rem;
   }
 }
+.preciosAgro {
+  margin: 25px 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f4f9ed;
+  border: 1px solid #d8e6c8;
+}
+
+.preciosGrid {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.precioCard {
+  flex: 1;
+  min-width: 180px;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.precioCard h3 {
+  margin-bottom: 10px;
+}
+
+.precioCard p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2e7d32;
+}

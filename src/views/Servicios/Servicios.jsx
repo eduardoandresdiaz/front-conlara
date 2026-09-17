@@ -224,12 +224,12 @@ const Servicios = () => {
       {error && <p className="listadoProductos__error">{error}</p>}
 
       <div className="listadoProductos__list2">
-        {loading ? (
-          <p>Cargando servicios...</p>
-        ) : productos.length === 0 && !error ? (
-          <p>No hay servicios disponibles.</p>
-        ) : (
-          productos.map((producto) => {
+  {productos.length === 0 && loading ? (
+    <p>Cargando servicios...</p>
+  ) : productos.length === 0 && !error ? (
+    <p>No hay servicios disponibles.</p>
+  ) : (
+    productos.map((producto) => {
             const img = producto.imgUrl || producto.image || producto.images?.[0] || '';
             const price = producto.price ?? producto.precio ?? 0;
             const expiresAt = producto.expiresAt || producto.expireAt || producto.expiration;
@@ -253,17 +253,12 @@ const Servicios = () => {
 
                 <div className="price">
                   <span className="precioTexto">
-                    Precio: {formatPrice(price, expiresAt, producto.mostrarprecio ?? true)}
+                    
                   </span>
                 </div>
 
                 <div style={{ marginTop: 8, fontSize: 14, color: '#222', textAlign: 'left', width: '90%' }}>
-                  <div><strong>Stock:</strong> {producto.stock ?? '—'}</div>
-                  <div><strong>Stock mínimo:</strong> {stockMin}</div>
-                  <div><strong>Ubicación:</strong> {ubicacion}</div>
-                  <div><strong>Categoría:</strong> {categoriaText}</div>
-                  <div><strong>Fecha de Creación:</strong> {formatDate(createdAt)}</div>
-                  <div><strong>Fecha de Expiración:</strong> {formatDate(expiresAt)}</div>
+                  
                 </div>
 
                 <div style={{ marginTop: 10, display: 'flex', gap: 8 }}>
@@ -281,7 +276,18 @@ const Servicios = () => {
         )}
       </div>
 
-      {loading && <p>😉</p>}
+      {loading && productos.length > 0 && (
+  <div
+    style={{
+      textAlign: "center",
+      padding: "20px",
+      fontSize: "18px",
+      fontWeight: "bold"
+    }}
+  >
+    Cargando más servicios...
+  </div>
+)}
     </div>
   );
 };

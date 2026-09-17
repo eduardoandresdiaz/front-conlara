@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import "./InfoLaToma.css";
 
+
 /* Información de las farmacias: nombre, dirección, teléfono, coordenadas y enlace a mapa */
 const farmaciasInfo = {
   A: {
@@ -69,7 +70,11 @@ DIA,ENERO,FEBRERO,MARZO,ABRIL,MAYO,JUNIO,JULIO,AGOSTO,SETIEMBRE,OCTUBRE,NOVIEMBR
 `;
 
 /* Normaliza nombre de mes */
-const normalizeMonth = (m) => m.trim().toLowerCase();
+const normalizeMonth = (m) =>
+  m
+    .trim()
+    .toLowerCase()
+    .replace("septiembre", "setiembre");
 
 /* Parser CSV -> objeto turnos */
 function parseTablaCSV(csv) {
@@ -104,19 +109,20 @@ function resolverFarmacia(turnoRaw) {
     return { clave: null, nombre: "No disponible", nota: null, direccion: null, mapa: null, telefonos: [] };
   }
 
-  const letra = turnoRaw.match(/[ABC]/)?.[0] ?? null;
+  const letra = turnoRaw.charAt(0);
   if (!letra) return { clave: null, nombre: "No disponible", nota: null, direccion: null, mapa: null, telefonos: [] };
 
-  const isCstar = /C\*/.test(turnoRaw);
+  const isCplus = /C\+/.test(turnoRaw);
   const isAplus = /A\+/.test(turnoRaw);
   const isAstar = /A\*/.test(turnoRaw);
-
-  if (isCstar) {
+  
+  if (isCplus) {
     const info = farmaciasInfo["A"];
+  
     return {
       clave: "A",
       nombre: info.nombre,
-      nota: "Turno original C* (San Diego cerrado); cubre Farmacia Santa Rita",
+      nota: "Turno original C+ (San Diego cerrado); cubre Farmacia Santa Rita",
       direccion: info.direccion,
       mapa: info.mapa,
       telefonos: info.telefonos,
@@ -161,7 +167,11 @@ const Info = () => {
 
   const hoy = new Date();
   const diaHoy = hoy.getDate();
-  const mesHoy = hoy.toLocaleString("es-ES", { month: "long" }).toLowerCase();
+  const mesHoy = normalizeMonth(
+    hoy.toLocaleString("es-ES", {
+      month: "long",
+    })
+  );
 
   const turnoRawHoy = turnos[mesHoy]?.[diaHoy] ?? null;
   const farmaciaHoy = resolverFarmacia(turnoRawHoy);
@@ -216,6 +226,26 @@ const Info = () => {
           📖 Historia de La Toma
         </a>
       </div>
+      <div className="preciosAgro">
+  <h2>🌾 Precios de Granos</h2>
+
+  <div className="preciosGrid">
+    <div className="precioCard">
+      <h3>🌽 Maíz</h3>
+      <p>$299.000/t</p>
+    </div>
+
+    <div className="precioCard">
+      <h3>🫘 Soja</h3>
+      <p>$560.000/t</p>
+    </div>
+
+    <div className="precioCard">
+      <h3>🌻 Girasol</h3>
+      <p>$750.000/t</p>
+    </div>
+  </div>
+</div>
       <div className="farmaciaTurno">
         <h2>💊 Farmacia de turno hoy</h2>
 

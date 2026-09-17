@@ -43,6 +43,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  padding-top: 1px;
 }
 
 
@@ -70,7 +71,7 @@ body {
   }
   
   .authButton {
-    margin-top: 99px;
+  margin-top: 99px;
   position: relative;
   overflow: hidden;
   border: none;
