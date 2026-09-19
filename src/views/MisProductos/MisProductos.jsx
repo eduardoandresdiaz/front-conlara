@@ -19,7 +19,7 @@ const MisProductos = () => {
   const fetchProductos = async () => {
     try {
       if (!user || !user.email) {
-        throw new Error("No se encontró el email del usuario.");
+        throw new Error("⚠️ Por seguridad, tu sesión ha expirado. Vuelve a iniciar sesión para continuar.");
       }
 
       const response = await fetch(
@@ -304,7 +304,7 @@ const MisProductos = () => {
 
       <div className="listadoProductos__list">
         {productosFiltrados.length === 0 && !error ? (
-          <p>No hay productos para mostrar.</p>
+          <p>Cargando....</p>
         ) : (
           productosFiltrados.map((producto) => (
             <div key={producto.id} className="listadoProductos__details">

@@ -261,7 +261,7 @@ const formatPhone = (phone = '') => {
           {loadingProductos ? (
             <p>Cargando productos...</p>
           ) : productos.length === 0 ? (
-            <p>No hay productos cargados.</p>
+            <p>Cargando....</p>
           ) : (
             productos.map((producto) => (
               <ProductCard
