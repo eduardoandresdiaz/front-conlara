@@ -3,8 +3,12 @@ import axios from 'axios';
 import './CreateAppointment.css'; // Mantiene el CSS existente
 import { useState } from 'react';
 import { useUser } from '../../context/UserContext'; // Importar el contexto del usuario
+import { useNavigate } from 'react-router-dom';
+``
 
 const CreateAppointment = () => {
+  // ✅ NUEVO
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
   const { user } = useUser(); // Obtener el usuario desde el contexto
 
@@ -63,7 +67,8 @@ const CreateAppointment = () => {
     }
   };
 
-  const posData = async (formData, userData) => {
+  // const posData = async (formData, userData) => {
+    const posData = async (formData, userData, navigate) => {
     try {
       console.log("Datos enviados:", formData);
 
@@ -88,12 +93,39 @@ const CreateAppointment = () => {
             { headers: { "Content-Type": "multipart/form-data" } }
           );
 
+          // console.log("Respuesta del backend (imagen):", imageResponse.data);
+          // alert("Producto creado e imagen subida exitosamente");
+          // return true;
+          //////////////////////////////////////////////////////////////
           console.log("Respuesta del backend (imagen):", imageResponse.data);
-          alert("Producto creado e imagen subida exitosamente");
-          return true;
+
+// ✅ NUEVO
+const crearOtro = window.confirm(
+  "✅ Producto creado e imagen subida exitosamente.\n\n¿Desea cargar un nuevo producto?"
+);
+
+if (!crearOtro) {
+  navigate("/MenuAppointment");
+}
+
+return true;
+
+          //////////////////////////////////////////////////////////////
         } else {
-          alert("Producto creado exitosamente (sin imagen)");
-          return true;
+          // alert("Producto creado exitosamente (sin imagen)");
+          // return true;
+          //////////////////////////////////////////////////////////////
+          // ✅ NUEVO
+const crearOtro = window.confirm(
+  "✅ Producto creado exitosamente.\n\n¿Desea cargar un nuevo producto?"
+);
+
+if (!crearOtro) {
+  navigate("/MenuAppointment");
+}
+
+return true;
+          //////////////////////////////////////////////////////////////
         }
       } else {
         alert("Error inesperado en el servidor");
@@ -189,7 +221,10 @@ const CreateAppointment = () => {
           };
           
 
-          const success = await posData(formData, userData);
+          // const success = await posData(formData, userData);
+          // ✅ MODIFICADO
+          const success = await posData(formData, userData, navigate);
+
           if (success) {
             resetForm();
             setSelectedFile(null);
