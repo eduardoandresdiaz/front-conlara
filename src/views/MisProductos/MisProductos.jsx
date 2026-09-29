@@ -348,11 +348,19 @@ const MisProductos = () => {
               </div>
 
               <button
-                className="eliminarBoton"
-                onClick={() => eliminarProducto(producto)}
-              >
-                Eliminar Publicación
-              </button>
+  className="eliminarBoton"
+  onClick={() => {
+    if (
+      window.confirm(
+        `¿Estás seguro de eliminar "${producto.name}"?`
+      )
+    ) {
+      eliminarProducto(producto);
+    }
+  }}
+>
+  Eliminar Publicación
+</button>
 
               <button
                 className="modificarBoton"
