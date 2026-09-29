@@ -69,11 +69,11 @@ const ModifyProduct = () => {
   const updateProduct = async (formData) => {
     try {
       const token = localStorage.getItem('token');
-      console.log("ID:", id);
-      console.log("VALUES:", values);
-      console.log(
+      console.log("FORM DATA:", formData);
+
+console.log(
   "JSON:",
-  JSON.stringify(values, null, 2)
+  JSON.stringify(formData, null, 2)
 );
       await axios.put(
         `https://ecommerce-9558.onrender.com/products/${id}`,
@@ -101,7 +101,7 @@ const ModifyProduct = () => {
       console.error("Error completo:", error);
       console.error("Response:", error.response);
       console.error("Data:", error.response?.data);
-      console.error("Payload enviado:", values);
+      console.error("Payload enviado:", formData);
     }
   };
   

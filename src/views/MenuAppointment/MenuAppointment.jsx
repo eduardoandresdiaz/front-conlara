@@ -96,7 +96,7 @@ const MenuAppointment = () => {
                 className="menu-appointment__button"
                 onClick={() =>
                   window.open(
-                    `https://wa.me/?text=¡Mira el perfil de ${nickname} en Conlara Tienda! https://ecommerce-9558.onrender.com/users/share/${nickname}`,
+                    `https://wa.me/?text=¡Toca La Imagen Para ver ${nickname} en Conlara.com.ar! https://ecommerce-9558.onrender.com/users/share/${nickname}`,
                     "_blank"
                   )
                 }
