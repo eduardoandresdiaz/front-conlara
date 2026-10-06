@@ -46,7 +46,7 @@
     .register__titulo {
       font-size: 2rem;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: center;
     margin-top: 680px;
     }
@@ -220,7 +220,7 @@
   @media (max-width: 600px) {
     .register__form {
       width: 90%;
-      margin-top: 0px; /* menos separación en móvil */
+      margin-top: 20px; /* menos separación en móvil */
     }
   
     .register {
