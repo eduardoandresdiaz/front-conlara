@@ -1,234 +1,133 @@
 /* ===========================
-   VARIABLES (ajusta aquí si querés)
+   VARIABLES
    =========================== */
+
    :root {
-    /* Colores principales */
-    --primary: #007BFF;
+    --primary: #007bff;
     --primary-dark: #0056b3;
     --input-bg: #e4e3e3;
-    --input-bg-focus: rgb(202, 202, 202);
+    --input-bg-focus: #cacaca;
     --muted: #555;
     --error: #e53935;
-    --card-bg: #ffffff;
+    --card-bg: #fff;
     --terms-bg: #f9f9f9;
   }
   
   /* ===========================
-     REGISTER Contenedor principal
+     CONTENEDOR PRINCIPAL
      =========================== */
-  /* Contenedor principal centrado verticalmente */
+  
   .register {
+    width: 100%;
+    min-height: 100vh;
+    padding: 120px 20px 50px;
+    box-sizing: border-box;
+  
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh; /* ocupa toda la altura de la ventana */
-    font-family: 'Arial', sans-serif;
-    margin-top: 470px; /* Ajusta según la altura del navbar */
+  
+    font-family: Arial, sans-serif;
   }
   
-  /* Título del formulario */
-  .register__title {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-    margin-top: 100px;
-  }
+  /* Título principal */
+  
   .register__titulo {
-    font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
-  margin-top: 130px;
-  }
-  @media screen and (max-width: 600px) {
-    .register__titulo {
-      font-size: 2rem;
+    margin: 0 0 20px;
     color: #333;
-    margin-bottom: 30px;
+    font-size: 2rem;
     text-align: center;
-    margin-top: 680px;
-    }
-    
+  }
+  
+  /* Título de requisitos */
+  
+  .register__title {
+    margin: 0 0 12px;
+    color: #333;
+    font-size: 1.3rem;
+    text-align: left;
   }
   
   /* ===========================
      FORMULARIO
      =========================== */
-  /* Caja del formulario: fondo, sombra y padding */
+  
   .register__form {
-    background-color: var(--card-bg);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 350px;
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    box-sizing: border-box;
+  
     display: flex;
     flex-direction: column;
-    margin-top: 20px; /* separación respecto al título */
+  
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   }
   
-  /* Campo (wrapper) de cada input */
   .register__field {
-    margin-bottom: 15px;
+    width: 100%;
+    margin-bottom: 16px;
   }
   
-  /* Label de cada campo */
   .register__label {
-    font-size: 1rem;
+    display: block;
+    margin-bottom: 6px;
     color: var(--muted);
-    margin-bottom: 5px;
+    font-size: 1rem;
   }
   
-  /* Input base */
+  /* ===========================
+     INPUTS
+     =========================== */
+  
   .register__input {
     width: 100%;
+    min-width: 0;
     padding: 10px;
-    font-size: 1rem;
+    box-sizing: border-box;
+  
+    background-color: var(--input-bg);
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
-    background-color: var(--input-bg);
+  
+    font-size: 1rem;
   }
   
-  /* Estado focus del input */
   .register__input:focus {
-    outline: none;
-    border-color: var(--primary);
     background-color: var(--input-bg-focus);
+    border-color: var(--primary);
+    outline: none;
   }
   
-  /* Mensaje de error */
   .register__error {
+    margin-top: 5px;
     color: var(--error);
     font-size: 0.875rem;
-    margin-top: 5px;
   }
   
-  /* Botón principal */
+  /* ===========================
+     BOTÓN
+     =========================== */
+  
   .register__button {
-    padding: 10px;
-    font-size: 1.25rem; /* reducido para mejor proporción visual */
+    width: 100%;
+    padding: 11px;
+  
     color: #fff;
     background-color: var(--primary);
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
+  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.18);
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  
+    font-size: 1.1rem;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
   }
   
-  /* Hover del botón (si no está deshabilitado) */
   .register__button:hover:not(:disabled) {
-    background-color: var(--primary-dark);
-    transform: translateY(-3px);
-  }
-  
-  /* ===========================
-     IMAGEN AVATAR / PREVIEW
-     =========================== */
-  /* Contenedor de la previsualización */
-  .register__image-preview {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  /* Imagen: tamaño máximo y recorte */
-  .register__image {
-    max-width: 150px;
-    max-height: 150px;
-    object-fit: cover;
-    border-radius: 10px; /* cambiar a 50% para avatar circular */
-    border: 1px solid #ccc;
-  }
-  
-  /* ===========================
-     TÉRMINOS Y CAJA DE TEXTO
-     =========================== */
-  .register__terms-box {
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: var(--terms-bg);
-    font-size: 0.9rem;
-    max-height: 150px;
-    overflow-y: auto; /* scroll si excede */
-    margin-bottom: 10px;
-    border-radius: 4px;
-  }
-  
-  /* ===========================
-     REQUISITOS DE CONTRASEÑA
-     =========================== */
-  /* Lista de requisitos (sin bullets por defecto) */
-  .password__requirements {
-    font-weight: bold;
-    list-style: none;
-    padding-left: 0;
-    font-size: 1rem; /* 20px era grande; 1rem es más consistente */
-    margin-top: 5px;
-  }
-  
-  /* Item de requisito (se puede cambiar color dinámicamente con JS) */
-  .password__requirements li {
-    margin-bottom: 3px;
-    transition: color 0.2s ease;
-  }
-  
-  /* ===========================
-     BARRA DE SEGURIDAD DE CONTRASEÑA
-     =========================== */
-  /* Contenedor de la barra (fondo gris) */
-  .password-strength-bar {
-    height: 8px;
-    border-radius: 4px;
-    margin-top: 6px;
-    background-color: #ddd;
-    overflow: hidden;
-  }
-  
-  /* Relleno dinámico (ancho y color controlados por clases) */
-  .password-strength-fill {
-    height: 100%;
-    width: 0%; /* por defecto 0, JS ajusta la clase/width */
-    transition: width 0.3s ease, background-color 0.3s ease;
-  }
-  
-  /* Ejemplo de clases para distintos niveles (aplicar desde JS) */
-  .password-strength-fill.malo {
-    width: 25%;
-    background-color: #e53935; /* rojo */
-  }
-  
-  .password-strength-fill.regular {
-    width: 50%;
-    background-color: #ff9800; /* naranja */
-  }
-  
-  .password-strength-fill.bueno {
-    width: 75%;
-    background-color: #2196f3; /* azul */
-  }
-  
-  .password-strength-fill.excelente {
-    width: 100%;
-    background-color: #4caf50; /* verde */
-  }
-  
-  /* ===========================
-     RESPONSIVE
-     =========================== */
-  @media (max-width: 600px) {
-    .register__form {
-      width: 90%;
-      margin-top: 20px; /* menos separación en móvil */
-    }
-  
-    .register {
-      margin-top: 120px; /* ajustar si el navbar ocupa más espacio en móvil */
-    }
-  
-    .register__button {
-      font-size: 1rem;
-    }
-  }
-  
+    background-color: var,}
