@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import "./InfoLaToma.css";
+import { useNavigate } from "react-router-dom";
 
 
 /* Información de las farmacias: nombre, dirección, teléfono, coordenadas y enlace a mapa */
@@ -163,6 +164,7 @@ function resolverFarmacia(turnoRaw) {
 }
 
 const Info = () => {
+  const navigate = useNavigate();
   const turnos = useMemo(() => parseTablaCSV(tablaCSV), []);
 
   const hoy = new Date();
@@ -217,33 +219,32 @@ const Info = () => {
 
 
       <div className="centerLink">
-        <a
-          href="https://conlara.com.ar/Historia"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btnHistoria"
-        >
-          📖 Historia de La Toma
-        </a>
+      <button
+  type="button"
+  onClick={() => navigate("/HistoriaLaToma")}
+  className="btnHistoria"
+>
+  📖 Historia de La Toma
+</button>
       </div>
       <div className="preciosAgro">
   <h2>🌾 Precios de Granos</h2>
 
   <div className="preciosGrid">
-    <div className="precioCard">
-      <h3>🌽 Maíz</h3>
-      <p>$299.000/t</p>
-    </div>
+  <div className="precioCard">
+  <h3>🌽 Maíz</h3>
+  <p>$294.800/t</p>
+</div>
 
-    <div className="precioCard">
-      <h3>🫘 Soja</h3>
-      <p>$560.000/t</p>
-    </div>
+<div className="precioCard">
+  <h3>🫘 Soja</h3>
+  <p>$560.000/t</p>
+</div>
 
-    <div className="precioCard">
-      <h3>🌻 Girasol</h3>
-      <p>$750.000/t</p>
-    </div>
+<div className="precioCard">
+  <h3>🌻 Girasol</h3>
+  <p>$611.419/t</p>
+</div>
   </div>
 </div>
       <div className="farmaciaTurno">

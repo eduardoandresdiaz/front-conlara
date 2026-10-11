@@ -116,15 +116,21 @@ const ListadoProductos = () => {
   return (
     
     <div className="listadoProductos">
-      <div className='botones_superiores'>
-  <a 
-    href="https://conlara.com.ar/InfoLaToma" 
-    target="_blank" 
-    rel="noopener noreferrer" 
-    className='telefonos_utiles'
+   <div className='botones_superiores'>
+   <button
+    type="button"
+    className="telefonos_utiles"
+    onClick={() => navigate("/InfoLaToma")}
   >
-    Informacion Util
-  </a>
+    Información La Toma
+  </button>
+  <button
+    type="button"
+    className="telefonos_utiles"
+    onClick={() => navigate("/InfoNaschel")}
+  >
+    Información Naschel
+  </button>
   <button className='telefonos_utiles' onClick={() => navigate('/servicios')}>Guia de Servicios</button>
 </div>
       {/* Buscador */}

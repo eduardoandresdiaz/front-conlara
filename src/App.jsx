@@ -16,8 +16,10 @@ import Perfil from "./views/Perfil/Perfil";
 import { HelmetProvider } from "react-helmet-async";
 import { useEffect } from "react";
 import PerfilPublico from "./views/PerfilPublico/PerfilPublico";
-import Historia from "./views/Historia/Historia";
+import HistoriaLaToma from "./views/HistoriaLaToma/HistoriaLaToma";
+import HistoriaNaschel from "./views/HistoriaNaschel/HistoriaNaschel";
 import InfoLaToma from "./views/InfoLaToma/InfoLaToma";
+import InfoNaschel from "./views/InfoNaschel/InfoNaschel";
 import Carrusell from "./views/Carrusell/Carrusell";
 import ListadoUsuarios from "./views/Ranger0750/ListadoUsuarios";
 import Servicios from "./views/Servicios/Servicios";
@@ -50,10 +52,12 @@ function App() {
           <Route path="/ModifyProduct/:id" element={<ModifyProduct />} />
           <Route path="/productos/:id" element={<DetallesProducto />} />
           <Route path="/productos/share/:id" element={<DetallesProducto />} />
-          <Route path="/perfil" element={<Perfil />} />
           <Route path="/:nickname" element={<PerfilPublico />} />
-          <Route path="/historia" element={<Historia />} />
+          <Route path="/historiaLaToma" element={<HistoriaLaToma />} />
+          <Route path="/historiaNaschel" element={<HistoriaNaschel />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="/infoLaToma" element={<InfoLaToma />} />
+          <Route path="/infoNaschel" element={<InfoNaschel />} />
           <Route path="/carrusel" element={<Carrusell />} />
           <Route path="/x28x" element={<ListadoUsuarios />} />
           {/* <Route path="/perfil/:nickname" element={<PerfilPublico />} /> */}
