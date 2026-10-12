@@ -8,7 +8,7 @@ function HistoriaNaschel() {
       <p>Conocé el legado de nuestro pueblo a través de este video.</p>
 
       <a
-        href="https://www.facebook.com/share/v/1BmXWzaZ6T/"
+        href="https://www.facebook.com/share/v/1KGZVycRb7/"
         target="_blank"
         rel="noopener noreferrer"
         className="historia-button"
