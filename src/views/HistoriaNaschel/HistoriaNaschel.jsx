@@ -13,17 +13,17 @@ function HistoriaNaschel() {
         rel="noopener noreferrer"
         className="historia-button"
       >
-        Ver video Capítulo 1 "Los Césares" La llegada de los Españoles
+        Presentacion Historia de Naschel
       </a>
 
-      <a
-        href="https://www.facebook.com/share/v/19LXhJBsJ3/"
+      {/* <a
+        href="https://www.facebook.com/share/v/19CuF6fMTu/"
         target="_blank"
         rel="noopener noreferrer"
         className="historia-button"
       >
         El Origen del Mármol Ónix
-      </a>
+      </a> */}
     </div>
   );
 }
