@@ -87,6 +87,56 @@ const [nuevoProveedor, setNuevoProveedor] = useState({
       return null;
     }
   };
+  const guardarProveedor = async () => {
+  try {
+    const userData = await fetchUserData(user.email);
+
+    if (!userData) return;
+
+    if (
+      !nuevoProveedor.empresa ||
+      !nuevoProveedor.viajante ||
+      !nuevoProveedor.telefono
+    ) {
+      alert("Completa todos los datos del proveedor");
+      return;
+    }
+
+    const proveedoresActualizados = [
+      ...(userData.proveedores || []),
+      nuevoProveedor,
+    ];
+
+   const token = localStorage.getItem('token');
+
+const response = await axios.put(
+  `https://ecommerce-9558.onrender.com/users/${userData.id}`,
+  {
+    proveedores: proveedoresActualizados,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
+
+    setProveedores(response.data.proveedores);
+
+    setNuevoProveedor({
+      empresa: "",
+      viajante: "",
+      telefono: "",
+    });
+
+    setMostrarFormularioProveedor(false);
+
+    alert("✅ Proveedor guardado correctamente");
+  } catch (error) {
+    console.error(error);
+    alert("Error al guardar proveedor");
+  }
+};
   
   useEffect(() => {
     const cargarProveedores = async () => {
@@ -397,6 +447,58 @@ return true;
     className="create-appointment__error"
   />
 </div>
+{mostrarFormularioProveedor && (
+  <div className="create-appointment__nuevo-proveedor">
+    <h3>Nuevo proveedor</h3>
+
+    <input
+      type="text"
+      placeholder="Empresa"
+      value={nuevoProveedor.empresa}
+      onChange={(e) =>
+        setNuevoProveedor({
+          ...nuevoProveedor,
+          empresa: e.target.value,
+        })
+      }
+      className="create-appointment__input"
+    />
+
+    <input
+      type="text"
+      placeholder="Viajante"
+      value={nuevoProveedor.viajante}
+      onChange={(e) =>
+        setNuevoProveedor({
+          ...nuevoProveedor,
+          viajante: e.target.value,
+        })
+      }
+      className="create-appointment__input"
+    />
+
+    <input
+      type="text"
+      placeholder="Teléfono"
+      value={nuevoProveedor.telefono}
+      onChange={(e) =>
+        setNuevoProveedor({
+          ...nuevoProveedor,
+          telefono: e.target.value,
+        })
+      }
+      className="create-appointment__input"
+    />
+
+    <button
+  type="button"
+  className="create-appointment__proveedor-button"
+  onClick={guardarProveedor}
+>
+  Guardar proveedor
+</button>
+  </div>
+)}
 
 
             {/* ✅ Nuevo campo para fecha de expiración */}

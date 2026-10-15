@@ -128,3 +128,270 @@
       width: 90%;
     }
   }
+
+  /* ==================================================
+   SECCIÓN DE PROVEEDORES
+================================================== */
+
+/* Fila que contiene el selector y el botón */
+.create-appointment__proveedor-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Selector de proveedor */
+.create-appointment__proveedor-row .create-appointment__input {
+  flex: 1;
+  min-width: 0;
+  height: 46px;
+  padding: 10px 12px;
+  border: 1px solid #b8c7d9;
+  border-radius: 9px;
+  outline: none;
+  background-color: #ffffff;
+  color: #26384a;
+  font-family: inherit;
+  font-size: 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.create-appointment__proveedor-row .create-appointment__input:hover {
+  border-color: #6f9dca;
+}
+
+.create-appointment__proveedor-row .create-appointment__input:focus {
+  border-color: #1976d2;
+  background-color: #fbfdff;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+}
+
+/* Botón Nuevo proveedor y Cancelar */
+.create-appointment__proveedor-button {
+  min-height: 46px;
+  padding: 10px 17px;
+  border: none;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(13, 71, 161, 0.22);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.create-appointment__proveedor-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 6px 14px rgba(13, 71, 161, 0.32);
+}
+
+.create-appointment__proveedor-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(13, 71, 161, 0.22);
+}
+
+.create-appointment__proveedor-button:focus-visible {
+  outline: 3px solid rgba(25, 118, 210, 0.25);
+  outline-offset: 2px;
+}
+
+.create-appointment__proveedor-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: none;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==================================================
+   FORMULARIO DE NUEVO PROVEEDOR
+================================================== */
+
+.create-appointment__nuevo-proveedor {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  width: 100%;
+  margin: 4px 0 18px;
+  padding: 20px;
+  border: 1px solid #b9d4ee;
+  border-left: 5px solid #1976d2;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f2f8ff, #ffffff);
+  box-shadow: 0 6px 16px rgba(27, 82, 135, 0.11);
+  box-sizing: border-box;
+  animation: mostrarFormularioProveedor 0.25s ease;
+}
+
+/* Título Nuevo proveedor */
+.create-appointment__nuevo-proveedor h3 {
+  margin: 0 0 3px;
+  color: #174a7e;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+/* Inputs del formulario de proveedor */
+.create-appointment__nuevo-proveedor .create-appointment__input {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 13px;
+  border: 1px solid #b8c7d9;
+  border-radius: 9px;
+  outline: none;
+  background-color: #ffffff;
+  color: #26384a;
+  font-family: inherit;
+  font-size: 15px;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.create-appointment__nuevo-proveedor
+  .create-appointment__input::placeholder {
+  color: #8796a5;
+}
+
+.create-appointment__nuevo-proveedor
+  .create-appointment__input:hover {
+  border-color: #6f9dca;
+}
+
+.create-appointment__nuevo-proveedor
+  .create-appointment__input:focus {
+  border-color: #1976d2;
+  background-color: #fbfdff;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+}
+
+/* Botón Guardar proveedor */
+.create-appointment__nuevo-proveedor
+  .create-appointment__proveedor-button {
+  align-self: flex-end;
+  min-width: 185px;
+  margin-top: 3px;
+  background: linear-gradient(135deg, #2e8b57, #176b3a);
+  box-shadow: 0 4px 10px rgba(23, 107, 58, 0.23);
+}
+
+.create-appointment__nuevo-proveedor
+  .create-appointment__proveedor-button:hover {
+  box-shadow: 0 6px 14px rgba(23, 107, 58, 0.34);
+}
+
+/* Animación de apertura */
+@keyframes mostrarFormularioProveedor {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================================================
+   TABLETS
+================================================== */
+
+@media (max-width: 768px) {
+  .create-appointment__proveedor-row {
+    gap: 8px;
+  }
+
+  .create-appointment__proveedor-button {
+    padding-right: 13px;
+    padding-left: 13px;
+    font-size: 13px;
+  }
+
+  .create-appointment__nuevo-proveedor {
+    padding: 17px;
+  }
+}
+
+/* ==================================================
+   TELÉFONOS
+================================================== */
+
+@media (max-width: 600px) {
+  .create-appointment__proveedor-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 9px;
+  }
+
+  .create-appointment__proveedor-row .create-appointment__input {
+    width: 100%;
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .create-appointment__proveedor-row
+    .create-appointment__proveedor-button {
+    width: 100%;
+    min-height: 46px;
+  }
+
+  .create-appointment__nuevo-proveedor {
+    gap: 11px;
+    margin-top: 3px;
+    padding: 15px 12px;
+    border-left-width: 4px;
+  }
+
+  .create-appointment__nuevo-proveedor h3 {
+    font-size: 17px;
+  }
+
+  .create-appointment__nuevo-proveedor
+    .create-appointment__input {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  .create-appointment__nuevo-proveedor
+    .create-appointment__proveedor-button {
+    align-self: stretch;
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+  }
+}
+
+/* ==================================================
+   TELÉFONOS PEQUEÑOS
+================================================== */
+
+@media (max-width: 380px) {
+  .create-appointment__nuevo-proveedor {
+    padding: 13px 9px;
+  }
+
+  .create-appointment__proveedor-button {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+}
