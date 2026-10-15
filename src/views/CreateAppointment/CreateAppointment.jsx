@@ -1,16 +1,26 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import './CreateAppointment.css'; // Mantiene el CSS existente
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUser } from '../../context/UserContext'; // Importar el contexto del usuario
 import { useNavigate } from 'react-router-dom';
-``
+
 
 const CreateAppointment = () => {
   // ✅ NUEVO
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
   const { user } = useUser(); // Obtener el usuario desde el contexto
+  const [proveedores, setProveedores] = useState([]);
+const [mostrarFormularioProveedor, setMostrarFormularioProveedor] =
+  useState(false);
+
+const [nuevoProveedor, setNuevoProveedor] = useState({
+  empresa: '',
+  viajante: '',
+  telefono: '',
+});
+  
 
   // ✅ Categorías fijas en el frontend
   const categories = [
@@ -45,10 +55,13 @@ const CreateAppointment = () => {
   const fetchUserData = async (email) => {
     try {
       const token = localStorage.getItem('token');
+  
       if (!token) {
-        throw new Error('Token no disponible. Por favor, inicia sesión nuevamente.');
+        throw new Error(
+          'Token no disponible. Por favor, inicia sesión nuevamente.'
+        );
       }
-
+  
       const response = await axios.get(
         `https://ecommerce-9558.onrender.com/users/email/${email}`,
         {
@@ -57,15 +70,44 @@ const CreateAppointment = () => {
           },
         }
       );
-
-      console.log("Datos del usuario obtenidos:", response.data);
+  
+      console.log('Datos del usuario obtenidos:', response.data);
+  
       return response.data;
     } catch (error) {
-      console.error("Error obteniendo datos del usuario:", error.response?.data || error.message);
-      alert("No se pudo obtener la información del usuario. Por favor, verifica tus credenciales.");
+      console.error(
+        'Error obteniendo datos del usuario:',
+        error.response?.data || error.message
+      );
+  
+      alert(
+        'No se pudo obtener la información del usuario. Por favor, verifica tus credenciales.'
+      );
+  
       return null;
     }
   };
+  
+  useEffect(() => {
+    const cargarProveedores = async () => {
+      if (!user?.email) {
+        return;
+      }
+  
+      const userData = await fetchUserData(user.email);
+  
+      if (userData) {
+        console.log("Proveedores usuario:", userData.proveedores);
+        setProveedores(
+          Array.isArray(userData.proveedores)
+            ? userData.proveedores
+            : []
+        );
+      }
+    };
+  
+    cargarProveedores();
+  }, [user?.email]);
 
   // const posData = async (formData, userData) => {
     const posData = async (formData, userData, navigate) => {
@@ -310,10 +352,50 @@ return true;
 </div>
 
 {/* ✅ Input proveedor */}
+{/* ✅ Selector de proveedor */}
 <div className="create-appointment__field">
-  <label htmlFor="proveedor" className="create-appointment__label">Proveedor</label>
-  <Field type="text" name="proveedor" id="proveedor" className="create-appointment__input" />
-  <ErrorMessage name="proveedor" component="div" className="create-appointment__error" />
+  <label
+    htmlFor="proveedor"
+    className="create-appointment__label"
+  >
+    Proveedor
+  </label>
+
+  <div className="create-appointment__proveedor-row">
+    <Field
+      as="select"
+      name="proveedor"
+      id="proveedor"
+      className="create-appointment__input"
+    >
+      <option value="">Selecciona un proveedor</option>
+
+      {proveedores.map((proveedor, index) => (
+        <option
+          key={`${proveedor.empresa}-${index}`}
+          value={proveedor.empresa}
+        >
+          {proveedor.empresa}
+        </option>
+      ))}
+    </Field>
+
+    <button
+      type="button"
+      className="create-appointment__proveedor-button"
+      onClick={() =>
+        setMostrarFormularioProveedor((estadoActual) => !estadoActual)
+      }
+    >
+      {mostrarFormularioProveedor ? 'Cancelar' : '+ Nuevo proveedor'}
+    </button>
+  </div>
+
+  <ErrorMessage
+    name="proveedor"
+    component="div"
+    className="create-appointment__error"
+  />
 </div>
 
 
