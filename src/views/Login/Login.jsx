@@ -20,7 +20,11 @@ const Login = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+  
+    setFormData((datosActuales) => ({
+      ...datosActuales,
+      [name]: name === "email" ? value.toLowerCase() : value,
+    }));
   };
 
   const handleSubmit = async (event) => {
@@ -29,7 +33,12 @@ const Login = () => {
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
-        const response = await loginUser(formData);
+        const datosLogin = {
+          ...formData,
+          email: formData.email.trim().toLowerCase(),
+        };
+        
+        const response = await loginUser(datosLogin);
         console.log("Response procesado:", response);
         const { token, message } = response;
 
@@ -38,7 +47,7 @@ const Login = () => {
         }
 
         localStorage.setItem("token", token); // Guarda el token
-        setUser({ email: formData.email }); // Actualiza el usuario en el contexto
+        setUser({ email: datosLogin.email }); // Actualiza el usuario en el contexto
         setFeedbackMessage(message); // Mensaje de bienvenida
         navigate('/MenuAppointment'); // Redirige al usuario
       } catch (error) {
@@ -78,14 +87,17 @@ const Login = () => {
         <div className="login__field">
           <label className="login__label">Email:</label>
           <input
-            type="email"
-            name="email"
-            className="login__input"
-            placeholder="mail@mail.com"
-            value={formData.email}
-            onChange={handleChange}
-            autoComplete="email"
-          />
+  type="email"
+  name="email"
+  className="login__input"
+  placeholder="mail@mail.com"
+  value={formData.email}
+  onChange={handleChange}
+  autoComplete="email"
+  autoCapitalize="none"
+  autoCorrect="off"
+  spellCheck="false"
+/>
           {errors.email && <span className="login__error">{errors.email}</span>}
         </div>
         <div className="login__field">

@@ -1,125 +1,372 @@
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+===================================================== */
+
+.carrusell,
+.carrusell * {
+  box-sizing: border-box;
+}
+
 .carrusell {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
   margin: 0;
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 4rem);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #e3f2df, #e3f2df);
+
+  background: linear-gradient(
+    135deg,
+    #e3f2df 0%,
+    #d4ebcf 50%,
+    #e3f2df 100%
+  );
+
   text-align: center;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-/* Nickname como título */
+/* =====================================================
+   TÍTULO O NOMBRE DEL USUARIO
+===================================================== */
+
 .carrusell__nickname {
-  font-size: 2rem;
-  font-weight: bold;
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 0 clamp(1rem, 3vh, 2.5rem);
+  padding: 0 0.5rem;
+
+  font-size: clamp(1.4rem, 3vw, 3.5rem);
+  line-height: 1.15;
+  font-weight: 800;
+
   color: #222;
-  margin-bottom: 1.5rem;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
-/* Mensaje de error */
+/* =====================================================
+   MENSAJE DE ERROR
+===================================================== */
+
 .carrusell__error {
+  width: min(90%, 700px);
+
+  margin: 0 0 1rem;
+  padding: 1rem;
+
   color: #b00020;
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.75);
+
+  border: 1px solid rgba(176, 0, 32, 0.25);
+  border-radius: 10px;
+
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 700;
 }
 
-/* Detalles del producto */
+/* =====================================================
+   TARJETA DEL PRODUCTO
+===================================================== */
+
 .carrusell__details {
-  background: #e3f2df;
-  border-radius: 12px;
-  padding: 2rem;
-  max-width: 600px;
-  width: 90%;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  animation: fadeSlide 0.8s ease-in-out;
+  width: min(92vw, 1000px);
+  max-height: calc(100dvh - 7rem);
+
+  padding: clamp(1rem, 3vw, 3rem);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(227, 242, 223, 0.96);
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: clamp(12px, 2vw, 24px);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  overflow: hidden;
+  animation: fadeSlide 0.7s ease-in-out;
 }
 
 @keyframes fadeSlide {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
+
+/* =====================================================
+   NOMBRE DEL PRODUCTO
+===================================================== */
 
 .carrusell__name {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #333;
+  width: 100%;
+
+  margin: 0 0 clamp(0.4rem, 1.5vh, 1rem);
+
+  color: #263326;
+
+  font-size: clamp(1.3rem, 3vw, 3.2rem);
+  line-height: 1.15;
+  font-weight: 800;
+
+  overflow-wrap: anywhere;
 }
+
+/* =====================================================
+   PRECIO
+===================================================== */
 
 .carrusell__precio {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: #444;
+  width: 100%;
+
+  margin: 0 0 clamp(0.75rem, 2vh, 1.5rem);
+
+  color: #344334;
+
+  font-size: clamp(1rem, 2.2vw, 2.2rem);
+  line-height: 1.3;
 }
 
+/* =====================================================
+   IMAGEN DEL PRODUCTO
+===================================================== */
+
 .carrusell__imagen {
+  display: block;
+
   width: 100%;
-  max-height: 300px;
+  max-width: 1000px;
+
+  height: auto;
+  max-height: min(58vh, 650px);
+
   object-fit: contain;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
+  object-position: center;
+
+  border-radius: clamp(8px, 1.5vw, 18px);
+
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
 }
 
 .carrusell__imagen:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+  filter: brightness(1.03);
 }
 
-/* Ocultar navbar si estás en la página del carrusel */
+/* =====================================================
+   OCULTAR NAVBAR EN LA PÁGINA DEL CARRUSEL
+===================================================== */
+
 body.carrusell-page .navbar {
   display: none;
 }
 
-/* 🔧 Ajustes para pantallas grandes (Smart TV, >1200px) */
-@media (min-width: 1200px) {
+/* =====================================================
+   CELULARES PEQUEÑOS
+===================================================== */
+
+@media (max-width: 480px) {
   .carrusell {
-    width: 100vw;
-    height: 100vh;
-    padding: 4rem;
+    justify-content: flex-start;
+    padding: 1rem 0.75rem;
   }
 
   .carrusell__nickname {
-    font-size: 3rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: clamp(1.25rem, 7vw, 1.7rem);
   }
 
   .carrusell__details {
-    max-width: 1000px;   /* más ancho en TV */
-    padding: 3rem;
-    font-size: 1.5rem;
+    width: 100%;
+    max-height: none;
+    padding: 1rem;
+    border-radius: 12px;
   }
 
   .carrusell__name {
-    font-size: 2.5rem;
+    font-size: clamp(1.2rem, 6vw, 1.6rem);
   }
 
   .carrusell__precio {
-    font-size: 1.8rem;
+    font-size: clamp(1rem, 5vw, 1.25rem);
   }
 
   .carrusell__imagen {
-    max-height: 600px;   /* imágenes más grandes */
-    object-fit: cover;   /* que ocupen todo el espacio */
+    max-height: 55vh;
   }
 }
 
-/* 🔧 Ajustes para pantallas muy pequeñas (<400px) */
-@media (max-width: 400px) {
+/* =====================================================
+   CELULARES EN POSICIÓN HORIZONTAL
+===================================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .carrusell {
+    min-height: 100dvh;
+    padding: 0.75rem;
+    justify-content: flex-start;
+  }
+
   .carrusell__nickname {
-    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
   }
 
   .carrusell__details {
-    padding: 1rem;
+    width: min(95vw, 800px);
+    max-height: none;
+    padding: 0.75rem;
+  }
+
+  .carrusell__name {
+    margin-bottom: 0.25rem;
+    font-size: 1.2rem;
+  }
+
+  .carrusell__precio {
+    margin-bottom: 0.5rem;
     font-size: 1rem;
   }
 
   .carrusell__imagen {
-    max-height: 200px;
+    max-height: 55vh;
+  }
+}
+
+/* =====================================================
+   TABLETS
+===================================================== */
+
+@media (min-width: 481px) and (max-width: 1024px) {
+  .carrusell {
+    padding: 2rem;
+  }
+
+  .carrusell__details {
+    width: min(90vw, 750px);
+  }
+
+  .carrusell__imagen {
+    max-height: 58vh;
+  }
+}
+
+/* =====================================================
+   ORDENADORES Y NOTEBOOKS
+===================================================== */
+
+@media (min-width: 1025px) and (max-width: 1599px) {
+  .carrusell__details {
+    width: min(82vw, 1000px);
+  }
+
+  .carrusell__imagen {
+    max-height: 58vh;
+  }
+}
+
+/* =====================================================
+   TV FULL HD Y PANTALLAS GRANDES
+===================================================== */
+
+@media (min-width: 1600px) {
+  .carrusell {
+    padding: clamp(3rem, 4vw, 6rem);
+  }
+
+  .carrusell__nickname {
+    max-width: 1500px;
+    margin-bottom: 2.5rem;
+    font-size: clamp(3rem, 3.5vw, 5rem);
+  }
+
+  .carrusell__details {
+    width: min(75vw, 1400px);
+    max-height: calc(100dvh - 12rem);
+    padding: clamp(2.5rem, 3vw, 5rem);
+    border-radius: 28px;
+  }
+
+  .carrusell__name {
+    font-size: clamp(2.8rem, 3vw, 4.5rem);
+  }
+
+  .carrusell__precio {
+    font-size: clamp(2rem, 2vw, 3rem);
+  }
+
+  .carrusell__imagen {
+    max-width: 1350px;
+    max-height: 58vh;
+    border-radius: 20px;
+  }
+}
+
+/* =====================================================
+   TV 4K O RESOLUCIONES MUY GRANDES
+===================================================== */
+
+@media (min-width: 2500px) {
+  .carrusell__nickname {
+    max-width: 2200px;
+    font-size: 6rem;
+  }
+
+  .carrusell__details {
+    width: min(70vw, 2100px);
+    padding: 6rem;
+    border-radius: 40px;
+  }
+
+  .carrusell__name {
+    font-size: 5.5rem;
+  }
+
+  .carrusell__precio {
+    font-size: 3.5rem;
+  }
+
+  .carrusell__imagen {
+    max-width: 1900px;
+    max-height: 60vh;
+    border-radius: 30px;
+  }
+}
+
+/* =====================================================
+   USUARIOS QUE PREFIEREN MENOS ANIMACIONES
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .carrusell__details {
+    animation: none;
+  }
+
+  .carrusell__imagen {
+    transition: none;
+  }
+
+  .carrusell__imagen:hover {
+    transform: none;
   }
 }

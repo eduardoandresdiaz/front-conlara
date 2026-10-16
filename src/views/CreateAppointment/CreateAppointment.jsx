@@ -6,6 +6,7 @@ import { useUser } from '../../context/UserContext'; // Importar el contexto del
 import { useNavigate } from 'react-router-dom';
 
 
+
 const CreateAppointment = () => {
   // ✅ NUEVO
   const navigate = useNavigate();

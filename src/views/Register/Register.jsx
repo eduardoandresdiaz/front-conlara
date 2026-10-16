@@ -160,7 +160,7 @@ const Register = () => {
               {
                 name: values.name,
                 dni: values.dni,
-                email: values.email,
+                email: values.email.trim().toLowerCase(),
                 password: values.password,
                 confirmPassword: values.confirmPassword,
                 phone: values.phone.startsWith("+54") ? values.phone : `+54${values.phone}`,
@@ -242,10 +242,36 @@ const Register = () => {
             </div>
 
             <div className="register__field">
-              <label htmlFor="email" className="register__label">Email</label>
-              <Field type="email" name="email" id="email" className="register__input" />
-              <ErrorMessage name="email" component="div" className="register__error" />
-            </div>
+  <label htmlFor="email" className="register__label">
+    Email
+  </label>
+
+  <Field name="email">
+    {({ field, form }) => (
+      <input
+        {...field}
+        type="email"
+        id="email"
+        className="register__input"
+        autoCapitalize="none"
+        autoCorrect="off"
+        spellCheck="false"
+        onChange={(e) => {
+          form.setFieldValue(
+            "email",
+            e.target.value.toLowerCase()
+          );
+        }}
+      />
+    )}
+  </Field>
+
+  <ErrorMessage
+    name="email"
+    component="div"
+    className="register__error"
+  />
+</div>
 
             <div className="register__field">
   {/* Requisitos de contraseña */}
