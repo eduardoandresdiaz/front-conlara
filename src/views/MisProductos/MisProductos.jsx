@@ -13,6 +13,7 @@ const MisProductos = () => {
   const [filtroVencidos, setFiltroVencidos] = useState(false);
   const [filtroStockMinimo, setFiltroStockMinimo] = useState(false); // nuevo estado
   const [busqueda, setBusqueda] = useState('');
+  const [proveedorSeleccionado, setProveedorSeleccionado] = useState('');
   const { user } = useUser();
   const navigate = useNavigate();
 
@@ -137,37 +138,59 @@ const MisProductos = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const proveedoresDisponibles = [
+    ...new Set(
+      productos
+        .map((producto) => producto.proveedor?.trim())
+        .filter(Boolean)
+    ),
+  ].sort((a, b) => a.localeCompare(b));
+
   // Filtrado dinámico con soporte para mostrar SOLO stock mínimo cuando ese filtro está activo
   const productosFiltrados = productos.filter((p) => {
-    const esAgotado = p.stock === 0;
-    const esVencido = new Date(p.expiresAt) < new Date();
-    const stockMinimoValor = p.stockminimo ?? 0;
-    const esStockMinimo = p.stock <= stockMinimoValor && p.stock > 0;
-
+    const esAgotado = Number(p.stock) === 0;
+  
+    const esVencido =
+      p.expiresAt && new Date(p.expiresAt) < new Date();
+  
+    const stockActual = Number(p.stock);
+    const stockMinimoValor = Number(p.stockminimo ?? 0);
+  
+    const esStockMinimo =
+      stockActual > 0 &&
+      stockActual <= stockMinimoValor;
+  
     const textoBusqueda = busqueda.trim().toLowerCase();
+  
     const coincideBusqueda =
       textoBusqueda === '' ||
-      (p.name?.toLowerCase().includes(textoBusqueda)) ||
-      (p.category?.name?.toLowerCase().includes(textoBusqueda));
-
-    // Si el filtro Stock Mínimo está activo, mostramos SOLO los productos en stock mínimo
+      p.name?.toLowerCase().includes(textoBusqueda) ||
+      p.category?.name?.toLowerCase().includes(textoBusqueda) ||
+      p.proveedor?.toLowerCase().includes(textoBusqueda);
+  
+    const coincideProveedor =
+      proveedorSeleccionado === '' ||
+      p.proveedor?.trim() === proveedorSeleccionado;
+  
+    if (!coincideBusqueda || !coincideProveedor) {
+      return false;
+    }
+  
     if (filtroStockMinimo) {
-      return esStockMinimo && coincideBusqueda;
+      return esStockMinimo;
     }
-
-    // Si Stock Mínimo no está activo, aplicamos los otros filtros (agotados o vencidos).
-    // Si hay al menos un filtro activo entre Agotados o Vencidos, mostramos la unión de esos filtros.
-    const filtrosActivos = filtroAgotados || filtroVencidos;
-    if (filtrosActivos) {
-      const cumpleFiltro =
-        (filtroAgotados && esAgotado) ||
-        (filtroVencidos && esVencido);
-      return cumpleFiltro && coincideBusqueda;
+  
+    if (filtroAgotados) {
+      return esAgotado;
     }
-
-    // Si no hay filtros activos, solo aplicamos búsqueda
-    return coincideBusqueda;
+  
+    if (filtroVencidos) {
+      return esVencido;
+    }
+  
+    return true;
   });
+  
 
   const cantidadAgotados = productos.filter((p) => p.stock === 0).length;
   const cantidadVencidos = productos.filter((p) => new Date(p.expiresAt) < new Date()).length;
@@ -249,17 +272,62 @@ const MisProductos = () => {
     <div className="listadoProductos">
       <h1 className="tituloSuperior">Mis Publicaciones</h1>
 
+      
       {/* Buscador */}
-      <form className="buscadorContainer" onSubmit={(e) => e.preventDefault()}>
-        <input
-          type="text"
-          placeholder="Buscar mis productos..."
-          value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}
-          className="buscadorInput"
-        />
-        <p className="Lupa">🔍</p>
-      </form>
+<form
+  className="buscadorContainer"
+  onSubmit={(e) => e.preventDefault()}
+>
+  <input
+    type="text"
+    placeholder="Buscar mis productos..."
+    value={busqueda}
+    onChange={(e) => setBusqueda(e.target.value)}
+    className="buscadorInput"
+  />
+
+  <p className="Lupa">🔍</p>
+</form>
+
+{/* Filtro por proveedor */}
+<div className="filtroProveedorContainer">
+  <label
+    htmlFor="filtroProveedor"
+    className="filtroProveedorLabel"
+  >
+    Filtrar por proveedor
+  </label>
+
+  <select
+    id="filtroProveedor"
+    className="filtroProveedorSelect"
+    value={proveedorSeleccionado}
+    onChange={(event) =>
+      setProveedorSeleccionado(event.target.value)
+    }
+  >
+    <option value="">Todos los proveedores</option>
+
+    {proveedoresDisponibles.map((proveedor) => (
+      <option key={proveedor} value={proveedor}>
+        {proveedor}
+      </option>
+    ))}
+  </select>
+
+  {proveedorSeleccionado && (
+    <button
+      type="button"
+      className="filtroProveedorLimpiar"
+      onClick={() => setProveedorSeleccionado('')}
+    >
+      Quitar filtro
+    </button>
+  )}
+</div>
+
+{/* Botones de filtro */}
+<div className="filtrosContainer"></div>
 
       {/* Botones de filtro */}
       <div className="filtrosContainer">
