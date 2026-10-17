@@ -8,6 +8,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules"; // 👈 agreg
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+const PRODUCTOS_POR_PAGINA = 20;
 
 const ListadoProductos = () => {
   const [productos, setProductos] = useState([]);
@@ -21,40 +22,66 @@ const ListadoProductos = () => {
   const fetchProductos = async (pageNumber = 1, append = false) => {
     try {
       setLoading(true);
+
       const response = await fetch(
-        `https://ecommerce-9558.onrender.com/products?page=${pageNumber}&limit=1000`
+        `https://ecommerce-9558.onrender.com/products?page=${pageNumber}&limit=${PRODUCTOS_POR_PAGINA}`
       );
-      if (!response.ok) throw new Error('Error al obtener los productos');
+
+      if (!response.ok) {
+        throw new Error("Error al obtener los productos");
+      }
+
       const data = await response.json();
 
-      // 👇 acumula productos si append es true
-      setProductos((prev) => (append ? [...prev, ...data] : data));
-      setError('');
-      setHasMore(data.length === 50); // si devuelve menos de 50, no hay más
+      setProductos((prev) =>
+        append ? [...prev, ...data] : data
+      );
+
+      setError("");
+      setHasMore(data.length === PRODUCTOS_POR_PAGINA);
     } catch (error) {
       setError(error.message);
-      if (!append) setProductos([]);
+
+      if (!append) {
+        setProductos([]);
+      }
     } finally {
       setLoading(false);
     }
   };
 
   const fetchBusqueda = async (pageNumber = 1, append = false) => {
-    if (busqueda.trim() === '') return fetchProductos(pageNumber, append);
+    if (busqueda.trim() === "") {
+      return fetchProductos(pageNumber, append);
+    }
+
     try {
       setLoading(true);
+
       const response = await fetch(
-        `https://ecommerce-9558.onrender.com/products/search?q=${encodeURIComponent(busqueda)}&page=${pageNumber}&limit=50`
+        `https://ecommerce-9558.onrender.com/products/search?q=${encodeURIComponent(
+          busqueda.trim()
+        )}&page=${pageNumber}&limit=${PRODUCTOS_POR_PAGINA}`
       );
-      if (!response.ok) throw new Error('Error al buscar productos');
+
+      if (!response.ok) {
+        throw new Error("Error al buscar productos");
+      }
+
       const data = await response.json();
 
-      setProductos((prev) => (append ? [...prev, ...data] : data));
-      setError('');
-      setHasMore(data.length === 50);
+      setProductos((prev) =>
+        append ? [...prev, ...data] : data
+      );
+
+      setError("");
+      setHasMore(data.length === PRODUCTOS_POR_PAGINA);
     } catch (error) {
       setError(error.message);
-      if (!append) setProductos([]);
+
+      if (!append) {
+        setProductos([]);
+      }
     } finally {
       setLoading(false);
     }
@@ -96,75 +123,75 @@ const ListadoProductos = () => {
 
   const formatPrice = (price, expiresAt, mostrarprecio) => {
     const validPrice = isNaN(price) ? 0 : parseFloat(price);
-  
+
     // Si mostrarprecio es false → mostrar "Consultar"
     if (!mostrarprecio) {
       return 'Consultar';
     }
-  
+
     // Si la oferta ya venció → mostrar "Consultar"
     if (new Date(expiresAt) < new Date()) {
       return 'Consultar';
     }
-  
+
     // Si el precio es 1 → mostrar "Consultar"
     return validPrice === 1 ? 'Consultar' : `$${validPrice.toFixed(2)}`;
   };
-  
 
-      
+
+
   return (
-    
+
     <div className="listadoProductos">
-   <div className='botones_superiores'>
-   <button
-    type="button"
-    className="telefonos_utiles"
-    onClick={() => navigate("/InfoLaToma")}
-  >
-    Información La Toma
-  </button>
-  <button
-    type="button"
-    className="telefonos_utiles"
-    onClick={() => navigate("/InfoNaschel")}
-  >
-    Información Naschel
-  </button>
-  <button className='telefonos_utiles' onClick={() => navigate('/servicios')}>Guia de Servicios</button>
-</div>
+      <div className='botones_superiores'>
+        <button
+          type="button"
+          className="telefonos_utiles"
+          onClick={() => navigate("/InfoLaToma")}
+        >
+          Información La Toma
+        </button>
+        <button
+          type="button"
+          className="telefonos_utiles"
+          onClick={() => navigate("/InfoNaschel")}
+        >
+          Información Naschel
+        </button>
+        <button className='telefonos_utiles' onClick={() => navigate('/servicios')}>Guia de Servicios</button>
+      </div>
       {/* Buscador */}
       <form className="listadoProductos__buscador" onSubmit={handleSubmit}>
-         {/* Carrusel de imágenes */}
-<Swiper
-  spaceBetween={10}
-  slidesPerView={3}
-  navigation
-  pagination={{ clickable: true }}
-  autoplay={{
-    delay: 2000, // ⏱ tiempo en ms entre cada slide
-    disableOnInteraction: false, // sigue moviéndose aunque el usuario interactúe
-    pauseOnMouseEnter: true, // 👈 se detiene si pasás el mouse encima
-  }}
-  breakpoints={{
-    320: { slidesPerView: 1 },
-    640: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 }
-  }}
-  modules={[Navigation, Pagination, Autoplay]} // 👈 incluir Autoplay
->
-  <SwiperSlide>
-    <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785880915/img1_npzt1t.png" alt="Producto 1" />
-  </SwiperSlide>
-  <SwiperSlide>
-    <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785888560/Sin_nombre_jnq2v0.png" alt="Producto 2" />
-  </SwiperSlide>
-  <SwiperSlide>
-    <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785880915/img1_npzt1t.png" alt="Producto 3" />
-  </SwiperSlide>
-</Swiper>
+        {/* Carrusel de imágenes */}
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={3}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{
+            delay: 2000, // ⏱ tiempo en ms entre cada slide
+            disableOnInteraction: false, // sigue moviéndose aunque el usuario interactúe
+            pauseOnMouseEnter: true, // 👈 se detiene si pasás el mouse encima
+          }}
+          breakpoints={{
+            320: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 }
+          }}
+          modules={[Navigation, Pagination, Autoplay]} // 👈 incluir Autoplay
+        >
+          <SwiperSlide>
+            <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785880915/img1_npzt1t.png" alt="Producto 1" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785888560/Sin_nombre_jnq2v0.png" alt="Producto 2" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785880915/img1_npzt1t.png" alt="Producto 3" />
+          </SwiperSlide>
+        </Swiper>
 
-        
+
         <input
           type="text"
           placeholder="Buscar productos..."
@@ -177,59 +204,65 @@ const ListadoProductos = () => {
       {error && <p className="listadoProductos__error">{error}</p>}
 
       <div className="listadoProductos__list">
-  {loading ? ( //iiiiiiii
-    <p>Cargando productos...</p> //iiiiiiii
-  ) : productos.length === 0 && !error ? ( //iiiiiiii
-    <p>🤖</p> //iiiiiiii
-  ) : (
-    productos.map((producto) => (
-<div key={producto.id} className="listadoProductos__details">
-  <div className="imagenContainer">
-    <img
-      src={producto.imgUrl}
-      alt={`Imagen de ${producto.name}`}
-      className="listadoProductos__img"
-    />
-    {producto.stock === 0 && (
-      <div className="agotadoOverlay">AGOTADO</div>
-    )}
-     {/* Overlay de OFERTA */}
-     {producto.resaltaroferta && (
-      <div className="ofertaOverlay">OFERTA</div>
-    )}
+        {productos.length === 0 && loading ? (
+          <p>Cargando productos...</p>
+        ) : productos.length === 0 && !error ? (
+          <p>🤖</p>
+        ) : (
+          productos.map((producto) => (
+            <div key={producto.id} className="listadoProductos__details">
+              <div className="imagenContainer">
+                <img
+                  src={producto.imgUrl}
+                  alt={`Imagen de ${producto.name}`}
+                  className="listadoProductos__img"
+                  loading="lazy"
+                  decoding="async"
+                />
+                {producto.stock === 0 && (
+                  <div className="agotadoOverlay">AGOTADO</div>
+                )}
+                {/* Overlay de OFERTA */}
+                {producto.resaltaroferta && (
+                  <div className="ofertaOverlay">OFERTA</div>
+                )}
 
-  </div>
+              </div>
 
-  <h2>{producto.name}</h2>
-  {formatPrice(
-  producto.price,
-  producto.expiresAt,
-  producto.mostrarprecio
-) !== 'Consultar' && (
-  <div className="price">
-    <span className="precioTexto">
-      Precio: {formatPrice(
-        producto.price,
-        producto.expiresAt,
-        producto.mostrarprecio
+              <h2>{producto.name}</h2>
+              {formatPrice(
+                producto.price,
+                producto.expiresAt,
+                producto.mostrarprecio
+              ) !== 'Consultar' && (
+                  <div className="price">
+                    <span className="precioTexto">
+                      Precio: {formatPrice(
+                        producto.price,
+                        producto.expiresAt,
+                        producto.mostrarprecio
+                      )}
+                    </span>
+                  </div>
+                )}
+              <button
+                className="meInteresaBoton"
+                onClick={() => handleClick(producto.id)}
+              >
+                Ver Detalles
+              </button>
+            </div>
+
+          ))
+        )}
+      </div>
+
+
+      {loading && productos.length > 0 && (
+        <p className="listadoProductos__cargandoMas">
+          Cargando más productos... 😉
+        </p>
       )}
-    </span>
-  </div>
-)}
-  <button
-    className="meInteresaBoton"
-    onClick={() => handleClick(producto.id)}
-  >
-    Ver Detalles
-  </button>
-</div>
-
-    ))
-  )}
-</div>
-
-
-      {loading && <p>😉</p>}
     </div>
   );
 };
