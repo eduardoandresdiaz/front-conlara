@@ -127,10 +127,21 @@ const DetallesProducto = () => {
             )}
 
             <h1 className="detallesProducto__titulo">{producto.name}</h1>
-            <p className="detallesProducto__informacion">
-              <span className="detallesProducto__etiqueta">Descripción: </span>
-              {producto.description}
-            </p>
+            {formatPrice(
+              producto.price,
+              producto.expiresAt,
+              producto.mostrarprecio
+            ) !== "Consultar" && (
+                <p className="detallesProducto__informacion">
+                  <span className="detallesProducto__etiqueta">Precio: </span>
+
+                  {formatPrice(
+                    producto.price,
+                    producto.expiresAt,
+                    producto.mostrarprecio
+                  )}
+                </p>
+              )}
             <p className="detallesProducto__informacion">
               <span className="detallesProducto__etiqueta">Precio: </span>
               {formatPrice(producto.price, producto.expiresAt, producto.mostrarprecio)}
@@ -146,8 +157,17 @@ const DetallesProducto = () => {
             />
 
             <div className="detallesProducto__botones">
-              <button className="detallesProducto__boton" onClick={handleComprar}>
-                Comprar
+              <button
+                className="detallesProducto__boton"
+                onClick={handleComprar}
+              >
+                {formatPrice(
+                  producto.price,
+                  producto.expiresAt,
+                  producto.mostrarprecio
+                ) === "Consultar"
+                  ? "Consultar precio"
+                  : "Comprar"}
               </button>
             </div>
 

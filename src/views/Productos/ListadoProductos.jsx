@@ -201,12 +201,21 @@ const ListadoProductos = () => {
   </div>
 
   <h2>{producto.name}</h2>
+  {formatPrice(
+  producto.price,
+  producto.expiresAt,
+  producto.mostrarprecio
+) !== 'Consultar' && (
   <div className="price">
-  <span className="precioTexto">
-  Precio: {formatPrice(producto.price, producto.expiresAt, producto.mostrarprecio)}
- </span>
-
+    <span className="precioTexto">
+      Precio: {formatPrice(
+        producto.price,
+        producto.expiresAt,
+        producto.mostrarprecio
+      )}
+    </span>
   </div>
+)}
   <button
     className="meInteresaBoton"
     onClick={() => handleClick(producto.id)}
