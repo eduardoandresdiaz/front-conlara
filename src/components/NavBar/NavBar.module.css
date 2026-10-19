@@ -160,3 +160,42 @@
 .profileButton:hover {
   background-color: #45a049;
 }
+
+.sobreNosotrosButton {
+  padding: 10px 16px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  background-color: #287a4d;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sobreNosotrosButton:hover {
+  background-color: #1c603b;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+}
+
+.sobreNosotrosButton:active {
+  transform: translateY(0);
+}
+
+.sobreNosotrosButton:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .sobreNosotrosButton {
+    width: 100%;
+    margin: 4px 0;
+  }
+}

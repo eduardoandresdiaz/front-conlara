@@ -1,0 +1,459 @@
+.sobreNosotros {
+    min-height: 100vh;
+    background-color: #f5f7f6;
+    color: #26332c;
+}
+
+.sobreNosotros * {
+    box-sizing: border-box;
+}
+
+/* HERO */
+.sobreNosotros__hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 390px;
+    padding: 60px 20px;
+    overflow: hidden;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(15, 92, 54, 0.97), rgba(30, 135, 79, 0.94));
+}
+
+.sobreNosotros__hero::before {
+    content: "";
+    position: absolute;
+    top: -120px;
+    right: -100px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.sobreNosotros__hero::after {
+    content: "";
+    position: absolute;
+    bottom: -150px;
+    left: -100px;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.sobreNosotros__heroContenido {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 900px;
+}
+
+.sobreNosotros__etiqueta {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 8px 16px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50px;
+}
+
+.sobreNosotros__hero h1 {
+    margin: 0 0 18px;
+    color: #ffffff;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.sobreNosotros__hero p {
+    max-width: 760px;
+    margin: 0 auto 28px;
+    color: rgba(255, 255, 255, 0.93);
+    font-size: 1.15rem;
+    line-height: 1.7;
+}
+
+/* CONTENEDOR */
+.sobreNosotros__contenedor {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+/* SECCIONES GENERALES */
+.sobreNosotros__seccion {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 28px;
+    align-items: flex-start;
+    margin-bottom: 35px;
+    padding: 35px;
+    background-color: blue;
+    border: 1px solid #e1e8e4;
+    border-radius: 22px;
+    box-shadow: 0 10px 30px rgba(22, 65, 42, 0.07);
+}
+
+.sobreNosotros__seccion--destacada {
+    color: #ffffff;
+    background: linear-gradient(135deg, #12623b, #269052);
+    border: none;
+}
+
+.sobreNosotros__seccion--destacada h2,
+.sobreNosotros__seccion--destacada p {
+    color: #ffffff;
+}
+
+.sobreNosotros__icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    font-size: 2.2rem;
+    background-color: #eaf7ef;
+    border-radius: 20px;
+}
+
+.sobreNosotros__seccion--destacada .sobreNosotros__icono {
+    background-color: rgba(255, 255, 255, 0.16);
+}
+
+.sobreNosotros__texto h2 {
+    margin: 0 0 15px;
+    color: #ffffff;
+    font-size: 1.7rem;
+}
+
+.sobreNosotros__texto p {
+    margin: 0 0 13px;
+    color: hsl(0, 0%, 100%);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.sobreNosotros__texto p:last-child {
+    margin-bottom: 0;
+}
+
+/* MENSAJE DESTACADO */
+.sobreNosotros__mensajeDestacado {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 22px;
+    padding: 16px 18px;
+    background-color: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 14px;
+}
+
+.sobreNosotros__mensajeDestacado span {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    color: #14633b;
+    font-weight: 900;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.sobreNosotros__mensajeDestacado p {
+    margin: 0;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* BENEFICIOS */
+.sobreNosotros__beneficios {
+    margin: 60px 0;
+}
+
+.sobreNosotros__beneficios>h2 {
+    margin: 0 0 30px;
+    color: #155f39;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.sobreNosotros__beneficiosGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.sobreNosotros__beneficio {
+    padding: 28px 24px;
+    text-align: center;
+    background-color: #ffffff;
+    border: 1px solid #e1e8e4;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(22, 65, 42, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sobreNosotros__beneficio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 32px rgba(22, 65, 42, 0.12);
+}
+
+.sobreNosotros__beneficioIcono {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 2.4rem;
+}
+
+.sobreNosotros__beneficio h3 {
+    margin: 0 0 10px;
+    color: #17663d;
+    font-size: 1.15rem;
+}
+
+.sobreNosotros__beneficio p {
+    margin: 0;
+    color: #68736d;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* MISIÓN Y VISIÓN */
+.sobreNosotros__misionVision {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin: 60px 0;
+}
+
+.sobreNosotros__tarjeta {
+    padding: 35px;
+    background-color: #ffffff;
+    border-top: 5px solid #21804c;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(22, 65, 42, 0.08);
+}
+
+.sobreNosotros__tarjetaIcono {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+}
+
+.sobreNosotros__tarjeta h2 {
+    margin: 0 0 15px;
+    color: #155f39;
+    font-size: 1.6rem;
+}
+
+.sobreNosotros__tarjeta p {
+    margin: 0;
+    color: #58655e;
+    line-height: 1.75;
+}
+
+/* LLAMADA A LA ACCIÓN */
+.sobreNosotros__llamadaAccion {
+    margin-top: 60px;
+    padding: 50px 30px;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(135deg, #0e5633, #21804c);
+    border-radius: 24px;
+    box-shadow: 0 18px 40px rgba(15, 92, 54, 0.2);
+}
+
+.sobreNosotros__llamadaIcono {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 3rem;
+}
+
+.sobreNosotros__llamadaAccion h2 {
+    margin: 0 0 15px;
+    font-size: 2rem;
+}
+
+.sobreNosotros__llamadaAccion p {
+    max-width: 720px;
+    margin: 0 auto 15px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
+
+.sobreNosotros__llamadaAccion strong {
+    display: block;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #ffffff;
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+.sobreNosotros__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 28px;
+}
+
+/* BOTONES */
+.sobreNosotros__botonPrincipal,
+.sobreNosotros__botonSecundario {
+    min-width: 180px;
+    padding: 13px 22px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sobreNosotros__botonPrincipal {
+    color: #17663d;
+    background-color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.sobreNosotros__botonPrincipal:hover {
+    transform: translateY(-2px);
+    background-color: #edf8f1;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.sobreNosotros__botonSecundario {
+    color: #ffffff;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+}
+
+.sobreNosotros__botonSecundario:hover {
+    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+    .sobreNosotros__beneficiosGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sobreNosotros__misionVision {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* CELULARES */
+@media (max-width: 650px) {
+    .sobreNosotros__hero {
+        min-height: 340px;
+        padding: 45px 18px;
+    }
+
+    .sobreNosotros__hero h1 {
+        font-size: 2.1rem;
+    }
+
+    .sobreNosotros__hero p {
+        font-size: 1rem;
+    }
+
+    .sobreNosotros__contenedor {
+        width: min(100% - 20px, 1180px);
+        padding: 30px 0;
+    }
+
+    .sobreNosotros__seccion {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 24px 20px;
+        background-color: blue;
+    }
+
+    .sobreNosotros__icono {
+        width: 62px;
+        height: 62px;
+        font-size: 1.8rem;
+    }
+
+    .sobreNosotros__texto h2 {
+        font-size: 1.4rem;
+    }
+
+    .sobreNosotros__texto p {
+        font-size: 0.95rem;
+    }
+
+    .sobreNosotros__beneficios {
+        margin: 40px 0;
+    }
+
+    .sobreNosotros__beneficios>h2 {
+        font-size: 1.6rem;
+    }
+
+    .sobreNosotros__beneficiosGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .sobreNosotros__misionVision {
+        margin: 40px 0;
+    }
+
+    .sobreNosotros__tarjeta {
+        padding: 25px 20px;
+    }
+
+    .sobreNosotros__llamadaAccion {
+        margin-top: 40px;
+        padding: 38px 20px;
+    }
+
+    .sobreNosotros__llamadaAccion h2 {
+        font-size: 1.6rem;
+    }
+
+    .sobreNosotros__acciones {
+        flex-direction: column;
+    }
+
+    .sobreNosotros__botonPrincipal,
+    .sobreNosotros__botonSecundario {
+        width: 100%;
+    }
+}
+/* Imagen principal de Sobre nosotros */
+
+.sobreNosotros__imagenPrincipal {
+    width: 100%;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+  
+  .sobreNosotros__imagen {
+    display: block;
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* Celulares */
+  
+  @media (max-width: 650px) {
+    .sobreNosotros__imagen {
+      max-height: 380px;
+      object-fit: cover;
+    }
+  }

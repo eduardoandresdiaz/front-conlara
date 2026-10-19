@@ -23,6 +23,7 @@ import InfoNaschel from "./views/InfoNaschel/InfoNaschel";
 import Carrusell from "./views/Carrusell/Carrusell";
 import ListadoUsuarios from "./views/Ranger0750/ListadoUsuarios";
 import Servicios from "./views/Servicios/Servicios";
+import SobreNosotros from "./views/SobreNosotros/SobreNosotros";
 
 function App() {
   const location = useLocation();
@@ -60,6 +61,7 @@ function App() {
           <Route path="/infoNaschel" element={<InfoNaschel />} />
           <Route path="/carrusel" element={<Carrusell />} />
           <Route path="/x28x" element={<ListadoUsuarios />} />
+          <Route path="/sobre-nosotros" element={<SobreNosotros />} />
           {/* <Route path="/perfil/:nickname" element={<PerfilPublico />} /> */}
 
         </Routes>
