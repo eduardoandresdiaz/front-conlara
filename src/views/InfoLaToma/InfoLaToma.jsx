@@ -116,10 +116,10 @@ function resolverFarmacia(turnoRaw) {
   const isCplus = /C\+/.test(turnoRaw);
   const isAplus = /A\+/.test(turnoRaw);
   const isAstar = /A\*/.test(turnoRaw);
-  
+
   if (isCplus) {
     const info = farmaciasInfo["A"];
-  
+
     return {
       clave: "A",
       nombre: info.nombre,
@@ -187,22 +187,25 @@ const Info = () => {
     },
     {
       nombre: "Hospital de La Toma",
-      telefonos: ["107","2655 421248"],
+      telefonos: ["107", "2655 421248"],
       direccion: "Av. Libertador 250, La Toma, San Luis",
       mapa: "https://maps.google.com/?q=Hospital+La+Toma+San+Luis",
     },
     {
       nombre: "Cuartel de Bomberos",
-      telefonos: ["100","2655 421021"],
+      telefonos: ["100", "2655 421021"],
       direccion: "Sarmiento y San Martin, La Toma, San Luis",
       mapa: "https://maps.google.com/?q=Bomberos+La+Toma+San+Luis",
     },
     {
       nombre: "Municipalidad de La Toma",
       telefonos: ["2655 421530"],
-      direccion: " Av. Belgrano y Rivadavia, La Toma, San Luis",
+      direccion: "Av. Belgrano y Rivadavia, La Toma, San Luis",
       mapa: "https://maps.google.com/?q=Municipalidad+La+Toma+San+Luis",
+      web: "https://latomaciudad.com/",
+      logo: "https://latomaciudad.com/logo-la-toma.png",
     },
+
     {
       nombre: "Terminal de Ómnibus",
       telefonos: ["2664 460000"],
@@ -219,34 +222,34 @@ const Info = () => {
 
 
       <div className="centerLink">
-      <button
-  type="button"
-  onClick={() => navigate("/HistoriaLaToma")}
-  className="btnHistoria"
->
-  📖 Historia de La Toma
-</button>
+        <button
+          type="button"
+          onClick={() => navigate("/HistoriaLaToma")}
+          className="btnHistoria"
+        >
+          📖 Historia de La Toma
+        </button>
       </div>
       <div className="preciosAgro">
-  <h2>🌾 Precios de Granos</h2>
+        <h2>🌾 Precios de Granos</h2>
 
-  <div className="preciosGrid">
-  <div className="precioCard">
-  <h3>🌽 Maíz</h3>
-  <p>$294.800/t</p>
-</div>
+        <div className="preciosGrid">
+          <div className="precioCard">
+            <h3>🌽 Maíz</h3>
+            <p>$294.800/t</p>
+          </div>
 
-<div className="precioCard">
-  <h3>🫘 Soja</h3>
-  <p>$560.000/t</p>
-</div>
+          <div className="precioCard">
+            <h3>🫘 Soja</h3>
+            <p>$560.000/t</p>
+          </div>
 
-<div className="precioCard">
-  <h3>🌻 Girasol</h3>
-  <p>$611.419/t</p>
-</div>
-  </div>
-</div>
+          <div className="precioCard">
+            <h3>🌻 Girasol</h3>
+            <p>$611.419/t</p>
+          </div>
+        </div>
+      </div>
       <div className="farmaciaTurno">
         <h2>💊 Farmacia de turno hoy</h2>
 
@@ -284,36 +287,64 @@ const Info = () => {
       <ul className="lugaresList">
         {lugares.map((lugar, index) => (
           <li key={index} className="lugarItem">
+            {lugar.logo && (
+              <div className="lugarLogoContenedor">
+                <img
+                  src={lugar.logo}
+                  alt={lugar.nombre}
+                  className="lugarLogo"
+                />
+              </div>
+            )}
+
             <h2 className="lugarNombre">{lugar.nombre}</h2>
 
             <div className="telefonoBlock">
-              <strong>📞 Teléfono{lugar.telefonos.length > 1 ? "s" : ""}:</strong>
-              <div className="telefonoColumn">
-                {lugar.telefonos.map((tel, i) => (
-                  <div key={i} className="telefonoFila">
-                    <span className="telefonoLabel">Teléfono {i + 1}:</span>
-                    <a
-                      href={`tel:${normalizeTelHref(tel)}`}
-                      className="telefonoLink"
-                    >
-                      {tel}
-                    </a>
-                  </div>
-                ))}
-              </div>
+              {lugar.telefonos.map((tel, i) => (
+                <div key={i} className="telefonoFila">
+                  <span>📞</span>
+
+                  <a
+                    href={`tel:${normalizeTelHref(tel)}`}
+                    className="telefonoLink"
+                  >
+                    {tel}
+                  </a>
+                </div>
+              ))}
             </div>
 
-            <p className="direccion">📍 Dirección: {lugar.direccion}</p>
+            <p className="direccion">
+              📍 Dirección: {lugar.direccion}
+            </p>
 
             <p className="mapa">
               🌍{" "}
-              <a href={lugar.mapa} target="_blank" rel="noopener noreferrer">
-                Como LLegar
+              <a
+                href={lugar.mapa}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Cómo llegar
               </a>
             </p>
+
+            {lugar.web && (
+              <p className="sitioWeb">
+                🌐{" "}
+                <a
+                  href={lugar.web}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visitar página web
+                </a>
+              </p>
+            )}
           </li>
         ))}
       </ul>
+
     </div>
   );
 };

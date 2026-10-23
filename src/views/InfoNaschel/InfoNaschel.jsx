@@ -163,48 +163,49 @@ const Info = () => {
 
   const turnoRawHoy = turnos[mesHoy]?.[diaHoy] ?? null;
   const farmaciaHoy = resolverFarmacia(turnoRawHoy);
-//////////////////////////////////////////////
-const lugares = [
-  {
-    nombre: "Policía de Naschel",
-    telefonos: ["911", "2656 491024"],
-    direccion: "Naschel, San Luis",
-    mapa:
-      "https://maps.google.com/?q=Policia+Naschel+San+Luis",
-  },
+  //////////////////////////////////////////////
+  const lugares = [
+    {
+      nombre: "Policía de Naschel",
+      telefonos: ["911", "2656 491024"],
+      direccion: "Naschel, San Luis",
+      mapa:
+        "https://maps.google.com/?q=Policia+Naschel+San+Luis",
+    },
 
-  {
-    nombre: "Hospital de Naschel",
-    telefonos: ["107"],
-    direccion: "Naschel, San Luis",
-    mapa:
-      "https://maps.google.com/?q=Hospital+Naschel+San+Luis",
-  },
+    {
+      nombre: "Hospital de Naschel",
+      telefonos: ["107"],
+      direccion: "Naschel, San Luis",
+      mapa:
+        "https://maps.google.com/?q=Hospital+Naschel+San+Luis",
+    },
 
-  {
-    nombre: "Cuartel de Bomberos de Naschel",
-    telefonos: ["100"],
-    direccion: "Naschel, San Luis",
-    mapa:
-      "https://maps.google.com/?q=Bomberos+Naschel+San+Luis",
-  },
+    {
+      nombre: "Cuartel de Bomberos de Naschel",
+      telefonos: ["100"],
+      direccion: "Naschel, San Luis",
+      mapa:
+        "https://maps.google.com/?q=Bomberos+Naschel+San+Luis",
+    },
 
-  {
-    nombre: "Municipalidad de Naschel",
-    telefonos: ["2656 491025"],
-    direccion: "Av. Belgrano 498, Naschel, San Luis",
-    mapa:
-      "https://maps.google.com/?q=Municipalidad+de+Naschel+San+Luis",
-  },
+    {
+      nombre: "Municipalidad de Naschel",
+      telefonos: ["2656 491025"],
+      direccion: "Av. Belgrano 498, Naschel, San Luis",
+      mapa: "https://maps.google.com/?q=Municipalidad+de+Naschel+San+Luis",
+      web: "https://municipalidadnaschel.net/",
+      logo: "https://municipalidadnaschel.net/assets/images/logo.png",
+    },
 
-  {
-    nombre: "Terminal de Ómnibus de Naschel",
-    telefonos: [],
-    direccion: "Naschel, San Luis",
-    mapa:
-      "https://maps.google.com/?q=Terminal+de+Omnibus+Naschel+San+Luis",
-  },
-];
+    {
+      nombre: "Terminal de Ómnibus de Naschel",
+      telefonos: [],
+      direccion: "Naschel, San Luis",
+      mapa:
+        "https://maps.google.com/?q=Terminal+de+Omnibus+Naschel+San+Luis",
+    },
+  ];
   /////////////////////////////////////////////////////////////////////////////
 
   const normalizeTelHref = (tel) => tel.replace(/[^\d+]/g, "");
@@ -215,34 +216,34 @@ const lugares = [
 
 
       <div className="centerLink">
-      <button
-  type="button"
-  onClick={() => navigate("/HistoriaNaschel")}
-  className="btnHistoria"
->
-  📖 Historia de Naschel
-</button>
+        <button
+          type="button"
+          onClick={() => navigate("/HistoriaNaschel")}
+          className="btnHistoria"
+        >
+          📖 Historia de Naschel
+        </button>
       </div>
       <div className="preciosAgro">
-  <h2>🌾 Precios de Granos</h2>
+        <h2>🌾 Precios de Granos</h2>
 
-  <div className="preciosGrid">
-  <div className="precioCard">
-  <h3>🌽 Maíz</h3>
-  <p>$294.800/t</p>
-</div>
+        <div className="preciosGrid">
+          <div className="precioCard">
+            <h3>🌽 Maíz</h3>
+            <p>$294.800/t</p>
+          </div>
 
-<div className="precioCard">
-  <h3>🫘 Soja</h3>
-  <p>$560.000/t</p>
-</div>
+          <div className="precioCard">
+            <h3>🫘 Soja</h3>
+            <p>$560.000/t</p>
+          </div>
 
-<div className="precioCard">
-  <h3>🌻 Girasol</h3>
-  <p>$611.419/t</p>
-</div>
-  </div>
-</div>
+          <div className="precioCard">
+            <h3>🌻 Girasol</h3>
+            <p>$611.419/t</p>
+          </div>
+        </div>
+      </div>
       <div className="farmaciaTurno">
         <h2>💊 Farmacia de turno hoy</h2>
 
@@ -280,6 +281,15 @@ const lugares = [
       <ul className="lugaresList">
         {lugares.map((lugar, index) => (
           <li key={index} className="lugarItem">
+            {lugar.logo && (
+              <div className="lugarLogoContenedor">
+                <img
+                  src={lugar.logo}
+                  alt={`Logo de ${lugar.nombre}`}
+                  className="lugarLogo"
+                />
+              </div>
+            )}
             <h2 className="lugarNombre">{lugar.nombre}</h2>
 
             <div className="telefonoBlock">
@@ -302,11 +312,20 @@ const lugares = [
             <p className="direccion">📍 Dirección: {lugar.direccion}</p>
 
             <p className="mapa">
-              🌍{" "}
-              <a href={lugar.mapa} target="_blank" rel="noopener noreferrer">
-                Como LLegar
-              </a>
-            </p>
+  🌍{" "}
+  <a href={lugar.mapa} target="_blank" rel="noopener noreferrer">
+    Cómo llegar
+  </a>
+</p>
+
+{lugar.web && (
+  <p className="sitioWeb">
+    🌐{" "}
+    <a href={lugar.web} target="_blank" rel="noopener noreferrer">
+      Visitar página web
+    </a>
+  </p>
+)}
           </li>
         ))}
       </ul>

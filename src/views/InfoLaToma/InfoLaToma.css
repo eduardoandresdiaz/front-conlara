@@ -191,3 +191,107 @@
   font-weight: bold;
   color: #2e7d32;
 }
+/* ========================= */
+/* LUGARES */
+/* ========================= */
+
+.lugarItem {
+  text-align: center;
+}
+
+.lugarNombre {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.telefonoBlock {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.telefonoColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.telefonoFila {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.telefonoLabel {
+  font-weight: bold;
+}
+
+.direccion {
+  margin: 10px 0;
+}
+
+.mapa {
+  margin: 10px 0;
+}
+
+.mapa a {
+  color: #0066cc;
+  font-weight: 600;
+}
+
+.sitioWeb {
+  margin-top: 10px;
+}
+
+.sitioWeb a {
+  color: #0066cc;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sitioWeb a:hover {
+  text-decoration: underline;
+}
+
+/* ========================= */
+/* LOGO MUNICIPALIDAD */
+/* ========================= */
+
+.lugarLogoContenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.lugarLogo {
+  width: 220px;
+  height: 60px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+
+  
+
+@media (max-width: 420px) {
+  .lugarLogo {
+    width: 255px;
+    height: 61px;
+  }
+
+  .lugarNombre {
+    font-size: 1rem;
+  }
+
+  .telefonoFila {
+    font-size: 0.9rem;
+  }
+}

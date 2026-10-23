@@ -1,193 +1,273 @@
-/* Base existente (tu CSS) */
+/* Base existente */
 .infoUtil {
-    max-width: 600px;
-    margin: auto;
-    font-family: Arial, sans-serif;
-    color: #333;
+  max-width: 600px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.infoUtil h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.infoUtil ul {
+  list-style: none;
+  padding: 0;
+}
+
+.infoUtil li {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  background: #f9f9f9;
+  margin-bottom: 12px;
+}
+
+.infoUtil a {
+  color: black;
+  text-decoration: none;
+}
+
+.infoUtil a:hover {
+  text-decoration: underline;
+}
+
+.btnHistoria {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 3px;
+  border: none;
+  cursor: pointer;
+}
+
+.btnHistoria:hover {
+  background: #0056b3;
+}
+
+/* ========================= */
+/* FARMACIA DE TURNO */
+/* ========================= */
+
+.farmaciaTurno {
+  border: 2px solid #e0e7ff;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.farmaciaTurno h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.15rem;
+  color: #0b5ed7;
+}
+
+.farmaciaTurno p {
+  margin: 6px 0;
+  line-height: 1.35;
+}
+
+.farmaciaInfo {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #eef2ff;
+}
+
+.farmaciaInfo p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.telefonoLink {
+  color: #0b5ed7;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.telefonoLink:hover {
+  text-decoration: underline;
+}
+
+.notaTurno {
+  margin-top: 8px;
+  padding: 8px;
+  background: #fff8e6;
+  border: 1px solid #ffe8a8;
+  border-radius: 6px;
+  color: #7a4b00;
+  font-size: 0.95rem;
+}
+
+.fechaTurno {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.centerLink {
+  text-align: center;
+  margin: 14px 0;
+}
+
+/* ========================= */
+/* LUGARES */
+/* ========================= */
+
+.lugaresList {
+  padding: 0;
+}
+
+.lugarItem {
+  text-align: center;
+}
+
+.lugarNombre {
+  margin: 10px 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #222;
+}
+
+.telefonoBlock {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.telefonoColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.telefonoFila {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 3px 0;
+}
+
+.telefonoLabel {
+  font-weight: bold;
+}
+
+.direccion {
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+.mapa {
+  margin: 10px 0;
+}
+
+.mapa a {
+  color: #0066cc;
+  font-weight: 600;
+}
+
+.sitioWeb {
+  margin-top: 10px;
+}
+
+.sitioWeb a {
+  color: #0066cc;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sitioWeb a:hover {
+  text-decoration: underline;
+}
+
+/* ========================= */
+/* LOGO MUNICIPALIDAD */
+/* ========================= */
+
+.lugarLogoContenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.lugarLogo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ========================= */
+/* PRECIOS DE GRANOS */
+/* ========================= */
+
+.preciosAgro {
+  margin: 25px 0;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f4f9ed;
+  border: 1px solid #d8e6c8;
+}
+
+.preciosGrid {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.precioCard {
+  flex: 1;
+  min-width: 180px;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.precioCard h3 {
+  margin-bottom: 10px;
+}
+
+.precioCard p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 420px) {
+  .infoUtil {
+    padding: 12px;
   }
-  
-  .infoUtil h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .infoUtil ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .infoUtil li {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 8px;
-    background: #f9f9f9;
-    margin-bottom: 12px;
-  }
-  
-  .infoUtil a {
-    color: black;
-    text-decoration: none;
-  }
-  
-  .infoUtil a:hover {
-    text-decoration: underline;
-  }
-  
-  .btnHistoria {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #007bff;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    margin: 3px;
-  }
-  
-  .btnHistoria:hover {
-    background: #0056b3;
-  }
-  
-  /* Nuevos estilos para la sección Farmacia de turno */
-  .farmaciaTurno {
-    border: 2px solid #e0e7ff;
-    background: linear-gradient(180deg, #ffffff 0%, #f6f9ff 100%);
-    padding: 14px;
-    border-radius: 10px;
-    margin-bottom: 18px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-  }
-  
+
   .farmaciaTurno h2 {
-    margin: 0 0 8px 0;
-    font-size: 1.15rem;
-    color: #0b5ed7;
-  }
-  
-  .farmaciaTurno p {
-    margin: 6px 0;
-    line-height: 1.35;
-  }
-  
-  /* Bloque con dirección, teléfono y mapa */
-  .farmaciaInfo {
-    margin-top: 8px;
-    padding: 8px;
-    border-radius: 8px;
-    background: #fff;
-    border: 1px solid #eef2ff;
-  }
-  
-  .farmaciaInfo p {
-    margin: 6px 0;
-    font-size: 0.95rem;
-  }
-  
-  .telefonoLink {
-    color: #0b5ed7;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  
-  .telefonoLink:hover {
-    text-decoration: underline;
-  }
-  
-  /* Nota especial cuando una farmacia cubre por cierre */
-  .notaTurno {
-    margin-top: 8px;
-    padding: 8px;
-    background: #fff8e6;
-    border: 1px solid #ffe8a8;
-    border-radius: 6px;
-    color: #7a4b00;
-    font-size: 0.95rem;
-  }
-  
-  /* Fecha del turno */
-  .fechaTurno {
-    margin-top: 8px;
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  /* Centrado del botón de historia */
-  .centerLink {
-    text-align: center;
-    margin: 14px 0;
-  }
-  
-  /* Ajustes para la lista de lugares (mantener consistencia) */
-  .lugaresList .lugarItem {
-    display: block;
-  }
-  
-  .lugarNombre {
-    margin: 0 0 6px 0;
     font-size: 1rem;
-    color: #222;
   }
-  
-  /* Bloque de teléfonos dentro de cada lugar */
-  .telefonoBlock {
-    margin: 6px 0;
-  }
-  
-  .telefonoColumn {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
+
+  .farmaciaInfo p,
   .telefonoFila {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
-  
-  /* Responsive pequeño */
-  @media (max-width: 420px) {
-    .infoUtil {
-      padding: 12px;
-    }
-    .farmaciaTurno h2 {
-      font-size: 1rem;
-    }
-    .farmaciaInfo p, .telefonoFila {
-      font-size: 0.9rem;
-    }
+
+  .lugarLogo {
+    width: 90px;
+    height: 90px;
   }
-  .preciosAgro {
-    margin: 25px 0;
-    padding: 20px;
-    border-radius: 12px;
-    background: #f4f9ed;
-    border: 1px solid #d8e6c8;
+
+  .lugarNombre {
+    font-size: 1.1rem;
   }
-  
-  .preciosGrid {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-  
-  .precioCard {
-    flex: 1;
-    min-width: 180px;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  }
-  
-  .precioCard h3 {
-    margin-bottom: 10px;
-  }
-  
-  .precioCard p {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #2e7d32;
-  }
+}
