@@ -63,13 +63,7 @@ const NavBar = () => {
         }`}
       >
         {/* Este botón aparece para todos los usuarios */}
-        <button
-          type="button"
-          className={style.sobreNosotrosButton}
-          onClick={() => handleNavigate("/sobre-nosotros")}
-        >
-          Sobre nosotros
-        </button>
+       
 
         {!user?.email ? (
           <>
@@ -97,6 +91,7 @@ const NavBar = () => {
               >
                 Registrarse
               </button>
+
             </Link>
           </>
         ) : (
@@ -135,6 +130,13 @@ const NavBar = () => {
             </button>
           </>
         )}
+         <button
+          type="button"
+          className={style.sobreNosotrosButton}
+          onClick={() => handleNavigate("/sobre-nosotros")}
+        >
+          Sobre nosotros
+        </button>
       </div>
     </nav>
   );

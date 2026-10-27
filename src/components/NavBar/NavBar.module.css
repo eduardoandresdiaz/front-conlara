@@ -162,20 +162,14 @@
 }
 
 .sobreNosotrosButton {
-  padding: 10px 16px;
-  color: #ffffff;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 600;
-  white-space: nowrap;
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 12px;
+  margin: 5px;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  background-color: #287a4d;
-  border: 1px solid #ffffff;
-  border-radius: 8px;
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  font-size: 14px;
 }
 
 .sobreNosotrosButton:hover {
