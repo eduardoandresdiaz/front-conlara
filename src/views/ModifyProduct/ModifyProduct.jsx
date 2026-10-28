@@ -31,14 +31,25 @@ const ModifyProduct = () => {
           stock: response.data.stock,
           stockminimo: response.data.stockminimo || 0,
           ubicacion: response.data.ubicacion || '',
-          category: response.data.category ? response.data.category.id : '',
-          expiresAt: response.data.expiresAt ? response.data.expiresAt.split('T')[0] : '',
+          category: response.data.category
+            ? response.data.category.id
+            : '',
+          expiresAt: response.data.expiresAt
+            ? response.data.expiresAt.split('T')[0]
+            : '',
+
+          // Fecha de vencimiento real del producto
+          tieneVencimiento: Boolean(response.data.fechaCaducidad),
+          fechaCaducidad: response.data.fechaCaducidad
+            ? response.data.fechaCaducidad.split('T')[0]
+            : '',
+
           proveedor: response.data.proveedor || '',
-          mostrarprecio: response.data.mostrarprecio,   // cuidado: backend lo devuelve en minúsculas
+          mostrarprecio: response.data.mostrarprecio,
           resaltaroferta: response.data.resaltaroferta,
-          nopublicable: response.data.nopublicable
+          nopublicable: response.data.nopublicable,
         });
-        
+
 
         setImageUrl(response.data.imgUrl);
       } catch (error) {
@@ -66,15 +77,15 @@ const ModifyProduct = () => {
           setProveedores([]);
           return;
         }
-    
+
         const token = localStorage.getItem('token');
-    
+
         if (!token) {
           console.error('No hay token disponible');
           setProveedores([]);
           return;
         }
-    
+
         const response = await axios.get(
           `https://ecommerce-9558.onrender.com/users/email/${user.email}`,
           {
@@ -83,7 +94,7 @@ const ModifyProduct = () => {
             },
           }
         );
-    
+
         setProveedores(
           Array.isArray(response.data.proveedores)
             ? response.data.proveedores
@@ -94,11 +105,11 @@ const ModifyProduct = () => {
           'Error al cargar los proveedores:',
           error.response?.data || error.message
         );
-    
+
         setProveedores([]);
       }
     };
-    
+
 
     fetchProduct();
     fetchCategories();
@@ -114,20 +125,20 @@ const ModifyProduct = () => {
       const token = localStorage.getItem('token');
       console.log("FORM DATA:", formData);
 
-console.log(
-  "JSON:",
-  JSON.stringify(formData, null, 2)
-);
+      console.log(
+        "JSON:",
+        JSON.stringify(formData, null, 2)
+      );
       await axios.put(
         `https://ecommerce-9558.onrender.com/products/${id}`,
         formData,
         { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
       );
-  
+
       if (selectedFile) {
         const formDataImage = new FormData();
         formDataImage.append('file', selectedFile);
-  
+
         await axios.post(
           `https://ecommerce-9558.onrender.com/file-upload/uploadImage/${id}`,
           formDataImage,
@@ -137,7 +148,7 @@ console.log(
       } else {
         alert('Producto modificado exitosamente (sin cambiar imagen).');
       }
-  
+
       // Volver a la página anterior en el historial
       navigate(-1);
     } catch (error) {
@@ -147,7 +158,7 @@ console.log(
       console.error("Payload enviado:", formData);
     }
   };
-  
+
 
   return (
     <div className="modify-product">
@@ -164,14 +175,14 @@ console.log(
             }
             const stockNum = Number(values.stock);
 
-if (
-  values.stock === '' ||
-  values.stock == null ||
-  !Number.isInteger(stockNum) ||
-  stockNum < 0
-) {
-  errors.stock = 'La cantidad debe ser un número entero no negativo.';
-}
+            if (
+              values.stock === '' ||
+              values.stock == null ||
+              !Number.isInteger(stockNum) ||
+              stockNum < 0
+            ) {
+              errors.stock = 'La cantidad debe ser un número entero no negativo.';
+            }
 
             if (!values.category || !/^[0-9a-fA-F-]{36}$/.test(values.category)) {
               errors.category = 'La categoría es obligatoria y debe ser un UUID válido.';
@@ -179,6 +190,26 @@ if (
             if (!values.expiresAt) {
               errors.expiresAt = 'La fecha de expiración es obligatoria.';
             }
+
+            if (values.tieneVencimiento && !values.fechaCaducidad) {
+              errors.fechaCaducidad =
+                'Debes indicar la fecha de vencimiento del producto.';
+            }
+
+            if (values.tieneVencimiento && values.fechaCaducidad) {
+              const hoy = new Date();
+              hoy.setHours(0, 0, 0, 0);
+
+              const fechaSeleccionada = new Date(
+                `${values.fechaCaducidad}T00:00:00`
+              );
+
+              if (fechaSeleccionada < hoy) {
+                errors.fechaCaducidad =
+                  'La fecha de vencimiento no puede ser anterior a hoy.';
+              }
+            }
+
             return errors;
           }}
           onSubmit={async (values, { setSubmitting }) => {
@@ -190,18 +221,26 @@ if (
               stockminimo: parseInt(values.stockminimo, 10),
               ubicacion: values.ubicacion,
               category: { id: values.category },
-              expiresAt: values.expiresAt ? new Date(values.expiresAt).toISOString() : null,
+
+              expiresAt: values.expiresAt
+                ? new Date(values.expiresAt).toISOString()
+                : null,
+
+              fechaCaducidad: values.tieneVencimiento
+                ? values.fechaCaducidad
+                : null,
+
               proveedor: values.proveedor,
               mostrarprecio: values.mostrarprecio,
               resaltaroferta: values.resaltaroferta,
-              nopublicable: values.nopublicable
+              nopublicable: values.nopublicable,
             };
-            
+
             await updateProduct(formData);
             setSubmitting(false);
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, values, setFieldValue }) => (
             <Form className="modify-product__form">
               <div className="modify-product__field">
                 <label htmlFor="name" className="modify-product__label">Nombre del producto</label>
@@ -226,17 +265,17 @@ if (
                 <Field type="number" name="stock" id="stock" className="modify-product__input" />
                 <ErrorMessage name="stock" component="div" className="modify-product__error" />
               </div>
-                <div className="modify-product__field">
-               <label htmlFor="stockminimo" className="modify-product__label">Stock mínimo</label>
-  <Field type="number" name="stockminimo" id="stockminimo" className="modify-product__input" />
-  <ErrorMessage name="stockminimo" component="div" className="modify-product__error" />
-</div>
+              <div className="modify-product__field">
+                <label htmlFor="stockminimo" className="modify-product__label">Stock mínimo</label>
+                <Field type="number" name="stockminimo" id="stockminimo" className="modify-product__input" />
+                <ErrorMessage name="stockminimo" component="div" className="modify-product__error" />
+              </div>
 
-<div className="modify-product__field">
-  <label htmlFor="ubicacion" className="modify-product__label">Ubicación</label>
-  <Field type="text" name="ubicacion" id="ubicacion" className="modify-product__input" />
-  <ErrorMessage name="ubicacion" component="div" className="modify-product__error" />
-</div>
+              <div className="modify-product__field">
+                <label htmlFor="ubicacion" className="modify-product__label">Ubicación</label>
+                <Field type="text" name="ubicacion" id="ubicacion" className="modify-product__input" />
+                <ErrorMessage name="ubicacion" component="div" className="modify-product__error" />
+              </div>
 
 
               <div className="modify-product__field">
@@ -250,58 +289,105 @@ if (
                 <ErrorMessage name="category" component="div" className="modify-product__error" />
               </div>
               <div className="modify-product__field">
-  <label htmlFor="proveedor" className="modify-product__label">
-    Proveedor
-  </label>
+                <label htmlFor="proveedor" className="modify-product__label">
+                  Proveedor
+                </label>
 
-  <Field
-    as="select"
-    name="proveedor"
-    id="proveedor"
-    className="modify-product__input"
-  >
-    <option value="">Seleccionar proveedor</option>
+                <Field
+                  as="select"
+                  name="proveedor"
+                  id="proveedor"
+                  className="modify-product__input"
+                >
+                  <option value="">Seleccionar proveedor</option>
 
-    {proveedores.map((proveedor, index) => (
-      <option
-        key={`${proveedor.empresa}-${index}`}
-        value={proveedor.empresa}
-      >
-        {proveedor.empresa} - {proveedor.viajante}
-      </option>
-    ))}
-  </Field>
+                  {proveedores.map((proveedor, index) => (
+                    <option
+                      key={`${proveedor.empresa}-${index}`}
+                      value={proveedor.empresa}
+                    >
+                      {proveedor.empresa} - {proveedor.viajante}
+                    </option>
+                  ))}
+                </Field>
 
-  <ErrorMessage
-    name="proveedor"
-    component="div"
-    className="modify-product__error"
-  />
-</div>
-<div className="modify-product__field">
-  <label>
-    <Field type="checkbox" name="mostrarprecio" />
-    Mostrar Precio
-  </label>
-</div>
+                <ErrorMessage
+                  name="proveedor"
+                  component="div"
+                  className="modify-product__error"
+                />
+              </div>
+              <div className="modify-product__field">
+                <label>
+                  <Field type="checkbox" name="mostrarprecio" />
+                  Mostrar Precio
+                </label>
+              </div>
 
-<div className="modify-product__field">
-  <label>
-    <Field type="checkbox" name="resaltaroferta" />
-    Resaltar Oferta
-  </label>
-</div>
+              <div className="modify-product__field">
+                <label>
+                  <Field type="checkbox" name="resaltaroferta" />
+                  Resaltar Oferta
+                </label>
+              </div>
 
-<div className="modify-product__field">
-  <label>
-    <Field type="checkbox" name="nopublicable" />
-    No Publicable
-  </label>
-</div>
+              <div className="modify-product__field">
+                <label>
+                  <Field type="checkbox" name="nopublicable" />
+                  No Publicable
+                </label>
+              </div>
+              <div className="modify-product__field">
+                <label className="modify-product__label">
+                  ¿Este producto tiene vencimiento?
+                </label>
+
+                <label>
+                  <Field
+                    type="checkbox"
+                    name="tieneVencimiento"
+                    onChange={(event) => {
+                      const marcado = event.target.checked;
+
+                      setFieldValue('tieneVencimiento', marcado);
+
+                      if (!marcado) {
+                        setFieldValue('fechaCaducidad', '');
+                      }
+                    }}
+                  />
+
+                  {' '}Sí
+                </label>
+              </div>
+
+              {values.tieneVencimiento && (
+                <div className="modify-product__field">
+                  <label
+                    htmlFor="fechaCaducidad"
+                    className="modify-product__label"
+                  >
+                    Fecha de vencimiento del producto
+                  </label>
+
+                  <Field
+                    type="date"
+                    name="fechaCaducidad"
+                    id="fechaCaducidad"
+                    className="modify-product__input"
+                  />
+
+                  <ErrorMessage
+                    name="fechaCaducidad"
+                    component="div"
+                    className="modify-product__error"
+                  />
+                </div>
+              )}
 
 
               <div className="modify-product__field">
-                <label htmlFor="expiresAt" className="modify-product__label">Fecha de Expiración</label>
+                <label htmlFor="expiresAt" className="modify-product__label">Expiración de oferta o precio</label>
                 <Field type="date" name="expiresAt" id="expiresAt" className="modify-product__input" />
                 <ErrorMessage name="expiresAt" component="div" className="modify-product__error" />
               </div>

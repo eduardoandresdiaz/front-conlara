@@ -13,15 +13,15 @@ const CreateAppointment = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const { user } = useUser(); // Obtener el usuario desde el contexto
   const [proveedores, setProveedores] = useState([]);
-const [mostrarFormularioProveedor, setMostrarFormularioProveedor] =
-  useState(false);
+  const [mostrarFormularioProveedor, setMostrarFormularioProveedor] =
+    useState(false);
 
-const [nuevoProveedor, setNuevoProveedor] = useState({
-  empresa: '',
-  viajante: '',
-  telefono: '',
-});
-  
+  const [nuevoProveedor, setNuevoProveedor] = useState({
+    empresa: '',
+    viajante: '',
+    telefono: '',
+  });
+
 
   // ✅ Categorías fijas en el frontend
   const categories = [
@@ -47,7 +47,7 @@ const [nuevoProveedor, setNuevoProveedor] = useState({
     { id: 20, name: "Repuestos y accesorios para Bicicletas" },
     { id: 21, name: "Agropartes" },
   ];
-  
+
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -56,13 +56,13 @@ const [nuevoProveedor, setNuevoProveedor] = useState({
   const fetchUserData = async (email) => {
     try {
       const token = localStorage.getItem('token');
-  
+
       if (!token) {
         throw new Error(
           'Token no disponible. Por favor, inicia sesión nuevamente.'
         );
       }
-  
+
       const response = await axios.get(
         `https://ecommerce-9558.onrender.com/users/email/${email}`,
         {
@@ -71,82 +71,82 @@ const [nuevoProveedor, setNuevoProveedor] = useState({
           },
         }
       );
-  
+
       console.log('Datos del usuario obtenidos:', response.data);
-  
+
       return response.data;
     } catch (error) {
       console.error(
         'Error obteniendo datos del usuario:',
         error.response?.data || error.message
       );
-  
+
       alert(
         'No se pudo obtener la información del usuario. Por favor, verifica tus credenciales.'
       );
-  
+
       return null;
     }
   };
   const guardarProveedor = async () => {
-  try {
-    const userData = await fetchUserData(user.email);
+    try {
+      const userData = await fetchUserData(user.email);
 
-    if (!userData) return;
+      if (!userData) return;
 
-    if (
-      !nuevoProveedor.empresa ||
-      !nuevoProveedor.viajante ||
-      !nuevoProveedor.telefono
-    ) {
-      alert("Completa todos los datos del proveedor");
-      return;
+      if (
+        !nuevoProveedor.empresa ||
+        !nuevoProveedor.viajante ||
+        !nuevoProveedor.telefono
+      ) {
+        alert("Completa todos los datos del proveedor");
+        return;
+      }
+
+      const proveedoresActualizados = [
+        ...(userData.proveedores || []),
+        nuevoProveedor,
+      ];
+
+      const token = localStorage.getItem('token');
+
+      const response = await axios.put(
+        `https://ecommerce-9558.onrender.com/users/${userData.id}`,
+        {
+          proveedores: proveedoresActualizados,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setProveedores(response.data.proveedores);
+
+      setNuevoProveedor({
+        empresa: "",
+        viajante: "",
+        telefono: "",
+      });
+
+      setMostrarFormularioProveedor(false);
+
+      alert("✅ Proveedor guardado correctamente");
+    } catch (error) {
+      console.error(error);
+      alert("Error al guardar proveedor");
     }
+  };
 
-    const proveedoresActualizados = [
-      ...(userData.proveedores || []),
-      nuevoProveedor,
-    ];
-
-   const token = localStorage.getItem('token');
-
-const response = await axios.put(
-  `https://ecommerce-9558.onrender.com/users/${userData.id}`,
-  {
-    proveedores: proveedoresActualizados,
-  },
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
-
-    setProveedores(response.data.proveedores);
-
-    setNuevoProveedor({
-      empresa: "",
-      viajante: "",
-      telefono: "",
-    });
-
-    setMostrarFormularioProveedor(false);
-
-    alert("✅ Proveedor guardado correctamente");
-  } catch (error) {
-    console.error(error);
-    alert("Error al guardar proveedor");
-  }
-};
-  
   useEffect(() => {
     const cargarProveedores = async () => {
       if (!user?.email) {
         return;
       }
-  
+
       const userData = await fetchUserData(user.email);
-  
+
       if (userData) {
         console.log("Proveedores usuario:", userData.proveedores);
         setProveedores(
@@ -156,12 +156,12 @@ const response = await axios.put(
         );
       }
     };
-  
+
     cargarProveedores();
   }, [user?.email]);
 
   // const posData = async (formData, userData) => {
-    const posData = async (formData, userData, navigate) => {
+  const posData = async (formData, userData, navigate) => {
     try {
       console.log("Datos enviados:", formData);
 
@@ -192,16 +192,16 @@ const response = await axios.put(
           //////////////////////////////////////////////////////////////
           console.log("Respuesta del backend (imagen):", imageResponse.data);
 
-// ✅ NUEVO
-const crearOtro = window.confirm(
-  "✅ Producto creado e imagen subida exitosamente.\n\n¿Desea cargar un nuevo producto?"
-);
+          // ✅ NUEVO
+          const crearOtro = window.confirm(
+            "✅ Producto creado e imagen subida exitosamente.\n\n¿Desea cargar un nuevo producto?"
+          );
 
-if (!crearOtro) {
-  navigate("/MenuAppointment");
-}
+          if (!crearOtro) {
+            navigate("/MenuAppointment");
+          }
 
-return true;
+          return true;
 
           //////////////////////////////////////////////////////////////
         } else {
@@ -209,15 +209,15 @@ return true;
           // return true;
           //////////////////////////////////////////////////////////////
           // ✅ NUEVO
-const crearOtro = window.confirm(
-  "✅ Producto creado exitosamente.\n\n¿Desea cargar un nuevo producto?"
-);
+          const crearOtro = window.confirm(
+            "✅ Producto creado exitosamente.\n\n¿Desea cargar un nuevo producto?"
+          );
 
-if (!crearOtro) {
-  navigate("/MenuAppointment");
-}
+          if (!crearOtro) {
+            navigate("/MenuAppointment");
+          }
 
-return true;
+          return true;
           //////////////////////////////////////////////////////////////
         }
       } else {
@@ -244,6 +244,8 @@ return true;
           ubicacion: '',
           category: '',
           expiresAt: '', // ✅ nuevo campo
+          tieneVencimiento: false,
+          fechaCaducidad: '',
           mostrarprecio: true,       // ✅ nuevo campo
           resaltaroferta: false,     // ✅ nuevo campo
           nopublicable: false,       // ✅ nuevo campo
@@ -282,7 +284,25 @@ return true;
           if (!values.ubicacion) {
             errors.ubicacion = 'La ubicación es obligatoria.';
           }
+
+          if (values.tieneVencimiento && !values.fechaCaducidad) {
+            errors.fechaCaducidad = 'Debes indicar la fecha de vencimiento.';
+          }
           
+          if (values.tieneVencimiento && values.fechaCaducidad) {
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+          
+            const fechaSeleccionada = new Date(
+              `${values.fechaCaducidad}T00:00:00`
+            );
+          
+            if (fechaSeleccionada < hoy) {
+              errors.fechaCaducidad =
+                'La fecha de vencimiento no puede ser anterior a hoy.';
+            }
+          }
+
           return errors;
         }}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
@@ -301,7 +321,16 @@ return true;
           // };
           const formData = {
             ...values,
-            expiresAt: values.expiresAt ? new Date(values.expiresAt) : undefined,
+            tieneVencimiento: undefined,
+          
+            expiresAt: values.expiresAt
+              ? new Date(values.expiresAt)
+              : undefined,
+          
+            fechaCaducidad: values.tieneVencimiento
+              ? values.fechaCaducidad
+              : null,
+          
             creatorEmail: userData.email,
             telefono: userData.phone || "Teléfono no disponible",
             category: { name: values.category },
@@ -312,7 +341,7 @@ return true;
             stockminimo: values.stockminimo,
             ubicacion: values.ubicacion,
           };
-          
+
 
           // const success = await posData(formData, userData);
           // ✅ MODIFICADO
@@ -325,8 +354,8 @@ return true;
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, errors, validateForm, handleSubmit }) => (
-           <Form className="create-appointment__form">
+        {({ isSubmitting, errors, validateForm, handleSubmit, values }) => (
+          <Form className="create-appointment__form">
             {/* Campos del formulario */}
             <div className="create-appointment__field">
               <label htmlFor="name" className="create-appointment__label" maxLength={100} >Nombre del producto</label>
@@ -352,12 +381,12 @@ return true;
               <ErrorMessage name="stock" component="div" className="create-appointment__error" />
             </div>
 
-             {/* 🔹 Nuevo campo Stock mínimo */}
+            {/* 🔹 Nuevo campo Stock mínimo */}
             <div className="create-appointment__field">
               <label htmlFor="stockminimo" className="create-appointment__label">Stock mínimo</label>
               <Field type="number" name="stockminimo" id="stockminimo" className="create-appointment__input" />
               <ErrorMessage name="stockminimo" component="div" className="create-appointment__error" />
-          </div>
+            </div>
 
             {/* 🔹 Nuevo campo Ubicación */}
             <div className="create-appointment__field">
@@ -379,132 +408,175 @@ return true;
             </div>
 
             {/* ✅ Checkbox mostrarprecio */}
-<div className="create-appointment__field">
-  <label>
-    <Field type="checkbox" name="mostrarprecio" />
-    Mostrar precio
-  </label>
-</div>
+            <div className="create-appointment__field">
+              <label>
+                <Field type="checkbox" name="mostrarprecio" />
+                Mostrar precio
+              </label>
+            </div>
 
-{/* ✅ Checkbox resaltaroferta */}
-<div className="create-appointment__field">
-  <label>
-    <Field type="checkbox" name="resaltaroferta" />
-    Resaltar como oferta
-  </label>
-</div>
+            {/* ✅ Checkbox resaltaroferta */}
+            <div className="create-appointment__field">
+              <label>
+                <Field type="checkbox" name="resaltaroferta" />
+                Resaltar como oferta
+              </label>
+            </div>
 
-{/* ✅ Checkbox nopublicable */}
-<div className="create-appointment__field">
-  <label>
-    <Field type="checkbox" name="nopublicable" disabled />
-    Producto no publicable
-  </label>
-</div>
+            {/* ✅ Checkbox nopublicable */}
+            <div className="create-appointment__field">
+              <label>
+                <Field type="checkbox" name="nopublicable" disabled />
+                Producto no publicable
+              </label>
+            </div>
 
-{/* ✅ Input proveedor */}
-{/* ✅ Selector de proveedor */}
-<div className="create-appointment__field">
-  <label
-    htmlFor="proveedor"
-    className="create-appointment__label"
-  >
-    Proveedor
-  </label>
+            {/* ✅ Input proveedor */}
+            {/* ✅ Selector de proveedor */}
+            <div className="create-appointment__field">
+              <label
+                htmlFor="proveedor"
+                className="create-appointment__label"
+              >
+                Proveedor
+              </label>
 
-  <div className="create-appointment__proveedor-row">
-    <Field
-      as="select"
-      name="proveedor"
-      id="proveedor"
-      className="create-appointment__input"
-    >
-      <option value="">Selecciona un proveedor</option>
+              <div className="create-appointment__proveedor-row">
+                <Field
+                  as="select"
+                  name="proveedor"
+                  id="proveedor"
+                  className="create-appointment__input"
+                >
+                  <option value="">Selecciona un proveedor</option>
 
-      {proveedores.map((proveedor, index) => (
-        <option
-          key={`${proveedor.empresa}-${index}`}
-          value={proveedor.empresa}
-        >
-          {proveedor.empresa}
-        </option>
-      ))}
-    </Field>
+                  {proveedores.map((proveedor, index) => (
+                    <option
+                      key={`${proveedor.empresa}-${index}`}
+                      value={proveedor.empresa}
+                    >
+                      {proveedor.empresa}
+                    </option>
+                  ))}
+                </Field>
 
-    <button
-      type="button"
-      className="create-appointment__proveedor-button"
-      onClick={() =>
-        setMostrarFormularioProveedor((estadoActual) => !estadoActual)
-      }
-    >
-      {mostrarFormularioProveedor ? 'Cancelar' : '+ Nuevo proveedor'}
-    </button>
-  </div>
+                <button
+                  type="button"
+                  className="create-appointment__proveedor-button"
+                  onClick={() =>
+                    setMostrarFormularioProveedor((estadoActual) => !estadoActual)
+                  }
+                >
+                  {mostrarFormularioProveedor ? 'Cancelar' : '+ Nuevo proveedor'}
+                </button>
+              </div>
 
-  <ErrorMessage
-    name="proveedor"
-    component="div"
-    className="create-appointment__error"
-  />
-</div>
-{mostrarFormularioProveedor && (
-  <div className="create-appointment__nuevo-proveedor">
-    <h3>Nuevo proveedor</h3>
+              <ErrorMessage
+                name="proveedor"
+                component="div"
+                className="create-appointment__error"
+              />
+            </div>
+            {mostrarFormularioProveedor && (
+              <div className="create-appointment__nuevo-proveedor">
+                <h3>Nuevo proveedor</h3>
 
-    <input
-      type="text"
-      placeholder="Empresa"
-      value={nuevoProveedor.empresa}
-      onChange={(e) =>
-        setNuevoProveedor({
-          ...nuevoProveedor,
-          empresa: e.target.value,
-        })
-      }
-      className="create-appointment__input"
-    />
+                <input
+                  type="text"
+                  placeholder="Empresa"
+                  value={nuevoProveedor.empresa}
+                  onChange={(e) =>
+                    setNuevoProveedor({
+                      ...nuevoProveedor,
+                      empresa: e.target.value,
+                    })
+                  }
+                  className="create-appointment__input"
+                />
 
-    <input
-      type="text"
-      placeholder="Viajante"
-      value={nuevoProveedor.viajante}
-      onChange={(e) =>
-        setNuevoProveedor({
-          ...nuevoProveedor,
-          viajante: e.target.value,
-        })
-      }
-      className="create-appointment__input"
-    />
+                <input
+                  type="text"
+                  placeholder="Viajante"
+                  value={nuevoProveedor.viajante}
+                  onChange={(e) =>
+                    setNuevoProveedor({
+                      ...nuevoProveedor,
+                      viajante: e.target.value,
+                    })
+                  }
+                  className="create-appointment__input"
+                />
 
-    <input
-      type="text"
-      placeholder="Teléfono"
-      value={nuevoProveedor.telefono}
-      onChange={(e) =>
-        setNuevoProveedor({
-          ...nuevoProveedor,
-          telefono: e.target.value,
-        })
-      }
-      className="create-appointment__input"
-    />
+                <input
+                  type="text"
+                  placeholder="Teléfono"
+                  value={nuevoProveedor.telefono}
+                  onChange={(e) =>
+                    setNuevoProveedor({
+                      ...nuevoProveedor,
+                      telefono: e.target.value,
+                    })
+                  }
+                  className="create-appointment__input"
+                />
 
-    <button
-  type="button"
-  className="create-appointment__proveedor-button"
-  onClick={guardarProveedor}
->
-  Guardar proveedor
-</button>
-  </div>
-)}
+                <button
+                  type="button"
+                  className="create-appointment__proveedor-button"
+                  onClick={guardarProveedor}
+                >
+                  Guardar proveedor
+                </button>
+              </div>
+            )}
+
+            {/* ✅ Producto con fecha de vencimiento */}
+            <div className="create-appointment__field">
+              <label className="create-appointment__label">
+                ¿Este producto tiene vencimiento?
+              </label>
+
+              <label>
+                <Field
+                  type="checkbox"
+                  name="tieneVencimiento"
+                />
+                Sí
+              </label>
+            </div>
+
+            {/* ✅ Solo aparece si el producto tiene vencimiento */}
+            {values.tieneVencimiento && (
+              <div className="create-appointment__field">
+                <label
+                  htmlFor="fechaCaducidad"
+                  className="create-appointment__label"
+                >
+                  Fecha de vencimiento del producto
+                </label>
+
+                <Field
+                  type="date"
+                  name="fechaCaducidad"
+                  id="fechaCaducidad"
+                  className="create-appointment__input"
+                />
+
+                <ErrorMessage
+                  name="fechaCaducidad"
+                  component="div"
+                  className="create-appointment__error"
+                />
+              </div>
+            )}
+
+
+
 
 
             {/* ✅ Nuevo campo para fecha de expiración */}
             <div className="create-appointment__field">
-              <label htmlFor="expiresAt" className="create-appointment__label">Fecha de expiración</label>
+              <label htmlFor="expiresAt" className="create-appointment__label">Fecha de expiración de Oferta o Precio</label>
               <Field type="date" name="expiresAt" id="expiresAt" className="create-appointment__input" />
               <ErrorMessage name="expiresAt" component="div" className="create-appointment__error" />
             </div>
@@ -515,21 +587,21 @@ return true;
             </div>
 
             <button
-  type="button"
-  className="create-appointment__button"
-  onClick={async () => {
-    const formErrors = await validateForm();
-    if (Object.keys(formErrors).length > 0) {
-      const camposFaltantes = Object.keys(formErrors).join(", ");
-      alert(`⚠️ Faltan completar los siguientes campos: ${camposFaltantes}`);
-    } else {
-      handleSubmit();
-    }
-  }}
-  disabled={isSubmitting}
->
-  {isSubmitting ? "Procesando..." : "Crear Producto"}
-</button>
+              type="button"
+              className="create-appointment__button"
+              onClick={async () => {
+                const formErrors = await validateForm();
+                if (Object.keys(formErrors).length > 0) {
+                  const camposFaltantes = Object.keys(formErrors).join(", ");
+                  alert(`⚠️ Faltan completar los siguientes campos: ${camposFaltantes}`);
+                } else {
+                  handleSubmit();
+                }
+              }}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Procesando..." : "Crear Producto"}
+            </button>
           </Form>
         )}
       </Formik>

@@ -2,18 +2,24 @@
 .listadoProductos {
   padding: 20px;
   font-family: Arial, sans-serif;
-  max-width: 1200px; /* Limitar el ancho máximo del contenedor */
-  margin: 0 auto; /* Centrar el contenedor horizontalmente */
+  max-width: 1200px;
+  /* Limitar el ancho máximo del contenedor */
+  margin: 0 auto;
+  /* Centrar el contenedor horizontalmente */
   margin-top: 27px;
 }
 
 /* Título centrado superior */
 .tituloSuperior {
   text-align: center;
-  font-size: 2rem; /* Tamaño del título */
-  margin-bottom: 0px; /* Espacio inferior */
-  color: #333; /* Color oscuro para el texto */
-  font-weight: bold; /* Negrita */
+  font-size: 2rem;
+  /* Tamaño del título */
+  margin-bottom: 0px;
+  /* Espacio inferior */
+  color: #333;
+  /* Color oscuro para el texto */
+  font-weight: bold;
+  /* Negrita */
   margin-bottom: 0%;
   margin-top: -79px;
 }
@@ -22,92 +28,137 @@
 .listadoProductos__error {
   color: red;
   font-weight: bold;
-  text-align: center; /* Centrar el texto */
+  text-align: center;
+  /* Centrar el texto */
 }
 
 /* Estilo para la lista de productos */
 .listadoProductos__list {
-  display: flex; /* Flexbox para organizar las tarjetas */
-  flex-wrap: wrap; /* Permitir que las tarjetas se ajusten en varias filas */
-  gap: 20px; /* Espaciado entre las tarjetas */
-  justify-content: center; /* Centrar las tarjetas horizontalmente */
+  display: flex;
+  /* Flexbox para organizar las tarjetas */
+  flex-wrap: wrap;
+  /* Permitir que las tarjetas se ajusten en varias filas */
+  gap: 20px;
+  /* Espaciado entre las tarjetas */
+  justify-content: center;
+  /* Centrar las tarjetas horizontalmente */
 }
 
 /* Estilo de cada tarjeta de producto */
 .listadoProductos__details {
-  border: none; /* Borde gris claro */
-  border-radius: 0px; /* Esquinas redondeadas */
-  padding: 15px; /* Espaciado interno */
-  max-width: 400px; /* Ancho máximo de la tarjeta */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  background: linear-gradient(
-  to top,
-  #007bff 0%,
-  #e6f1f5 100%
-);
-margin-top: 10px; /* Espaciado superior */
-  text-align: center; /* Centrar el contenido dentro de la tarjeta */
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Efecto dinámico */
+  border: none;
+  /* Borde gris claro */
+  border-radius: 0px;
+  /* Esquinas redondeadas */
+  padding: 15px;
+  /* Espaciado interno */
+  max-width: 400px;
+  /* Ancho máximo de la tarjeta */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Sombra sutil */
+  background: linear-gradient(to top,
+      #007bff 0%,
+      #e6f1f5 100%);
+  margin-top: 10px;
+  /* Espaciado superior */
+  text-align: center;
+  /* Centrar el contenido dentro de la tarjeta */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* Efecto dinámico */
 }
 
 .listadoProductos__details:hover {
-  transform: translateY(-5px); /* Elevar al pasar el mouse */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Intensificar la sombra */
+  transform: translateY(-5px);
+  /* Elevar al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  /* Intensificar la sombra */
 }
 
 /* Estilo para las imágenes dentro de las tarjetas */
 .listadoProductos__details img {
-  width: 100%; /* La imagen ocupará el ancho disponible */
-  max-width: 300px; /* Limitar el ancho máximo */
-  max-height: 300px; /* Limitar la altura máxima */
-  object-fit: cover; /* Ajustar la imagen sin distorsionarse */
-  border-radius: 5px; /* Esquinas redondeadas */
-  margin: 10px 0; /* Espaciado superior e inferior */
+  width: 100%;
+  /* La imagen ocupará el ancho disponible */
+  max-width: 300px;
+  /* Limitar el ancho máximo */
+  max-height: 300px;
+  /* Limitar la altura máxima */
+  object-fit: cover;
+  /* Ajustar la imagen sin distorsionarse */
+  border-radius: 5px;
+  /* Esquinas redondeadas */
+  margin: 10px 0;
+  /* Espaciado superior e inferior */
 }
 
 /* Estilo para el botón de modificar publicación */
 .modificarBoton {
-  background-color: yellow; /* Fondo amarillo */
-  color: black; /* Texto negro */
-  border: none; /* Sin bordes */
-  border-radius: 8px; /* Esquinas redondeadas */
-  padding: 10px 20px; /* Espaciado interno */
-  cursor: pointer; /* Cambiar el puntero al pasar el mouse */
-  font-weight: bold; /* Texto en negrita */
-  font-size: 1rem; /* Tamaño del texto */
-  transition: background-color 0.3s ease; /* Efecto dinámico al pasar el mouse */
+  background-color: yellow;
+  /* Fondo amarillo */
+  color: black;
+  /* Texto negro */
+  border: none;
+  /* Sin bordes */
+  border-radius: 8px;
+  /* Esquinas redondeadas */
+  padding: 10px 20px;
+  /* Espaciado interno */
+  cursor: pointer;
+  /* Cambiar el puntero al pasar el mouse */
+  font-weight: bold;
+  /* Texto en negrita */
+  font-size: 1rem;
+  /* Tamaño del texto */
+  transition: background-color 0.3s ease;
+  /* Efecto dinámico al pasar el mouse */
 }
 
 .modificarBoton:hover {
-  background-color: gold; /* Fondo amarillo más intenso al pasar el mouse */
+  background-color: gold;
+  /* Fondo amarillo más intenso al pasar el mouse */
 }
 
 .modificarBoton:disabled {
-  background-color: #ccc; /* Fondo gris cuando está deshabilitado */
-  color: #999; /* Texto gris desactivado */
-  cursor: not-allowed; /* Cambiar puntero a "no permitido" */
+  background-color: #ccc;
+  /* Fondo gris cuando está deshabilitado */
+  color: #999;
+  /* Texto gris desactivado */
+  cursor: not-allowed;
+  /* Cambiar puntero a "no permitido" */
 }
 
 /* Estilo para el botón de eliminar publicación */
 .eliminarBoton {
-  background-color: red; /* Fondo rojo */
-  color: black; /* Texto negro */
-  border: none; /* Sin bordes */
-  border-radius: 8px; /* Esquinas redondeadas */
-  padding: 10px 20px; /* Espaciado interno */
-  cursor: pointer; /* Cambiar el puntero al pasar el mouse */
-  font-weight: bold; /* Texto en negrita */
-  font-size: 1rem; /* Tamaño del texto */
-  transition: background-color 0.3s ease; /* Efecto dinámico al pasar el mouse */
+  background-color: red;
+  /* Fondo rojo */
+  color: black;
+  /* Texto negro */
+  border: none;
+  /* Sin bordes */
+  border-radius: 8px;
+  /* Esquinas redondeadas */
+  padding: 10px 20px;
+  /* Espaciado interno */
+  cursor: pointer;
+  /* Cambiar el puntero al pasar el mouse */
+  font-weight: bold;
+  /* Texto en negrita */
+  font-size: 1rem;
+  /* Tamaño del texto */
+  transition: background-color 0.3s ease;
+  /* Efecto dinámico al pasar el mouse */
 }
 
 .eliminarBoton:hover {
-  background-color: darkred; /* Fondo rojo oscuro al pasar el mouse */
+  background-color: darkred;
+  /* Fondo rojo oscuro al pasar el mouse */
 }
+
 /* Botón Vendido */
 .vendidoBoton {
-  background-color: #4caf50; /* Verde */
-  color: white; /* Texto blanco */
+  background-color: #4caf50;
+  /* Verde */
+  color: white;
+  /* Texto blanco */
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
@@ -115,11 +166,13 @@ margin-top: 10px; /* Espaciado superior */
   font-weight: bold;
   font-size: 1rem;
   transition: background-color 0.3s ease;
-  margin: 10px 0; /* Espaciado superior e inferior */
+  margin: 10px 0;
+  /* Espaciado superior e inferior */
 }
 
 .vendidoBoton:hover {
-  background-color: #45a049; /* Verde más oscuro al pasar el mouse */
+  background-color: #45a049;
+  /* Verde más oscuro al pasar el mouse */
 }
 
 /* Modal Overlay */
@@ -129,7 +182,8 @@ margin-top: 10px; /* Espaciado superior */
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fondo semi-transparente */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,7 +197,7 @@ margin-top: 10px; /* Espaciado superior */
   border-radius: 8px;
   text-align: center;
   max-width: 400px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modalContent p {
@@ -153,7 +207,8 @@ margin-top: 10px; /* Espaciado superior */
 }
 
 .modalContent button {
-  background-color: #4caf50; /* Verde */
+  background-color: #4caf50;
+  /* Verde */
   color: white;
   border: none;
   border-radius: 8px;
@@ -167,6 +222,7 @@ margin-top: 10px; /* Espaciado superior */
 .modalContent button:hover {
   background-color: #45a049;
 }
+
 .imagenContainer {
   position: relative;
   display: inline-block;
@@ -207,11 +263,13 @@ margin-top: 10px; /* Espaciado superior */
   align-items: center;
   justify-content: center;
 }
+
 .filtroBoton {
   margin-left: 10px;
   margin-bottom: 3px;
   padding: 8px 14px;
-  background-color: #007bff; /* azul */
+  background-color: #007bff;
+  /* azul */
   color: white;
   border: none;
   border-radius: 5px;
@@ -221,24 +279,33 @@ margin-top: 10px; /* Espaciado superior */
 }
 
 .filtroBoton:hover {
-  background-color: #0056b3; /* azul más oscuro al pasar el mouse */
+  background-color: #0056b3;
+  /* azul más oscuro al pasar el mouse */
 }
 
 .filtroBoton:active {
-  transform: scale(0.95); /* pequeño efecto al hacer click */
+  transform: scale(0.95);
+  /* pequeño efecto al hacer click */
 }
 
 .tituloSuperior {
   display: flex;
   align-items: center;
-  gap: 10px; /* espacio entre título y botones */
+  gap: 10px;
+  /* espacio entre título y botones */
 }
+
 .detallesCompactos {
-  text-align: left;      /* alinea a la izquierda */
-  font-size: 70%;        /* reduce tamaño de letra un 30% */
-  line-height: 0.75;     /* reduce interlineado un 50% */
-  margin: 5px 0;         /* opcional: espacio reducido */
+  text-align: left;
+  /* alinea a la izquierda */
+  font-size: 70%;
+  /* reduce tamaño de letra un 30% */
+  line-height: 0.75;
+  /* reduce interlineado un 50% */
+  margin: 5px 0;
+  /* opcional: espacio reducido */
 }
+
 .buscadorContainer {
   padding: 10px;
   font-size: 1rem;
@@ -253,7 +320,8 @@ margin-top: 10px; /* Espaciado superior */
   margin-top: 10px;
   margin-bottom: 3px;
 }
-.Lupa{
+
+.Lupa {
   margin-bottom: 10px;
   margin-top: -18px;
   margin-left: 191px;
@@ -278,6 +346,7 @@ margin-top: 10px; /* Espaciado superior */
 .compartirWhatsAppBoton i {
   margin-right: 8px;
 }
+
 .filtroProveedorContainer {
   width: 100%;
   max-width: 600px;
@@ -348,4 +417,76 @@ margin-top: 10px; /* Espaciado superior */
     width: 100%;
     min-width: 0;
   }
+}
+
+.vencimientoProductoOverlay {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 10;
+
+  padding: 10px 14px;
+
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+/* Faltan entre 30 y 1 día */
+.vencimientoProductoOverlay--proximo {
+  background: rgba(230, 126, 0, 0.92);
+}
+
+/* Vence en el día actual */
+.vencimientoProductoOverlay--hoy {
+  background: rgba(211, 84, 0, 0.95);
+  animation: vencimientoPulso 1.2s infinite;
+}
+
+/* El producto ya venció */
+.vencimientoProductoOverlay--vencido {
+  background: rgba(192, 35, 35, 0.96);
+}
+
+@keyframes vencimientoPulso {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .vencimientoProductoOverlay {
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+
+    padding: 8px 10px;
+
+    font-size: 13px;
+  }
+}
+
+.filtroBoton--activo {
+  background: #198754;
+  color: white;
+  border-color: #198754;
+  font-weight: bold;
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.2);
 }

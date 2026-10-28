@@ -16,6 +16,57 @@ const MisProductos = () => {
   const [proveedorSeleccionado, setProveedorSeleccionado] = useState('');
   const { user } = useUser();
   const navigate = useNavigate();
+  const [filtroCaducidad, setFiltroCaducidad] = useState(false);
+  const calcularDiasParaVencer = (fechaCaducidad) => {
+    if (!fechaCaducidad) return null;
+
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    const vencimiento = new Date(`${fechaCaducidad}T00:00:00`);
+
+    return Math.ceil(
+      (vencimiento.getTime() - hoy.getTime()) /
+      (1000 * 60 * 60 * 24)
+    );
+  };
+  const obtenerAvisoVencimiento = (fechaCaducidad) => {
+    const dias = calcularDiasParaVencer(fechaCaducidad);
+
+    if (dias === null) {
+      return null;
+    }
+
+    if (dias < 0) {
+      return {
+        mensaje: '⛔ PRODUCTO VENCIDO',
+        clase: 'vencimientoProductoOverlay vencimientoProductoOverlay--vencido',
+      };
+    }
+
+    if (dias === 0) {
+      return {
+        mensaje: '⚠️ VENCE HOY',
+        clase: 'vencimientoProductoOverlay vencimientoProductoOverlay--hoy',
+      };
+    }
+
+    if (dias === 1) {
+      return {
+        mensaje: '⚠️ 1 DÍA PARA VENCER',
+        clase: 'vencimientoProductoOverlay vencimientoProductoOverlay--proximo',
+      };
+    }
+
+    if (dias <= 30) {
+      return {
+        mensaje: `⚠️ ${dias} DÍAS PARA VENCER`,
+        clase: 'vencimientoProductoOverlay vencimientoProductoOverlay--proximo',
+      };
+    }
+
+    return null;
+  };
 
   const fetchProductos = async () => {
     try {
@@ -149,63 +200,82 @@ const MisProductos = () => {
   // Filtrado dinámico con soporte para mostrar SOLO stock mínimo cuando ese filtro está activo
   const productosFiltrados = productos.filter((p) => {
     const esAgotado = Number(p.stock) === 0;
-  
+
     const esVencido =
       p.expiresAt && new Date(p.expiresAt) < new Date();
-  
+
     const stockActual = Number(p.stock);
     const stockMinimoValor = Number(p.stockminimo ?? 0);
-  
+
     const esStockMinimo =
       stockActual > 0 &&
       stockActual <= stockMinimoValor;
-  
+    const diasParaVencer = calcularDiasParaVencer(p.fechaCaducidad);
+
+    const esProductoAVencerOVencido =
+      diasParaVencer !== null &&
+      diasParaVencer <= 30;
+
+
+
     const textoBusqueda = busqueda.trim().toLowerCase();
-  
+
     const coincideBusqueda =
       textoBusqueda === '' ||
       p.name?.toLowerCase().includes(textoBusqueda) ||
       p.category?.name?.toLowerCase().includes(textoBusqueda) ||
       p.proveedor?.toLowerCase().includes(textoBusqueda);
-  
+
     const coincideProveedor =
       proveedorSeleccionado === '' ||
       p.proveedor?.trim() === proveedorSeleccionado;
-  
+
     if (!coincideBusqueda || !coincideProveedor) {
       return false;
     }
-  
+
     if (filtroStockMinimo) {
       return esStockMinimo;
     }
-  
+
     if (filtroAgotados) {
       return esAgotado;
     }
-  
+
     if (filtroVencidos) {
       return esVencido;
     }
-  
+    if (filtroCaducidad) {
+      return esProductoAVencerOVencido;
+    }
+
     return true;
   });
-  
+
 
   const cantidadAgotados = productos.filter((p) => p.stock === 0).length;
   const cantidadVencidos = productos.filter((p) => new Date(p.expiresAt) < new Date()).length;
   const cantidadStockMinimo = productos.filter((p) => (p.stock > 0) && (p.stock <= (p.stockminimo ?? 0))).length;
-  
+  const cantidadCaducidad = productos.filter((p) => {
+    const dias = calcularDiasParaVencer(p.fechaCaducidad);
+
+    return (
+      dias !== null &&
+      dias <= 30
+    );
+  }).length;
+
+
   const fetchUserDataByEmail = async (email) => {
     const token = localStorage.getItem("token");
-  
+
     if (!token) {
       throw new Error("No se encontró un token.");
     }
-  
+
     console.log("Email:", email);
     console.log("Token:", token);
-  
+
     const response = await axios.get(
       `https://ecommerce-9558.onrender.com/users/email/${email}`,
       {
@@ -214,157 +284,177 @@ const MisProductos = () => {
         },
       }
     );
-  
+
     console.log("Respuesta:", response.data);
-  
+
     const userData = response.data;
-  
+
     console.log("Datos completos del usuario:", userData);
-  
+
     return userData;
   };
-  
-//////////////////////////////////////////////////////////////////////////////
+
+  //////////////////////////////////////////////////////////////////////////////
   const compartirWhatsApp = async (producto) => {
     try {
       // Detectar si está usando un dispositivo móvil
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  
+
       // Buscar los datos del vendedor
       const userData = await fetchUserDataByEmail(producto.creatorEmail);
-  
+
       // Reemplazar "_" y "-" por espacios
       const nickname = (userData.nickname || "")
         .replace(/[_-]+/g, " ")
         .trim();
-  
+
       // Quitar +54 del teléfono
       const telefono = (userData.phone || "")
         .replace(/^\+54\s?/, "")
         .trim();
-  
+
       // URL pública para compartir
       const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
       const productUrl2 = `https://ecommerce-9558.onrender.com/productos/share/${producto.id}`;
       // Mensaje de WhatsApp
       const mensajeWhatsApp =
-     `${productUrl}
+        `${productUrl}
       ${nickname}
       ${producto.name}
       ${telefono ? `📞 ${telefono}` : ""}`;
-  
+
       // Móvil → aplicación WhatsApp
       // PC → WhatsApp Web
       const whatsappUrl = isMobile
         ? `whatsapp://send?text=${encodeURIComponent(mensajeWhatsApp)}`
         : `https://web.whatsapp.com/send?text=${encodeURIComponent(mensajeWhatsApp)}`;
-  
+
       // Abrir WhatsApp
       window.open(whatsappUrl, "_blank");
-  
+
     } catch (error) {
       console.error("Error al obtener los datos del usuario:", error);
     }
   };
-//////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="listadoProductos">
       <h1 className="tituloSuperior">Mis Publicaciones</h1>
 
-      
+
       {/* Buscador */}
-<form
-  className="buscadorContainer"
-  onSubmit={(e) => e.preventDefault()}
->
-  <input
-    type="text"
-    placeholder="Buscar mis productos..."
-    value={busqueda}
-    onChange={(e) => setBusqueda(e.target.value)}
-    className="buscadorInput"
-  />
+      <form
+        className="buscadorContainer"
+        onSubmit={(e) => e.preventDefault()}
+      >
+        <input
+          type="text"
+          placeholder="Buscar mis productos..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          className="buscadorInput"
+        />
 
-  <p className="Lupa">🔍</p>
-</form>
+        <p className="Lupa">🔍</p>
+      </form>
 
-{/* Filtro por proveedor */}
-<div className="filtroProveedorContainer">
-  <label
-    htmlFor="filtroProveedor"
-    className="filtroProveedorLabel"
-  >
-    Filtrar por proveedor
-  </label>
+      {/* Filtro por proveedor */}
+      <div className="filtroProveedorContainer">
+        <label
+          htmlFor="filtroProveedor"
+          className="filtroProveedorLabel"
+        >
+          Filtrar por proveedor
+        </label>
 
-  <select
-    id="filtroProveedor"
-    className="filtroProveedorSelect"
-    value={proveedorSeleccionado}
-    onChange={(event) =>
-      setProveedorSeleccionado(event.target.value)
-    }
-  >
-    <option value="">Todos los proveedores</option>
+        <select
+          id="filtroProveedor"
+          className="filtroProveedorSelect"
+          value={proveedorSeleccionado}
+          onChange={(event) =>
+            setProveedorSeleccionado(event.target.value)
+          }
+        >
+          <option value="">Todos los proveedores</option>
 
-    {proveedoresDisponibles.map((proveedor) => (
-      <option key={proveedor} value={proveedor}>
-        {proveedor}
-      </option>
-    ))}
-  </select>
+          {proveedoresDisponibles.map((proveedor) => (
+            <option key={proveedor} value={proveedor}>
+              {proveedor}
+            </option>
+          ))}
+        </select>
 
-  {proveedorSeleccionado && (
-    <button
-      type="button"
-      className="filtroProveedorLimpiar"
-      onClick={() => setProveedorSeleccionado('')}
-    >
-      Quitar filtro
-    </button>
-  )}
-</div>
+        {proveedorSeleccionado && (
+          <button
+            type="button"
+            className="filtroProveedorLimpiar"
+            onClick={() => setProveedorSeleccionado('')}
+          >
+            Quitar filtro
+          </button>
+        )}
+      </div>
 
-{/* Botones de filtro */}
-<div className="filtrosContainer"></div>
+      {/* Botones de filtro */}
+      <div className="filtrosContainer"></div>
 
       {/* Botones de filtro */}
       <div className="filtrosContainer">
         <button
-          className="filtroBoton"
+          className={`filtroBoton ${filtroCaducidad ? 'filtroBoton--activo' : ''}`}
           onClick={() => {
-            // Al activar Agotados, desactivo los otros filtros para evitar mezcla
+            setFiltroCaducidad(prev => !prev);
+            setFiltroAgotados(false);
+            setFiltroVencidos(false);
+            setFiltroStockMinimo(false);
+          }}
+        >
+          {filtroCaducidad
+            ? "✓ A vencer y vencidos - Mostrar Todo"
+            : `Productos a vencer y vencidos (${cantidadCaducidad})`}
+        </button>
+
+        <button
+          className={`filtroBoton ${filtroAgotados ? 'filtroBoton--activo' : ''}`}
+          onClick={() => {
             setFiltroAgotados(prev => !prev);
             setFiltroVencidos(false);
             setFiltroStockMinimo(false);
+            setFiltroCaducidad(false);
           }}
         >
-          {filtroAgotados ? "Mostrar Todo" : `Productos Agotados (${cantidadAgotados})`}
+          {filtroAgotados
+            ? "✓ Agotados - Mostrar Todo"
+            : `Productos Agotados (${cantidadAgotados})`}
         </button>
 
         <button
-          className="filtroBoton"
+          className={`filtroBoton ${filtroVencidos ? 'filtroBoton--activo' : ''}`}
           onClick={() => {
-            // Al activar Vencidos, desactivo los otros filtros para evitar mezcla
             setFiltroVencidos(prev => !prev);
             setFiltroAgotados(false);
             setFiltroStockMinimo(false);
+            setFiltroCaducidad(false);
           }}
         >
-          {filtroVencidos ? "Mostrar Todo" : `Ofertas Vencidas (${cantidadVencidos})`}
+          {filtroVencidos
+            ? "✓ Ofertas Vencidas - Mostrar Todo"
+            : `Ofertas Vencidas (${cantidadVencidos})`}
         </button>
 
         <button
-          className="filtroBoton"
+          className={`filtroBoton ${filtroStockMinimo ? 'filtroBoton--activo' : ''}`}
           onClick={() => {
-            // Al activar Stock Mínimo, desactivo los otros filtros para que se muestren SOLO estos
             setFiltroStockMinimo(prev => !prev);
             setFiltroAgotados(false);
             setFiltroVencidos(false);
+            setFiltroCaducidad(false);
           }}
         >
-          {filtroStockMinimo ? "Mostrar Todo" : `Stock Mínimo (${cantidadStockMinimo})`}
+          {filtroStockMinimo
+            ? "✓ Stock Mínimo - Mostrar Todo"
+            : `Stock Mínimo (${cantidadStockMinimo})`}
         </button>
       </div>
 
@@ -385,9 +475,27 @@ const MisProductos = () => {
               <p><strong>Ubicación:</strong> {producto.ubicacion ?? 'No especificada'}</p>
 
               <div className="detallesCompactos">
-                <p><strong>Categoría:</strong> {producto.category?.name ?? 'Sin categoría'}</p>
-                <p><strong>Fecha de Creación:</strong> {new Date(producto.createdAt).toLocaleString()}</p>
-                <p><strong>Fecha de Expiración:</strong> {new Date(producto.expiresAt).toLocaleDateString()}</p>
+                <p>
+                  <strong>Categoría:</strong>{' '}
+                  {producto.category?.name ?? 'Sin categoría'}
+                </p>
+
+                <p>
+                  <strong>Fecha de Creación:</strong>{' '}
+                  {new Date(producto.createdAt).toLocaleString()}
+                </p>
+
+                <p>
+                  <strong>Expiración de Oferta o Precio:</strong>{' '}
+                  {new Date(producto.expiresAt).toLocaleDateString()}
+                </p>
+
+                <p>
+                  <strong>Vencimiento del producto:</strong>{' '}
+                  {producto.fechaCaducidad
+                    ? new Date(`${producto.fechaCaducidad}T00:00:00`).toLocaleDateString()
+                    : 'No tiene vencimiento'}
+                </p>
               </div>
 
               <button
@@ -413,22 +521,38 @@ const MisProductos = () => {
                 {(producto.stock <= (producto.stockminimo ?? 0) && producto.stock > 0) && (
                   <div className="stockMinimoOverlay">STOCK MÍNIMO</div>
                 )}
+                {(() => {
+                  const avisoVencimiento = obtenerAvisoVencimiento(
+                    producto.fechaCaducidad
+                  );
+
+                  if (!avisoVencimiento) {
+                    return null;
+                  }
+
+                  return (
+                    <div className={avisoVencimiento.clase}>
+                      {avisoVencimiento.mensaje}
+                    </div>
+                  );
+                })()}
+
               </div>
 
               <button
-  className="eliminarBoton"
-  onClick={() => {
-    if (
-      window.confirm(
-        `¿Estás seguro de eliminar "${producto.name}"?`
-      )
-    ) {
-      eliminarProducto(producto);
-    }
-  }}
->
-  Eliminar Publicación
-</button>
+                className="eliminarBoton"
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      `¿Estás seguro de eliminar "${producto.name}"?`
+                    )
+                  ) {
+                    eliminarProducto(producto);
+                  }
+                }}
+              >
+                Eliminar Publicación
+              </button>
 
               <button
                 className="modificarBoton"
@@ -437,10 +561,10 @@ const MisProductos = () => {
                 Modificar Publicacion
               </button>
               <button
-                     className="compartirWhatsAppBoton"
-                      onClick={() => compartirWhatsApp(producto)}>
-                                <i className="fa-brands fa-whatsapp"></i>
-                                      Compartir en WhatsApp</button>
+                className="compartirWhatsAppBoton"
+                onClick={() => compartirWhatsApp(producto)}>
+                <i className="fa-brands fa-whatsapp"></i>
+                Compartir en WhatsApp</button>
             </div>
           ))
         )}
