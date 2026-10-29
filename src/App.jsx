@@ -28,9 +28,9 @@ import SobreNosotros from "./views/SobreNosotros/SobreNosotros";
 function App() {
   const location = useLocation();
 
-  useEffect(() => {
-    localStorage.removeItem("user");
-  }, []);
+  // useEffect(() => {
+  //   localStorage.removeItem("user");
+  // }, []);
 
   useEffect(() => {
     console.log("Ruta actual:", location.pathname); // ⬅️ Log de ruta

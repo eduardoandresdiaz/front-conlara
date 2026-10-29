@@ -58,12 +58,11 @@ const NavBar = () => {
 
       {/* Menú de enlaces */}
       <div
-        className={`${style.linksContainer} ${
-          menuOpen ? style.open : ""
-        }`}
+        className={`${style.linksContainer} ${menuOpen ? style.open : ""
+          }`}
       >
         {/* Este botón aparece para todos los usuarios */}
-       
+
 
         {!user?.email ? (
           <>
@@ -120,6 +119,17 @@ const NavBar = () => {
             >
               Menú de publicaciones
             </button>
+            {/* SOLO PARA ADMINISTRADORES */}
+            {user?.isAdmin === true && (
+              <button
+                type="button"
+                onClick={() => handleNavigate("/x28x")}
+                className={style.adminButton}
+              >
+                Administración
+              </button>
+            )}
+
 
             <button
               type="button"
@@ -130,7 +140,7 @@ const NavBar = () => {
             </button>
           </>
         )}
-         <button
+        <button
           type="button"
           className={style.sobreNosotrosButton}
           onClick={() => handleNavigate("/sobre-nosotros")}

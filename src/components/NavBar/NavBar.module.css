@@ -193,3 +193,44 @@
     margin: 4px 0;
   }
 }
+
+.adminButton {
+  background-color: #6f42c1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  max-height: 40px;
+}
+
+.adminButton:hover {
+  background-color: #59359a;
+  transform: scale(1.05);
+}
+/* =========================================
+   BOTONES DEL MENÚ HAMBURGUESA
+   MISMO TAMAÑO
+========================================= */
+@media (max-width: 768px) {
+  .linksContainer .loginButton,
+  .linksContainer .logoutButton,
+  .linksContainer .menuAppointmentButton,
+  .linksContainer .profileButton,
+  .linksContainer .sobreNosotrosButton,
+  .linksContainer .adminButton {
+    width: 190px;
+    height: 42px;
+    margin: 4px 0;
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+}
