@@ -140,9 +140,9 @@ const Register = () => {
             errors.city = "Debes seleccionar una ciudad.";
           }
           if (!values.nickname) {
-            errors.nickname = 'El nickname es obligatorio.';
+            errors.nickname = 'El Nombre del Comercio obligatorio.';
           } else if (/\s/.test(values.nickname)) {
-            errors.nickname = 'El nickname no debe contener espacios.';
+            errors.nickname = 'El Nombre del Comercio no debe contener para ello utiliza.';
           }
           
           // if (!values.nickname) errors.nickname = 'El nickname es obligatorio.';
@@ -374,7 +374,7 @@ const Register = () => {
 
 {/* Nickname */}
 <div className="register__field">
-  <label htmlFor="nickname" className="register__label">Empresa, Apodo o Nickname</label>
+  <label htmlFor="nickname" className="register__label">Nombre de Tu Negocio</label>
   <input
     type="text"
     name="nickname"
@@ -382,7 +382,7 @@ const Register = () => {
     value={values.nickname}
     onChange={(e) => {
       let inputValue = e.target.value;
-      inputValue = inputValue.replace(/\s/g, ''); // Elimina espacios
+      inputValue = inputValue.replace(/\s/g, '_'); // Elimina espacios y reemplaza por "_" pap'a
       if (inputValue.length > 20) inputValue = inputValue.slice(0, 20); // Limitar a 20 caracteres
       setFieldValue('nickname', inputValue);
     }}
@@ -395,7 +395,7 @@ const Register = () => {
       {values.nickname.length}/20
     </span>
     <div style={{ color: '#666', marginTop: '2px' }}>
-      No puede contener espacios. Permitidos: "-" y "_".
+      
     </div>
   </div>
 
@@ -478,7 +478,7 @@ const Register = () => {
 
             {/* Términos y Condiciones */}
             <div className="register__field">
-              <label className="register__label">Términos y Condiciones</label>
+              <label className="register__label"></label>
               <div className="register__terms-box">
   <h2 className="text-xl font-bold mb-4">Términos y Condiciones</h2>
   <p>
