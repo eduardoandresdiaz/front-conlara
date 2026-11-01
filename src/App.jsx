@@ -24,6 +24,9 @@ import Carrusell from "./views/Carrusell/Carrusell";
 import ListadoUsuarios from "./views/Ranger0750/ListadoUsuarios";
 import Servicios from "./views/Servicios/Servicios";
 import SobreNosotros from "./views/SobreNosotros/SobreNosotros";
+import Pedidos from "./views/Pedidos/Pedidos";
+import AgregarPedido from "./views/AgregarPedido/AgregarPedido";
+import VerFaltantes from "./views/VerFaltantes/VerFaltantes";
 
 function App() {
   const location = useLocation();
@@ -53,6 +56,12 @@ function App() {
           <Route path="/ModifyProduct/:id" element={<ModifyProduct />} />
           <Route path="/productos/:id" element={<DetallesProducto />} />
           <Route path="/productos/share/:id" element={<DetallesProducto />} />
+          <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/agregar-pedido"element={<AgregarPedido />}/>
+          <Route
+  path="/ver-faltantes"
+  element={<VerFaltantes />}
+/>
           <Route path="/:nickname" element={<PerfilPublico />} />
           <Route path="/historiaLaToma" element={<HistoriaLaToma />} />
           <Route path="/historiaNaschel" element={<HistoriaNaschel />} />
@@ -62,6 +71,7 @@ function App() {
           <Route path="/carrusel" element={<Carrusell />} />
           <Route path="/x28x" element={<ListadoUsuarios />} />
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
+          
           {/* <Route path="/perfil/:nickname" element={<PerfilPublico />} /> */}
 
         </Routes>

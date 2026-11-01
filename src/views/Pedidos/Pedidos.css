@@ -1,0 +1,71 @@
+.pedidos {
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .pedidos__content {
+    width: 100%;
+    max-width: 600px;
+    padding: 24px;
+    box-sizing: border-box;
+  
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    text-align: center;
+  }
+  
+  .pedidos__title {
+    margin: 0 0 20px;
+    color: #333333;
+  }
+  
+  .pedidos__message {
+    margin-bottom: 20px;
+    color: #555555;
+  }
+  
+  .pedidos__button {
+    width: 100%;
+    padding: 11px;
+  
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+  
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .pedidos__button:hover {
+    background-color: #0056b3;
+  }
+  .pedidos__buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .pedidos__button--faltantes {
+    background-color: #f59e0b;
+  }
+  
+  .pedidos__button--faltantes:hover {
+    background-color: #d97706;
+  }
+  
+  .pedidos__button--volver {
+    background-color: #6c757d;
+  }
+  
+  .pedidos__button--volver:hover {
+    background-color: #545b62;
+  }

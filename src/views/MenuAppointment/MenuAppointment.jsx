@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
-import { QRCodeCanvas } from "qrcode.react"; 
+import { QRCodeCanvas } from "qrcode.react";
 import "./MenuAppointment.css";
 
 const MenuAppointment = () => {
@@ -85,13 +85,20 @@ const MenuAppointment = () => {
           </button>
 
           <button
-                  className="menu-appointment__button"
-                  onClick={() => navigate("/misproductos")}>
-                          {nickname.replace(/[_-]/g, " ")}
-                             </button>
+            className="menu-appointment__button"
+            onClick={() => navigate("/misproductos")}>
+            {nickname.replace(/[_-]/g, " ")}
+          </button>
 
           {nickname && (
             <>
+              <button
+                type="button"
+                className="menu-appointment__button"
+                onClick={() => navigate("/Pedidos")}
+              >
+                Pedidos
+              </button>
               <button
                 className="menu-appointment__button"
                 onClick={() =>
@@ -134,8 +141,8 @@ const MenuAppointment = () => {
                 </div>
               )}
 
-              <button 
-                className="menu-appointment__button" 
+              <button
+                className="menu-appointment__button"
                 onClick={() => navigate("/carrusel")}>
                 Mostrar Productos
               </button>
@@ -148,4 +155,3 @@ const MenuAppointment = () => {
 };
 
 export default MenuAppointment;
-  

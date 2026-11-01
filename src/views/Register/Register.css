@@ -2,8 +2,8 @@
 html,
 body,
 #root {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
 }
 
 
@@ -126,7 +126,7 @@ body,
   }
   
   .register__terms-box ol {
-    margin: 0;
+    margin: 0px;
   }
   
   .register__terms-box li {
@@ -144,7 +144,7 @@ body,
     }
   
     .register__titulo {
-      margin: 0 0 20 0;
+      margin: 0 0 20px 0;
       font-size: 2rem;
     }
   
@@ -190,7 +190,7 @@ body,
     }
   
     .register__terms-box h2 {
-      margin-top: 0;
+      margin-top: 0px;
       margin-bottom: 10px;
       font-size: 18px;
     }
@@ -211,7 +211,7 @@ body,
     }
   
     .register__titulo {
-      margin: 0 0 20 0;
+      margin: 0 0 20px 0;
       font-size: 2rem;
     }
   
@@ -257,7 +257,7 @@ body,
     }
   
     .register__terms-box h2 {
-      margin-top: 0;
+      margin-top: 0px;
       margin-bottom: 10px;
       font-size: 18px;
     }
