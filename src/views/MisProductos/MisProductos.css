@@ -1067,3 +1067,28 @@
   }
 
 }
+.ofertaOverlay {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  z-index: 20;
+
+  padding: 7px 13px;
+
+  background-color: #ffd200;
+  color: #000;
+
+  border: 2px solid #000;
+  border-radius: 5px;
+
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .ofertaOverlay {
+    left: 6px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+}

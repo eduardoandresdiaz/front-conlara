@@ -235,4 +235,59 @@
       grid-template-columns: 1fr;
     }
   }
-  
+  /* =========================================================
+   CONTENEDOR IMAGEN + OVERLAY OFERTA
+========================================================= */
+
+.detallesProducto__imagenContainer {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+
+/* =========================================================
+   OVERLAY OFERTA
+========================================================= */
+
+.detallesProducto__ofertaOverlay {
+  position: absolute;
+
+  top: 10px;
+  left: 10px;
+
+  z-index: 20;
+
+  background-color: #ffd200;
+  color: #000;
+
+  border: 2px solid #000;
+  border-radius: 5px;
+
+  padding: 7px 13px;
+
+  font-size: 1.1rem;
+  font-weight: bold;
+
+  line-height: 1;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   RESPONSIVE MÓVIL
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .detallesProducto__ofertaOverlay {
+    top: 8px;
+    left: 8px;
+
+    padding: 6px 10px;
+
+    font-size: 0.9rem;
+  }
+
+}

@@ -515,6 +515,13 @@ const MisProductos = () => {
                 {producto.stock === 0 && (
                   <div className="agotadoOverlay">AGOTADO</div>
                 )}
+                {/* Overlay de OFERTA */}
+                {producto.resaltaroferta && (
+                  <div className="ofertaOverlay">
+                    OFERTA
+                  </div>
+                )}
+
                 {new Date(producto.expiresAt) < new Date() && producto.stock > 0 && (
                   <div className="ofertaVencidaOverlay">OFERTA VENCIDA</div>
                 )}
