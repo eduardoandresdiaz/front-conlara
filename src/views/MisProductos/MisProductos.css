@@ -1,342 +1,577 @@
-/* Contenedor principal */
+/* =========================================================
+   CONTENEDOR PRINCIPAL
+========================================================= */
+
 .listadoProductos {
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  width: 100%;
   max-width: 1200px;
-  /* Limitar el ancho máximo del contenedor */
   margin: 0 auto;
-  /* Centrar el contenedor horizontalmente */
+  padding: clamp(10px, 2vw, 20px);
   margin-top: 27px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
-/* Título centrado superior */
+
+/* =========================================================
+   TITULO SUPERIOR
+========================================================= */
+
 .tituloSuperior {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
   text-align: center;
-  font-size: 2rem;
-  /* Tamaño del título */
-  margin-bottom: 0px;
-  /* Espacio inferior */
-  color: #333;
-  /* Color oscuro para el texto */
+
+  font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: bold;
-  /* Negrita */
-  margin-bottom: 0%;
-  margin-top: -79px;
+
+  color: #333;
+
+  margin-top: clamp(-79px, -5vw, -30px);
+  margin-bottom: 0;
 }
 
-/* Mensaje de error */
+
+/* =========================================================
+   ERROR
+========================================================= */
+
 .listadoProductos__error {
+  width: 100%;
+
   color: red;
   font-weight: bold;
   text-align: center;
-  /* Centrar el texto */
+
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-/* Estilo para la lista de productos */
+
+/* =========================================================
+   LISTA DE PRODUCTOS
+========================================================= */
+
 .listadoProductos__list {
+  width: 100%;
+
   display: flex;
-  /* Flexbox para organizar las tarjetas */
   flex-wrap: wrap;
-  /* Permitir que las tarjetas se ajusten en varias filas */
-  gap: 20px;
-  /* Espaciado entre las tarjetas */
+
+  gap: clamp(10px, 2vw, 20px);
+
   justify-content: center;
-  /* Centrar las tarjetas horizontalmente */
+  align-items: stretch;
 }
 
-/* Estilo de cada tarjeta de producto */
+
+/* =========================================================
+   TARJETA DEL PRODUCTO
+========================================================= */
+
 .listadoProductos__details {
-  border: none;
-  /* Borde gris claro */
-  border-radius: 0px;
-  /* Esquinas redondeadas */
-  padding: 15px;
-  /* Espaciado interno */
+  width: 100%;
   max-width: 400px;
-  /* Ancho máximo de la tarjeta */
+
+  border: none;
+  border-radius: 0;
+
+  padding: 15px;
+
+  box-sizing: border-box;
+
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /* Sombra sutil */
-  background: linear-gradient(to top,
-      #007bff 0%,
-      #e6f1f5 100%);
+
+  background: linear-gradient(
+    to top,
+    #007bff 0%,
+    #e6f1f5 100%
+  );
+
   margin-top: 10px;
-  /* Espaciado superior */
+
   text-align: center;
-  /* Centrar el contenido dentro de la tarjeta */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  /* Efecto dinámico */
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .listadoProductos__details:hover {
   transform: translateY(-5px);
-  /* Elevar al pasar el mouse */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  /* Intensificar la sombra */
+
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Estilo para las imágenes dentro de las tarjetas */
+
+/* =========================================================
+   IMAGEN DEL PRODUCTO
+========================================================= */
+
 .listadoProductos__details img {
+  display: block;
+
   width: 100%;
-  /* La imagen ocupará el ancho disponible */
   max-width: 300px;
-  /* Limitar el ancho máximo */
+
+  height: auto;
   max-height: 300px;
-  /* Limitar la altura máxima */
+
   object-fit: cover;
-  /* Ajustar la imagen sin distorsionarse */
+
   border-radius: 5px;
-  /* Esquinas redondeadas */
-  margin: 10px 0;
-  /* Espaciado superior e inferior */
+
+  margin: 10px auto;
 }
 
-/* Estilo para el botón de modificar publicación */
+
+/* =========================================================
+   CONTENEDOR DE IMAGEN
+========================================================= */
+
+.imagenContainer {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  max-width: 400px;
+
+  margin: 0 auto;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   IMAGEN PRINCIPAL
+========================================================= */
+
+.productoImagen {
+  width: 100%;
+  max-width: 400px;
+
+  height: auto;
+  max-height: 400px;
+
+  object-fit: cover;
+
+  display: block;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   BOTON MODIFICAR
+========================================================= */
+
 .modificarBoton {
   background-color: yellow;
-  /* Fondo amarillo */
+
   color: black;
-  /* Texto negro */
+
   border: none;
-  /* Sin bordes */
+
   border-radius: 8px;
-  /* Esquinas redondeadas */
+
   padding: 10px 20px;
-  /* Espaciado interno */
+
   cursor: pointer;
-  /* Cambiar el puntero al pasar el mouse */
+
   font-weight: bold;
-  /* Texto en negrita */
+
   font-size: 1rem;
-  /* Tamaño del texto */
-  transition: background-color 0.3s ease;
-  /* Efecto dinámico al pasar el mouse */
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .modificarBoton:hover {
   background-color: gold;
-  /* Fondo amarillo más intenso al pasar el mouse */
 }
 
 .modificarBoton:disabled {
   background-color: #ccc;
-  /* Fondo gris cuando está deshabilitado */
+
   color: #999;
-  /* Texto gris desactivado */
+
   cursor: not-allowed;
-  /* Cambiar puntero a "no permitido" */
+
+  transform: none;
 }
 
-/* Estilo para el botón de eliminar publicación */
+
+/* =========================================================
+   BOTON ELIMINAR
+========================================================= */
+
 .eliminarBoton {
   background-color: red;
-  /* Fondo rojo */
+
   color: black;
-  /* Texto negro */
+
   border: none;
-  /* Sin bordes */
+
   border-radius: 8px;
-  /* Esquinas redondeadas */
+
   padding: 10px 20px;
-  /* Espaciado interno */
+
   cursor: pointer;
-  /* Cambiar el puntero al pasar el mouse */
+
   font-weight: bold;
-  /* Texto en negrita */
+
   font-size: 1rem;
-  /* Tamaño del texto */
-  transition: background-color 0.3s ease;
-  /* Efecto dinámico al pasar el mouse */
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .eliminarBoton:hover {
   background-color: darkred;
-  /* Fondo rojo oscuro al pasar el mouse */
 }
 
-/* Botón Vendido */
+
+/* =========================================================
+   BOTON VENDIDO
+========================================================= */
+
 .vendidoBoton {
   background-color: #4caf50;
-  /* Verde */
+
   color: white;
-  /* Texto blanco */
+
   border: none;
+
   border-radius: 8px;
+
   padding: 10px 20px;
+
   cursor: pointer;
+
   font-weight: bold;
+
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+
   margin: 10px 0;
-  /* Espaciado superior e inferior */
 }
 
 .vendidoBoton:hover {
   background-color: #45a049;
-  /* Verde más oscuro al pasar el mouse */
 }
 
-/* Modal Overlay */
+
+/* =========================================================
+   MODAL
+========================================================= */
+
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
+
+  inset: 0;
+
   width: 100%;
   height: 100%;
+
+  padding: 15px;
+
+  box-sizing: border-box;
+
   background-color: rgba(0, 0, 0, 0.5);
-  /* Fondo semi-transparente */
+
   display: flex;
+
   justify-content: center;
   align-items: center;
+
   z-index: 1000;
 }
 
-/* Contenido del Modal */
+
+/* =========================================================
+   CONTENIDO MODAL
+========================================================= */
+
 .modalContent {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
+  width: 100%;
   max-width: 400px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  background-color: #fff;
+
+  padding: clamp(15px, 4vw, 20px);
+
+  box-sizing: border-box;
+
+  border-radius: 8px;
+
+  text-align: center;
+
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modalContent p {
   margin-bottom: 15px;
-  font-size: 1.2rem;
+
+  font-size: clamp(1rem, 3vw, 1.2rem);
+
   font-weight: bold;
 }
 
 .modalContent button {
   background-color: #4caf50;
-  /* Verde */
+
   color: white;
+
   border: none;
+
   border-radius: 8px;
+
   padding: 10px 20px;
+
   cursor: pointer;
+
   font-weight: bold;
+
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+
+  transition:
+    background-color 0.3s ease;
 }
 
 .modalContent button:hover {
   background-color: #45a049;
 }
 
-.imagenContainer {
-  position: relative;
-  display: inline-block;
-}
 
-.productoImagen {
-  max-width: 400px;
-  max-height: 400px;
-  object-fit: cover;
-  display: block;
-}
+/* =========================================================
+   OVERLAY AGOTADO
+========================================================= */
 
 .agotadoOverlay {
   position: absolute;
+
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
+
+  width: max-content;
+  max-width: 90%;
+
   background-color: rgba(255, 0, 0, 0.7);
+
   color: white;
-  font-size: 2rem;
+
+  font-size: clamp(1.2rem, 5vw, 2rem);
+
   font-weight: bold;
+
   padding: 10px 20px;
+
+  box-sizing: border-box;
+
   border-radius: 5px;
+
+  text-align: center;
+
+  z-index: 15;
 }
 
+
+/* =========================================================
+   OVERLAY OFERTA VENCIDA
+========================================================= */
 
 .ofertaVencidaOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
+
+  inset: 0;
+
   width: 100%;
   height: 100%;
+
   background-color: rgba(0, 0, 0, 0.404);
+
   color: yellow;
-  font-size: 2rem;
+
+  font-size: clamp(1.2rem, 5vw, 2rem);
+
   font-weight: bold;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
+  text-align: center;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  z-index: 12;
 }
 
+
+/* =========================================================
+   BOTONES FILTROS
+========================================================= */
+
 .filtroBoton {
-  margin-left: 10px;
-  margin-bottom: 3px;
+  margin: 3px 5px;
+
   padding: 8px 14px;
+
   background-color: #007bff;
-  /* azul */
+
   color: white;
+
   border: none;
+
   border-radius: 5px;
+
   font-size: 0.9rem;
+
   cursor: pointer;
-  transition: background-color 0.3s ease;
+
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 
 .filtroBoton:hover {
   background-color: #0056b3;
-  /* azul más oscuro al pasar el mouse */
 }
 
 .filtroBoton:active {
   transform: scale(0.95);
-  /* pequeño efecto al hacer click */
 }
 
-.tituloSuperior {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  /* espacio entre título y botones */
+.filtroBoton--activo {
+  background: #198754;
+
+  color: white;
+
+  border-color: #198754;
+
+  font-weight: bold;
+
+  box-shadow:
+    0 0 0 3px rgba(25, 135, 84, 0.2);
 }
+
+
+/* =========================================================
+   DETALLES COMPACTOS
+========================================================= */
 
 .detallesCompactos {
+  width: 100%;
+
   text-align: left;
-  /* alinea a la izquierda */
+
   font-size: 70%;
-  /* reduce tamaño de letra un 30% */
-  line-height: 0.75;
-  /* reduce interlineado un 50% */
+
+  line-height: 1.1;
+
   margin: 5px 0;
-  /* opcional: espacio reducido */
+
+  overflow-wrap: anywhere;
 }
+
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
 
 .buscadorContainer {
-  padding: 10px;
-  font-size: 1rem;
-  border: 2px solid #4960e7;
-  border-radius: 65px;
-  width: 60%;
-  max-width: 400px;
-  max-height: 40px;
+  display: block;
+
+  width: min(100%, 400px);
+
   min-height: 40px;
+
+  padding: 10px 45px 10px 15px;
+
+  box-sizing: border-box;
+
+  font-size: 1rem;
+
+  border: 2px solid #4960e7;
+
+  border-radius: 65px;
+
   outline: none;
+
   background-color: aliceblue;
-  margin-top: 10px;
-  margin-bottom: 3px;
+
+  margin: 10px auto 3px;
 }
+
+
+/* =========================================================
+   LUPA
+========================================================= */
 
 .Lupa {
+  display: block;
+
+  width: fit-content;
+
+  margin-top: -31px;
+  margin-right: calc(50% - 185px);
   margin-bottom: 10px;
-  margin-top: -18px;
-  margin-left: 191px;
+  margin-left: auto;
+
+  position: relative;
+
+  z-index: 2;
 }
 
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
 .compartirWhatsAppBoton {
-  background: #25d366;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 15px;
-  margin-top: 8px;
   width: 100%;
+
+  background: #25d366;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 15px;
+
+  box-sizing: border-box;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  margin-top: 8px;
 }
 
 .compartirWhatsAppBoton:hover {
@@ -347,53 +582,81 @@
   margin-right: 8px;
 }
 
+
+/* =========================================================
+   FILTRO PROVEEDOR
+========================================================= */
+
 .filtroProveedorContainer {
   width: 100%;
+
   max-width: 600px;
+
   margin: 1rem auto;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   gap: 0.75rem;
+
   flex-wrap: wrap;
+
+  box-sizing: border-box;
 }
 
 .filtroProveedorLabel {
   font-weight: 700;
+
   color: #333;
 }
 
 .filtroProveedorSelect {
-  min-width: 220px;
+  flex: 1 1 220px;
+
+  min-width: 0;
+  max-width: 100%;
+
   padding: 0.7rem 1rem;
 
+  box-sizing: border-box;
+
   font-size: 1rem;
+
   color: #333;
+
   background-color: #fff;
 
   border: 1px solid #aaa;
+
   border-radius: 8px;
 
   cursor: pointer;
+
   outline: none;
 }
 
 .filtroProveedorSelect:focus {
   border-color: #2e7d32;
-  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+
+  box-shadow:
+    0 0 0 3px rgba(46, 125, 50, 0.15);
 }
 
 .filtroProveedorLimpiar {
   padding: 0.7rem 1rem;
 
   color: #fff;
+
   background-color: #616161;
 
   border: none;
+
   border-radius: 8px;
 
   font-weight: 700;
+
   cursor: pointer;
 }
 
@@ -401,63 +664,72 @@
   background-color: #424242;
 }
 
-@media (max-width: 600px) {
-  .filtroProveedorContainer {
-    padding: 0 1rem;
-    flex-direction: column;
-    align-items: stretch;
-  }
 
-  .filtroProveedorLabel {
-    text-align: center;
-  }
-
-  .filtroProveedorSelect,
-  .filtroProveedorLimpiar {
-    width: 100%;
-    min-width: 0;
-  }
-}
+/* =========================================================
+   VENCIMIENTO PRODUCTO
+========================================================= */
 
 .vencimientoProductoOverlay {
   position: absolute;
+
   left: 10px;
   right: 10px;
   bottom: 10px;
+
   z-index: 10;
 
   padding: 10px 14px;
 
   color: #ffffff;
-  font-size: 15px;
+
+  font-size: clamp(12px, 2vw, 15px);
+
   font-weight: 800;
+
   text-align: center;
+
   text-transform: uppercase;
 
-  border: 2px solid rgba(255, 255, 255, 0.85);
+  border:
+    2px solid rgba(255, 255, 255, 0.85);
+
   border-radius: 10px;
 
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.45);
+
   backdrop-filter: blur(3px);
+
+  box-sizing: border-box;
 }
 
+
 /* Faltan entre 30 y 1 día */
+
 .vencimientoProductoOverlay--proximo {
   background: rgba(230, 126, 0, 0.92);
 }
 
-/* Vence en el día actual */
+
+/* Vence hoy */
+
 .vencimientoProductoOverlay--hoy {
   background: rgba(211, 84, 0, 0.95);
-  animation: vencimientoPulso 1.2s infinite;
+
+  animation:
+    vencimientoPulso 1.2s infinite;
 }
 
-/* El producto ya venció */
+
+/* Producto vencido */
+
 .vencimientoProductoOverlay--vencido {
   background: rgba(192, 35, 35, 0.96);
 }
 
+
 @keyframes vencimientoPulso {
+
   0% {
     transform: scale(1);
   }
@@ -469,9 +741,188 @@
   100% {
     transform: scale(1);
   }
+
 }
 
+
+/* =========================================================
+   TABLET
+   601px - 900px
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .listadoProductos {
+    padding: 15px;
+  }
+
+  .listadoProductos__details {
+    max-width: 350px;
+  }
+
+  .tituloSuperior {
+    margin-top: -50px;
+  }
+
+}
+
+
+/* =========================================================
+   MOVILES
+   hasta 600px
+========================================================= */
+
 @media (max-width: 600px) {
+
+  .listadoProductos {
+    padding: 10px;
+
+    margin-top: 15px;
+  }
+
+
+  /* ---------- TITULO ---------- */
+
+  .tituloSuperior {
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: -25px;
+
+    font-size: 1.4rem;
+  }
+
+
+  /* ---------- TARJETAS ---------- */
+
+  .listadoProductos__list {
+    gap: 10px;
+  }
+
+  .listadoProductos__details {
+    width: 100%;
+
+    max-width: 400px;
+
+    padding: 10px;
+
+    margin-top: 8px;
+  }
+
+
+  /* ---------- IMAGEN ---------- */
+
+  .listadoProductos__details img {
+    width: 100%;
+
+    max-width: 300px;
+
+    height: auto;
+  }
+
+  .imagenContainer {
+    width: 100%;
+
+    max-width: 100%;
+  }
+
+  .productoImagen {
+    width: 100%;
+
+    height: auto;
+
+    max-height: 350px;
+  }
+
+
+  /* ---------- BOTONES ---------- */
+
+  .modificarBoton,
+  .eliminarBoton,
+  .vendidoBoton {
+
+    width: 160px;
+
+    max-width: 100%;
+
+    min-height: 44px;
+
+    padding: 0 10px;
+
+    margin: 5px;
+
+    font-size: 1rem;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+  }
+
+
+  /* ---------- FILTROS ---------- */
+
+  .filtroBoton {
+    margin: 3px;
+
+    padding: 8px 10px;
+
+    font-size: 0.85rem;
+  }
+
+
+  /* ---------- PROVEEDOR ---------- */
+
+  .filtroProveedorContainer {
+    padding: 0 5px;
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .filtroProveedorLabel {
+    text-align: center;
+  }
+
+  .filtroProveedorSelect,
+  .filtroProveedorLimpiar {
+    width: 100%;
+
+    min-width: 0;
+  }
+
+  .filtroProveedorSelect {
+    flex: none;
+  }
+
+
+  /* ---------- BUSCADOR ---------- */
+
+  .buscadorContainer {
+    width: 100%;
+
+    max-width: 400px;
+
+    font-size: 16px;
+  }
+
+  .Lupa {
+    margin-top: -31px;
+
+    margin-right: 17px;
+
+    margin-left: auto;
+  }
+
+
+  /* ---------- VENCIMIENTO ---------- */
+
   .vencimientoProductoOverlay {
     left: 6px;
     right: 6px;
@@ -481,31 +932,138 @@
 
     font-size: 13px;
   }
+
+
+  /* ---------- AGOTADO ---------- */
+
+  .agotadoOverlay {
+    font-size: 1.4rem;
+
+    padding: 8px 15px;
+  }
+
+
+  /* ---------- OFERTA VENCIDA ---------- */
+
+  .ofertaVencidaOverlay {
+    font-size: 1.4rem;
+  }
+
+
+  /* ---------- MODAL ---------- */
+
+  .modalContent {
+    width: calc(100% - 20px);
+
+    max-width: 400px;
+  }
+
 }
 
-.filtroBoton--activo {
-  background: #198754;
-  color: white;
-  border-color: #198754;
-  font-weight: bold;
-  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.2);
-}
-@media (max-width: 600px) {
+
+/* =========================================================
+   MOVILES PEQUEÑOS
+   hasta 380px
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .listadoProductos {
+    padding: 7px;
+  }
+
+  .tituloSuperior {
+    font-size: 1.2rem;
+
+    margin-top: -15px;
+  }
+
+  .listadoProductos__details {
+    padding: 8px;
+  }
 
   .modificarBoton,
   .eliminarBoton,
   .vendidoBoton {
-    width: 160px;
-    height: 44px;
-    padding: 0;
-    margin: 5px;
-    font-size: 1rem;
 
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    width: 145px;
 
-    box-sizing: border-box;
+    font-size: 0.9rem;
+  }
+
+  .filtroBoton {
+    padding: 7px 8px;
+
+    font-size: 0.8rem;
+  }
+
+  .agotadoOverlay,
+  .ofertaVencidaOverlay {
+    font-size: 1.2rem;
+  }
+
+}
+
+
+/* =========================================================
+   PANTALLAS GRANDES
+========================================================= */
+
+@media (min-width: 1200px) {
+
+  .listadoProductos {
+    max-width: 1400px;
+  }
+
+  .listadoProductos__list {
+    gap: 20px;
+  }
+
+}
+
+
+/* =========================================================
+   MONITORES GRANDES / TV
+========================================================= */
+
+@media (min-width: 1920px) {
+
+  .listadoProductos {
+    max-width: 1700px;
+
+    padding: 30px;
+  }
+
+  .tituloSuperior {
+    font-size: 2.3rem;
+  }
+
+  .listadoProductos__list {
+    gap: 30px;
+  }
+
+  .listadoProductos__details {
+    max-width: 430px;
+
+    padding: 20px;
+  }
+
+  .listadoProductos__details img {
+    max-width: 350px;
+
+    max-height: 350px;
+  }
+
+  .productoImagen {
+    max-width: 430px;
+
+    max-height: 430px;
+  }
+
+  .modificarBoton,
+  .eliminarBoton,
+  .vendidoBoton {
+    font-size: 1.05rem;
   }
 
 }

@@ -1,4 +1,7 @@
-/* Reset CSS básico */
+/* =========================
+   RESET CSS
+========================= */
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -18,102 +21,344 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  box-sizing: border-box;
 }
 
-/* Bloques de HTML5 – Estilo por defecto */
+/* =========================
+   HTML5
+========================= */
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-/* Restablece listas sin estilo */
+/* =========================
+   LISTAS
+========================= */
+
 ol, ul {
   list-style: none;
 }
 
-/* Restablece tablas */
+/* =========================
+   TABLAS
+========================= */
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/* =========================
+   BODY
+========================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: #e3f2df;
+  background-color: #e6f1f5;
   color: #000;
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
-  padding-top: 1px;
+
+  min-height: 100vh;
 }
 
+
+/* ==================================================
+   HOME
+================================================== */
 
 .homeContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0px;
-    margin-top: 151px;
-    background-color: #e6f1f5;
-  }
-  
-  .title {
-    font-size: 1.5rem;
-    margin-bottom: 16px;
-    color: #333;
-  }
-  
-  .canchas {
-    max-width: 22em;
-    height: auto;
-    border-radius: 10px; /* Agregar bordes redondeados a la imagen */
-  }
-  
-  .authButton {
-  margin-top: 138px;
-  position: relative;
-  overflow: hidden;
-  border: none;
-  border-radius: 5px;
-  background: #007bff;
-  color: #fff;
-  z-index: 0;
-  width: 177px;
-  height: 46px;
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  text-align: center;
+
+  padding: clamp(80px, 12vh, 150px) 20px 40px;
+
+  background-color: #e6f1f5;
 }
+
+
+/* ==================================================
+   TITULO
+================================================== */
+
+.title {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+
+  margin-bottom: clamp(12px, 2vw, 16px);
+
+  color: #333;
+
+  line-height: 1.3;
+}
+
+
+/* ==================================================
+   IMAGEN
+================================================== */
+
+.canchas {
+  width: 100%;
+
+  max-width: 22em;
+
+  height: auto;
+
+  display: block;
+
+  border-radius: 10px;
+
+  object-fit: contain;
+}
+
+
+/* ==================================================
+   BOTON
+================================================== */
+
+.authButton {
+  margin-top: clamp(50px, 12vh, 138px);
+
+  position: relative;
+
+  overflow: hidden;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background: #007bff;
+
+  color: #fff;
+
+  z-index: 0;
+
+  width: clamp(150px, 45vw, 177px);
+
+  height: 46px;
+
+  cursor: pointer;
+
+  font-size: 1rem;
+
+  flex-shrink: 0;
+}
+
+
+/* ==================================================
+   BORDE ANIMADO
+================================================== */
 
 .authButton::before {
   content: "";
+
   position: absolute;
+
   inset: -50%;
+
   background: conic-gradient(
     #00f700,
     #7c3aed,
     #ec4899,
     #00f700
   );
+
   animation: girar 2s linear infinite;
+
   z-index: -2;
 }
 
+
+/* ==================================================
+   INTERIOR BOTON
+================================================== */
+
 .authButton::after {
   content: "";
+
   position: absolute;
-  inset: 3px; /* grosor del borde */
-  background: linear-gradient(0deg, black, #007bff);
+
+  inset: 3px;
+
+  background: linear-gradient(
+    0deg,
+    black,
+    #007bff
+  );
+
   border-radius: 3px;
+
   z-index: -1;
 }
 
+
+/* ==================================================
+   ANIMACION
+================================================== */
+
 @keyframes girar {
+
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+
 }
-.styles.homeContainer {
-  margin-top: 0px;
+
+
+/* ==================================================
+   TABLETS
+   768px o menos
+================================================== */
+
+@media (max-width: 768px) {
+
+  .homeContainer {
+    padding:
+      clamp(70px, 10vh, 110px)
+      16px
+      30px;
+  }
+
+  .canchas {
+    max-width: 20em;
+  }
+
+  .authButton {
+    margin-top: clamp(45px, 10vh, 90px);
+  }
+
+}
+
+
+/* ==================================================
+   MOVILES
+   480px o menos
+================================================== */
+
+@media (max-width: 480px) {
+
+  .homeContainer {
+    padding:
+      clamp(60px, 9vh, 90px)
+      12px
+      25px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .canchas {
+    width: 95%;
+    max-width: 350px;
+  }
+
+  .authButton {
+    width: 170px;
+
+    height: 46px;
+
+    margin-top: clamp(40px, 8vh, 70px);
+  }
+
+}
+
+
+/* ==================================================
+   MOVILES PEQUEÑOS
+   360px o menos
+================================================== */
+
+@media (max-width: 360px) {
+
+  .homeContainer {
+    padding:
+      55px
+      10px
+      20px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .canchas {
+    width: 100%;
+  }
+
+  .authButton {
+    width: 160px;
+
+    height: 44px;
+
+    margin-top: 40px;
+  }
+
+}
+
+
+/* ==================================================
+   PANTALLAS GRANDES
+================================================== */
+
+@media (min-width: 1200px) {
+
+  .homeContainer {
+    padding-top: 150px;
+  }
+
+  .canchas {
+    max-width: 22em;
+  }
+
+  .authButton {
+    margin-top: 120px;
+  }
+
+}
+
+
+/* ==================================================
+   MONITORES / TV GRANDES
+================================================== */
+
+@media (min-width: 1920px) {
+
+  .homeContainer {
+    padding-top: 180px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .canchas {
+    max-width: 27em;
+  }
+
+  .authButton {
+    width: 190px;
+    height: 50px;
+
+    font-size: 1.05rem;
+
+    margin-top: 140px;
+  }
+
 }
