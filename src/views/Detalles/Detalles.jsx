@@ -97,7 +97,7 @@ const DetallesProducto = () => {
      URLS DEL PRODUCTO
   ========================================================= */
 
-  const productUrl = `https://og.conlara.com.ar/productos/share/${id}`;
+  const productUrl = `https://conlara.com.ar/productos/share/${id}`;
 
   const facebookProductUrl =
     `https://ecommerce-9558.onrender.com/products/share-facebook/${id}`;
