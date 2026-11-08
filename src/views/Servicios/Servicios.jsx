@@ -80,15 +80,30 @@ const Servicios = () => {
   const fetchProductos = async (pageNumber = 1, append = false) => {
     try {
       setLoading(true);
-      const url = `https://ecommerce-9558.onrender.com/products?page=${pageNumber}&limit=50`;
+      // const url = `https://ecommerce-9558.onrender.com/products?page=${pageNumber}&limit=50`;
+      const url =
+        `https://ecommerce-9558.onrender.com/products?page=${pageNumber}&limit=20&category=${encodeURIComponent(TARGET_CATEGORY)}`;
       const response = await fetch(url);
       if (!response.ok) throw new Error('Error al obtener los productos');
       const data = await response.json();
+      console.log("URL SERVICIOS:", url);
+      console.log("RESPUESTA SERVICIOS:", data);
+      console.log("CANTIDAD SERVICIOS:", data.length);
 
-      const servicios = filterServicios(data);
-      setProductos((prev) => (append ? [...prev, ...servicios] : servicios));
+
+
+      // const servicios = filterServicios(data);
+      // setProductos((prev) => (append ? [...prev, ...servicios] : servicios));
+      // setError('');
+      // setHasMore(Array.isArray(data) ? data.length === 50 : false);
+      const servicios = Array.isArray(data) ? data : [];
+
+      setProductos((prev) =>
+        append ? [...prev, ...servicios] : servicios
+      );
+
       setError('');
-      setHasMore(Array.isArray(data) ? data.length === 50 : false);
+      setHasMore(servicios.length === 20);
     } catch (err) {
       setError(err.message);
       if (!append) setProductos([]);
@@ -177,164 +192,164 @@ const Servicios = () => {
   };
 
   return (
-  <>
-    <Helmet>
-      <title>Servicios | Conlara.com.ar</title>
+    <>
+      <Helmet>
+        <title>Servicios | Conlara.com.ar</title>
 
-      <meta
-        name="description"
-        content="Encontrá servicios y prestadores publicados en Conlara.com.ar."
-      />
-
-      <meta
-        name="robots"
-        content="index, follow, max-image-preview:large"
-      />
-
-      <link
-        rel="canonical"
-        href="https://conlara.com.ar/servicios"
-      />
-
-      <meta
-        property="og:title"
-        content="Servicios | Conlara.com.ar"
-      />
-
-      <meta
-        property="og:description"
-        content="Encontrá servicios y prestadores publicados en Conlara.com.ar."
-      />
-
-      <meta
-        property="og:url"
-        content="https://conlara.com.ar/servicios"
-      />
-
-      <meta
-        property="og:type"
-        content="website"
-      />
-
-      <meta
-        property="og:image"
-        content="https://conlara.com.ar/imagen2.jpg"
-      />
-    </Helmet>
-
-    <div className="listadoProductosServicios">
-      <div className='botones_superiores'>
-        
-
-        {/* ocultar el botón si ya estás en /servicios */}
-        {location.pathname !== '/servicios' && (
-          <button
-            className='telefonos_utiles'
-            onClick={() => navigate('/servicios')}
-          >
-            Guia de Servicios
-          </button>
-        )}
-      </div>
-
-      <form className="listadoProductos__buscador" onSubmit={handleSubmit}>
-        <Swiper
-          spaceBetween={10}
-          slidesPerView={3}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 2000, disableOnInteraction: false, pauseOnMouseEnter: true }}
-          breakpoints={{ 320: { slidesPerView: 1 }, 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
-          modules={[Navigation, Pagination, Autoplay]}
-        >
-          <SwiperSlide>
-            <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785880915/img1_npzt1t.png" alt="Slide 1" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785888560/Sin_nombre_jnq2v0.png" alt="Slide 2" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785880915/img1_npzt1t.png" alt="Slide 3" />
-          </SwiperSlide>
-        </Swiper>
-
-        <input
-          type="text"
-          placeholder="Buscar servicios..."
-          value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}
+        <meta
+          name="description"
+          content="Encontrá servicios y prestadores publicados en Conlara.com.ar."
         />
-        <button type="submit">🔍</button>
-      </form>
 
-      {error && <p className="listadoProductos__error">{error}</p>}
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large"
+        />
 
-      <div className="listadoProductos__list2">
-  {productos.length === 0 && loading ? (
-    <p>Cargando servicios...</p>
-  ) : productos.length === 0 && !error ? (
-    <p>No hay servicios disponibles.</p>
-  ) : (
-    productos.map((producto) => {
-            const img = producto.imgUrl || producto.image || producto.images?.[0] || '';
-            const price = producto.price ?? producto.precio ?? 0;
-            const expiresAt = producto.expiresAt || producto.expireAt || producto.expiration;
-            const createdAt = producto.createdAt || producto.created_at || producto.created;
-            const stockMin = producto.stockminimo ?? producto.stockMin ?? producto.stock_min ?? '—';
-            const ubicacion = producto.ubicacion || producto.location || producto.taller || '—';
-            const categoriaRaw = producto.category || producto.categoria || producto.Categoria || producto.categories || producto.categorias || '—';
-            const categoriaText = typeof categoriaRaw === 'string'
-              ? categoriaRaw
-              : (Array.isArray(categoriaRaw) ? categoriaRaw.map(c => (c.name || c)).join(', ') : (categoriaRaw?.name || categoriaRaw?.title || '—'));
+        <link
+          rel="canonical"
+          href="https://conlara.com.ar/servicios"
+        />
 
-            return (
-              <div key={producto.id ?? producto._id} className="listadoProductos__details">
-                <div className="imagenContainer" style={{ position: 'relative' }}>
-                  <img src={img} alt={`Imagen de ${producto.name}`} className="listadoProductos__img" />
-                  {(producto.stock === 0 || producto.stock === '0') && <div className="agotadoOverlay">AGOTADO</div>}
-                  {producto.resaltaroferta && <div className="ofertaOverlay">OFERTA</div>}
+        <meta
+          property="og:title"
+          content="Servicios | Conlara.com.ar"
+        />
+
+        <meta
+          property="og:description"
+          content="Encontrá servicios y prestadores publicados en Conlara.com.ar."
+        />
+
+        <meta
+          property="og:url"
+          content="https://conlara.com.ar/servicios"
+        />
+
+        <meta
+          property="og:type"
+          content="website"
+        />
+
+        <meta
+          property="og:image"
+          content="https://conlara.com.ar/imagen2.jpg"
+        />
+      </Helmet>
+
+      <div className="listadoProductosServicios">
+        <div className='botones_superiores'>
+
+
+          {/* ocultar el botón si ya estás en /servicios */}
+          {location.pathname !== '/servicios' && (
+            <button
+              className='telefonos_utiles'
+              onClick={() => navigate('/servicios')}
+            >
+              Guia de Servicios
+            </button>
+          )}
+        </div>
+
+        <form className="listadoProductos__buscador" onSubmit={handleSubmit}>
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={3}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 2000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            breakpoints={{ 320: { slidesPerView: 1 }, 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
+            modules={[Navigation, Pagination, Autoplay]}
+          >
+            <SwiperSlide>
+              <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785880915/img1_npzt1t.png" alt="Slide 1" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785888560/Sin_nombre_jnq2v0.png" alt="Slide 2" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785880915/img1_npzt1t.png" alt="Slide 3" />
+            </SwiperSlide>
+          </Swiper>
+
+          <input
+            type="text"
+            placeholder="Buscar servicios..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
+          <button type="submit">🔍</button>
+        </form>
+
+        {error && <p className="listadoProductos__error">{error}</p>}
+
+        <div className="listadoProductos__list2">
+          {productos.length === 0 && loading ? (
+            <p>Cargando servicios...</p>
+          ) : productos.length === 0 && !error ? (
+            <p>No hay servicios disponibles.</p>
+          ) : (
+            productos.map((producto) => {
+              const img = producto.imgUrl || producto.image || producto.images?.[0] || '';
+              const price = producto.price ?? producto.precio ?? 0;
+              const expiresAt = producto.expiresAt || producto.expireAt || producto.expiration;
+              const createdAt = producto.createdAt || producto.created_at || producto.created;
+              const stockMin = producto.stockminimo ?? producto.stockMin ?? producto.stock_min ?? '—';
+              const ubicacion = producto.ubicacion || producto.location || producto.taller || '—';
+              const categoriaRaw = producto.category || producto.categoria || producto.Categoria || producto.categories || producto.categorias || '—';
+              const categoriaText = typeof categoriaRaw === 'string'
+                ? categoriaRaw
+                : (Array.isArray(categoriaRaw) ? categoriaRaw.map(c => (c.name || c)).join(', ') : (categoriaRaw?.name || categoriaRaw?.title || '—'));
+
+              return (
+                <div key={producto.id ?? producto._id} className="listadoProductos__details">
+                  <div className="imagenContainer" style={{ position: 'relative' }}>
+                    <img src={img} alt={`Imagen de ${producto.name}`} className="listadoProductos__img" />
+                    {(producto.stock === 0 || producto.stock === '0') && <div className="agotadoOverlay">AGOTADO</div>}
+                    {producto.resaltaroferta && <div className="ofertaOverlay">OFERTA</div>}
+                  </div>
+
+                  <h2>{producto.name || producto.title || 'Sin nombre'}</h2>
+
+                  <div className="price">
+                    <span className="precioTexto">
+
+                    </span>
+                  </div>
+
+                  <div style={{ marginTop: 8, fontSize: 14, color: '#222', textAlign: 'left', width: '90%' }}>
+
+                  </div>
+
+                  <div style={{ marginTop: 10, display: 'flex', gap: 8 }}>
+                    <button className="meInteresaBoton" onClick={() => handleClick(producto.id)}>Ver Detalles</button>
+                    {producto.creatorEmail === localStorage.getItem('userEmail') && (
+                      <>
+                        <button className="meInteresaBoton" onClick={() => handleEdit(producto.id)}>Modificar Publicacion</button>
+                        <button className="meInteresaBoton" onClick={() => handleDelete(producto.id)}>Eliminar Publicación</button>
+                      </>
+                    )}
+                  </div>
                 </div>
+              );
+            })
+          )}
+        </div>
 
-                <h2>{producto.name || producto.title || 'Sin nombre'}</h2>
-
-                <div className="price">
-                  <span className="precioTexto">
-                    
-                  </span>
-                </div>
-
-                <div style={{ marginTop: 8, fontSize: 14, color: '#222', textAlign: 'left', width: '90%' }}>
-                  
-                </div>
-
-                <div style={{ marginTop: 10, display: 'flex', gap: 8 }}>
-                  <button className="meInteresaBoton" onClick={() => handleClick(producto.id)}>Ver Detalles</button>
-                  {producto.creatorEmail === localStorage.getItem('userEmail') && (
-                    <>
-                      <button className="meInteresaBoton" onClick={() => handleEdit(producto.id)}>Modificar Publicacion</button>
-                      <button className="meInteresaBoton" onClick={() => handleDelete(producto.id)}>Eliminar Publicación</button>
-                    </>
-                  )}
-                </div>
-              </div>
-            );
-          })
+        {loading && productos.length > 0 && (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "20px",
+              fontSize: "18px",
+              fontWeight: "bold"
+            }}
+          >
+            Cargando más servicios...
+          </div>
         )}
       </div>
-
-      {loading && productos.length > 0 && (
-  <div
-    style={{
-      textAlign: "center",
-      padding: "20px",
-      fontSize: "18px",
-      fontWeight: "bold"
-    }}
-  >
-    Cargando más servicios...
-  </div>
-)}
-    </div>
     </>
   );
 };
