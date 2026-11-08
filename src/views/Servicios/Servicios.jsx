@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Servicios.css';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -176,6 +177,51 @@ const Servicios = () => {
   };
 
   return (
+  <>
+    <Helmet>
+      <title>Servicios | Conlara.com.ar</title>
+
+      <meta
+        name="description"
+        content="Encontrá servicios y prestadores publicados en Conlara.com.ar."
+      />
+
+      <meta
+        name="robots"
+        content="index, follow, max-image-preview:large"
+      />
+
+      <link
+        rel="canonical"
+        href="https://conlara.com.ar/servicios"
+      />
+
+      <meta
+        property="og:title"
+        content="Servicios | Conlara.com.ar"
+      />
+
+      <meta
+        property="og:description"
+        content="Encontrá servicios y prestadores publicados en Conlara.com.ar."
+      />
+
+      <meta
+        property="og:url"
+        content="https://conlara.com.ar/servicios"
+      />
+
+      <meta
+        property="og:type"
+        content="website"
+      />
+
+      <meta
+        property="og:image"
+        content="https://conlara.com.ar/imagen2.jpg"
+      />
+    </Helmet>
+
     <div className="listadoProductosServicios">
       <div className='botones_superiores'>
         
@@ -289,6 +335,7 @@ const Servicios = () => {
   </div>
 )}
     </div>
+    </>
   );
 };
 

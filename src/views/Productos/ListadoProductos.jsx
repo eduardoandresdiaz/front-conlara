@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import './ListadoProductos.css';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules"; // 👈 agregar Autoplay
@@ -18,6 +20,9 @@ const ListadoProductos = () => {
   const [hasMore, setHasMore] = useState(true); // controlar si hay más productos
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const esPaginaProductos = location.pathname === "/productos";
 
   const fetchProductos = async (pageNumber = 1, append = false) => {
     try {
@@ -140,7 +145,53 @@ const ListadoProductos = () => {
 
 
 
-  return (
+ return (
+  <>
+    {esPaginaProductos && (
+      <Helmet>
+        <title>Productos | Conlara.com.ar</title>
+
+        <meta
+          name="description"
+          content="Encontrá productos publicados por comercios, emprendedores y vendedores en Conlara.com.ar."
+        />
+
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large"
+        />
+
+        <link
+          rel="canonical"
+          href="https://conlara.com.ar/productos"
+        />
+
+        <meta
+          property="og:title"
+          content="Productos | Conlara.com.ar"
+        />
+
+        <meta
+          property="og:description"
+          content="Encontrá productos publicados por comercios, emprendedores y vendedores en Conlara.com.ar."
+        />
+
+        <meta
+          property="og:url"
+          content="https://conlara.com.ar/productos"
+        />
+
+        <meta
+          property="og:type"
+          content="website"
+        />
+
+        <meta
+          property="og:image"
+          content="https://conlara.com.ar/imagen2.jpg"
+        />
+      </Helmet>
+    )}
 
     <div className="listadoProductos">
       <div className='botones_superiores'>
@@ -186,7 +237,7 @@ const ListadoProductos = () => {
           <SwiperSlide>
             <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1785888560/Sin_nombre_jnq2v0.png" alt="Producto 2" />
           </SwiperSlide>
-          
+
           <SwiperSlide>
             <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1792253750/ARTICA_tlfidl.jpg" alt="Producto 3" />
           </SwiperSlide>
@@ -265,7 +316,8 @@ const ListadoProductos = () => {
         </p>
       )}
     </div>
-  );
+  </>
+ );
 };
 
 export default ListadoProductos;

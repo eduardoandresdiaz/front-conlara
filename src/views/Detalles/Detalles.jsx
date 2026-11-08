@@ -221,61 +221,80 @@ const DetallesProducto = () => {
         =================================================== */}
 
         <Helmet>
-          <title>
-            {producto.name
-              ? `${producto.name} - Conlara.com.ar`
-              : "Cargando producto..."}
-          </title>
+  <title>
+    {producto.name
+      ? `${producto.name} | Conlara.com.ar`
+      : "Producto | Conlara.com.ar"}
+  </title>
 
-          <meta
-            name="description"
-            content={
-              producto.description ||
-              "Compra los mejores productos en Conlara.com.ar"
-            }
-          />
+  <meta
+    name="description"
+    content={
+      producto.description
+        ? `${producto.name} - ${producto.description}`.slice(0, 160)
+        : producto.name
+          ? `Encontrá ${producto.name} publicado en Conlara.com.ar.`
+          : "Encontrá productos publicados en Conlara.com.ar."
+    }
+  />
 
-          <meta
-            name="keywords"
-            content="tienda, compra, venta, productos, Conlara"
-          />
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  />
 
-          <meta
-            property="og:type"
-            content="product"
-          />
+  <link
+    rel="canonical"
+    href={`https://conlara.com.ar/productos/${id}`}
+  />
 
-          <meta
-            property="og:title"
-            content={producto.name || "Producto"}
-          />
+  <meta
+    property="og:type"
+    content="product"
+  />
 
-          <meta
-            property="og:description"
-            content={
-              producto.description ||
-              "Detalles del producto"
-            }
-          />
+  <meta
+    property="og:title"
+    content={
+      producto.name
+        ? `${producto.name} | Conlara.com.ar`
+        : "Producto | Conlara.com.ar"
+    }
+  />
 
-          <meta
-            property="og:image"
-            content={
-              producto.imgUrl ||
-              "https://via.placeholder.com/400"
-            }
-          />
+  <meta
+    property="og:description"
+    content={
+      producto.description ||
+      (producto.name
+        ? `Encontrá ${producto.name} en Conlara.com.ar.`
+        : "Encontrá productos en Conlara.com.ar.")
+    }
+  />
 
-          <meta
-            property="og:url"
-            content={productUrl}
-          />
+  <meta
+    property="og:image"
+    content={
+      producto.imgUrl ||
+      "https://conlara.com.ar/imagen2.jpg"
+    }
+  />
 
-          <meta
-            property="og:site_name"
-            content="Conlara.com.ar"
-          />
-        </Helmet>
+  <meta
+    property="og:url"
+    content={`https://conlara.com.ar/productos/${id}`}
+  />
+
+  <meta
+    property="og:site_name"
+    content="Conlara.com.ar"
+  />
+
+  <meta
+    property="og:locale"
+    content="es_AR"
+  />
+</Helmet>
 
         {/* ===================================================
             ERROR

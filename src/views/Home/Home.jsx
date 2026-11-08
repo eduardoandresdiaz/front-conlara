@@ -1,49 +1,138 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
-import { useState, useEffect } from 'react'; //import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Para la redirección
-//import logoConlara from "../../assets/media/images/imagen2.jpg"; // Importar la imagen de las canchas
-import styles from './Home.module.css';
-import ListadoProductos from '../Productos/ListadoProductos';
+import styles from "./Home.module.css";
+import ListadoProductos from "../Productos/ListadoProductos";
 
 const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  // Verificar
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    setIsLoggedIn(!!user); // Estable en localStorage
+    const user = localStorage.getItem("user");
+    setIsLoggedIn(!!user);
   }, []);
 
   const handleAuthButtonClick = () => {
     if (isLoggedIn) {
-      // Eliminar usuario del localStorage
-      localStorage.removeItem('user');
+      localStorage.removeItem("user");
       setIsLoggedIn(false);
     } else {
-      // Redirigir al 
       navigate("/login");
     }
   };
 
   return (
-    <div className={styles.homeContainer}>
-      <h1 className={styles.title}></h1>
-      {/* <img 
-        src={logoConlara} 
-        alt="Portal de Compras y Venta en el Valle del Conlara" 
-        className={styles.canchas} 
-      /> */}
-      <button 
-        onClick={handleAuthButtonClick} 
-        className={styles.authButton}
-      >
-        {isLoggedIn ? 'Logout' : 'Publica tu Producto'}
-      </button>
-      <ListadoProductos />
-    </div>
-    
+    <>
+      <Helmet>
+        <title>
+          Conlara.com.ar | Comprá y Vendé Sin Comisiones
+        </title>
+
+        <meta
+          name="description"
+          content="Comprá, vendé y publicá productos y servicios sin comisiones en Conlara.com.ar. Encontrá comercios, emprendedores y prestadores de servicios."
+        />
+
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large"
+        />
+
+        <link
+          rel="canonical"
+          href="https://conlara.com.ar/"
+        />
+
+        <meta
+          property="og:title"
+          content="Conlara.com.ar | Comprá y Vendé Sin Comisiones"
+        />
+
+        <meta
+          property="og:description"
+          content="Comprá, vendé y publicá productos y servicios sin comisiones en Conlara.com.ar."
+        />
+
+        <meta
+          property="og:url"
+          content="https://conlara.com.ar/"
+        />
+
+        <meta
+          property="og:type"
+          content="website"
+        />
+
+        <meta
+          property="og:image"
+          content="https://conlara.com.ar/imagen2.jpg"
+        />
+      </Helmet>
+
+      <div className={styles.homeContainer}>
+        <h1 className={styles.title}></h1>
+
+        <button
+          onClick={handleAuthButtonClick}
+          className={styles.authButton}
+        >
+          {isLoggedIn ? "Logout" : "Publica tu Producto"}
+        </button>
+
+        <ListadoProductos />
+      </div>
+    </>
   );
 };
 
 export default Home;
+// import { useState, useEffect } from 'react'; //import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom'; // Para la redirección
+// //import logoConlara from "../../assets/media/images/imagen2.jpg"; // Importar la imagen de las canchas
+// import styles from './Home.module.css';
+// import ListadoProductos from '../Productos/ListadoProductos';
+
+// const Home = () => {
+//   const [isLoggedIn, setIsLoggedIn] = useState(false);
+//   const navigate = useNavigate();
+
+//   // Verificar
+//   useEffect(() => {
+//     const user = localStorage.getItem('user');
+//     setIsLoggedIn(!!user); // Estable en localStorage
+//   }, []);
+
+//   const handleAuthButtonClick = () => {
+//     if (isLoggedIn) {
+//       // Eliminar usuario del localStorage
+//       localStorage.removeItem('user');
+//       setIsLoggedIn(false);
+//     } else {
+//       // Redirigir al 
+//       navigate("/login");
+//     }
+//   };
+
+//   return (
+//     <div className={styles.homeContainer}>
+//       <h1 className={styles.title}></h1>
+//       {/* <img 
+//         src={logoConlara} 
+//         alt="Portal de Compras y Venta en el Valle del Conlara" 
+//         className={styles.canchas} 
+//       /> */}
+//       <button 
+//         onClick={handleAuthButtonClick} 
+//         className={styles.authButton}
+//       >
+//         {isLoggedIn ? 'Logout' : 'Publica tu Producto'}
+//       </button>
+//       <ListadoProductos />
+//     </div>
+    
+//   );
+// };
+
+// export default Home;
