@@ -3,7 +3,24 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import { useState } from 'react';
 import './Register.css';
-const cities = ["Naschel", "La Toma"];
+const cities = [
+  "Naschel",
+  "La Toma",
+  "Tilisarao",
+  "Concarán",
+  "Renca",
+  "Santa Rosa del Conlara",
+  "Merlo",
+  "Carpintería",
+  "Los Molles",
+  "Cortaderas",
+  "Villa Elena",
+  "Villa Larca",
+  "Papagayos",
+  "Villa del Carmen",
+  "La Punilla",
+  "Paso Grande"
+];
 const provinces = [
   "Buenos Aires",
   "Catamarca",

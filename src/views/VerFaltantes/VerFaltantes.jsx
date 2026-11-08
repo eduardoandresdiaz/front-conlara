@@ -16,7 +16,9 @@ const VerFaltantes = () => {
 
   const [cargandoProveedores, setCargandoProveedores] = useState(true);
   const [cargandoFaltantes, setCargandoFaltantes] = useState(false);
-  const [procesando, setProcesando] = useState(false);
+
+  // Guarda el ID del faltante que se está procesando
+  const [faltanteProcesandoId, setFaltanteProcesandoId] = useState(null);
 
   const [mensaje, setMensaje] = useState("");
   const [error, setError] = useState("");
@@ -49,7 +51,9 @@ const VerFaltantes = () => {
           }
         );
 
-        const listaProveedores = Array.isArray(response.data.proveedores)
+        const listaProveedores = Array.isArray(
+          response.data.proveedores
+        )
           ? response.data.proveedores
           : [];
 
@@ -130,6 +134,61 @@ const VerFaltantes = () => {
     await obtenerFaltantes(proveedorSeleccionado);
   };
 
+  // Marca solamente un producto como pedido
+  const marcarComoPedido = async (faltanteId) => {
+    const confirmar = window.confirm(
+      "¿Confirmas que este producto ya fue pedido?"
+    );
+
+    if (!confirmar) return;
+
+    try {
+      setFaltanteProcesandoId(faltanteId);
+      setMensaje("");
+      setError("");
+
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setError("Tu sesión ha finalizado. Inicia sesión nuevamente.");
+        return;
+      }
+
+      await axios.patch(
+        `${API_URL}/product-requests/${faltanteId}/mark-as-ordered`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Actualiza solamente el ítem seleccionado
+      setFaltantes((faltantesActuales) =>
+        faltantesActuales.map((faltante) =>
+          faltante.id === faltanteId
+            ? {
+                ...faltante,
+                status: "PEDIDO",
+              }
+            : faltante
+        )
+      );
+
+      setMensaje("Producto marcado como pedido correctamente.");
+    } catch (error) {
+      console.error("Error al marcar como pedido:", error);
+
+      setError(
+        error.response?.data?.message ||
+          "No se pudo marcar el producto como pedido."
+      );
+    } finally {
+      setFaltanteProcesandoId(null);
+    }
+  };
+
   const eliminarFaltante = async (faltanteId) => {
     const confirmar = window.confirm(
       "¿Seguro que deseas eliminar este faltante?"
@@ -138,7 +197,7 @@ const VerFaltantes = () => {
     if (!confirmar) return;
 
     try {
-      setProcesando(true);
+      setFaltanteProcesandoId(faltanteId);
       setMensaje("");
       setError("");
 
@@ -173,66 +232,7 @@ const VerFaltantes = () => {
           "No se pudo eliminar el faltante."
       );
     } finally {
-      setProcesando(false);
-    }
-  };
-
-  const marcarListaComoPedida = async () => {
-    if (!supplierName) {
-      setError("Debes seleccionar un proveedor.");
-      return;
-    }
-
-    if (faltantes.length === 0) {
-      setError("Este proveedor no tiene faltantes pendientes.");
-      return;
-    }
-
-    const confirmar = window.confirm(
-      `¿Confirmas que el pedido a ${supplierName} ya fue realizado?`
-    );
-
-    if (!confirmar) return;
-
-    try {
-      setProcesando(true);
-      setMensaje("");
-      setError("");
-
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        setError("Tu sesión ha finalizado. Inicia sesión nuevamente.");
-        return;
-      }
-
-      const response = await axios.patch(
-        `${API_URL}/product-requests/mark-as-ordered`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          params: {
-            supplierName,
-          },
-        }
-      );
-
-      setFaltantes([]);
-
-      setMensaje(
-        `${response.data.updatedRecords} producto(s) marcados como pedidos. Ya puedes comenzar una nueva lista para ${supplierName}.`
-      );
-    } catch (error) {
-      console.error("Error al marcar la lista:", error);
-
-      setError(
-        error.response?.data?.message ||
-          "No se pudo marcar la lista como pedida."
-      );
-    } finally {
-      setProcesando(false);
+      setFaltanteProcesandoId(null);
     }
   };
 
@@ -253,6 +253,10 @@ const VerFaltantes = () => {
       minute: "2-digit",
     });
   };
+
+  const cantidadPendientes = faltantes.filter(
+    (faltante) => faltante.status !== "ordered"
+  ).length;
 
   return (
     <div className="ver-faltantes">
@@ -293,7 +297,7 @@ const VerFaltantes = () => {
             disabled={
               cargandoProveedores ||
               cargandoFaltantes ||
-              procesando
+              faltanteProcesandoId !== null
             }
           >
             <option value="">
@@ -313,11 +317,12 @@ const VerFaltantes = () => {
           </select>
         </div>
 
-        {!cargandoProveedores && proveedores.length === 0 && (
-          <div className="ver-faltantes__empty">
-            No tienes proveedores registrados.
-          </div>
-        )}
+        {!cargandoProveedores &&
+          proveedores.length === 0 && (
+            <div className="ver-faltantes__empty">
+              No tienes proveedores registrados.
+            </div>
+          )}
 
         {cargandoFaltantes && (
           <div className="ver-faltantes__loading">
@@ -339,68 +344,110 @@ const VerFaltantes = () => {
               <strong>{supplierName}</strong>
 
               <span>
-                {faltantes.length} producto(s) pendiente(s)
+                {cantidadPendientes} producto(s) pendiente(s)
               </span>
             </div>
 
             <div className="ver-faltantes__list">
-              {faltantes.map((faltante) => (
-                <article
-                  key={faltante.id}
-                  className="ver-faltantes__card"
-                >
-                  <div className="ver-faltantes__card-header">
-                    <span className="ver-faltantes__date">
-                      {formatearFecha(faltante.requestedAt)}
-                    </span>
+              {faltantes.map((faltante) => {
+                const estaPedido =
+                  faltante.status === "PEDIDO";
 
-                    <span className="ver-faltantes__status">
-                      {faltante.status}
-                    </span>
-                  </div>
+                const estaProcesando =
+                  faltanteProcesandoId === faltante.id;
 
-                  <h2 className="ver-faltantes__product">
-                    {faltante.productDetail}
-                  </h2>
-
-                  <div className="ver-faltantes__quantities">
-                    <div className="ver-faltantes__quantity">
-                      <span>Stock actual</span>
-                      <strong>{faltante.currentStock}</strong>
-                    </div>
-
-                    <div className="ver-faltantes__quantity">
-                      <span>Cantidad a pedir</span>
-                      <strong>
-                        {faltante.requestedQuantity}
-                      </strong>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    className="ver-faltantes__delete"
-                    onClick={() =>
-                      eliminarFaltante(faltante.id)
-                    }
-                    disabled={procesando}
+                return (
+                  <article
+                    key={faltante.id}
+                    className={`ver-faltantes__card ${
+                      estaPedido
+                        ? "ver-faltantes__card--ordered"
+                        : ""
+                    }`}
                   >
-                    Eliminar faltante
-                  </button>
-                </article>
-              ))}
-            </div>
+                    <div className="ver-faltantes__card-header">
+                      <span className="ver-faltantes__date">
+                        {formatearFecha(
+                          faltante.requestedAt
+                        )}
+                      </span>
 
-            <button
-              type="button"
-              className="ver-faltantes__button ver-faltantes__button--ordered"
-              onClick={marcarListaComoPedida}
-              disabled={procesando}
-            >
-              {procesando
-                ? "Procesando..."
-                : "Marcar lista como pedida"}
-            </button>
+                      <span
+                        className={`ver-faltantes__status ${
+                          estaPedido
+                            ? "ver-faltantes__status--ordered"
+                            : ""
+                        }`}
+                      >
+                        {estaPedido
+                          ? "Ya pedido"
+                          : "Pendiente"}
+                      </span>
+                    </div>
+
+                    <h2 className="ver-faltantes__product">
+                      {faltante.productDetail}
+                    </h2>
+
+                    <div className="ver-faltantes__quantities">
+                      <div className="ver-faltantes__quantity">
+                        <span>Stock actual</span>
+
+                        <strong>
+                          {faltante.currentStock}
+                        </strong>
+                      </div>
+
+                      <div className="ver-faltantes__quantity">
+                        <span>Cantidad a pedir</span>
+
+                        <strong>
+                          {faltante.requestedQuantity}
+                        </strong>
+                      </div>
+                    </div>
+
+                    {!estaPedido && (
+                      <button
+                        type="button"
+                        className="ver-faltantes__ordered"
+                        onClick={() =>
+                          marcarComoPedido(faltante.id)
+                        }
+                        disabled={
+                          faltanteProcesandoId !== null
+                        }
+                      >
+                        {estaProcesando
+                          ? "Marcando..."
+                          : "Marcar como pedido"}
+                      </button>
+                    )}
+
+                    {estaPedido && (
+                      <div className="ver-faltantes__ordered-message">
+                        ✓ Este producto ya fue pedido
+                      </div>
+                    )}
+
+                    <button
+                      type="button"
+                      className="ver-faltantes__delete"
+                      onClick={() =>
+                        eliminarFaltante(faltante.id)
+                      }
+                      disabled={
+                        faltanteProcesandoId !== null
+                      }
+                    >
+                      {estaProcesando
+                        ? "Procesando..."
+                        : "Eliminar faltante"}
+                    </button>
+                  </article>
+                );
+              })}
+            </div>
           </>
         )}
 
@@ -409,7 +456,7 @@ const VerFaltantes = () => {
             type="button"
             className="ver-faltantes__button"
             onClick={() => navigate("/agregar-pedido")}
-            disabled={procesando}
+            disabled={faltanteProcesandoId !== null}
           >
             Agregar otro faltante
           </button>
@@ -418,7 +465,7 @@ const VerFaltantes = () => {
             type="button"
             className="ver-faltantes__button ver-faltantes__button--back"
             onClick={() => navigate("/pedidos")}
-            disabled={procesando}
+            disabled={faltanteProcesandoId !== null}
           >
             Volver a pedidos
           </button>
