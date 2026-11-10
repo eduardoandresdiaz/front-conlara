@@ -28,7 +28,21 @@ const SobreNosotros = () => {
                         Una plataforma argentina creada para conectar personas,
                         comercios, emprendedores, artesanos y prestadores de servicios
                         con su comunidad.
+
                     </p>
+
+                        <p>
+                            El proyecto nació en el Valle del Conlara, provincia de San
+                            Luis, con el propósito de facilitar la publicación y promoción
+                            de productos, ofertas, comercios y servicios locales.
+                        </p>
+
+                        <p>
+                            Nuestro objetivo inicial es llegar a todas las localidades del
+                            Valle del Conlara y, con el tiempo, expandir la plataforma a
+                            diferentes puntos de la provincia de San Luis.
+                        </p>
+                      
 
                     <button
                         type="button"
@@ -41,86 +55,11 @@ const SobreNosotros = () => {
             </section>
 
             <section className="sobreNosotros__contenedor">
-                <article className="sobreNosotros__seccion">
-                    <div className="sobreNosotros__icono">🌎</div>
+                
 
-                    <div className="sobreNosotros__texto">
-                        <h2>¿Qué es Conlara.com.ar?</h2>
+                
 
-                        <p>
-                            <strong>Conlara.com.ar</strong> es una plataforma argentina
-                            creada para conectar personas, comercios, emprendedores,
-                            artesanos y prestadores de servicios con posibles clientes de
-                            su comunidad.
-                        </p>
-
-                        <p>
-                            El proyecto nació en el Valle del Conlara, provincia de San
-                            Luis, con el propósito de facilitar la publicación y promoción
-                            de productos, ofertas, comercios y servicios locales.
-                        </p>
-
-                        <p>
-                            Nuestro objetivo inicial es llegar a todas las localidades del
-                            Valle del Conlara y, con el tiempo, expandir la plataforma a
-                            diferentes puntos de la Argentina.
-                        </p>
-                    </div>
-                </article>
-
-                <article className="sobreNosotros__seccion sobreNosotros__seccion--destacada">
-                    <div className="sobreNosotros__icono">💰</div>
-
-                    <div className="sobreNosotros__texto">
-                        <h2>Vendé sin pagar comisiones</h2>
-
-                        <p>
-                            Una de las principales diferencias de Conlara.com.ar es que
-                            <strong> no cobramos comisiones por cada venta</strong>.
-                        </p>
-
-                        <p>
-                            La plataforma facilita el contacto directo entre compradores y
-                            vendedores. Cada vendedor puede establecer sus precios,
-                            responder las consultas de sus clientes y conservar el valor de
-                            sus ventas sin pagar un porcentaje por cada operación.
-                        </p>
-
-                        <div className="sobreNosotros__mensajeDestacado">
-                            <span>✓</span>
-
-                            <p>
-                                Publicá tus productos y vendé sin pagar comisiones por cada
-                                venta.
-                            </p>
-                        </div>
-                    </div>
-                </article>
-
-                <article className="sobreNosotros__seccion">
-                    <div className="sobreNosotros__icono">🛍️</div>
-
-                    <div className="sobreNosotros__texto">
-                        <h2>Más que una plataforma de compraventa</h2>
-
-                        <p>
-                            Conlara.com.ar también ofrece herramientas para ayudar a
-                            comerciantes y emprendedores a organizar su actividad diaria.
-                        </p>
-
-                        <p>
-                            Los usuarios pueden publicar productos, controlar existencias,
-                            identificar productos agotados, recibir avisos de stock mínimo,
-                            organizar precios y guardar información de sus proveedores.
-                        </p>
-
-                        <p>
-                            Cada producto publicado mejora la visibilidad del negocio y
-                            permite que los posibles clientes conozcan qué productos están
-                            disponibles.
-                        </p>
-                    </div>
-                </article>
+                
 
                 <section className="sobreNosotros__beneficios">
                     <h2>¿Qué podés hacer en Conlara.com.ar?</h2>
@@ -154,8 +93,8 @@ const SobreNosotros = () => {
                             <h3>Controlar el stock</h3>
 
                             <p>
-                                Organizá tus existencias e identificá productos agotados o con
-                                stock mínimo.
+                                Organizá tus existencias e identificá productos agotados, con
+                                stock mínimo o con fecha de vencimiento próxima.
                             </p>
                         </article>
 
@@ -215,7 +154,7 @@ const SobreNosotros = () => {
 
                         <p>
                             Crecer localidad por localidad, comenzando por el Valle del
-                            Conlara y llegando progresivamente a toda la Argentina,
+                            Conlara y llegando progresivamente a toda la provincia de San Luis,
                             fortaleciendo el comercio y las economías locales.
                         </p>
                     </article>
