@@ -224,32 +224,12 @@ const Info = () => {
           📖 Historia de Naschel
         </button>
       </div>
-      <div className="preciosAgro">
-        <h2>🌾 Precios de Granos</h2>
-
-        <div className="preciosGrid">
-          <div className="precioCard">
-            <h3>🌽 Maíz</h3>
-            <p>$294.800/t</p>
-          </div>
-
-          <div className="precioCard">
-            <h3>🫘 Soja</h3>
-            <p>$560.000/t</p>
-          </div>
-
-          <div className="precioCard">
-            <h3>🌻 Girasol</h3>
-            <p>$611.419/t</p>
-          </div>
-        </div>
-      </div>
       {/* Radar meteorológico */}
 <div className="radarClima">
   <h2>🌦️ Radar Meteorológico de Naschel</h2>
 
   <iframe
-    title="Radar Meteorológico Naschel"
+    title="Radar Meteorológico"
     width="100%"
     height="600"
     src="https://embed.windy.com/embed2.html?lat=-32.9167&lon=-65.3833&zoom=9&level=surface&overlay=radar&product=radar"
@@ -288,6 +268,26 @@ const Info = () => {
         ) : (
           <p>No hay farmacia de turno registrada para hoy.</p>
         )}
+      </div>
+      <div className="preciosAgro">
+        <h2>🌾 Precios de Granos</h2>
+
+        <div className="preciosGrid">
+          <div className="precioCard">
+            <h3>🌽 Maíz</h3>
+            <p>$294.800/t</p>
+          </div>
+
+          <div className="precioCard">
+            <h3>🫘 Soja</h3>
+            <p>$560.000/t</p>
+          </div>
+
+          <div className="precioCard">
+            <h3>🌻 Girasol</h3>
+            <p>$611.419/t</p>
+          </div>
+        </div>
       </div>
 
       <ul className="lugaresList">
