@@ -244,6 +244,18 @@ const Info = () => {
           </div>
         </div>
       </div>
+      {/* Radar meteorológico */}
+<div className="radarClima">
+  <h2>🌦️ Radar Meteorológico de Naschel</h2>
+
+  <iframe
+    title="Radar Meteorológico Naschel"
+    width="100%"
+    height="600"
+    src="https://embed.windy.com/embed2.html?lat=-32.9167&lon=-65.3833&zoom=9&level=surface&overlay=radar&product=radar"
+    frameBorder="0"
+  />
+</div>
       <div className="farmaciaTurno">
         <h2>💊 Farmacia de turno hoy</h2>
 

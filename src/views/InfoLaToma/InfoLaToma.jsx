@@ -219,6 +219,7 @@ const Info = () => {
   return (
     <div className="infoUtil">
       <h1>ℹ️ Información Útil - La Toma</h1>
+ 
 
 
       <div className="centerLink">
@@ -283,6 +284,18 @@ const Info = () => {
           <p>No hay farmacia de turno registrada para hoy.</p>
         )}
       </div>
+           {/* Radar meteorológico */}
+<div className="radarClima">
+  <h2>🌦️ Radar Meteorológico</h2>
+
+  <iframe
+    title="Radar Meteorológico La Toma"
+    width="100%"
+    height="600"
+    src="https://embed.windy.com/embed2.html?lat=-33.053&lon=-65.624&zoom=9&level=surface&overlay=radar&product=radar"
+    frameBorder="0"
+  />
+</div>
 
       <ul className="lugaresList">
         {lugares.map((lugar, index) => (
