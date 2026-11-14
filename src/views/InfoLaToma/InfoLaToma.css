@@ -191,6 +191,35 @@
   font-weight: bold;
   color: #2e7d32;
 }
+
+.precioCard .precioSecundario,
+.precioCard .variacionGrano,
+.precioCard .actualizacionDivisa {
+  margin: 6px 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.precioCard .variacionGrano {
+  color: #333;
+}
+
+.preciosAgro .tituloDivisas {
+  margin-top: 24px;
+}
+
+.actualizacionGranos {
+  margin: 12px 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.actualizacionGranos a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
 /* ========================= */
 /* LUGARES */
 /* ========================= */

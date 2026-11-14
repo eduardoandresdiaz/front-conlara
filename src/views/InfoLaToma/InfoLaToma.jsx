@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./InfoLaToma.css";
 import { useNavigate } from "react-router-dom";
 
@@ -166,6 +166,56 @@ function resolverFarmacia(turnoRaw) {
 const Info = () => {
   const navigate = useNavigate();
   const turnos = useMemo(() => parseTablaCSV(tablaCSV), []);
+  const [precios, setPrecios] = useState(null);
+  const [cotizaciones, setCotizaciones] = useState(null);
+  const [errorPrecios, setErrorPrecios] = useState("");
+  const [errorDivisas, setErrorDivisas] = useState("");
+
+  useEffect(() => {
+    const cargarPrecios = async () => {
+      try {
+        const response = await fetch(
+          "https://granosar.lfcaucino.workers.dev/api/v1/pizarra"
+        );
+        if (!response.ok) {
+          throw new Error(`Error HTTP ${response.status}`);
+        }
+
+        const result = await response.json();
+        if (!result?.data?.granos) {
+          throw new Error("La respuesta no contiene cotizaciones de granos");
+        }
+        setPrecios(result.data);
+      } catch (error) {
+        console.error("Error obteniendo precios de granos:", error);
+        setErrorPrecios("No se pudieron cargar las cotizaciones de granos.");
+      }
+    };
+
+    const cargarDivisas = async () => {
+      try {
+        const [dolarResponse, euroResponse] = await Promise.all([
+          fetch("https://dolarapi.com/v1/dolares/oficial"),
+          fetch("https://dolarapi.com/v1/cotizaciones/eur"),
+        ]);
+        if (!dolarResponse.ok || !euroResponse.ok) {
+          throw new Error("Error HTTP al consultar las cotizaciones");
+        }
+
+        const [dolar, euro] = await Promise.all([
+          dolarResponse.json(),
+          euroResponse.json(),
+        ]);
+        setCotizaciones({ dolar, euro });
+      } catch (error) {
+        console.error("Error obteniendo cotizaciones de divisas:", error);
+        setErrorDivisas("No se pudieron cargar las cotizaciones de divisas.");
+      }
+    };
+
+    cargarPrecios();
+    cargarDivisas();
+  }, []);
 
   const hoy = new Date();
   const diaHoy = hoy.getDate();
@@ -275,24 +325,84 @@ const Info = () => {
         )}
       </div>
       <div className="preciosAgro">
-        <h2>🌾 Precios de Granos</h2>
-
+        <h2>🌾 Cotizaciones de granos</h2>
         <div className="preciosGrid">
-          <div className="precioCard">
-            <h3>🌽 Maíz</h3>
-            <p>$294.800/t</p>
-          </div>
-
-          <div className="precioCard">
-            <h3>🫘 Soja</h3>
-            <p>$560.000/t</p>
-          </div>
-
-          <div className="precioCard">
-            <h3>🌻 Girasol</h3>
-            <p>$611.419/t</p>
-          </div>
+          {[
+            { clave: "maiz", nombre: "Maíz", icono: "🌽" },
+            { clave: "soja", nombre: "Soja", icono: "🫘" },
+            { clave: "girasol", nombre: "Girasol", icono: "🌻" },
+            { clave: "trigo", nombre: "Trigo", icono: "🌾" },
+            { clave: "sorgo", nombre: "Sorgo", icono: "🟤" },
+          ].map(({ clave, nombre, icono }) => {
+            const grano = precios?.granos?.[clave];
+            return (
+              <div className="precioCard" key={clave}>
+                <h3>{icono} {nombre}</h3>
+                {grano ? (
+                  <>
+                    <p>${grano.ars_tn.toLocaleString("es-AR")}/t</p>
+                    <p className="precioSecundario">
+                      US$ {grano.usd_tn.toLocaleString("es-AR", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}/t
+                    </p>
+                    {typeof grano.variacion_pct_vs_rueda_anterior === "number" && (
+                      <p className="variacionGrano">
+                        {grano.variacion_pct_vs_rueda_anterior > 0 ? "+" : ""}
+                        {grano.variacion_pct_vs_rueda_anterior.toLocaleString("es-AR", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}% vs. rueda anterior
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <p>{errorPrecios || "Cargando..."}</p>
+                )}
+              </div>
+            );
+          })}
         </div>
+        {precios && (
+          <p className="actualizacionGranos">
+            Rueda del {new Date(`${precios.fecha}T12:00:00`).toLocaleDateString("es-AR")}.{" "}
+            Fuente:{" "}
+            <a href="https://granos.ar" target="_blank" rel="noopener noreferrer">
+              granos.ar
+            </a>
+            {" · "}{precios.fuente_precios}
+          </p>
+        )}
+
+        <h2 className="tituloDivisas">💱 Divisas</h2>
+        <div className="preciosGrid">
+          {cotizaciones ? (
+            [
+              { clave: "dolar", nombre: "Dólar oficial", cotizacion: cotizaciones.dolar },
+              { clave: "euro", nombre: "Euro", cotizacion: cotizaciones.euro },
+            ].map(({ clave, nombre, cotizacion }) => (
+              <div className="precioCard" key={clave}>
+                <h3>{nombre}</h3>
+                <p>Compra: ${cotizacion.compra.toLocaleString("es-AR")}</p>
+                <p>Venta: ${cotizacion.venta.toLocaleString("es-AR")}</p>
+                <p className="actualizacionDivisa">
+                  Actualizado: {new Date(cotizacion.fechaActualizacion).toLocaleString("es-AR")}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p role={errorDivisas ? "alert" : undefined}>
+              {errorDivisas || "Cargando cotizaciones de divisas..."}
+            </p>
+          )}
+        </div>
+        <p className="actualizacionGranos">
+          Fuente de divisas:{" "}
+          <a href="https://dolarapi.com" target="_blank" rel="noopener noreferrer">
+            DolarApi
+          </a>
+        </p>
       </div>
            {/* Radar meteorológico */}
 </div>
