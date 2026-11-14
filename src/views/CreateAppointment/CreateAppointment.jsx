@@ -424,12 +424,12 @@ const CreateAppointment = () => {
             </div>
 
             {/* ✅ Checkbox nopublicable */}
-            <div className="create-appointment__field">
+            {/* <div className="create-appointment__field">
               <label>
                 <Field type="checkbox" name="nopublicable" disabled />
                 Producto no publicable
               </label>
-            </div>
+            </div> */}
 
             {/* ✅ Input proveedor */}
             {/* ✅ Selector de proveedor */}

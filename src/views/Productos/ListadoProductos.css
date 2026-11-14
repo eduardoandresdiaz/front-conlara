@@ -71,15 +71,6 @@
   padding: 0;
 }
 
-@media (max-width: 767px) {
-  .listadoProductos__list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
-  }
-}
-
-
 /* =========================================================
    🟨 CONFIGURACIÓN DE LAS CARDS
 ========================================================= */
@@ -102,28 +93,6 @@
   margin-right: -10px;
   margin-bottom: -5px;
   padding: 2px;
-}
-
-
-/* =========================================================
-   📱 CARDS EN TABLET Y MÓVIL
-========================================================= */
-
-@media (max-width: 768px) {
-  .listadoProductos__details {
-    max-width: 46%;
-    border:none;
-    
-  }
-}
-
-@media (max-width: 480px) {
-  .listadoProductos__details {
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    border: none;
-  }
 }
 
 
@@ -333,12 +302,6 @@
   background-color: #004080;
   transform: scale(0.95);
 }
-@media (max-width: 480px) {
-  .telefonos_utiles {
-  width: 117px;
-  font-size: 15px;
-  margin-left: -3px;}
-}
 
 
 /* =========================================================
@@ -412,8 +375,48 @@
   border: none;
 }
 
+/* =========================================================
+   📱 RESPONSIVE: TABLET Y PANTALLAS HASTA 768px
+========================================================= */
+
 @media (max-width: 768px) {
+  .listadoProductos__details {
+    max-width: 46%;
+    border: none;
+  }
+
   .radar-container {
     height: 350px;
+  }
+}
+
+/* =========================================================
+   📱 RESPONSIVE: MÓVIL Y PANTALLAS HASTA 767px
+========================================================= */
+
+@media (max-width: 767px) {
+  .listadoProductos__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+  }
+}
+
+/* =========================================================
+   📱 RESPONSIVE: MÓVIL PEQUEÑO, HASTA 480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .listadoProductos__details {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .telefonos_utiles {
+    width: 117px;
+    font-size: 15px;
+    margin-left: -3px;
   }
 }
