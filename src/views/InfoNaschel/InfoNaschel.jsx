@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import "./InfoNaschel.css";
 import { useNavigate } from "react-router-dom";
 
@@ -152,6 +152,27 @@ function resolverFarmacia(turnoRaw) {
 const Info = () => {
   const navigate = useNavigate();
   const turnos = useMemo(() => parseTablaCSV(tablaCSV), []);
+  const [precios, setPrecios] = useState(null);
+
+useEffect(() => {
+  const cargarPrecios = async () => {
+    try {
+      const response = await fetch(
+        "https://granosar.lfcaucino.workers.dev/api/v1/pizarra"
+      );
+
+      const result = await response.json();
+
+      if (result?.data?.granos) {
+        setPrecios(result.data.granos);
+      }
+    } catch (error) {
+      console.error("Error obteniendo precios de granos:", error);
+    }
+  };
+
+  cargarPrecios();
+}, []);
 
   const hoy = new Date();
   const diaHoy = hoy.getDate();
@@ -224,15 +245,18 @@ const Info = () => {
           📖 Historia de Naschel
         </button>
       </div>
+
+
+
       {/* Radar meteorológico */}
 <div className="radarClima">
-  <h2>🌦️ Radar Meteorológico de Naschel</h2>
+  <h2>🌦️ Radar Meteorológico</h2>
 
   <iframe
     title="Radar Meteorológico"
     width="100%"
     height="600"
-    src="https://embed.windy.com/embed2.html?lat=-32.9167&lon=-65.3833&zoom=9&level=surface&overlay=radar&product=radar"
+    src="https://embed.windy.com/embed2.html?lat=-32.956&lon=-65.441&zoom=12&level=surface&overlay=radar&product=radar"
     frameBorder="0"
   />
 </div>
@@ -270,25 +294,61 @@ const Info = () => {
         )}
       </div>
       <div className="preciosAgro">
-        <h2>🌾 Precios de Granos</h2>
+  <h2>🌾 Precios de Granos</h2>
 
-        <div className="preciosGrid">
-          <div className="precioCard">
-            <h3>🌽 Maíz</h3>
-            <p>$294.800/t</p>
-          </div>
+  <div className="preciosGrid">
 
-          <div className="precioCard">
-            <h3>🫘 Soja</h3>
-            <p>$560.000/t</p>
-          </div>
+    <div className="precioCard">
+      <h3>🌽 Maíz</h3>
+      <p>
+        {precios?.maiz?.ars_tn
+          ? `$${precios.maiz.ars_tn.toLocaleString("es-AR")}/t`
+          : "Cargando..."}
+      </p>
+    </div>
 
-          <div className="precioCard">
-            <h3>🌻 Girasol</h3>
-            <p>$611.419/t</p>
-          </div>
-        </div>
-      </div>
+    <div className="precioCard">
+      <h3>🫘 Soja</h3>
+      <p>
+        {precios?.soja?.ars_tn
+          ? `$${precios.soja.ars_tn.toLocaleString("es-AR")}/t`
+          : "Cargando..."}
+      </p>
+    </div>
+
+    <div className="precioCard">
+      <h3>🌻 Girasol</h3>
+      <p>
+        {precios?.girasol?.ars_tn
+          ? `$${precios.girasol.ars_tn.toLocaleString("es-AR")}/t`
+          : "Cargando..."}
+      </p>
+    </div>
+
+    <div className="precioCard">
+      <h3>🌾 Trigo</h3>
+      <p>
+        {precios?.trigo?.ars_tn
+          ? `$${precios.trigo.ars_tn.toLocaleString("es-AR")}/t`
+          : "Cargando..."}
+      </p>
+    </div>
+
+    <div className="precioCard">
+      <h3>🟤 Sorgo</h3>
+      <p>
+        {precios?.sorgo?.ars_tn
+          ? `$${precios.sorgo.ars_tn.toLocaleString("es-AR")}/t`
+          : "Cargando..."}
+      </p>
+    </div>
+
+  </div>
+
+  <p className="actualizacionGranos">
+    Actualización automática de mercado.
+  </p>
+</div>
 
       <ul className="lugaresList">
         {lugares.map((lugar, index) => (

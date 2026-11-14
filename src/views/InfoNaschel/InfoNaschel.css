@@ -289,3 +289,17 @@
   border-radius: 10px;
   width: 100%;
 }
+
+button {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #1565c0;
+}

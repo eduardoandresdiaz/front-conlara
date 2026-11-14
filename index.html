@@ -1,47 +1,161 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-AR">
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./src/assets/media/images/imagen2.jpg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <!-- =========================
+       SEO PRINCIPAL
+  ========================== -->
+
   <title>Conlara.com.ar | Comprá y Vendé Sin Comisiones</title>
 
-  <!-- Open Graph meta tags -->
-  <meta property="og:title" content="Conlara.com.ar | Comprá y Vendé Sin Comisiones" />
+  <meta
+    name="description"
+    content="Comprá, vendé y publicá productos y servicios sin comisiones en Conlara.com.ar. Encontrá comercios, emprendedores y prestadores de servicios del Valle del Conlara y Argentina."
+  />
 
-  <meta property="og:description"
-    content="Conlara.com.ar es una plataforma argentina donde personas, comercios, emprendedores y prestadores de servicios pueden publicar productos y vender sin pagar comisiones. Nacida en el Valle del Conlara, conecta negocios locales y busca expandirse a toda la Argentina." />
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  />
 
-  <meta property="og:locale" content="es_AR" />
+  <meta
+    name="googlebot"
+    content="index, follow, max-image-preview:large"
+  />
 
-  <meta property="og:image" content="https://conlara.com.ar/assets/imagen2-Ch2Bn8__.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <!-- URL PRINCIPAL -->
 
-  <meta property="og:url" content="https://conlara.com.ar/" />
-  <meta property="og:type" content="website" />
+  <link
+    rel="canonical"
+    href="https://conlara.com.ar/"
+  />
 
-  <meta property="og:site_name" content="Conlara.com.ar" />
+  <!-- FAVICON -->
 
-  <!-- Font Awesome (para íconos de Facebook, WhatsApp e Instagram) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link
+    rel="icon"
+    type="image/jpeg"
+    href="/imagen2.jpg"
+  />
+
+  <!-- =========================
+       OPEN GRAPH
+       Facebook / WhatsApp
+  ========================== -->
+
+  <meta
+    property="og:title"
+    content="Conlara.com.ar | Comprá y Vendé Sin Comisiones"
+  />
+
+  <meta
+    property="og:description"
+    content="Comprá, vendé y publicá productos y servicios sin comisiones. Conlara.com.ar conecta personas, comercios, emprendedores y prestadores de servicios."
+  />
+
+  <meta
+    property="og:url"
+    content="https://conlara.com.ar/"
+  />
+
+  <meta
+    property="og:type"
+    content="website"
+  />
+
+  <meta
+    property="og:site_name"
+    content="Conlara.com.ar"
+  />
+
+  <meta
+    property="og:locale"
+    content="es_AR"
+  />
+
+  <meta
+    property="og:image"
+    content="https://conlara.com.ar/imagen2.jpg"
+  />
+
+  <meta
+    property="og:image:alt"
+    content="Conlara.com.ar - Comprá y Vendé Sin Comisiones"
+  />
+
+  <!-- =========================
+       TWITTER / X
+  ========================== -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <meta
+    name="twitter:title"
+    content="Conlara.com.ar | Comprá y Vendé Sin Comisiones"
+  />
+
+  <meta
+    name="twitter:description"
+    content="Comprá, vendé y publicá productos y servicios sin pagar comisiones."
+  />
+
+  <meta
+    name="twitter:image"
+    content="https://conlara.com.ar/imagen2.jpg"
+  />
+
+  <!-- =========================
+       FONT AWESOME
+  ========================== -->
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- =========================
+       GOOGLE ANALYTICS
+  ========================== -->
+
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-TGZQRKKPFM"
+  ></script>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+    gtag("config", "G-TGZQRKKPFM");
+  </script>
 
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGZQRKKPFM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-
-  gtag('config', 'G-TGZQRKKPFM');
-</script>
 
 <body>
+
   <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
+
+  <script
+    type="module"
+    src="/src/main.jsx"
+  ></script>
+
 </body>
 
 </html>

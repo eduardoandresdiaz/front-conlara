@@ -241,6 +241,9 @@ const ListadoProductos = () => {
           <SwiperSlide>
             <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1792253750/ARTICA_tlfidl.jpg" alt="Producto 3" />
           </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://res.cloudinary.com/dvp0fdhyc/image/upload/v1794632638/cyc_x51std.png" alt="Producto 3" />
+          </SwiperSlide>
         </Swiper>
 
 
