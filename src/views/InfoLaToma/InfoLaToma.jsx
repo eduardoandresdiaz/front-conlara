@@ -77,6 +77,11 @@ const normalizeMonth = (m) =>
     .toLowerCase()
     .replace("septiembre", "setiembre");
 
+const formatNumber = (value, options) =>
+  typeof value === "number" && Number.isFinite(value)
+    ? value.toLocaleString("es-AR", options)
+    : "No disponible";
+
 /* Parser CSV -> objeto turnos */
 function parseTablaCSV(csv) {
   const lines = csv.trim().split("\n").map((l) => l.trim());
@@ -340,9 +345,9 @@ const Info = () => {
                 <h3>{icono} {nombre}</h3>
                 {grano ? (
                   <>
-                    <p>${grano.ars_tn.toLocaleString("es-AR")}/t</p>
+                    <p>${formatNumber(grano.ars_tn)}/t</p>
                     <p className="precioSecundario">
-                      US$ {grano.usd_tn.toLocaleString("es-AR", {
+                      US$ {formatNumber(grano.usd_tn, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}/t
@@ -350,7 +355,7 @@ const Info = () => {
                     {typeof grano.variacion_pct_vs_rueda_anterior === "number" && (
                       <p className="variacionGrano">
                         {grano.variacion_pct_vs_rueda_anterior > 0 ? "+" : ""}
-                        {grano.variacion_pct_vs_rueda_anterior.toLocaleString("es-AR", {
+                        {formatNumber(grano.variacion_pct_vs_rueda_anterior, {
                           minimumFractionDigits: 2,
                           maximumFractionDigits: 2,
                         })}% vs. rueda anterior
@@ -384,8 +389,8 @@ const Info = () => {
             ].map(({ clave, nombre, cotizacion }) => (
               <div className="precioCard" key={clave}>
                 <h3>{nombre}</h3>
-                <p>Compra: ${cotizacion.compra.toLocaleString("es-AR")}</p>
-                <p>Venta: ${cotizacion.venta.toLocaleString("es-AR")}</p>
+                <p>Compra: ${formatNumber(cotizacion.compra)}</p>
+                <p>Venta: ${formatNumber(cotizacion.venta)}</p>
                 <p className="actualizacionDivisa">
                   Actualizado: {new Date(cotizacion.fechaActualizacion).toLocaleString("es-AR")}
                 </p>
