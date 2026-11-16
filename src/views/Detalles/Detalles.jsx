@@ -197,7 +197,7 @@ const DetallesProducto = () => {
   ========================================================= */
 
   return (
-    <>
+    <div className="detallesProducto__pagina">
       {/* =====================================================
           ENCABEZADO
       ===================================================== */}
@@ -207,7 +207,9 @@ const DetallesProducto = () => {
           CONLARA.COM.AR
         </h1>
 
-        <h2 className="detallesProducto__subtitulo"></h2>
+        <h2 className="detallesProducto__subtitulo">
+          Compra y vendé en el Valle del Conlara
+        </h2>
       </div>
 
       {/* =====================================================
@@ -337,231 +339,121 @@ const DetallesProducto = () => {
               </button>
             )}
 
-            {/* NOMBRE */}
+            <div className="detallesProducto__media">
+              <div className="detallesProducto__imagenContainer">
+                <img
+                  className="detallesProducto__imagen"
+                  src={producto.imgUrl || "https://via.placeholder.com/400"}
+                  alt={`Imagen de ${producto.name}`}
+                  onError={(e) => {
+                    e.currentTarget.src = "https://via.placeholder.com/400";
+                  }}
+                />
 
-            <h1 className="detallesProducto__titulo">
-              {producto.name}
-            </h1>
-
-            {/* PRECIO */}
-
-            <p className="detallesProducto__informacion">
-              <span className="detallesProducto__etiqueta">
-                Precio:{" "}
-              </span>
-
-              {precioFormateado}
-            </p>
-
-            {/* DESCRIPCIÓN */}
-
-            {producto.description && (
-              <p className="detallesProducto__informacion">
-                <span className="detallesProducto__etiqueta">
-                  Descripción:{" "}
-                </span>
-
-                {producto.description}
-              </p>
-            )}
-
-            {/* CATEGORÍA */}
-
-            {producto.category?.name && (
-              <p className="detallesProducto__informacion">
-                <span className="detallesProducto__etiqueta">
-                  Categoría:{" "}
-                </span>
-
-                {producto.category.name}
-              </p>
-            )}
-
-            {/* UBICACIÓN
-
-            {producto.ubicacion && (
-              <p className="detallesProducto__informacion">
-                <span className="detallesProducto__etiqueta">
-                  Ubicación:{" "}
-                </span>
-
-                {producto.ubicacion}
-              </p>
-            )} */}
-
-            {/* STOCK */}
-
-            {/* {producto.stock !== undefined &&
-              producto.stock !== null && (
-                <p className="detallesProducto__informacion">
-                  <span className="detallesProducto__etiqueta">
-                    Stock:{" "}
-                  </span>
-
-                  {producto.stock}
-                </p>
-              )} */}
-
-            {/* PROVEEDOR */}
-
-            {/* {producto.proveedor && (
-              <p className="detallesProducto__informacion">
-                <span className="detallesProducto__etiqueta">
-                  Proveedor:{" "}
-                </span>
-
-                {producto.proveedor}
-              </p>
-            )} */}
-
-            {/* FECHA CADUCIDAD */}
-
-            {/* {producto.fechaCaducidad && (
-              <p className="detallesProducto__informacion">
-                <span className="detallesProducto__etiqueta">
-                  Vencimiento del producto:{" "}
-                </span>
-
-                {formatearFecha(
-                  `${producto.fechaCaducidad}T00:00:00`
+                {producto.resaltaroferta && (
+                  <div className="detallesProducto__ofertaOverlay">
+                    Oferta
+                  </div>
                 )}
-              </p>
-            )} */}
+              </div>
+            </div>
 
-            {/* =================================================
-                IMAGEN
-            ================================================= */}
+            <div className="detallesProducto__contenido">
+              <h1 className="detallesProducto__titulo">
+                {producto.name}
+              </h1>
 
-            <div className="detallesProducto__imagenContainer">
+              <div className="detallesProducto__datos">
+                <p className="detallesProducto__informacion detallesProducto__precio">
+                  <span className="detallesProducto__etiqueta">Precio</span>
+                  <span>{precioFormateado}</span>
+                </p>
 
-              <img
-                className="detallesProducto__imagen"
-                src={
-                  producto.imgUrl ||
-                  "https://via.placeholder.com/400"
-                }
-                alt={`Imagen de ${producto.name}`}
-                onError={(e) => {
-                  e.currentTarget.src =
-                    "https://via.placeholder.com/400";
-                }}
-              />
+                {producto.description && (
+                  <p className="detallesProducto__informacion">
+                    <span className="detallesProducto__etiqueta">
+                      Descripción
+                    </span>
+                    <span>{producto.description}</span>
+                  </p>
+                )}
 
-              {producto.resaltaroferta && (
-                <div className="detallesProducto__ofertaOverlay">
-                  OFERTA
+                {producto.category?.name && (
+                  <p className="detallesProducto__informacion">
+                    <span className="detallesProducto__etiqueta">
+                      Categoría
+                    </span>
+                    <span>{producto.category.name}</span>
+                  </p>
+                )}
+              </div>
+
+              <div className="detallesProducto__botones">
+                <button
+                  className="detallesProducto__boton detallesProducto__boton--principal"
+                  onClick={handleComprar}
+                >
+                  {precioFormateado === "Consultar"
+                    ? "Consultar precio"
+                    : "Comprar"}
+                </button>
+              </div>
+
+              {mostrarContacto && (
+                <div className="detallesProducto__contacto">
+                  {producto.creatorEmail && (
+                    <p>
+                      <strong>Correo del vendedor:</strong>{" "}
+                      {producto.creatorEmail}
+                    </p>
+                  )}
+
+                  {producto.telefono && (
+                    <p>
+                      <strong>Teléfono del vendedor:</strong>{" "}
+                      {producto.telefono}
+                    </p>
+                  )}
+
+                  {isMobile && producto.telefono && (
+                    <div className="detallesProducto__accionesMovil">
+                      <a
+                        href={`tel:${producto.telefono}`}
+                        className="detallesProducto__boton"
+                      >
+                        Llamar
+                      </a>
+                      <a
+                        href={`https://wa.me/${producto.telefono}`}
+                        className="detallesProducto__boton detallesProducto__boton--whatsapp"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        WhatsApp
+                      </a>
+                    </div>
+                  )}
                 </div>
               )}
 
-            </div>
-
-            {/* =================================================
-                COMPRAR / CONSULTAR
-            ================================================= */}
-
-            <div className="detallesProducto__botones">
-
-              <button
-                className="detallesProducto__boton"
-                onClick={handleComprar}
-              >
-                {precioFormateado === "Consultar"
-                  ? "Consultar precio"
-                  : "Comprar"}
-              </button>
-
-            </div>
-
-            {/* =================================================
-                DATOS DEL VENDEDOR
-            ================================================= */}
-
-            {mostrarContacto && (
-              <div className="detallesProducto__contacto">
-
-                {producto.creatorEmail && (
-                  <p>
-                    <strong>
-                      Correo del vendedor:
-                    </strong>{" "}
-                    {producto.creatorEmail}
-                  </p>
-                )}
-
-                {producto.telefono && (
-                  <p>
-                    <strong>
-                      Teléfono del vendedor:
-                    </strong>{" "}
-                    {producto.telefono}
-                  </p>
-                )}
-
-                {isMobile && producto.telefono && (
-                  <div className="detallesProducto__accionesMovil">
-
-                    <a
-                      href={`tel:${producto.telefono}`}
-                      className="detallesProducto__boton"
-                    >
-                      Llamar
-                    </a>
-
-                    <a
-                      href={`https://wa.me/${producto.telefono}`}
-                      className="detallesProducto__boton"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      WhatsApp
-                    </a>
-
-                  </div>
-                )}
-
-              </div>
-            )}
-
-            {/* =================================================
-                COMPARTIR
-            ================================================= */}
-
-            <div className="detallesProducto__compartir">
-
-              {/*
-              <a
-                href={facebookShareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="detallesProducto__boton compartir facebook"
-              >
-                <i className="fa-brands fa-facebook-f"></i>
-                Compartir en Facebook
-              </a>
-              */}
-
-              <a
-                href={whatsappUrl}
-                className="detallesProducto__boton compartir whatsapp"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fa-brands fa-whatsapp"></i>
-                {" "}
-                Compartir en WhatsApp
-              </a>
-
-              <div className="detallesProducto__copiar">
+              <div className="detallesProducto__compartir">
+                <a
+                  href={whatsappUrl}
+                  className="detallesProducto__boton detallesProducto__boton--whatsapp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fa-brands fa-whatsapp"></i>
+                  Compartir por WhatsApp
+                </a>
 
                 <button
-                  className="detallesProducto__boton"
+                  className="detallesProducto__boton detallesProducto__boton--secundario"
                   onClick={handleCopyToClipboard}
                 >
-                  Copiar Enlace
+                  Copiar enlace
                 </button>
-
               </div>
-
             </div>
 
           </div>
@@ -595,7 +487,7 @@ const DetallesProducto = () => {
         </button>
 
       </div>
-    </>
+    </div>
   );
 };
 
