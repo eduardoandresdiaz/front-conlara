@@ -193,7 +193,7 @@ const ListadoProductos = () => {
       </Helmet>
     )}
 
-    <div className="listadoProductos">
+    <div className="listadoProductos listadoProductos--catalogo">
       <div className='botones_superiores'>
         <button
           type="button"

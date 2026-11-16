@@ -71,15 +71,6 @@
   padding: 0;
 }
 
-@media (max-width: 767px) {
-  .listadoProductos__list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
-  }
-}
-
-
 /* =========================================================
    🟨 CONFIGURACIÓN DE LAS CARDS
 ========================================================= */
@@ -102,28 +93,6 @@
   margin-right: -10px;
   margin-bottom: -5px;
   padding: 2px;
-}
-
-
-/* =========================================================
-   📱 CARDS EN TABLET Y MÓVIL
-========================================================= */
-
-@media (max-width: 768px) {
-  .listadoProductos__details {
-    max-width: 46%;
-    border:none;
-    
-  }
-}
-
-@media (max-width: 480px) {
-  .listadoProductos__details {
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    border: none;
-  }
 }
 
 
@@ -415,5 +384,277 @@
 @media (max-width: 768px) {
   .radar-container {
     height: 350px;
+  }
+}
+
+@media (max-width: 767px) {
+  #root .listadoProductos--catalogo {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    padding: 1px 8px;
+  }
+
+  #root .listadoProductos--catalogo .listadoProductos__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: stretch;
+    gap: 8px;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 4px;
+  }
+
+  #root .listadoProductos--catalogo .listadoProductos__details {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    min-height: 0;
+    flex: none;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid #e6eaf0;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(20, 35, 70, 0.08);
+    text-align: center;
+  }
+
+  #root .listadoProductos--catalogo .listadoProductos__details img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  #root .listadoProductos--catalogo .listadoProductos__details h2 {
+    width: 100%;
+    max-width: none;
+    margin: 10px 0;
+    padding: 0 4px;
+    font-size: 14px;
+    text-align: center;
+    text-justify: auto;
+  }
+
+  .price {
+    width: 100%;
+    margin-top: auto;
+    padding: 8px 0;
+    text-align: center;
+  }
+
+  .meInteresaBoton {
+    width: 100%;
+    min-height: 40px;
+    margin-top: auto;
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .botones_superiores {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto 16px;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+
+  .telefonos_utiles {
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .listadoProductos__details {
+    padding: 6px;
+    border-radius: 9px;
+  }
+
+  .listadoProductos__details h2 {
+    margin: 8px 0;
+    padding: 0 2px;
+    font-size: 12px;
+  }
+
+  .meInteresaBoton {
+    min-height: 36px;
+    padding: 5px 2px;
+    font-size: 0.72rem;
+  }
+
+  .botones_superiores {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 520px;
+  }
+
+  .telefonos_utiles {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    margin: 0;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    line-height: 1.25;
+  }
+
+  .botones_superiores .telefonos_utiles:last-child {
+    grid-column: 1 / -1;
+    width: calc(50% - 4px);
+    justify-self: center;
+  }
+}
+
+#root .listadoProductos--catalogo .listadoProductos__details {
+  gap: 12px;
+  overflow: hidden;
+  border: 1px solid #e4e9f1;
+  border-radius: 16px;
+  background: linear-gradient(to top, #007bff 0%, #e6f1f5 100%);
+  box-shadow: 0 5px 18px rgba(27, 43, 76, 0.08);
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+#root .listadoProductos--catalogo .listadoProductos__details:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(27, 43, 76, 0.13);
+}
+
+#root .listadoProductos--catalogo .imagenContainer {
+  position: relative;
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #f8f9fc, #eef2f8);
+}
+
+#root .listadoProductos--catalogo .listadoProductos__details img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border: 0;
+  border-radius: 12px;
+  object-fit: contain;
+  transform: scale(1.06);
+}
+
+#root .listadoProductos--catalogo .listadoProductos__details h2 {
+  display: -webkit-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 4px;
+  overflow: hidden;
+  color: #26334b;
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+#root .listadoProductos--catalogo .price {
+  width: 100%;
+  margin-top: auto;
+  padding: 8px 0;
+  color: #17653a;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+#root .listadoProductos--catalogo .precioTexto {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #edf8f0;
+}
+
+#root .listadoProductos--catalogo .meInteresaBoton {
+  width: 100%;
+  min-height: 42px;
+  margin-top: auto;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #3455c7;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+#root .listadoProductos--catalogo .meInteresaBoton:hover {
+  background: #263fa6;
+}
+
+#root .listadoProductos--catalogo .ofertaOverlay {
+  top: 8px;
+  left: 8px;
+  padding: 5px 9px;
+  border: 0;
+  border-radius: 999px;
+  background: #ffd35a;
+  color: #553b00;
+  box-shadow: 0 3px 10px rgba(53, 42, 12, 0.16);
+  font-size: 0.68rem;
+  animation: none;
+}
+
+@media (max-width: 767px) {
+  #root .listadoProductos--catalogo .listadoProductos__details {
+    gap: 8px;
+    padding: 8px;
+    border-radius: 13px;
+  }
+
+  #root .listadoProductos--catalogo .listadoProductos__details h2 {
+    padding: 0 2px;
+    font-size: 0.76rem;
+    line-height: 1.3;
+    -webkit-line-clamp: 3;
+  }
+
+  #root .listadoProductos--catalogo .price {
+    padding: 4px 0;
+    font-size: 0.74rem;
+  }
+
+  #root .listadoProductos--catalogo .precioTexto {
+    padding: 4px 6px;
+  }
+
+  #root .listadoProductos--catalogo .meInteresaBoton {
+    min-height: 38px;
+    padding: 6px 4px;
+    border-radius: 9px;
+    font-size: 0.72rem;
+  }
+
+  #root .listadoProductos--catalogo .ofertaOverlay {
+    top: 6px;
+    left: 6px;
+    padding: 4px 7px;
+    font-size: 0.62rem;
   }
 }

@@ -3,18 +3,18 @@
   display: flex;
   flex-direction: column;
   background:
-    radial-gradient(ellipse at top left, rgba(91, 112, 235, 0.1), transparent 34rem),
-    #f4f6fb;
-  color: #172033;
+    radial-gradient(ellipse at top left, rgba(0, 123, 255, 0.1), transparent 34rem),
+    #f2f7fc;
+  color: #17324a;
   font-family: Inter, "Segoe UI", Arial, sans-serif;
 }
 
 .encabezadoConlara {
   padding: clamp(24px, 4vw, 42px) 20px;
-  background: linear-gradient(120deg, #263b91 0%, #4b5fe0 60%, #6678ed 100%);
+  background: linear-gradient(120deg, #07518a 0%, #0879cf 58%, #45a5df 100%);
   color: #fff;
   text-align: center;
-  box-shadow: 0 8px 24px rgba(32, 49, 117, 0.2);
+  box-shadow: 0 8px 24px rgba(15, 74, 120, 0.2);
 }
 
 .detallesProducto__tituloPrincipal {
@@ -45,10 +45,10 @@
   align-items: start;
   gap: clamp(24px, 4vw, 48px);
   padding: clamp(20px, 4vw, 40px);
-  border: 1px solid #e1e7f0;
+  border: 1px solid #dce8f1;
   border-radius: 24px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 20px 55px rgba(28, 43, 82, 0.1);
+  background: linear-gradient(to top, #007bff 0%, #e6f1f5 100%);
+  box-shadow: 0 20px 55px rgba(24, 66, 104, 0.1);
 }
 
 .detallesProducto__boton {
@@ -61,8 +61,8 @@
   padding: 11px 18px;
   border: 1px solid transparent;
   border-radius: 12px;
-  background: #eef1f8;
-  color: #293653;
+  background: #edf5fb;
+  color: #294b64;
   font: inherit;
   font-size: 0.95rem;
   font-weight: 700;
@@ -79,7 +79,7 @@
 }
 
 .detallesProducto__boton:focus-visible {
-  outline: 3px solid rgba(75, 95, 224, 0.35);
+  outline: 3px solid rgba(0, 123, 255, 0.3);
   outline-offset: 3px;
 }
 
@@ -88,9 +88,9 @@
   justify-self: start;
   min-height: 40px;
   padding: 8px 13px;
-  border-color: #e2e7f0;
+  border-color: #dce9f2;
   background: #fff;
-  color: #46536e;
+  color: #3b5b72;
 }
 
 .detallesProducto__media {
@@ -107,7 +107,7 @@
   overflow: hidden;
   border: 1px solid #e8ecf3;
   border-radius: 20px;
-  background: linear-gradient(145deg, #f8f9fc, #eef2f8);
+  background: linear-gradient(145deg, #f8fbfe, #eaf4fb);
 }
 
 .detallesProducto__imagen {
@@ -141,7 +141,7 @@
 
 .detallesProducto__titulo {
   margin: 0 0 22px;
-  color: #172033;
+  color: #17324a;
   font-size: clamp(1.75rem, 3.2vw, 2.45rem);
   font-weight: 780;
   line-height: 1.12;
@@ -158,15 +158,15 @@
   gap: 6px;
   margin: 0;
   padding-bottom: 14px;
-  border-bottom: 1px solid #edf0f5;
-  color: #4a556b;
+  border-bottom: 1px solid #e7eff5;
+  color: #486276;
   font-size: 1rem;
   line-height: 1.65;
   overflow-wrap: anywhere;
 }
 
 .detallesProducto__etiqueta {
-  color: #7a8497;
+  color: #658095;
   font-size: 0.75rem;
   font-weight: 750;
   letter-spacing: 0.08em;
@@ -180,17 +180,17 @@
   gap: 16px;
   margin-bottom: 4px;
   padding: 16px 18px;
-  border: 1px solid #d6efdf;
+  border: 1px solid #cce7f5;
   border-radius: 16px;
-  background: linear-gradient(135deg, #f0fbf4, #e8f7ed);
-  color: #17653a;
+  background: linear-gradient(135deg, #edf8fe, #e1f2fc);
+  color: #075b8d;
   font-size: clamp(1.35rem, 2.6vw, 1.8rem);
   font-weight: 800;
   line-height: 1.2;
 }
 
 .detallesProducto__precio .detallesProducto__etiqueta {
-  color: #47805c;
+  color: #397696;
   font-size: 0.75rem;
 }
 
@@ -202,23 +202,23 @@
 .detallesProducto__boton--principal {
   width: 100%;
   min-height: 54px;
-  background: linear-gradient(110deg, #344cc5, #566be5);
+  background: linear-gradient(110deg, #0879cf, #0066bd);
   color: #fff;
   font-size: 1.02rem;
-  box-shadow: 0 9px 18px rgba(64, 83, 200, 0.2);
+  box-shadow: 0 9px 18px rgba(0, 105, 190, 0.2);
 }
 
 .detallesProducto__boton--principal:hover {
-  background: linear-gradient(110deg, #293fae, #495ed5);
+  background: linear-gradient(110deg, #0568b4, #0059a8);
 }
 
 .detallesProducto__contacto {
   margin-top: 18px;
   padding: 16px;
-  border: 1px solid #e4e9f2;
+  border: 1px solid #dceaf4;
   border-radius: 16px;
-  background: #f8f9fc;
-  color: #4a556b;
+  background: #f5faff;
+  color: #486276;
   font-size: 0.95rem;
   line-height: 1.6;
   overflow-wrap: anywhere;
@@ -229,7 +229,7 @@
 }
 
 .detallesProducto__contacto strong {
-  color: #27334d;
+  color: #24465f;
 }
 
 .detallesProducto__accionesMovil {
@@ -259,19 +259,19 @@
 }
 
 .detallesProducto__boton--secundario {
-  border-color: #dfe5ef;
+  border-color: #d7e6f0;
   background: #fff;
-  color: #4a556b;
+  color: #3b5b72;
 }
 
 .error-container,
 .loading-spinner {
   margin: 0;
   padding: 28px;
-  border: 1px solid #e1e7f0;
+  border: 1px solid #dce8f1;
   border-radius: 18px;
   background: #fff;
-  box-shadow: 0 12px 30px rgba(28, 43, 82, 0.07);
+  box-shadow: 0 12px 30px rgba(24, 66, 104, 0.07);
   text-align: center;
 }
 
@@ -283,7 +283,7 @@
 }
 
 .loading-spinner {
-  color: #64708a;
+  color: #5b7488;
 }
 
 .loading-spinner p {
@@ -297,9 +297,9 @@
 }
 
 .boton-regresar-contenedor .detallesProducto__boton {
-  border-color: #dfe5ef;
+  border-color: #d7e6f0;
   background: #fff;
-  color: #34415d;
+  color: #31536c;
 }
 
 @media (max-width: 760px) {
