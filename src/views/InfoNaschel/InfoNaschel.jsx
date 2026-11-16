@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect, useState } from "react";
 import "./InfoNaschel.css";
 import { useNavigate } from "react-router-dom";
+import { cargarPreciosGranos } from "../../helpers/grainQuotes.js";
 
 
 /* Información de las farmacias: nombre, dirección, teléfono, coordenadas y enlace a mapa */
@@ -165,18 +166,7 @@ const Info = () => {
   useEffect(() => {
     const cargarPrecios = async () => {
       try {
-        const response = await fetch(
-          "https://granosar.lfcaucino.workers.dev/api/v1/pizarra"
-        );
-        if (!response.ok) {
-          throw new Error(`Error HTTP ${response.status}`);
-        }
-
-        const result = await response.json();
-        if (!result?.data?.granos) {
-          throw new Error("La respuesta no contiene cotizaciones de granos");
-        }
-        setPrecios(result.data);
+        setPrecios(await cargarPreciosGranos());
       } catch (error) {
         console.error("Error obteniendo precios de granos:", error);
         setErrorPrecios("No se pudieron cargar las cotizaciones de granos.");
@@ -338,19 +328,28 @@ const Info = () => {
             { clave: "sorgo", nombre: "Sorgo", icono: "🟤" },
           ].map(({ clave, nombre, icono }) => {
             const grano = precios?.granos?.[clave];
+            const precioArs = formatNumber(grano?.ars_tn);
+            const precioUsd = formatNumber(grano?.usd_tn, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            });
             return (
               <div className="precioCard" key={clave}>
                 <h3>{icono} {nombre}</h3>
                 {grano ? (
                   <>
-                    <p>${formatNumber(grano.ars_tn)}/t</p>
+                    <p>{precioArs === "No disponible" ? precioArs : `$${precioArs}/t`}</p>
                     <p className="precioSecundario">
-                      US$ {formatNumber(grano.usd_tn, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}/t
+                      {precioUsd === "No disponible" ? `US$ ${precioUsd}` : `US$ ${precioUsd}/t`}
                     </p>
-                    {typeof grano.variacion_pct_vs_rueda_anterior === "number" && (
+                    {grano.fechaPrecioHistorico && (
+                      <p className="precioSecundario">
+                        Último precio disponible: {new Date(`${grano.fechaPrecioHistorico}T12:00:00`).toLocaleDateString("es-AR")}
+                      </p>
+                    )}
+                    {grano.fechaPrecioHistorico ? (
+                      <p className="variacionGrano">Variación: No disponible</p>
+                    ) : typeof grano.variacion_pct_vs_rueda_anterior === "number" && (
                       <p className="variacionGrano">
                         {grano.variacion_pct_vs_rueda_anterior > 0 ? "+" : ""}
                         {formatNumber(grano.variacion_pct_vs_rueda_anterior, {
