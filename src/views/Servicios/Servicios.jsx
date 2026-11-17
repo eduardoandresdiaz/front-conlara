@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './Servicios.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { getProductPath } from '../../helpers/productUrls';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -159,8 +160,8 @@ const Servicios = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasMore, loading, busqueda, page]);
 
-  const handleClick = (id) => {
-    navigate(`/productos/${id}`);
+  const handleClick = (producto) => {
+    navigate(getProductPath(producto));
   };
 
   const handleEdit = (id) => {
@@ -323,7 +324,7 @@ const Servicios = () => {
                   </div>
 
                   <div style={{ marginTop: 10, display: 'flex', gap: 8 }}>
-                    <button className="meInteresaBoton" onClick={() => handleClick(producto.id)}>Ver Detalles</button>
+                    <button className="meInteresaBoton" onClick={() => handleClick(producto)}>Ver Detalles</button>
                     {producto.creatorEmail === localStorage.getItem('userEmail') && (
                       <>
                         <button className="meInteresaBoton" onClick={() => handleEdit(producto.id)}>Modificar Publicacion</button>

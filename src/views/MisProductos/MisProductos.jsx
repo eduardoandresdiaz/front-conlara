@@ -3,6 +3,7 @@ import { useUser } from "../../context/UserContext";
 import { useNavigate } from 'react-router-dom';
 import './MisProductos.css';
 import axios from "axios";
+import { getProductPreviewUrl } from "../../helpers/productUrls";
 
 const MisProductos = () => {
   const [productos, setProductos] = useState([]);
@@ -314,8 +315,7 @@ const MisProductos = () => {
         .trim();
 
       // URL pública para compartir
-      const productUrl = `https://og.conlara.com.ar/productos/share/${producto.id}`;
-      const productUrl2 = `https://ecommerce-9558.onrender.com/productos/share/${producto.id}`;
+      const productUrl = getProductPreviewUrl(producto);
       // Mensaje de WhatsApp
       const mensajeWhatsApp =
         `${productUrl}

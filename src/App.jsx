@@ -54,8 +54,10 @@ function App() {
           <Route path="/productos" element={<ListadoProductos />} />
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/ModifyProduct/:id" element={<ModifyProduct />} />
+          <Route path="/productos/share/:slug/:id" element={<DetallesProducto />} />
           <Route path="/productos/:id" element={<DetallesProducto />} />
           <Route path="/productos/share/:id" element={<DetallesProducto />} />
+          <Route path="/productos/:slug/:id" element={<DetallesProducto />} />
           <Route path="/pedidos" element={<Pedidos />} />
           <Route path="/agregar-pedido"element={<AgregarPedido />}/>
           <Route

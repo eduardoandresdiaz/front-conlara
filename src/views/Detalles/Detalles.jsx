@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import "./Detalles.css";
+import { getProductPath, getProductPreviewUrl } from "../../helpers/productUrls";
 
 const DetallesProducto = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [producto, setProducto] = useState({});
   const [error, setError] = useState("");
@@ -72,6 +74,17 @@ const DetallesProducto = () => {
     };
   }, [id]);
 
+  useEffect(() => {
+    if (loading || !producto.name) {
+      return;
+    }
+
+    const canonicalPath = getProductPath({ ...producto, id });
+    if (location.pathname !== canonicalPath) {
+      navigate(canonicalPath, { replace: true });
+    }
+  }, [id, loading, location.pathname, navigate, producto]);
+
   /* =========================================================
      NAVEGACIÓN
   ========================================================= */
@@ -92,8 +105,8 @@ const DetallesProducto = () => {
      URL PARA COMPARTIR
   ========================================================= */
 
-  const productUrl =
-    `https://og.conlara.com.ar/productos/share/${id}`;
+  const productPath = getProductPath({ ...producto, id });
+  const productUrl = getProductPreviewUrl({ ...producto, id });
 
   const facebookProductUrl =
     `https://ecommerce-9558.onrender.com/products/share-facebook/${id}`;
@@ -247,7 +260,7 @@ const DetallesProducto = () => {
 
   <link
     rel="canonical"
-    href={`https://conlara.com.ar/productos/${id}`}
+    href={`https://conlara.com.ar${productPath}`}
   />
 
   <meta
@@ -284,7 +297,7 @@ const DetallesProducto = () => {
 
   <meta
     property="og:url"
-    content={`https://conlara.com.ar/productos/${id}`}
+    content={`https://conlara.com.ar${productPath}`}
   />
 
   <meta

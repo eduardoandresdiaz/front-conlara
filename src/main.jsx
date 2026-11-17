@@ -14,8 +14,10 @@ createRoot(document.getElementById('root')).render(
         <HelmetProvider>
           <Routes>
             <Route path="*" element={<App />} />
+            <Route path="/productos/share/:slug/:id" element={<DetallesProducto />} />
             <Route path="/productos/:id" element={<DetallesProducto />} />
             <Route path="/productos/share/:id" element={<DetallesProducto />} />
+            <Route path="/productos/:slug/:id" element={<DetallesProducto />} />
           </Routes>
         </HelmetProvider>
       </UserProvider>

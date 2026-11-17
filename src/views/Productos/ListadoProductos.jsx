@@ -3,6 +3,7 @@ import './ListadoProductos.css';
 // import { useNavigate } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { getProductPath } from '../../helpers/productUrls';
 import 'swiper/css';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules"; // 👈 agregar Autoplay
@@ -116,8 +117,8 @@ const ListadoProductos = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [hasMore, loading, busqueda, page]);
 
-  const handleClick = (id) => {
-    navigate(`/productos/${id}`);
+  const handleClick = (producto) => {
+    navigate(getProductPath(producto));
   };
 
   const handleSubmit = (e) => {
@@ -302,7 +303,7 @@ const ListadoProductos = () => {
                 )}
               <button
                 className="meInteresaBoton"
-                onClick={() => handleClick(producto.id)}
+                onClick={() => handleClick(producto)}
               >
                 Ver Detalles
               </button>

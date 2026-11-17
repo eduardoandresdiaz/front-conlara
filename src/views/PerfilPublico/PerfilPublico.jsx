@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
+import { getProductPath } from '../../helpers/productUrls';
 
 import './PerfilPublico.css';
 
@@ -47,7 +48,7 @@ function ProductCard({ producto, onClick, showOverlays = true }) {
 
       <button
         className="meInteresaBoton"
-        onClick={() => onClick(producto.id)}
+        onClick={() => onClick(producto)}
         aria-label={`Ver detalles de ${producto.name}`}
         type="button"
       >
@@ -130,7 +131,7 @@ const PerfilPublico = () => {
     };
   }, [usuario]);
 
-  const handleClick = (id) => navigate(`/productos/${id}`);
+  const handleClick = (producto) => navigate(getProductPath(producto));
 
   const currentUrl =
     typeof window !== 'undefined'
