@@ -10,7 +10,7 @@ const farmaciasInfo = {
     clave: "A",
     nombre: "Farmacia Santa Rita",
     direccion: "Av. Libertador 250, La Toma, San Luis",
-    telefonos: ["+54 2664 500111"],
+    telefonos: ["2655 42-1366"],
     lat: -33.000000,
     lng: -66.000000,
     mapa: "https://maps.google.com/?q=Farmacia+Santa+Rita+La+Toma+San+Luis",
@@ -19,7 +19,7 @@ const farmaciasInfo = {
     clave: "B",
     nombre: "Farmacia San Francisco",
     direccion: "Calle 9 de Julio 45, La Toma, San Luis",
-    telefonos: ["+54 2664 500222"],
+    telefonos: [],
     lat: -33.001000,
     lng: -66.001000,
     mapa: "https://maps.google.com/?q=Farmacia+San+Francisco+La+Toma+San+Luis",
@@ -28,7 +28,7 @@ const farmaciasInfo = {
     clave: "C",
     nombre: "Farmacia San Diego",
     direccion: "25 de Mayo 10, La Toma, San Luis",
-    telefonos: ["+54 2664 500333"],
+    telefonos: ["2655 42-1360"],
     lat: -33.002000,
     lng: -66.002000,
     mapa: "https://maps.google.com/?q=Farmacia+San+Diego+La+Toma+San+Luis",
@@ -318,6 +318,29 @@ const Info = () => {
         ) : (
           <p>No hay farmacia de turno registrada para hoy.</p>
         )}
+      </div>
+      <div className="farmaciaTurno">
+        <h2>☎️ Teléfonos de farmacias de La Toma</h2>
+        {Object.values(farmaciasInfo).map((farmacia) => (
+          <p key={farmacia.clave}>
+            <strong>{farmacia.nombre}:</strong>{" "}
+            {farmacia.telefonos.length > 0 ? (
+              farmacia.telefonos.map((telefono, index) => (
+                <React.Fragment key={telefono}>
+                  <a
+                    href={`tel:${normalizeTelHref(telefono)}`}
+                    className="telefonoLink"
+                  >
+                    {telefono}
+                  </a>
+                  {index < farmacia.telefonos.length - 1 ? " · " : ""}
+                </React.Fragment>
+              ))
+            ) : (
+              "Teléfono no disponible"
+            )}
+          </p>
+        ))}
       </div>
       <div className="preciosAgro">
         <h2>🌾 Cotizaciones de granos</h2>

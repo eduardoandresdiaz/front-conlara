@@ -1,0 +1,206 @@
+.infoTilisarao {
+  max-width: 600px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.infoTilisarao h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.infoTilisarao ul {
+  padding: 0;
+  list-style: none;
+}
+
+.infoTilisarao li {
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+.infoTilisarao a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.infoTilisarao a:hover {
+  text-decoration: underline;
+}
+
+.infoTilisarao .farmaciaTurno {
+  margin-bottom: 18px;
+  padding: 14px;
+  border: 2px solid #e0e7ff;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fff 0%, #f6f9ff 100%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.infoTilisarao .farmaciaTurno h2 {
+  margin: 0 0 8px;
+  color: #0b5ed7;
+  font-size: 1.15rem;
+}
+
+.infoTilisarao .farmaciaTurno p {
+  margin: 6px 0;
+  line-height: 1.35;
+}
+
+.infoTilisarao .telefonoLink {
+  color: #0b5ed7;
+  font-weight: 600;
+}
+
+.infoTilisarao .fechaTurno {
+  margin-top: 8px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.infoTilisarao .preciosAgro {
+  margin: 25px 0;
+  padding: 20px;
+  border: 1px solid #d8e6c8;
+  border-radius: 12px;
+  background: #f4f9ed;
+}
+
+.infoTilisarao .preciosGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.infoTilisarao .precioCard {
+  flex: 1;
+  min-width: 180px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.infoTilisarao .precioCard h3 {
+  margin-bottom: 10px;
+}
+
+.infoTilisarao .precioCard p {
+  color: #2e7d32;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.infoTilisarao .precioCard .precioSecundario,
+.infoTilisarao .precioCard .variacionGrano,
+.infoTilisarao .precioCard .actualizacionDivisa {
+  margin: 6px 0;
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.infoTilisarao .precioCard .variacionGrano {
+  color: #333;
+}
+
+.infoTilisarao .tituloDivisas {
+  margin-top: 24px;
+}
+
+.infoTilisarao .actualizacionGranos {
+  margin: 12px 0;
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.infoTilisarao .actualizacionGranos a {
+  text-decoration: underline;
+}
+
+.infoTilisarao .lugarItem {
+  display: block;
+  text-align: center;
+}
+
+.infoTilisarao .lugarNombre {
+  margin: 10px 0;
+  color: #222;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.infoTilisarao .lugarLogoContenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.infoTilisarao .lugarLogo {
+  display: block;
+  max-width: 180px;
+  max-height: 130px;
+  object-fit: contain;
+}
+
+.infoTilisarao .telefonoBlock {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.infoTilisarao .telefonoFila {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.infoTilisarao .direccion,
+.infoTilisarao .mapa {
+  margin: 10px 0;
+}
+
+.infoTilisarao .mapa a {
+  font-weight: 600;
+}
+
+.infoTilisarao .radarClima {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.infoTilisarao .radarClima h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.infoTilisarao .radarClima iframe {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+}
+
+@media (max-width: 420px) {
+  .infoTilisarao {
+    padding: 12px;
+  }
+
+  .infoTilisarao .farmaciaTurno h2 {
+    font-size: 1rem;
+  }
+
+  .infoTilisarao .telefonoFila {
+    font-size: 0.9rem;
+  }
+}

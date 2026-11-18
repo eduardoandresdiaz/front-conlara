@@ -11,7 +11,7 @@ const farmaciasInfo = {
     clave: "A",
     nombre: "Farmacia Del Pueblo S.C.",
     direccion: "Pedernera y Rivadavia S/N, Naschel, San Luis",
-    telefonos: ["2664548697"],
+    telefonos: ["+54 2656 49-1028"],
     lat: null,
     lng: null,
     mapa:
@@ -22,7 +22,7 @@ const farmaciasInfo = {
     clave: "B",
     nombre: "Farmacia Rotte",
     direccion: "Pringles 466, Naschel, San Luis",
-    telefonos: ["2656491089"],
+    telefonos: [],
     lat: null,
     lng: null,
     mapa:
@@ -316,6 +316,29 @@ const Info = () => {
         ) : (
           <p>No hay farmacia de turno registrada para hoy.</p>
         )}
+      </div>
+      <div className="farmaciaTurno">
+        <h2>☎️ Teléfonos de farmacias de Naschel</h2>
+        {Object.values(farmaciasInfo).map((farmacia) => (
+          <p key={farmacia.clave}>
+            <strong>{farmacia.nombre}:</strong>{" "}
+            {farmacia.telefonos.length > 0 ? (
+              farmacia.telefonos.map((telefono, index) => (
+                <React.Fragment key={telefono}>
+                  <a
+                    href={`tel:${normalizeTelHref(telefono)}`}
+                    className="telefonoLink"
+                  >
+                    {telefono}
+                  </a>
+                  {index < farmacia.telefonos.length - 1 ? " · " : ""}
+                </React.Fragment>
+              ))
+            ) : (
+              "Teléfono no disponible"
+            )}
+          </p>
+        ))}
       </div>
       <div className="preciosAgro">
         <h2>🌾 Cotizaciones de granos</h2>

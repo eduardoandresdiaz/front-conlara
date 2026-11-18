@@ -210,6 +210,13 @@ const ListadoProductos = () => {
         >
           Información Naschel
         </button>
+        <button
+          type="button"
+          className="telefonos_utiles"
+          onClick={() => navigate("/InfoTilisarao")}
+        >
+          Información Tilisarao
+        </button>
         <button className='telefonos_utiles' onClick={() => navigate('/servicios')}>Guia de Servicios</button>
       </div>
       {/* Buscador */}

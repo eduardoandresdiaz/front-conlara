@@ -20,6 +20,7 @@ import HistoriaLaToma from "./views/HistoriaLaToma/HistoriaLaToma";
 import HistoriaNaschel from "./views/HistoriaNaschel/HistoriaNaschel";
 import InfoLaToma from "./views/InfoLaToma/InfoLaToma";
 import InfoNaschel from "./views/InfoNaschel/InfoNaschel";
+import InfoTilisarao from "./views/InfoTilisarao/InfoTilisarao";
 import Carrusell from "./views/Carrusell/Carrusell";
 import ListadoUsuarios from "./views/Ranger0750/ListadoUsuarios";
 import Servicios from "./views/Servicios/Servicios";
@@ -70,6 +71,7 @@ function App() {
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/infoLaToma" element={<InfoLaToma />} />
           <Route path="/infoNaschel" element={<InfoNaschel />} />
+          <Route path="/infoTilisarao" element={<InfoTilisarao />} />
           <Route path="/carrusel" element={<Carrusell />} />
           <Route path="/x28x" element={<ListadoUsuarios />} />
           <Route path="/sobre-nosotros" element={<SobreNosotros />} />
