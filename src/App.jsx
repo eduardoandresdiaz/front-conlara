@@ -28,6 +28,8 @@ import SobreNosotros from "./views/SobreNosotros/SobreNosotros";
 import Pedidos from "./views/Pedidos/Pedidos";
 import AgregarPedido from "./views/AgregarPedido/AgregarPedido";
 import VerFaltantes from "./views/VerFaltantes/VerFaltantes";
+import Empleados from "./views/Empleados/Empleados";
+import HistorialActividad from "./views/HistorialActividad/HistorialActividad";
 
 function App() {
   const location = useLocation();
@@ -65,6 +67,8 @@ function App() {
   path="/ver-faltantes"
   element={<VerFaltantes />}
 />
+          <Route path="/empleados" element={<Empleados />} />
+          <Route path="/historial-actividad" element={<HistorialActividad />} />
           <Route path="/:nickname" element={<PerfilPublico />} />
           <Route path="/historiaLaToma" element={<HistoriaLaToma />} />
           <Route path="/historiaNaschel" element={<HistoriaNaschel />} />

@@ -14,14 +14,26 @@ export const UserProvider = ({ children }) => {
   const [userAppointments, setUserAppointments] = useState([]);
 
   useEffect(() => {
-    // 
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+    if (!storedUser) return;
 
-  console.log(user, "usuario logueado");
+    try {
+      const parsedUser = JSON.parse(storedUser);
+      if (
+        parsedUser &&
+        typeof parsedUser === "object" &&
+        typeof parsedUser.email === "string"
+      ) {
+        setUser(parsedUser);
+        return;
+      }
+    } catch (error) {
+      console.warn("La sesión guardada no es válida; se limpiará.", error);
+    }
+
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+  }, []);
 
   return (
     <UserContext.Provider

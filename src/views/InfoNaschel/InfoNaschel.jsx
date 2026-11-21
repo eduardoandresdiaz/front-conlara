@@ -11,7 +11,7 @@ const farmaciasInfo = {
     clave: "A",
     nombre: "Farmacia Del Pueblo S.C.",
     direccion: "Pedernera y Rivadavia S/N, Naschel, San Luis",
-    telefonos: ["+54 2656 49-1028"],
+    telefonos: ["2656 49-1028"],
     lat: null,
     lng: null,
     mapa:

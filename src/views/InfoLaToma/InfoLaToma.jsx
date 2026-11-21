@@ -17,9 +17,9 @@ const farmaciasInfo = {
   },
   B: {
     clave: "B",
-    nombre: "Farmacia San Francisco",
+    nombre: "Farmacia San Francisco de Asís",
     direccion: "Calle 9 de Julio 45, La Toma, San Luis",
-    telefonos: [],
+    telefonos: ["2665 12-3149"],
     lat: -33.001000,
     lng: -66.001000,
     mapa: "https://maps.google.com/?q=Farmacia+San+Francisco+La+Toma+San+Luis",

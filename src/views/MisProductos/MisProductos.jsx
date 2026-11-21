@@ -75,8 +75,9 @@ const MisProductos = () => {
         throw new Error("⚠️ Por seguridad, tu sesión ha expirado. Vuelve a iniciar sesión para continuar.");
       }
 
+      const merchantEmail = user.merchantOwnerEmail || user.email;
       const response = await fetch(
-        `https://ecommerce-9558.onrender.com/products/by-creator?creatorEmail=${user.email}`
+        `https://ecommerce-9558.onrender.com/products/by-creator?creatorEmail=${encodeURIComponent(merchantEmail)}`
       );
       if (!response.ok) {
         throw new Error('Error al obtener los productos del usuario');
@@ -101,7 +102,7 @@ const MisProductos = () => {
       const publicId = imgUrl.split('/').pop().split('.')[0];
 
       const responseImg = await fetch(
-        `https://ecommerce-9558.onrender.com/file-upload/deleteImage/${publicId}`,
+        `https://ecommerce-9558.onrender.com/file-upload/deleteImage/${producto.id}/${publicId}`,
         {
           method: 'DELETE',
           headers: {

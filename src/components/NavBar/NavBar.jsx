@@ -11,6 +11,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
     setUser({});
     closeMenu();
     navigate("/");
@@ -119,6 +120,24 @@ const NavBar = () => {
             >
               Menú de publicaciones
             </button>
+            {user.merchantOwnerId === null && (
+              <button
+                type="button"
+                onClick={() => handleNavigate("/empleados")}
+                className={style.menuAppointmentButton}
+              >
+                Empleados
+              </button>
+            )}
+            {user.merchantOwnerId === null && (
+              <button
+                type="button"
+                onClick={() => handleNavigate("/historial-actividad")}
+                className={style.menuAppointmentButton}
+              >
+                Historial de actividad
+              </button>
+            )}
             {/* SOLO PARA ADMINISTRADORES */}
             {user?.isAdmin === true && (
               <button

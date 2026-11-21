@@ -11,12 +11,13 @@ const MenuAppointment = () => {
   const [showQR, setShowQR] = useState(false);
   const [productCount, setProductCount] = useState(0);
   const [maxProducts, setMaxProducts] = useState(0); // ⭐ Límite permitido
+  const merchantEmail = user?.merchantOwnerEmail || user?.email;
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const email = user?.email;
+        const email = merchantEmail;
 
         if (!token || !email) return;
 
@@ -52,10 +53,10 @@ const MenuAppointment = () => {
       }
     };
 
-    if (user?.email) {
+    if (merchantEmail) {
       fetchUserData();
     }
-  }, [user?.email]);
+  }, [merchantEmail]);
 
   const handlePrint = () => {
     window.print();

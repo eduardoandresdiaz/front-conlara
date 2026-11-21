@@ -1,26 +1,16 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 import styles from "./Home.module.css";
 import ListadoProductos from "../Productos/ListadoProductos";
+import { useUser } from "../../context/UserContext";
 
 const Home = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useUser();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    setIsLoggedIn(!!user);
-  }, []);
-
-  const handleAuthButtonClick = () => {
-    if (isLoggedIn) {
-      localStorage.removeItem("user");
-      setIsLoggedIn(false);
-    } else {
-      navigate("/login");
-    }
+  const handlePublishClick = () => {
+    navigate(user?.email ? "/createAppointments" : "/login");
   };
 
   return (
@@ -75,10 +65,10 @@ const Home = () => {
         <h1 className={styles.title}></h1>
 
         <button
-          onClick={handleAuthButtonClick}
+          onClick={handlePublishClick}
           className={styles.authButton}
         >
-          {isLoggedIn ? "Logout" : "Publica tu Producto"}
+          Publica tu Producto
         </button>
 
         <ListadoProductos />

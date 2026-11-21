@@ -131,6 +131,34 @@
     background-color: #f2f2f2;
     border-radius: 6px;
   }
+
+  .ver-faltantes__tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .ver-faltantes__tab {
+    padding: 10px;
+    color: #333333;
+    background: #f2f2f2;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .ver-faltantes__tab--active {
+    color: #ffffff;
+    background: #007bff;
+    border-color: #007bff;
+  }
+
+  .ver-faltantes__tab:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
   
   .ver-faltantes__list {
     width: 100%;
@@ -185,6 +213,11 @@
     font-size: 1.15rem;
     line-height: 1.4;
     overflow-wrap: anywhere;
+  }
+
+  .ver-faltantes__supplier {
+    margin: -4px 0 12px;
+    color: #555555;
   }
   
   .ver-faltantes__quantities {
@@ -275,6 +308,110 @@
   
   .ver-faltantes__button--ordered:hover:not(:disabled) {
     background-color: #146c43;
+  }
+
+  .ver-faltantes__unavailable {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px 16px;
+    color: #ffffff;
+    background-color: #6c757d;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .ver-faltantes__unavailable:hover:not(:disabled) {
+    background-color: #545b62;
+  }
+
+  .ver-faltantes__unavailable:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  .ver-faltantes__card--unavailable {
+    border: 2px solid #6c757d;
+    background: rgba(108, 117, 125, 0.08);
+  }
+
+  .ver-faltantes__status--unavailable {
+    color: #ffffff;
+    background-color: #6c757d;
+  }
+
+  .ver-faltantes__unavailable-message {
+    width: 100%;
+    margin: 18px 0 10px;
+    padding: 12px 16px;
+    color: #495057;
+    background-color: rgba(108, 117, 125, 0.12);
+    border: 1px solid #6c757d;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .ver-faltantes__derived-suppliers {
+    margin: -4px 0 14px;
+    color: #495057;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .ver-faltantes__reassign {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    color: #ffffff;
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .ver-faltantes__reassign:hover:not(:disabled),
+  .ver-faltantes__reassign-confirm:hover:not(:disabled) {
+    background-color: #0a58ca;
+  }
+
+  .ver-faltantes__reassign-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding: 14px;
+    background-color: #f4f7fb;
+    border: 1px solid #cfe2ff;
+    border-radius: 8px;
+  }
+
+  .ver-faltantes__reassign-confirm {
+    width: 100%;
+    padding: 11px;
+    color: #ffffff;
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .ver-faltantes__reassign:disabled,
+  .ver-faltantes__reassign-confirm:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .ver-faltantes__no-suppliers {
+    margin: 0;
+    color: #664d03;
+    line-height: 1.4;
   }
   
   .ver-faltantes__button--back {

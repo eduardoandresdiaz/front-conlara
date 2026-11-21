@@ -39,15 +39,20 @@ const Login = () => {
         };
         
         const response = await loginUser(datosLogin);
-        console.log("Response procesado:", response);
-        const { token, message } = response;
+        const { token, message, user } = response;
 
         if (!token) {
           throw new Error("El servidor no devolvió un token válido.");
         }
 
+        const loggedInUser =
+          user && typeof user.email === "string"
+            ? user
+            : { email: datosLogin.email };
+
         localStorage.setItem("token", token); // Guarda el token
-        setUser({ email: datosLogin.email }); // Actualiza el usuario en el contexto
+        localStorage.setItem("user", JSON.stringify(loggedInUser));
+        setUser(loggedInUser);
         setFeedbackMessage(message); // Mensaje de bienvenida
         navigate('/MenuAppointment'); // Redirige al usuario
       } catch (error) {
@@ -66,10 +71,9 @@ const Login = () => {
   const loginUser = async (data) => {
     try {
       const response = await axios.post("https://ecommerce-9558.onrender.com/auth/signin", data);
-      console.log("Respuesta completa de la API:", response);
       if (response.status === 200 || response.status === 201) {
-        const { token, message } = response.data;
-        return { token, message }; // Retorna token y mensaje
+        const { token, message, user } = response.data;
+        return { token, message, user };
       } else {
         throw new Error("La respuesta del servidor no es exitosa.");
       }

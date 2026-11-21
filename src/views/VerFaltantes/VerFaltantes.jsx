@@ -13,6 +13,10 @@ const VerFaltantes = () => {
   const [proveedores, setProveedores] = useState([]);
   const [supplierName, setSupplierName] = useState("");
   const [faltantes, setFaltantes] = useState([]);
+  const [noDisponibles, setNoDisponibles] = useState([]);
+  const [vista, setVista] = useState("pendientes");
+  const [reasignandoId, setReasignandoId] = useState(null);
+  const [proveedorDestino, setProveedorDestino] = useState("");
 
   const [cargandoProveedores, setCargandoProveedores] = useState(true);
   const [cargandoFaltantes, setCargandoFaltantes] = useState(false);
@@ -30,7 +34,7 @@ const VerFaltantes = () => {
         setError("");
 
         const token = localStorage.getItem("token");
-        const email = user?.email;
+        const email = user?.merchantOwnerEmail || user?.email;
 
         if (!token) {
           setError("Tu sesión ha finalizado. Inicia sesión nuevamente.");
@@ -75,7 +79,7 @@ const VerFaltantes = () => {
     } else {
       setCargandoProveedores(false);
     }
-  }, [user?.email]);
+  }, [user?.email, user?.merchantOwnerEmail]);
 
   const obtenerFaltantes = async (proveedorSeleccionado) => {
     if (!proveedorSeleccionado) {
@@ -121,6 +125,57 @@ const VerFaltantes = () => {
       );
     } finally {
       setCargandoFaltantes(false);
+    }
+  };
+
+  const obtenerNoDisponibles = async () => {
+    try {
+      setCargandoFaltantes(true);
+      setMensaje("");
+      setError("");
+
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setError("Tu sesión ha finalizado. Inicia sesión nuevamente.");
+        return;
+      }
+
+      const response = await axios.get(
+        `${API_URL}/product-requests/unavailable`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setNoDisponibles(
+        Array.isArray(response.data) ? response.data : []
+      );
+    } catch (error) {
+      console.error("Error al obtener productos no disponibles:", error);
+
+      setNoDisponibles([]);
+
+      setError(
+        error.response?.data?.message ||
+          "No se pudieron obtener los productos no disponibles."
+      );
+    } finally {
+      setCargandoFaltantes(false);
+    }
+  };
+
+  const handleCambiarVista = async (nuevaVista) => {
+    setVista(nuevaVista);
+    setReasignandoId(null);
+    setProveedorDestino("");
+    setMensaje("");
+    setError("");
+
+    if (nuevaVista === "no-disponibles") {
+      await obtenerNoDisponibles();
     }
   };
 
@@ -183,6 +238,121 @@ const VerFaltantes = () => {
       setError(
         error.response?.data?.message ||
           "No se pudo marcar el producto como pedido."
+      );
+    } finally {
+      setFaltanteProcesandoId(null);
+    }
+  };
+
+  const marcarComoNoDisponible = async (faltante) => {
+    const confirmar = window.confirm(
+      "¿Confirmas que el proveedor no tiene este producto?"
+    );
+
+    if (!confirmar) return;
+
+    try {
+      setFaltanteProcesandoId(faltante.id);
+      setMensaje("");
+      setError("");
+
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setError("Tu sesión ha finalizado. Inicia sesión nuevamente.");
+        return;
+      }
+
+      await axios.patch(
+        `${API_URL}/product-requests/${faltante.id}/mark-as-unavailable`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setFaltantes((faltantesActuales) =>
+        faltantesActuales.filter(
+          (item) => item.id !== faltante.id
+        )
+      );
+      setNoDisponibles((actuales) => [
+        ...actuales,
+        { ...faltante, status: "NO_DISPONIBLE" },
+      ]);
+
+      setMensaje("Producto marcado como no disponible.");
+    } catch (error) {
+      console.error("Error al marcar como no disponible:", error);
+
+      setError(
+        error.response?.data?.message ||
+          "No se pudo marcar el producto como no disponible."
+      );
+    } finally {
+      setFaltanteProcesandoId(null);
+    }
+  };
+
+  const pedirAOtroProveedor = async (faltante) => {
+    if (!proveedorDestino) {
+      setError("Selecciona el proveedor al que deseas pedir el producto.");
+      return;
+    }
+
+    try {
+      setFaltanteProcesandoId(faltante.id);
+      setMensaje("");
+      setError("");
+
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setError("Tu sesión ha finalizado. Inicia sesión nuevamente.");
+        return;
+      }
+
+      const response = await axios.post(
+        `${API_URL}/product-requests/${faltante.id}/reassign`,
+        {
+          supplierName: proveedorDestino,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setNoDisponibles((actuales) =>
+        actuales.map((item) =>
+          item.id === faltante.id
+            ? {
+                ...item,
+                derivedSuppliers: response.data.derivedSuppliers,
+              }
+            : item
+        )
+      );
+
+      setMensaje(
+        `El producto fue derivado a ${proveedorDestino}.`
+      );
+      setReasignandoId(null);
+      setProveedorDestino("");
+    } catch (error) {
+      console.error("Error al pedir a otro proveedor:", error);
+
+      const serverMessage = error.response?.data?.message;
+
+      setError(
+        Array.isArray(serverMessage)
+          ? serverMessage.join(" ")
+          : serverMessage ||
+              "No se pudo asignar el producto al nuevo proveedor."
       );
     } finally {
       setFaltanteProcesandoId(null);
@@ -255,8 +425,10 @@ const VerFaltantes = () => {
   };
 
   const cantidadPendientes = faltantes.filter(
-    (faltante) => faltante.status !== "ordered"
+    (faltante) => faltante.status !== "PEDIDO"
   ).length;
+  const productosMostrados =
+    vista === "no-disponibles" ? noDisponibles : faltantes;
 
   return (
     <div className="ver-faltantes">
@@ -266,7 +438,9 @@ const VerFaltantes = () => {
         </h1>
 
         <p className="ver-faltantes__description">
-          Selecciona un proveedor para consultar su lista pendiente.
+          {vista === "no-disponibles"
+            ? "Consulta los productos que un proveedor no tenía disponibles."
+            : "Selecciona un proveedor para consultar su lista pendiente."}
         </p>
 
         {error && (
@@ -281,43 +455,69 @@ const VerFaltantes = () => {
           </div>
         )}
 
-        <div className="ver-faltantes__field">
-          <label
-            htmlFor="supplierName"
-            className="ver-faltantes__label"
+        <div className="ver-faltantes__tabs">
+          <button
+            type="button"
+            className={`ver-faltantes__tab ${
+              vista === "pendientes" ? "ver-faltantes__tab--active" : ""
+            }`}
+            onClick={() => handleCambiarVista("pendientes")}
+            disabled={cargandoFaltantes || faltanteProcesandoId !== null}
           >
-            Proveedor
-          </label>
-
-          <select
-            id="supplierName"
-            className="ver-faltantes__select"
-            value={supplierName}
-            onChange={handleSeleccionarProveedor}
-            disabled={
-              cargandoProveedores ||
-              cargandoFaltantes ||
-              faltanteProcesandoId !== null
-            }
+            Faltantes pendientes
+          </button>
+          <button
+            type="button"
+            className={`ver-faltantes__tab ${
+              vista === "no-disponibles" ? "ver-faltantes__tab--active" : ""
+            }`}
+            onClick={() => handleCambiarVista("no-disponibles")}
+            disabled={cargandoFaltantes || faltanteProcesandoId !== null}
           >
-            <option value="">
-              {cargandoProveedores
-                ? "Cargando proveedores..."
-                : "Seleccionar proveedor"}
-            </option>
-
-            {proveedores.map((proveedor, index) => (
-              <option
-                key={`${proveedor.empresa}-${index}`}
-                value={proveedor.empresa}
-              >
-                {proveedor.empresa}
-              </option>
-            ))}
-          </select>
+            Productos no disponibles
+          </button>
         </div>
 
+        {vista === "pendientes" && (
+          <div className="ver-faltantes__field">
+            <label
+              htmlFor="supplierName"
+              className="ver-faltantes__label"
+            >
+              Proveedor
+            </label>
+
+            <select
+              id="supplierName"
+              className="ver-faltantes__select"
+              value={supplierName}
+              onChange={handleSeleccionarProveedor}
+              disabled={
+                cargandoProveedores ||
+                cargandoFaltantes ||
+                faltanteProcesandoId !== null
+              }
+            >
+              <option value="">
+                {cargandoProveedores
+                  ? "Cargando proveedores..."
+                  : "Seleccionar proveedor"}
+              </option>
+
+              {proveedores.map((proveedor, index) => (
+                <option
+                  key={`${proveedor.empresa}-${index}`}
+                  value={proveedor.empresa}
+                >
+                  {proveedor.empresa}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         {!cargandoProveedores &&
+          vista === "pendientes" &&
           proveedores.length === 0 && (
             <div className="ver-faltantes__empty">
               No tienes proveedores registrados.
@@ -331,30 +531,62 @@ const VerFaltantes = () => {
         )}
 
         {!cargandoFaltantes &&
-          supplierName &&
-          faltantes.length === 0 && (
+          !error &&
+          ((vista === "pendientes" && supplierName && faltantes.length === 0) ||
+            (vista === "no-disponibles" && noDisponibles.length === 0)) && (
             <div className="ver-faltantes__empty">
-              No hay faltantes pendientes para {supplierName}.
+              {vista === "no-disponibles"
+                ? "Todavía no hay productos marcados como no disponibles."
+                : `No hay faltantes pendientes para ${supplierName}.`}
             </div>
           )}
 
-        {!cargandoFaltantes && faltantes.length > 0 && (
+        {!cargandoFaltantes && productosMostrados.length > 0 && (
           <>
             <div className="ver-faltantes__summary">
-              <strong>{supplierName}</strong>
+              <strong>
+                {vista === "no-disponibles"
+                  ? "Todos los proveedores"
+                  : supplierName}
+              </strong>
 
               <span>
-                {cantidadPendientes} producto(s) pendiente(s)
+                {vista === "no-disponibles"
+                  ? `${noDisponibles.length} producto(s) no disponible(s)`
+                  : `${cantidadPendientes} producto(s) pendiente(s)`}
               </span>
             </div>
 
             <div className="ver-faltantes__list">
-              {faltantes.map((faltante) => {
+              {productosMostrados.map((faltante) => {
                 const estaPedido =
                   faltante.status === "PEDIDO";
+                const estaNoDisponible =
+                  faltante.status === "NO_DISPONIBLE";
+                const proveedoresDerivados =
+                  faltante.derivedSuppliers ?? [];
+                const otrosProveedores = proveedores.filter(
+                  (proveedor) => {
+                    const nombreProveedor =
+                      proveedor.empresa?.trim().toLowerCase();
+
+                    return (
+                      nombreProveedor &&
+                      nombreProveedor !==
+                        faltante.supplierName?.trim().toLowerCase() &&
+                      !proveedoresDerivados.some(
+                        (derivado) =>
+                          derivado.trim().toLowerCase() ===
+                          nombreProveedor
+                      )
+                    );
+                  }
+                );
 
                 const estaProcesando =
                   faltanteProcesandoId === faltante.id;
+                const estaReasignando =
+                  reasignandoId === faltante.id;
 
                 return (
                   <article
@@ -362,7 +594,9 @@ const VerFaltantes = () => {
                     className={`ver-faltantes__card ${
                       estaPedido
                         ? "ver-faltantes__card--ordered"
-                        : ""
+                        : estaNoDisponible
+                          ? "ver-faltantes__card--unavailable"
+                          : ""
                     }`}
                   >
                     <div className="ver-faltantes__card-header">
@@ -376,14 +610,24 @@ const VerFaltantes = () => {
                         className={`ver-faltantes__status ${
                           estaPedido
                             ? "ver-faltantes__status--ordered"
-                            : ""
+                            : estaNoDisponible
+                              ? "ver-faltantes__status--unavailable"
+                              : ""
                         }`}
                       >
                         {estaPedido
                           ? "Ya pedido"
-                          : "Pendiente"}
+                          : estaNoDisponible
+                            ? "No disponible"
+                            : "Pendiente"}
                       </span>
                     </div>
+
+                    {vista === "no-disponibles" && (
+                      <p className="ver-faltantes__supplier">
+                        Proveedor: <strong>{faltante.supplierName}</strong>
+                      </p>
+                    )}
 
                     <h2 className="ver-faltantes__product">
                       {faltante.productDetail}
@@ -407,7 +651,7 @@ const VerFaltantes = () => {
                       </div>
                     </div>
 
-                    {!estaPedido && (
+                    {!estaPedido && !estaNoDisponible && (
                       <button
                         type="button"
                         className="ver-faltantes__ordered"
@@ -424,26 +668,133 @@ const VerFaltantes = () => {
                       </button>
                     )}
 
+                    {!estaPedido && !estaNoDisponible && (
+                      <button
+                        type="button"
+                        className="ver-faltantes__unavailable"
+                        onClick={() =>
+                          marcarComoNoDisponible(faltante)
+                        }
+                        disabled={faltanteProcesandoId !== null}
+                      >
+                        {estaProcesando
+                          ? "Marcando..."
+                          : "Producto no disponible"}
+                      </button>
+                    )}
+
                     {estaPedido && (
                       <div className="ver-faltantes__ordered-message">
                         ✓ Este producto ya fue pedido
                       </div>
                     )}
 
-                    <button
-                      type="button"
-                      className="ver-faltantes__delete"
-                      onClick={() =>
-                        eliminarFaltante(faltante.id)
-                      }
-                      disabled={
-                        faltanteProcesandoId !== null
-                      }
-                    >
-                      {estaProcesando
-                        ? "Procesando..."
-                        : "Eliminar faltante"}
-                    </button>
+                    {estaNoDisponible && (
+                      <>
+                        <div className="ver-faltantes__unavailable-message">
+                          Este producto no estaba disponible con este proveedor.
+                        </div>
+
+                        {proveedoresDerivados.length > 0 && (
+                          <p className="ver-faltantes__derived-suppliers">
+                            <strong>Derivado a:</strong>{" "}
+                            {proveedoresDerivados.join(", ")}
+                          </p>
+                        )}
+
+                        <button
+                          type="button"
+                          className="ver-faltantes__reassign"
+                          onClick={() => {
+                            setError("");
+                            setMensaje("");
+                            setProveedorDestino("");
+                            setReasignandoId(
+                              estaReasignando ? null : faltante.id
+                            );
+                          }}
+                          disabled={faltanteProcesandoId !== null}
+                        >
+                          {estaReasignando
+                            ? "Cancelar"
+                            : "Pedir a otro proveedor"}
+                        </button>
+
+                        {estaReasignando && (
+                          <div className="ver-faltantes__reassign-form">
+                            {otrosProveedores.length > 0 ? (
+                              <>
+                                <label
+                                  htmlFor={`supplier-${faltante.id}`}
+                                  className="ver-faltantes__label"
+                                >
+                                  Selecciona otro proveedor
+                                </label>
+
+                                <select
+                                  id={`supplier-${faltante.id}`}
+                                  className="ver-faltantes__select"
+                                  value={proveedorDestino}
+                                  onChange={(event) =>
+                                    setProveedorDestino(event.target.value)
+                                  }
+                                  disabled={faltanteProcesandoId !== null}
+                                >
+                                  <option value="">
+                                    Seleccionar proveedor
+                                  </option>
+                                  {otrosProveedores.map((proveedor, index) => (
+                                    <option
+                                      key={`${proveedor.empresa}-${index}`}
+                                      value={proveedor.empresa}
+                                    >
+                                      {proveedor.empresa}
+                                    </option>
+                                  ))}
+                                </select>
+
+                                <button
+                                  type="button"
+                                  className="ver-faltantes__reassign-confirm"
+                                  onClick={() =>
+                                    pedirAOtroProveedor(faltante)
+                                  }
+                                  disabled={
+                                    !proveedorDestino ||
+                                    faltanteProcesandoId !== null
+                                  }
+                                >
+                                  {estaProcesando
+                                    ? "Asignando..."
+                                    : "Confirmar pedido"}
+                                </button>
+                              </>
+                            ) : (
+                              <p className="ver-faltantes__no-suppliers">
+                                No hay otros proveedores disponibles para derivar este producto.
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </>
+                    )}
+
+                    {!estaPedido && !estaNoDisponible && (
+                      <button
+                        type="button"
+                        className="ver-faltantes__delete"
+                        onClick={() =>
+                          eliminarFaltante(faltante.id)
+                        }
+                        disabled={
+                          faltanteProcesandoId !== null
+                        }
+                      >
+                        {estaProcesando
+                          ? "Procesando..."
+                          : "Eliminar faltante"}
+                      </button>
+                    )}
                   </article>
                 );
               })}

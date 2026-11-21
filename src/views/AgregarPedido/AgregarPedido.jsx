@@ -28,7 +28,7 @@ const AgregarPedido = () => {
         setError("");
 
         const token = localStorage.getItem("token");
-        const email = user?.email;
+        const email = user?.merchantOwnerEmail || user?.email;
 
         if (!token) {
           setError("Tu sesión no es válida. Debes iniciar sesión nuevamente.");
@@ -71,7 +71,7 @@ const AgregarPedido = () => {
     } else {
       setCargandoProveedores(false);
     }
-  }, [user?.email]);
+  }, [user?.email, user?.merchantOwnerEmail]);
 
   const limpiarFormulario = () => {
     setProductDetail("");

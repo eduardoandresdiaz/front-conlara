@@ -12,6 +12,7 @@ const CreateAppointment = () => {
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
   const { user } = useUser(); // Obtener el usuario desde el contexto
+  const merchantEmail = user?.merchantOwnerEmail || user?.email;
   const [proveedores, setProveedores] = useState([]);
   const [mostrarFormularioProveedor, setMostrarFormularioProveedor] =
     useState(false);
@@ -90,7 +91,9 @@ const CreateAppointment = () => {
   };
   const guardarProveedor = async () => {
     try {
-      const userData = await fetchUserData(user.email);
+      if (user?.merchantOwnerId) return;
+
+      const userData = await fetchUserData(merchantEmail);
 
       if (!userData) return;
 
@@ -141,11 +144,11 @@ const CreateAppointment = () => {
 
   useEffect(() => {
     const cargarProveedores = async () => {
-      if (!user?.email) {
+      if (!merchantEmail) {
         return;
       }
 
-      const userData = await fetchUserData(user.email);
+      const userData = await fetchUserData(merchantEmail);
 
       if (userData) {
         console.log("Proveedores usuario:", userData.proveedores);
@@ -158,18 +161,23 @@ const CreateAppointment = () => {
     };
 
     cargarProveedores();
-  }, [user?.email]);
+  }, [merchantEmail]);
 
   // const posData = async (formData, userData) => {
   const posData = async (formData, userData, navigate) => {
     try {
       console.log("Datos enviados:", formData);
 
-      const response = await axios.post("https://ecommerce-9558.onrender.com/products", {
-        ...formData,
-        creatorEmail: userData.email,
-        telefono: userData.phone || "Teléfono no disponible",
-      });
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "https://ecommerce-9558.onrender.com/products",
+        {
+          ...formData,
+          creatorEmail: userData.email,
+          telefono: userData.phone || "Teléfono no disponible",
+        },
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
       console.log("Respuesta del backend (producto):", response.data);
 
       if (response.status === 201 || response.data.startsWith("Producto creado exitosamente")) {
@@ -183,7 +191,12 @@ const CreateAppointment = () => {
           const imageResponse = await axios.post(
             `https://ecommerce-9558.onrender.com/file-upload/uploadImage/${productId}`,
             formDataImage,
-            { headers: { "Content-Type": "multipart/form-data" } }
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
+              },
+            }
           );
 
           // console.log("Respuesta del backend (imagen):", imageResponse.data);
@@ -306,7 +319,7 @@ const CreateAppointment = () => {
           return errors;
         }}
         onSubmit={async (values, { setSubmitting, resetForm }) => {
-          const userData = await fetchUserData(user.email);
+          const userData = await fetchUserData(merchantEmail);
           if (!userData) {
             setSubmitting(false);
             return;
@@ -354,7 +367,7 @@ const CreateAppointment = () => {
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, errors, validateForm, handleSubmit, values }) => (
+        {({ isSubmitting, validateForm, handleSubmit, values }) => (
           <Form className="create-appointment__form">
             {/* Campos del formulario */}
             <div className="create-appointment__field">
@@ -460,15 +473,17 @@ const CreateAppointment = () => {
                   ))}
                 </Field>
 
-                <button
-                  type="button"
-                  className="create-appointment__proveedor-button"
-                  onClick={() =>
-                    setMostrarFormularioProveedor((estadoActual) => !estadoActual)
-                  }
-                >
-                  {mostrarFormularioProveedor ? 'Cancelar' : '+ Nuevo proveedor'}
-                </button>
+                {!user?.merchantOwnerId && (
+                  <button
+                    type="button"
+                    className="create-appointment__proveedor-button"
+                    onClick={() =>
+                      setMostrarFormularioProveedor((estadoActual) => !estadoActual)
+                    }
+                  >
+                    {mostrarFormularioProveedor ? 'Cancelar' : '+ Nuevo proveedor'}
+                  </button>
+                )}
               </div>
 
               <ErrorMessage
@@ -477,7 +492,7 @@ const CreateAppointment = () => {
                 className="create-appointment__error"
               />
             </div>
-            {mostrarFormularioProveedor && (
+            {mostrarFormularioProveedor && !user?.merchantOwnerId && (
               <div className="create-appointment__nuevo-proveedor">
                 <h3>Nuevo proveedor</h3>
 
