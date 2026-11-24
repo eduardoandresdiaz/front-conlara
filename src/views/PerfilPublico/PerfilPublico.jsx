@@ -62,6 +62,7 @@ const PerfilPublico = () => {
   const { nickname } = useParams();
   const [usuario, setUsuario] = useState(null);
   const [productos, setProductos] = useState([]);
+  const [busqueda, setBusqueda] = useState('');
   const [error, setError] = useState('');
   const [loadingUsuario, setLoadingUsuario] = useState(false);
   const [loadingProductos, setLoadingProductos] = useState(false);
@@ -132,6 +133,21 @@ const PerfilPublico = () => {
   }, [usuario]);
 
   const handleClick = (producto) => navigate(getProductPath(producto));
+
+  const normalizarTexto = (texto = '') =>
+    texto
+      .toString()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+
+  const terminoBusqueda = normalizarTexto(busqueda);
+  const productosFiltrados = terminoBusqueda
+    ? productos.filter((producto) =>
+        normalizarTexto(producto.name).includes(terminoBusqueda)
+      )
+    : productos;
 
   const currentUrl =
     typeof window !== 'undefined'
@@ -258,13 +274,36 @@ const formatPhone = (phone = '') => {
           </a>
         </div>
 
+        <form
+          className="perfilPublico__buscador"
+          onSubmit={(event) => event.preventDefault()}
+          role="search"
+        >
+          <label htmlFor="busquedaPerfil">Buscar productos de {formatNickname(usuario?.nickname)}</label>
+          <input
+            id="busquedaPerfil"
+            type="search"
+            placeholder="Buscar por nombre..."
+            value={busqueda}
+            onChange={(event) => setBusqueda(event.target.value)}
+            autoComplete="off"
+          />
+          {busqueda && (
+            <button type="button" onClick={() => setBusqueda('')}>
+              Limpiar
+            </button>
+          )}
+        </form>
+
         <div className="listadoProductos__list" aria-live="polite">
           {loadingProductos ? (
             <p>Cargando productos...</p>
           ) : productos.length === 0 ? (
             <p>Cargando....</p>
+          ) : productosFiltrados.length === 0 ? (
+            <p>No se encontraron productos que coincidan con "{busqueda}".</p>
           ) : (
-            productos.map((producto) => (
+            productosFiltrados.map((producto) => (
               <ProductCard
                 key={producto.id}
                 producto={producto}
