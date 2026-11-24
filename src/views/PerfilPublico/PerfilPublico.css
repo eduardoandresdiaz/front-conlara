@@ -251,6 +251,13 @@
     padding: 12px 8px 24px;
   }
 
+  .listadoProductos__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 8px;
+  }
+
   .perfilPublico__imagen {
     margin: 12px auto;
   }
@@ -276,11 +283,29 @@
 
   .listadoProductos__details {
     width: 100%;
-    max-width: 320px;
+    max-width: none;
+    height: 100%;
+    padding: 8px;
+  }
+
+  .listadoProductos__details img {
+    height: clamp(120px, 38vw, 180px);
+    margin: 6px 0;
+  }
+
+  .listadoProductos__details h2 {
+    font-size: clamp(0.8rem, 3.5vw, 1rem);
+    line-height: 1.2;
+  }
+
+  .price {
+    font-size: clamp(0.75rem, 3.2vw, 0.95rem);
   }
 
   .meInteresaBoton {
     width: 100%;
+    padding: 8px 4px;
+    font-size: clamp(0.75rem, 3.2vw, 0.95rem);
   }
 }
 
