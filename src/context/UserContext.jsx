@@ -1,4 +1,10 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import {
+  clearExpiredSession,
+  getTokenExpiration,
+  installSessionGuards,
+  isSessionExpired,
+} from "../helpers/authSession";
 
 // 
 export const UserContext = createContext({
@@ -14,8 +20,18 @@ export const UserProvider = ({ children }) => {
   const [userAppointments, setUserAppointments] = useState([]);
 
   useEffect(() => {
+    installSessionGuards();
+
     const storedUser = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
     if (!storedUser) return;
+
+    if (isSessionExpired(token)) {
+      clearExpiredSession();
+      setUser({});
+      return;
+    }
 
     try {
       const parsedUser = JSON.parse(storedUser);
@@ -34,6 +50,31 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
   }, []);
+
+  useEffect(() => {
+    const handleExpiredSession = () => setUser({});
+    window.addEventListener("conlara:session-expired", handleExpiredSession);
+
+    const token = localStorage.getItem("token");
+    const expiration = getTokenExpiration(token);
+    let timeoutId;
+
+    if (expiration) {
+      const remainingTime = expiration - Date.now();
+      if (remainingTime <= 0) {
+        clearExpiredSession();
+      } else {
+        timeoutId = window.setTimeout(() => {
+          clearExpiredSession();
+        }, remainingTime);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("conlara:session-expired", handleExpiredSession);
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, [user]);
 
   return (
     <UserContext.Provider

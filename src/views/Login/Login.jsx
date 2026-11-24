@@ -11,7 +11,11 @@ const Login = () => {
   const [formData, setFormData] = useState(initialValues);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [feedbackMessage, setFeedbackMessage] = useState(""); // Nuevo estado para mensajes de feedback
+  const [feedbackMessage, setFeedbackMessage] = useState(
+    new URLSearchParams(window.location.search).get("session") === "expired"
+      ? "Tu sesión expiró. Iniciá sesión nuevamente."
+      : ""
+  ); // Nuevo estado para mensajes de feedback
   const navigate = useNavigate();
 
   useEffect(() => {
