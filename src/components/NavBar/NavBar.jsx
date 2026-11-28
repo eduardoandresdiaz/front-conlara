@@ -105,13 +105,15 @@ const NavBar = () => {
               {user.email}
             </button>
 
-            <button
-              type="button"
-              onClick={() => handleNavigate("/perfil")}
-              className={style.profileButton}
-            >
-              Tu perfil
-            </button>
+            {!user?.merchantOwnerId && (
+              <button
+                type="button"
+                onClick={() => handleNavigate("/perfil")}
+                className={style.profileButton}
+              >
+                Tu perfil
+              </button>
+            )}
 
             <button
               type="button"

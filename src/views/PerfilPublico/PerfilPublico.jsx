@@ -7,8 +7,8 @@ import { getProductPath } from '../../helpers/productUrls';
 import './PerfilPublico.css';
 
 const API_BASE = 'https://ecommerce-9558.onrender.com';
-const FALLBACK_USER_IMG = '/fallback-user.png';
-const FALLBACK_PRODUCT_IMG = '/fallback-product.png';
+const FALLBACK_USER_IMG = '/imagen2.jpg';
+const FALLBACK_PRODUCT_IMG = '/imagen2.jpg';
 
 // Componente de tarjeta reutilizable (autocontenido para pegar directo)
 function ProductCard({ producto, onClick, showOverlays = true }) {
@@ -213,8 +213,14 @@ const formatPhone = (phone = '') => {
   <meta property="og:description" content={`Mira los productos publicados por ${formatNickname(usuario?.nickname)}`} />
   <meta property="og:image" content={usuario?.imgUrlUser || FALLBACK_USER_IMG} />
   <meta property="og:image:secure_url" content={usuario?.imgUrlUser || FALLBACK_USER_IMG} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={`Foto de ${formatNickname(usuario?.nickname)}`} />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="Conlara.com.ar" />
   <meta property="og:url" content={currentUrl} />
   <meta property="og:type" content="website" />
+  <link rel="canonical" href={currentUrl} />
 
   {/* Twitter card */}
   <meta name="twitter:card" content="summary_large_image" />
